@@ -2,22 +2,22 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>neosten</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#d9e6e1;--ink:#050806;--sky:#2e86de;--sun:#ffd93b;--grass:#2f8f3a;--sh:8px 8px 0 var(--ink)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "JetBrains Mono","Courier New",monospace;overflow-x:hidden}
+body{margin:0;font-weight:500;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Mono","Courier New",monospace;overflow-x:hidden}
 #grid{position:fixed;inset:0;z-index:0;pointer-events:none}
 main,header,footer{position:relative;z-index:1}
-.big{font-weight:900;font-family:"Unbounded","Arial Black",Impact,sans-serif;text-transform:lowercase;letter-spacing:-.045em;line-height:.85;margin:0}
+.big{font-weight:900;font-family:"Unbounded","Arial Black",Impact,sans-serif;text-transform:lowercase;letter-spacing:-.045em;line-height:.9;margin:0}
 a,button{color:inherit}
 /* gate */
 #gate{position:fixed;inset:0;z-index:100;background:var(--sky);display:grid;place-items:center;transition:transform .7s cubic-bezier(.8,0,.2,1)}
 #gate.go{transform:translateY(-101%)}
 #gate div{background:var(--bg);border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:28px;max-width:min(460px,90vw);transform:rotate(-2deg)}
 #gate h2{font-size:clamp(28px,8vw,52px);margin-bottom:16px}
-.btn{font:700 16px "JetBrains Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}
+.btn{font:700 16px "IBM Plex Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}
 .btn:hover{background:#fff}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
 .btn.alt{background:var(--bg)}
 #mute{position:fixed;bottom:14px;right:14px;z-index:60;padding:6px 12px;font-size:13px;margin:0;box-shadow:4px 4px 0 var(--ink)}
@@ -25,7 +25,7 @@ a,button{color:inherit}
 #hero{height:100vh;min-height:620px;position:relative;overflow:hidden}
 #pin{position:absolute;inset:0;transition:transform .25s ease-out}
 .w{position:absolute;font-size:clamp(30px,7.5vmin,88px);white-space:nowrap}
-.w small{display:block;font:400 11px/1.4 "JetBrains Mono",monospace;letter-spacing:0;margin-top:8px}
+.w small{display:block;font:400 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:0;margin-top:8px}
 .w.t{top:max(5vh,86px);left:50%;transform:translateX(-50%) rotate(180deg)}
 .w.b{bottom:5vh;left:50%;transform:translateX(-50%)}
 .w.l{left:4vw;top:50%;transform:translateY(-50%) rotate(90deg)}
@@ -37,7 +37,7 @@ a,button{color:inherit}
 #cat{margin:0;font:min(6.4px,1.1vw)/.9 "Courier New",monospace;white-space:pre;color:var(--ink)}
 #catbox:hover #cat{color:var(--sky)}
 #catbox{width:max-content}
-.strip{background:var(--ink);color:var(--sun);overflow:hidden;white-space:nowrap;border-block:5px solid var(--ink);font:700 22px "JetBrains Mono",monospace;padding:6px 0}
+.strip{background:var(--ink);color:var(--sun);overflow:hidden;white-space:nowrap;border-block:5px solid var(--ink);font:700 22px "IBM Plex Mono",monospace;padding:6px 0}
 .strip span{display:inline-block;animation:mq 28s linear infinite}
 @keyframes mq{to{transform:translateX(-50%)}}
 /* sections */
@@ -52,14 +52,14 @@ section{padding:clamp(48px,9vw,110px) 5vw}
 .cover em{position:absolute;right:7%;bottom:12%;font:900 clamp(26px,5.2vw,72px)/1 "Unbounded",Impact,sans-serif;color:#fff;letter-spacing:-.05em}
 #viz{display:flex;gap:4px;align-items:flex-end;height:70px;border:4px solid var(--ink);background:var(--ink);padding:6px;margin:0 0 20px}
 #viz i{flex:1;background:var(--sun);height:5%}
-.tr{display:flex;gap:14px;align-items:center;width:100%;border:4px solid var(--ink);background:#fff;padding:14px 16px;margin:0 0 14px;font:700 16px "JetBrains Mono",monospace;text-align:left;cursor:pointer;box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.tr{display:flex;gap:14px;align-items:center;width:100%;border:4px solid var(--ink);background:#fff;padding:14px 16px;margin:0 0 14px;font:700 16px "IBM Plex Mono",monospace;text-align:left;cursor:pointer;box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
 .tr:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);background:var(--sun)}
 .tr.on{background:var(--grass);color:#fff}
 .tr em{font:normal 900 26px "Unbounded",Impact,sans-serif;width:34px}
 .note{font-size:12px;margin-top:6px}
 #memory{background:var(--ink);color:var(--bg);margin:0}
 #memory h2{font-size:clamp(30px,6.5vw,84px);margin-bottom:24px}
-#in{width:100%;max-width:640px;border:4px solid var(--sun);background:transparent;color:var(--sun);font:700 20px "JetBrains Mono",monospace;padding:14px}
+#in{width:100%;max-width:640px;border:4px solid var(--sun);background:transparent;color:var(--sun);font:700 20px "IBM Plex Mono",monospace;padding:14px}
 #in::placeholder{color:#8a8a50}
 #mem{margin-top:26px;min-height:140px}
 #mem div{font:900 clamp(16px,2.8vw,32px)/1.25 "Unbounded",Impact,sans-serif;text-transform:lowercase;transition:opacity 7s linear,filter 7s linear,letter-spacing 7s linear}
@@ -73,26 +73,39 @@ footer{padding:30px 5vw 50px;font-size:12px}
 #catbox:active{cursor:grabbing}
 #catbox.small{border-width:4px;box-shadow:5px 5px 0 var(--ink)}#catbox.small #cat{font-size:3.3px}
 #catbox.small b{font-size:10px}
-#bub{position:absolute;bottom:calc(100% + 12px);left:0;background:var(--sun);border:3px solid var(--ink);padding:2px 8px;font:700 12px "JetBrains Mono",monospace;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;color:var(--ink)}#bub.on{opacity:1}
+#bub{position:absolute;bottom:calc(100% + 12px);left:0;background:var(--sun);border:3px solid var(--ink);padding:2px 8px;font:700 12px "IBM Plex Mono",monospace;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;color:var(--ink)}#bub.on{opacity:1}
 .heart{position:fixed;z-index:45;pointer-events:none;font-size:22px;color:#ff3d7f;animation:hf 1.2s ease-out forwards}@keyframes hf{to{transform:translateY(-70px) scale(1.4);opacity:0}}
-.fish{position:fixed;z-index:44;font:700 16px "JetBrains Mono",monospace;background:var(--sun);border:3px solid var(--ink);padding:0 6px;transition:top .7s cubic-bezier(.5,0,1,.6)}
-#pet{position:fixed;left:14px;bottom:14px;z-index:60;background:var(--bg);border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:10px 12px;font:700 12px "JetBrains Mono",monospace;display:none}
+.fish{position:fixed;z-index:44;font:700 16px "IBM Plex Mono",monospace;background:var(--sun);border:3px solid var(--ink);padding:0 6px;transition:top .7s cubic-bezier(.5,0,1,.6)}
+#pet{position:fixed;left:14px;bottom:14px;z-index:60;background:var(--bg);border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:10px 12px;font:700 12px "IBM Plex Mono",monospace;display:none}
 #pet.on{display:block}#pet pre{margin:0;font:inherit}#pet .btn{font-size:12px;padding:4px 10px;margin:8px 8px 0 0;box-shadow:3px 3px 0 var(--ink);border-width:3px}
 .pg{display:none}.pg.on{display:block}.pg:not(#p-home){padding-top:66px;min-height:100vh}
 #nav{position:fixed;top:0;left:0;right:0;z-index:55;display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--bg);border-bottom:5px solid var(--ink);overflow-x:auto}
 #logo{font:900 18px "Unbounded",Impact,sans-serif;margin-right:10px;cursor:pointer}
-#nav .n{font:700 14px "JetBrains Mono",monospace;border:3px solid var(--ink);background:#fff;padding:5px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
+#nav .n{font:700 14px "IBM Plex Mono",monospace;border:3px solid var(--ink);background:#fff;padding:5px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
 #nav .n.on{background:var(--sun)}#nav .n:hover{background:var(--sky)}
 .cover u{cursor:pointer;z-index:3}.cover.night{background:linear-gradient(#050a1c,#1b2a5c 55%,#10260f 56%,#050806)}.cover.night u{background:#dfe8ff;box-shadow:0 0 40px 14px #7f9cff}
 #pin.spin{animation:sp 1.4s cubic-bezier(.7,0,.3,1)}@keyframes sp{to{transform:rotate(720deg)}}
-.rain{position:fixed;top:-30px;z-index:90;font:700 18px "JetBrains Mono",monospace;pointer-events:none;animation:rn 2.6s linear forwards}@keyframes rn{to{transform:translateY(115vh) rotate(40deg)}}
+.rain{position:fixed;top:-30px;z-index:90;font:700 18px "IBM Plex Mono",monospace;pointer-events:none;animation:rn 2.6s linear forwards}@keyframes rn{to{transform:translateY(115vh) rotate(40deg)}}
 .card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,70px);align-items:start}
 .photo{aspect-ratio:4/5;border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);transform:rotate(1.5deg);background:radial-gradient(circle,#fff 1.5px,transparent 2px) 0 0/14px 14px,linear-gradient(#2e86de,#9cc9e8);display:grid;place-items:center}
 .photo span{background:var(--sun);border:4px solid var(--ink);padding:8px 14px;font-weight:700;transform:rotate(-4deg)}
 dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex;gap:14px;padding:10px 14px;border-bottom:3px solid var(--ink)}dl div:last-child{border:0}dt{width:120px;font-weight:700;flex:none}dd{margin:0}
 .soon{margin-top:50px;border:5px dashed var(--ink);padding:22px;font-weight:700}.soon i{display:inline-block;background:var(--ink);width:140px;height:1em;vertical-align:middle}
+.btn,.tr,#nav .n,#pet .btn,.pop,dt,.strip,.soon{font-family:"Oswald","Arial Narrow",sans-serif;letter-spacing:.03em}
+.btn{font-size:19px;font-weight:700}#nav .n{font-size:18px;font-weight:500}.tr{font-size:23px;font-weight:700}.strip{font-size:26px;font-weight:700}#pet .btn{font-size:15px}
+.hd{font-size:clamp(30px,6vw,80px);margin-bottom:28px;text-shadow:5px 5px 0 #fff}.b1 .hd{text-shadow:5px 5px 0 var(--sun)}#memory h2{text-shadow:5px 5px 0 var(--sky)}
+.band{border-bottom:5px solid var(--ink)}.b2{background:var(--sun)}.b3{background:var(--sky)}
+.pop{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:4px solid var(--ink);margin:0 0 12px;padding:12px 16px;cursor:pointer;color:var(--ink);font-size:23px;font-weight:700;background:linear-gradient(90deg,var(--sky) var(--w),#fff var(--w));box-shadow:5px 5px 0 var(--ink);transition:transform .1s}
+.pop:hover{transform:translate(-3px,-3px)}.pop em{font:900 22px "Unbounded",sans-serif}.pop.on{border-color:var(--grass);box-shadow:5px 5px 0 var(--grass)}.pop.on em::after{content:"♪"}
+.pick{display:flex;gap:30px;align-items:center;flex-wrap:wrap;background:#fff;border:5px solid var(--ink);box-shadow:var(--sh);padding:26px}
+.stamp{flex:none;width:150px;height:150px;border-radius:50%;border:5px solid var(--ink);background:var(--sun);display:grid;place-items:center;text-align:center;font:900 15px/1.2 "Unbounded",sans-serif;transform:rotate(-12deg);box-shadow:6px 6px 0 var(--ink)}
+.pick h3{font:900 clamp(20px,3.4vw,40px)/1.1 "Unbounded",sans-serif;margin:0 0 10px}.pick>div:last-child{flex:1 1 260px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}.tile{border:5px solid var(--ink);box-shadow:var(--sh);padding:22px;background:#fff}
+.tile h3{font:900 clamp(18px,2.2vw,28px)/1 "Unbounded",sans-serif;margin:0 0 14px}.tile p{margin:0 0 14px}.tile .btn{font-size:16px;padding:7px 12px;margin-bottom:0}
+.t-new{grid-column:span 3;background:var(--sky)}.t-pop{grid-column:span 3;background:var(--sun)}.t-pick{grid-column:span 2;transform:rotate(1deg)}.t-art{grid-column:span 2;background:var(--ink);color:var(--bg)}.t-con{grid-column:span 2;background:var(--grass);color:#fff;transform:rotate(-1deg)}
+.tile .pop{font-size:17px;padding:6px 10px;margin:0 0 8px;box-shadow:3px 3px 0 var(--ink)}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
-@media(max-width:800px){.card,.two{grid-template-columns:1fr}#catbox.home{margin-left:-135px}.w.l,.w.r{display:none}}
+@media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}#catbox.home{margin-left:-135px}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <canvas id="grid"></canvas>
@@ -164,21 +177,32 @@ dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex
 +++====+++++==+==++++=+++++++++++++*****@@@@@@@@@@@@@@@@@@@@@%***+***=+++++===++==++=====+===++==+++
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
 <div class="strip"><span>neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ </span></div>
+<section id="sum"><h2 class="big hd">сводка</h2><div class="bento">
+<div class="tile t-new"><h3>новое</h3><p>after ep — свежий ep. четыре трека о первой минуте после пробуждения.</p><button class="btn" data-i="0">слушать</button> <button class="btn alt" data-go="rel">все релизы</button></div>
+<div class="tile t-pop"><h3>популярное</h3><div id="hpop"></div><button class="btn alt" data-go="rel">весь чарт</button></div>
+<div class="tile t-pick"><h3>выбор артиста</h3><p><b id="hpk"></b><br><span id="hpn"></span></p><button class="btn alt" data-go="rel">к выбору</button></div>
+<div class="tile t-art"><h3>артист</h3><p>neosten. эмбиент и нежная электроника. сейчас пишет новое.</p><button class="btn alt" data-go="art">карточка</button></div>
+<div class="tile t-con"><h3>связь</h3><p>spotify, soundcloud, bandcamp, instagram и букинг.</p><button class="btn alt" data-go="con">контакты</button></div>
+</div></section>
 <section id="memory"><h2 class="big">оставь мысль</h2>
 <input id="in" maxlength="70" placeholder="напиши что угодно и нажми enter" autocomplete="off" aria-label="твоя мысль">
 <div id="mem"></div></section>
 </div>
 
-<div class="pg" id="p-rel"><section><div class="two">
+<div class="pg" id="p-rel">
+<section class="band b1"><h2 class="big hd">новое</h2><div class="two">
 <div class="cover" aria-label="обложка after ep"><i></i><u title="солнце"></u><s></s><em>after</em></div>
-<div><h2 class="big" style="font-size:clamp(28px,4.6vw,60px);margin-bottom:24px">after ep</h2>
+<div><h3 class="big" style="font-size:clamp(24px,3.6vw,48px);margin-bottom:20px">after ep</h3>
 <div id="viz"></div>
 <button class="tr" data-i="0"><em>1</em>пробуждение</button>
 <button class="tr" data-i="1"><em>2</em>травинка</button>
 <button class="tr" data-i="2"><em>3</em>до мелочей</button>
 <button class="tr" data-i="3"><em>4</em>ждать конца песни</button>
 <p class="note">демо: звук генерируется прямо в браузере и каждый раз немного другой.</p></div></div>
-<div class="soon">следующий релиз: <i></i> &nbsp;скоро.</div></section></div>
+<div class="soon">следующий релиз: <i></i> &nbsp;скоро.</div></section>
+<section class="band b2"><h2 class="big hd">популярное</h2><div id="pop"></div><p class="note">цифры демонстрационные. каждое твоё прослушивание их двигает.</p></section>
+<section class="band b3"><h2 class="big hd">выбор артиста</h2><div class="pick"><div class="stamp">выбор<br>артиста</div><div><h3 id="pk"></h3><p id="pn2"></p><button class="btn" id="pkp">слушать</button> <button class="btn alt" id="pkn">другой выбор</button></div></div></section>
+</div>
 
 <div class="pg" id="p-art"><section><div class="card">
 <div class="photo"><span>здесь будет фото</span></div>
@@ -207,8 +231,8 @@ $('#on').onclick=()=>{setSound(true);enter()};$('#off').onclick=()=>{setSound(fa
 function enter(){$('#gate').classList.add('go');$('#mute').hidden=false;$('#pet').classList.add('on');setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
 $('#mute').onclick=()=>{setSound(!sound);if(!sound)stopMusic()};
 /* UI sounds */
-document.addEventListener('mouseover',e=>{if(e.target.closest('.tr,a,.btn,.n,[data-s]'))blip(1300+Math.random()*300,.04,'square',.015)});
-document.addEventListener('pointerdown',e=>{if(e.target.closest('.tr,a,.btn,.n,[data-s]'))blip(220,.14,'sine',.2,60)});
+document.addEventListener('mouseover',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(1300+Math.random()*300,.04,'square',.015)});
+document.addEventListener('pointerdown',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(220,.14,'sine',.2,60)});
 /* ---------- dotted grid ---------- */
 const cv=$('#grid'),cx=cv.getContext('2d');
 const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
@@ -241,7 +265,7 @@ $('#call').onclick=()=>{go('home');home=true;vy=0;rot=0;cb.classList.remove('sma
 /* ---------- generative music ---------- */
 let nodes=[],bells,cur=-1;const roots=[220,196,174.6,164.8],sc=[0,2,4,7,9,12,14,16],bars=[];
 for(let i=0;i<20;i++){const e=document.createElement('i');$('#viz').append(e);bars.push(e)}
-function stopMusic(){if(!ac)return;mg.gain.setTargetAtTime(0,ac.currentTime,.3);const o=nodes;setTimeout(()=>o.forEach(n=>{try{n.stop()}catch(e){}}),1500);nodes=[];clearInterval(bells);cur=-1;$$('.tr').forEach(b=>b.classList.remove('on'))}
+function stopMusic(){if(!ac)return;mg.gain.setTargetAtTime(0,ac.currentTime,.3);const o=nodes;setTimeout(()=>o.forEach(n=>{try{n.stop()}catch(e){}}),1500);nodes=[];clearInterval(bells);cur=-1;$$('[data-i]').forEach(b=>b.classList.remove('on'));if(window.renderPop)renderPop()}
 function play(i){
  if(!sound)setSound(true);A();stopMusic();cur=i;const r=roots[i],f=ac.createBiquadFilter(),lfo=ac.createOscillator(),lg=ac.createGain(),pg=ac.createGain();
  f.type='lowpass';f.frequency.value=700;lfo.frequency.value=.12+i*.05;lg.gain.value=350;lfo.connect(lg);lg.connect(f.frequency);pg.gain.value=.2;f.connect(pg);pg.connect(mg);
@@ -250,15 +274,15 @@ function play(i){
  bells=setInterval(()=>{const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.type='sine';o.frequency.value=r*2*Math.pow(2,sc[Math.random()*sc.length|0]/12);
   g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.35,n+.02);g.gain.exponentialRampToValueAtTime(.001,n+3);o.connect(g);g.connect(mg);o.start();o.stop(n+3.2)},900+i*250);
  mg.gain.setTargetAtTime(.55,ac.currentTime,.5)}
-$$('.tr').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(cur===i){stopMusic();return}play(i);b.classList.add('on')});
+
 const fq=new Uint8Array(32);
 (function viz(){const on=an&&cur>-1;if(on)an.getByteFrequencyData(fq);bars.forEach((b,i)=>b.style.height=on?Math.max(5,fq[i]/2.5)+'%':(5+Math.abs(Math.sin(Date.now()/700+i))*8)+'%');requestAnimationFrame(viz)})();
 /* ---------- thoughts ---------- */
-const ph=["небо было таким синим, что стало больно.","я не помню твоё имя. помню запах.","кто-то играет песню в гараже.","ты уже был здесь. трава помнит.","кот знает. он не скажет.","сижу в машине. жду, когда закончится песня.","она не заканчивается.","всё стирается, кроме запаха.","никто не слушает. поэтому это честно.","солнце — это пунктир.","можешь уйти. окно останется открытым.","сначала покорми кота.","было лучше, пока ты не сказал это вслух.","забывание — тоже вид музыки.","динамик в траве всё ещё включён.","завтра ты вспомнишь это. наверное, не ту часть.","просыпайся медленно.","ты напечатал это так, будто всерьёз.","где-то гудит дверь.","облака ещё загружаются.","скажи это ещё раз, тише."];let bag=[];
-const secret={'кот':'он всё слышит. и всё запоминает.','мяу':'мяу.','neosten':'это я. или не я. не помню.','привет':'привет. ты уже здесь.','after':'after — это когда песня закончилась, а ты всё ещё в машине.','после':'после — это не конец. это тихая комната рядом.','ветер':'он всегда на фоне. прислушайся.','рыба':'><((°> ...кот это видел.','спасибо':'не за что. забудь.'};
+const ph=["небо было таким синим, что стало больно.","я не помню твоё имя. помню запах.","кто-то играет песню в гараже.","ты уже был здесь. трава помнит.","кот знает. он не скажет.","сижу в машине. жду, когда закончится песня.","она не заканчивается.","всё стирается, кроме запаха.","никто не слушает. поэтому это честно.","солнце — это пунктир.","можешь уйти. окно останется открытым.","сначала покорми кота.","было лучше, пока ты не сказал это вслух.","забывание — тоже вид музыки.","динамик в траве всё ещё включён.","завтра ты вспомнишь это. наверное, не ту часть.","просыпайся медленно.","ты напечатал это так, будто всерьёз.","где-то гудит дверь.","облака ещё загружаются.","скажи это ещё раз, тише.","ошибка музыки — это тоже музыка.","303 всё ещё бежит по комнате.","нео — значит новое. но ты уже где-то это слышал.","неостен не помнит, как записал этот трек.","сати: вдох. песня играет. ты здесь.","сэйфхарм — громкое, сделанное тихим.","самое честное живёт в ошибке музыки."];let bag=[];
+const secret={'ошибка музыки':'ошибка музыки — когда в трек случайно попадает живое. её не стирают.','неостен':'неостен — это я. тот, кто пишет после. или не я.','сэлфхарм':'тяжёлое слово. здесь оно просто звучит, и никто не осуждает. если внутри слишком громко — поговори с кем-то живым.','сэйфхарм':'сэйфхарм — попытка сделать громкое тихим. получается не всегда. получается музыка.','303':'три-ноль-три. кислотная линия бежит по комнате, пока ты стоишь на месте.','сати':'сати — быть здесь, пока играет песня. или тот француз, что писал музыку для мебели. вдох.','нео':'нео — приставка «новое». или тот, кто выбирает таблетку. или просто начало имени.','кот':'он всё слышит. и всё запоминает.','мяу':'мяу.','neosten':'это я. или не я. не помню.','привет':'привет. ты уже здесь.','after':'after — это когда песня закончилась, а ты всё ещё в машине.','после':'после — это не конец. это тихая комната рядом.','ветер':'он всегда на фоне. прислушайся.','рыба':'><((°> ...кот это видел.','спасибо':'не за что. забудь.'};
 const pick=v=>{v=v.toLowerCase();for(const k in secret)if(v.includes(k))return secret[k];if(!bag.length)bag=ph.slice().sort(()=>Math.random()-.5);return bag.pop()};
 $('#in').onkeydown=e=>{blip(500+Math.random()*500,.05,'triangle',.05);if(e.key!=='Enter'||!e.target.value.trim())return;
- const t=pick(e.target.value);e.target.value='';const el=document.createElement('div'),m=$('#mem');m.prepend(el);while(m.children.length>3)m.lastChild.remove();
+ const t0=e.target.value,t=pick(t0);if(t0.includes('303'))acid();e.target.value='';const el=document.createElement('div'),m=$('#mem');m.prepend(el);while(m.children.length>3)m.lastChild.remove();
  let i=0;const iv=setInterval(()=>{el.textContent=t.slice(0,++i);blip(900+Math.random()*500,.03,'square',.02);if(i>=t.length){clearInterval(iv);setTimeout(()=>el.classList.add('f'),2500);setTimeout(()=>el.remove(),10000)}},38)};
 /* ---------- pages ---------- */
 const pages=$$('.pg');
@@ -271,4 +295,16 @@ const kk=[38,38,40,40,37,39,37,39,66,65];let ki=0;
 addEventListener('keydown',e=>{ki=e.keyCode===kk[ki]?ki+1:(e.keyCode===kk[0]?1:0);if(ki===kk.length){ki=0;say('рыбный дождь!',3000);for(let i=0;i<30;i++)setTimeout(()=>{const f=document.createElement('div');f.className='rain';f.textContent='><((°>';f.style.left=Math.random()*95+'vw';document.body.append(f);blip(400+i*40,.15,'triangle',.05);setTimeout(()=>f.remove(),2700)},i*90)}});
 document.addEventListener('visibilitychange',()=>document.title=document.hidden?'вернись… тут тихо':'neosten');
 console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл консоль — ты из тех, кто заглядывает за кулисы. привет.');
+/* ---------- releases ---------- */
+const pl=[12480,9310,7260,15020],nm=['пробуждение','травинка','до мелочей','ждать конца песни'],pnote=['с неё начинается всё. открой глаза и не торопись.','самый тихий трек. слушай, лёжа на земле.','моя любимая. ошибку музыки в ней я оставил специально.','она не заканчивается. я проверял.'];let pk=2;
+function renderPop(){const o=[0,1,2,3].sort((a,b)=>pl[b]-pl[a]),m=pl[o[0]];
+ const row=(i,k)=>`<button class="pop${cur===i?' on':''}" data-i="${i}" style="--w:${Math.round(pl[i]/m*100)}%"><em>${k+1}</em><span>${nm[i]}</span><span>${pl[i].toLocaleString('ru-RU')}</span></button>`;
+ $('#pop').innerHTML=o.map(row).join('');$('#hpop').innerHTML=o.slice(0,3).map(row).join('')}
+function renderPick(){$('#pk').textContent='«'+nm[pk]+'»';$('#pn2').textContent=pnote[pk];$('#hpk').textContent='«'+nm[pk]+'»';$('#hpn').textContent=pnote[pk]}
+$('#pkn').onclick=()=>{pk=(pk+1)%4;renderPick();blip(600,.1,'square',.06,900)};
+renderPop();renderPick();
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
+ let b=e.target.closest('[data-i]');const i=b?+b.dataset.i:(e.target.closest('#pkp')?pk:-1);if(i<0)return;
+ if(cur===i){stopMusic();return}play(i);pl[i]++;renderPop();$$('.tr[data-i="'+i+'"]').forEach(x=>x.classList.add('on'))});
+function acid(){[55,55,110,55,82,55,110,165,55,55,82,110].forEach((n,i)=>setTimeout(()=>blip(n*2,.14,'sawtooth',.07,n*(i%3?1:1.5)),i*130))}
 </script></body></html>
