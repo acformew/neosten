@@ -13,10 +13,10 @@ main,header,footer{position:relative;z-index:1}
 .big{font-weight:900;font-family:"Unbounded","Arial Black",Impact,sans-serif;text-transform:lowercase;letter-spacing:-.045em;line-height:.9;margin:0}
 a,button{color:inherit}
 /* gate */
-#gate{position:fixed;inset:0;z-index:100;background:var(--sky);display:grid;place-items:center;transition:transform .7s cubic-bezier(.8,0,.2,1)}
+#gate{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--bg);display:grid;place-content:center;justify-items:center;gap:14px;transition:transform .8s cubic-bezier(.8,0,.2,1)}
 #gate.go{transform:translateY(-101%)}
-#gate div{background:var(--bg);border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);padding:28px;max-width:min(460px,90vw);transform:rotate(-2deg)}
-#gate h2{font-size:clamp(28px,8vw,52px);margin-bottom:16px}
+
+
 .btn{font:700 16px "IBM Plex Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}
 .btn:hover{background:#fff}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
 .btn.alt{background:var(--bg)}
@@ -104,24 +104,50 @@ dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex
 .tile h3{font:900 clamp(18px,2.2vw,28px)/1 "Unbounded",sans-serif;margin:0 0 14px}.tile p{margin:0 0 14px}.tile .btn{font-size:16px;padding:7px 12px;margin-bottom:0}
 .t-new{grid-column:span 3;background:var(--sky)}.t-pop{grid-column:span 3;background:var(--sun)}.t-pick{grid-column:span 2;transform:rotate(1deg)}.t-art{grid-column:span 2;background:var(--ink);color:var(--bg)}.t-con{grid-column:span 2;background:var(--grass);color:#fff;transform:rotate(-1deg)}
 .tile .pop{font-size:17px;padding:6px 10px;margin:0 0 8px;box-shadow:3px 3px 0 var(--ink)}
+#ld{margin:0;font:12px/1.05 "IBM Plex Mono",monospace;color:#6f817b;white-space:pre}#ld b{color:var(--sun);font-weight:400}#lb,#ls{font:500 16px "IBM Plex Mono",monospace;letter-spacing:.08em}#ls{opacity:.7}
+#hero{height:auto;min-height:100vh;padding:100px 5vw 50px;overflow:hidden;display:flex;align-items:center}
+#pin{position:static;inset:auto;transform-origin:20% 30%;width:100%}
+.w2{font-size:clamp(44px,15.5vw,250px);margin:0 0 30px -.04em}
+.intro{max-width:560px}.lead{font:500 clamp(17px,1.6vw,23px)/1.45 "IBM Plex Mono",monospace;margin:0 0 18px}
+.toc{list-style:none;padding:0;margin:0;border-top:2px solid var(--ink)}.toc li{padding:9px 0;border-bottom:2px solid var(--ink)}
+.toc a{font:700 20px "Oswald",sans-serif;text-decoration:none;margin-right:10px;letter-spacing:.04em;text-transform:uppercase;padding:0 3px}.toc a:hover{background:var(--ink);color:var(--bg)}
+#catbox.home{position:absolute;left:auto;top:auto;right:6vw;bottom:70px;margin:0;--r:-3deg}
+#catbox.home #cat{font-size:min(5px,.9vw)}
+@media(max-width:1100px){#hero{display:block}#catbox.home{position:relative;right:auto;bottom:auto;margin:36px 0 0;display:inline-block;--r:-2deg}}
+.btn,#pet .btn{background:transparent;border:2px solid var(--ink);box-shadow:none;padding:8px 14px;font:500 15px "IBM Plex Mono",monospace;letter-spacing:.05em;text-transform:uppercase;margin:0 8px 8px 0}
+.btn:hover,#pet .btn:hover{background:var(--ink);color:var(--bg)}.btn:active{transform:none}
+#nav{border-bottom-width:3px}
+#nav .n{background:transparent;border:0;border-bottom:3px solid transparent;box-shadow:none;padding:4px 6px;font:500 15px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.07em}
+#nav .n:hover{background:transparent;border-color:var(--ink)}#nav .n.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tr{background:transparent;border:0;border-top:2px solid var(--ink);box-shadow:none;margin:0;padding:14px 4px;font:700 22px "Oswald",sans-serif}
+.tr:hover{background:var(--ink);color:var(--bg);transform:none;box-shadow:none}.tr.on{background:var(--ink);color:var(--sun)}.tr em{font:900 20px "Unbounded",sans-serif}
+.tr:last-of-type{border-bottom:2px solid var(--ink)}
+.hd,.b1 .hd,#memory h2{text-shadow:none}
+.b2{background:var(--ink);color:var(--bg)}
+.pop{color:var(--bg);border:0;border-top:2px solid var(--bg);box-shadow:none;margin:0;padding:14px 4px;background:linear-gradient(var(--sun),var(--sun)) 0 100%/var(--w) 6px no-repeat}
+.pop:hover{background-color:rgba(255,255,255,.1);transform:none}.pop.on{color:var(--sun);border-color:var(--bg);box-shadow:none}
+.pick{box-shadow:none;border-width:3px}.stamp{box-shadow:none}
+.cover,.photo{box-shadow:8px 8px 0 var(--ink)}
+#links a,#links a:nth-child(2n),#links a:nth-child(3n){background:transparent}
+#pet{box-shadow:none;border-width:3px}#grip{cursor:grab;font-weight:700;border-bottom:2px solid var(--ink);margin:-4px -4px 8px;padding:0 4px 4px;touch-action:none;user-select:none}
+html.inv{filter:invert(1) hue-rotate(180deg)}
+html.glitch{animation:gl .25s steps(2) 6}@keyframes gl{25%{filter:invert(1)}50%{filter:hue-rotate(140deg) contrast(1.6)}75%{filter:saturate(5)}}
+.breath{position:fixed;inset:0;z-index:80;display:grid;place-items:center;pointer-events:none}.breath span{width:min(60vmin,420px);aspect-ratio:1;border:4px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:700 28px "Oswald",sans-serif;background:rgba(217,230,225,.75);animation:br 5s ease-in-out infinite}@keyframes br{0%,100%{transform:scale(.4)}50%{transform:scale(1)}}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
-@media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}#catbox.home{margin-left:-135px}.w.l,.w.r{display:none}}
+@media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <canvas id="grid"></canvas>
-<div id="gate"><div><h2 class="big">neosten</h2><p>звук — часть этого сайта. лучше в наушниках.</p>
-<button class="btn" id="on">войти со звуком</button><button class="btn alt" id="off">войти без звука</button></div></div>
-<button class="btn alt" id="mute" hidden>звук: выкл</button>
+<div id="gate"><pre id="ld"></pre><div id="lb"></div><div id="ls"></div></div>
+<button class="btn alt" id="mute" hidden>звук: вкл</button>
 <nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">связь</button></nav>
 
 <main>
 <div class="pg on" id="p-home">
-<header id="hero"><div id="pin">
-<div class="w big t">neosten<small>after ep — уже вышел<br>двигай курсор</small></div>
-<div class="w big b">neosten<small>after ep — уже вышел<br>подними кота. зажми — погладишь</small></div>
-<div class="w big l">neosten<small>after ep — уже вышел</small></div>
-<div class="w big r">neosten<small>after ep — уже вышел</small></div>
-</div><div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
+<header id="hero"><div id="pin"><h1 class="big w2">neosten</h1>
+<div class="intro"><p class="lead">музыка про первую минуту после пробуждения. на сайте живут релизы, карточка артиста, генератор мыслей и один кот.</p>
+<ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">связь</a> ссылки и букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
+<div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
 ========================---**#*++=======-==--====-=--==---===+++++++++===-=+*====-----==---=*#++=---
 ============================*##**++==-=+++++===+++==-=------==+++++++++*#@@@==-------==-----=%*+==--
 ========+===========++++=*==+**++++++==-**+++=============-------====+%@@@@@*==-----==------=%%+++=-
@@ -177,13 +203,7 @@ dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex
 +++====+++++==+==++++=+++++++++++++*****@@@@@@@@@@@@@@@@@@@@@%***+***=+++++===++==++=====+===++==+++
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
 <div class="strip"><span>neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ neosten ✶ after ep ✶ просыпайся медленно ✶ </span></div>
-<section id="sum"><h2 class="big hd">сводка</h2><div class="bento">
-<div class="tile t-new"><h3>новое</h3><p>after ep — свежий ep. четыре трека о первой минуте после пробуждения.</p><button class="btn" data-i="0">слушать</button> <button class="btn alt" data-go="rel">все релизы</button></div>
-<div class="tile t-pop"><h3>популярное</h3><div id="hpop"></div><button class="btn alt" data-go="rel">весь чарт</button></div>
-<div class="tile t-pick"><h3>выбор артиста</h3><p><b id="hpk"></b><br><span id="hpn"></span></p><button class="btn alt" data-go="rel">к выбору</button></div>
-<div class="tile t-art"><h3>артист</h3><p>neosten. эмбиент и нежная электроника. сейчас пишет новое.</p><button class="btn alt" data-go="art">карточка</button></div>
-<div class="tile t-con"><h3>связь</h3><p>spotify, soundcloud, bandcamp, instagram и букинг.</p><button class="btn alt" data-go="con">контакты</button></div>
-</div></section>
+
 <section id="memory"><h2 class="big">оставь мысль</h2>
 <input id="in" maxlength="70" placeholder="напиши что угодно и нажми enter" autocomplete="off" aria-label="твоя мысль">
 <div id="mem"></div></section>
@@ -213,21 +233,21 @@ dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex
 <div class="pg" id="p-con"><section><div id="links"><a href="#" data-s>spotify</a><a href="#" data-s>soundcloud</a><a href="#" data-s>bandcamp</a><a href="#" data-s>instagram</a><a href="#" data-s>букинг</a></div></section></div>
 </main>
 <footer>neosten ✶ after ep ✶ ты забудешь эту страницу. это нормально.</footer>
-<div id="pet"><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></div>
+<div id="pet"><div id="grip">⠿ питомец</div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></div>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-let ac,out,mg,an,wf,sound=false,mx=innerWidth/2,my=innerHeight/2,W,H;
+let ac,out,mg,an,wf,sound=true,mx=innerWidth/2,my=innerHeight/2,W,H;
 /* ---------- audio engine ---------- */
 function A(){if(!ac){ac=new(window.AudioContext||window.webkitAudioContext)();out=ac.createGain();an=ac.createAnalyser();an.fftSize=64;out.connect(an);an.connect(ac.destination);mg=ac.createGain();mg.gain.value=0;mg.connect(out);wind()}ac.resume();out.gain.value=1}
 function wind(){const b=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
  const s=ac.createBufferSource();s.buffer=b;s.loop=true;wf=ac.createBiquadFilter();wf.type='lowpass';wf.frequency.value=520;const g=ac.createGain();g.gain.value=.03;s.connect(wf);wf.connect(g);g.connect(out);s.start()}
-function blip(f,d,t='sine',v=.05,f2){if(!sound)return;const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.type=t;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(out);o.start(n);o.stop(n+d+.02)}
-function meow(){if(!sound)return;const n=ac.currentTime,o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain(),l=ac.createOscillator(),lg=ac.createGain();
+function blip(f,d,t='sine',v=.05,f2){if(!sound||!ac||ac.state!=='running')return;const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.type=t;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(out);o.start(n);o.stop(n+d+.02)}
+function meow(){if(!sound||!ac||ac.state!=='running')return;const n=ac.currentTime,o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain(),l=ac.createOscillator(),lg=ac.createGain();
  o.type='sawtooth';o.frequency.setValueAtTime(420,n);o.frequency.linearRampToValueAtTime(820,n+.18);o.frequency.linearRampToValueAtTime(380,n+.6);l.frequency.value=22;lg.gain.value=14;l.connect(lg);lg.connect(o.frequency);
  f.type='bandpass';f.Q.value=4;f.frequency.setValueAtTime(900,n);f.frequency.linearRampToValueAtTime(1900,n+.2);f.frequency.linearRampToValueAtTime(800,n+.6);
  g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.22,n+.06);g.gain.linearRampToValueAtTime(0,n+.65);o.connect(f);f.connect(g);g.connect(out);o.start(n);l.start(n);o.stop(n+.7);l.stop(n+.7)}
 const setSound=v=>{sound=v;if(v)A();else if(out)out.gain.value=0;$('#mute').textContent='звук: '+(v?'вкл':'выкл')};
-$('#on').onclick=()=>{setSound(true);enter()};$('#off').onclick=()=>{setSound(false);enter()};
+
 function enter(){$('#gate').classList.add('go');$('#mute').hidden=false;$('#pet').classList.add('on');setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
 $('#mute').onclick=()=>{setSound(!sound);if(!sound)stopMusic()};
 /* UI sounds */
@@ -248,17 +268,17 @@ const heart=()=>{const r=cb.getBoundingClientRect(),h=document.createElement('sp
 const wig=()=>{cb.classList.remove('wig');void cb.offsetWidth;cb.classList.add('wig')};
 const bar=v=>'█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));
 const draw=()=>$('#st').textContent='сытость '+bar(hunger)+'\nлюбовь  '+bar(mood);draw();
-function purr(){if(!sound)return;if(!pn){const o=ac.createOscillator(),l=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter(),g=ac.createGain(),g2=ac.createGain();o.type='sawtooth';o.frequency.value=48;f.type='lowpass';f.frequency.value=260;l.frequency.value=22;lg.gain.value=.5;g.gain.value=.5;g2.gain.value=0;l.connect(lg);lg.connect(g.gain);o.connect(f);f.connect(g);g.connect(g2);g2.connect(out);o.start();l.start();pn=g2}
+function purr(){if(!sound||!ac||ac.state!=='running')return;if(!pn){const o=ac.createOscillator(),l=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter(),g=ac.createGain(),g2=ac.createGain();o.type='sawtooth';o.frequency.value=48;f.type='lowpass';f.frequency.value=260;l.frequency.value=22;lg.gain.value=.5;g.gain.value=.5;g2.gain.value=0;l.connect(lg);lg.connect(g.gain);o.connect(f);f.connect(g);g.connect(g2);g2.connect(out);o.start();l.start();pn=g2}
  pn.gain.setTargetAtTime(.3,ac.currentTime,.1);clearTimeout(pt);pt=setTimeout(()=>pn.gain.setTargetAtTime(0,ac.currentTime,.15),300)}
-cb.onpointerdown=e=>{if(e.button)return;const r=cb.getBoundingClientRect();d={x:e.clientX,y:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,m:false,h:false};clearInterval(hi);ht=setTimeout(()=>{if(d&&!d.m){d.h=true;hi=setInterval(()=>{purr();mood=Math.min(100,mood+1);draw();if(Math.random()<.5)heart();say('мррр',900)},260)}},350);cb.setPointerCapture(e.pointerId)};
+cb.onpointerdown=e=>{if(e.button)return;const r=cb.getBoundingClientRect();d={x:e.clientX,y:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,m:false,h:false};clearInterval(hi);ht=setTimeout(()=>{if(d&&!d.m){d.h=true;hi=setInterval(()=>{purr();mood=Math.min(100,mood+1);draw();if(Math.random()<.5)heart();say('мррр',900);navigator.vibrate&&navigator.vibrate([25,35,25])},260)}},350);cb.setPointerCapture(e.pointerId)};
 cb.onpointermove=e=>{
  if(!d)return;
  if(!d.m&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>6){d.m=true;clearTimeout(ht);clearInterval(hi);cb.style.transition='';if(home){home=false;cb.classList.remove('home');cb.classList.add('small');d.ox=cb.offsetWidth/2;d.oy=14}vy=0;say('мрр?!',1500);blip(700,.15,'sawtooth',.05,300)}
  if(d.m){cb.style.left=e.clientX-d.ox+'px';cb.style.top=e.clientY-d.oy+'px';rot=Math.max(-25,Math.min(25,e.movementX*2))}};
-cb.onpointerup=()=>{clearTimeout(ht);clearInterval(hi);if(d&&!d.m&&!d.h){meow();wig();say('мяу');mood=Math.min(100,mood+2);draw()}d=null};
+cb.onpointerup=()=>{clearTimeout(ht);clearInterval(hi);navigator.vibrate&&navigator.vibrate(0);if(d&&!d.m&&!d.h){meow();wig();say('мяу');mood=Math.min(100,mood+2);draw()}d=null};
 (function phys(){if(!home){if(!(d&&d.m)){const fl=innerHeight-cb.offsetHeight-8;let y=Math.min(parseFloat(cb.style.top)||0,fl);if(y<fl-.5||vy){vy+=.9;y+=vy;if(y>=fl){y=fl;if(vy>6){blip(110,.2,'sine',.3,40);wig();if(vy>20)say('приземлился на лапы.')}vy=Math.abs(vy)<3?0:-vy*.35}}cb.style.top=y+'px'}rot*=.88;cb.style.setProperty('--r',rot+'deg')}requestAnimationFrame(phys)})();
 setInterval(()=>{if(home||d||vy||Math.random()<.5)return;const x=Math.max(0,Math.min(innerWidth-cb.offsetWidth,(parseFloat(cb.style.left)||0)+(Math.random()-.5)*260));cb.style.transition='left 1.8s ease-in-out';cb.style.left=x+'px';setTimeout(()=>cb.style.transition='',1900)},5000);
-setInterval(()=>{hunger=Math.max(0,hunger-2);mood=Math.max(0,mood-1);draw();if(hunger<30&&!d){say('голодный…');meow()}},4000);
+setInterval(()=>{hunger=Math.max(0,hunger-1);mood=Math.max(0,mood-(Math.random()<.5?1:0));draw();if(hunger<30&&!d){say('голодный…');meow()}},15000);
 $('#feed').onclick=()=>{const r=cb.getBoundingClientRect(),f=document.createElement('div');f.className='fish';f.textContent='><((°>';f.style.left=r.left+r.width/2-30+'px';f.style.top='-40px';document.body.append(f);void f.offsetWidth;f.style.top=r.top+r.height*.3+'px';
  setTimeout(()=>{f.remove();if(hunger>=100){say('сыт. хватит.');if(++over>=3){over=0;say('ты меня раскормишь!');rot=180}return}hunger=Math.min(100,hunger+35);mood=Math.min(100,mood+5);draw();wig();say('ням-ням');for(let i=0;i<5;i++)setTimeout(()=>blip(240-i*15,.07,'square',.08,120),i*110);heart()},750)};
 $('#call').onclick=()=>{go('home');home=true;vy=0;rot=0;cb.classList.remove('small');cb.classList.add('home');cb.style.cssText='';say('мяу!');meow()};
@@ -278,9 +298,9 @@ function play(i){
 const fq=new Uint8Array(32);
 (function viz(){const on=an&&cur>-1;if(on)an.getByteFrequencyData(fq);bars.forEach((b,i)=>b.style.height=on?Math.max(5,fq[i]/2.5)+'%':(5+Math.abs(Math.sin(Date.now()/700+i))*8)+'%');requestAnimationFrame(viz)})();
 /* ---------- thoughts ---------- */
-const ph=["небо было таким синим, что стало больно.","я не помню твоё имя. помню запах.","кто-то играет песню в гараже.","ты уже был здесь. трава помнит.","кот знает. он не скажет.","сижу в машине. жду, когда закончится песня.","она не заканчивается.","всё стирается, кроме запаха.","никто не слушает. поэтому это честно.","солнце — это пунктир.","можешь уйти. окно останется открытым.","сначала покорми кота.","было лучше, пока ты не сказал это вслух.","забывание — тоже вид музыки.","динамик в траве всё ещё включён.","завтра ты вспомнишь это. наверное, не ту часть.","просыпайся медленно.","ты напечатал это так, будто всерьёз.","где-то гудит дверь.","облака ещё загружаются.","скажи это ещё раз, тише.","ошибка музыки — это тоже музыка.","303 всё ещё бежит по комнате.","нео — значит новое. но ты уже где-то это слышал.","неостен не помнит, как записал этот трек.","сати: вдох. песня играет. ты здесь.","сэйфхарм — громкое, сделанное тихим.","самое честное живёт в ошибке музыки."];let bag=[];
-const secret={'ошибка музыки':'ошибка музыки — когда в трек случайно попадает живое. её не стирают.','неостен':'неостен — это я. тот, кто пишет после. или не я.','сэлфхарм':'тяжёлое слово. здесь оно просто звучит, и никто не осуждает. если внутри слишком громко — поговори с кем-то живым.','сэйфхарм':'сэйфхарм — попытка сделать громкое тихим. получается не всегда. получается музыка.','303':'три-ноль-три. кислотная линия бежит по комнате, пока ты стоишь на месте.','сати':'сати — быть здесь, пока играет песня. или тот француз, что писал музыку для мебели. вдох.','нео':'нео — приставка «новое». или тот, кто выбирает таблетку. или просто начало имени.','кот':'он всё слышит. и всё запоминает.','мяу':'мяу.','neosten':'это я. или не я. не помню.','привет':'привет. ты уже здесь.','after':'after — это когда песня закончилась, а ты всё ещё в машине.','после':'после — это не конец. это тихая комната рядом.','ветер':'он всегда на фоне. прислушайся.','рыба':'><((°> ...кот это видел.','спасибо':'не за что. забудь.'};
-const pick=v=>{v=v.toLowerCase();for(const k in secret)if(v.includes(k))return secret[k];if(!bag.length)bag=ph.slice().sort(()=>Math.random()-.5);return bag.pop()};
+const ph=["небо было таким синим, что стало больно.","я не помню твоё имя. помню запах.","кто-то играет песню в гараже.","ты уже был здесь. трава помнит.","кот знает. он не скажет.","сижу в машине. жду, когда закончится песня.","она не заканчивается.","всё стирается, кроме запаха.","никто не слушает. поэтому это честно.","солнце — это пунктир.","можешь уйти. окно останется открытым.","сначала покорми кота.","было лучше, пока ты не сказал это вслух.","забывание — тоже вид музыки.","динамик в траве всё ещё включён.","завтра ты вспомнишь это. наверное, не ту часть.","просыпайся медленно.","ты напечатал это так, будто всерьёз.","где-то гудит дверь.","облака ещё загружаются.","скажи это ещё раз, тише.","ошибка музыки — это тоже музыка.","303 всё ещё бежит по комнате.","нео — значит новое. но ты уже где-то это слышал.","неостен не помнит, как записал этот трек.","сати: вдох. песня играет. ты здесь.","сэйфхарм — громкое, сделанное тихим.","самое честное живёт в ошибке музыки.","в шкафу кто-то оставил включённый свет.","чайник остыл, пока ты думал.","на третьем этаже всегда пахнет дождём.","лифт едет вверх без тебя.","в 4:12 утра все города одинаковые.","кто-то вечно забывает выключить лето.","телефон нагрелся от чужих мыслей.","батарея на двух процентах, но ты улыбаешься.","под кроватью тихо шумит море.","автобус приедет. не сегодня.","ты потерял ключ, а замок — тебя.","сегодня облака ходят строем.","кошки видят то, что мы называем пустотой.","за окном кто-то репетирует закат.","все лампочки помнят первый вечер.","вода в стакане слушает тебя.","ты не опоздал. просто время сдвинулось.","в карманах всё ещё лежит прошлая зима.","старая песня стучит в стену соседа.","город дышит ровно, пока ты не смотришь.","пыль — это тоже маленькие звёзды.","ты оставил окно открытым, и вышло лето.","трамвай звенит где-то внутри.","у каждого дня есть тайная дверь.","мир перезагрузится, если долго не двигаться."];let bag=[];
+const secret={'дождь':'он идёт только в динамике.','тишина':'самый громкий трек на ep.','сон':'продолжай. я подожду.','42':'ответ найден. вопрос потерян.','спокойной ночи':'и тебе. оставлю свет в траве.','ошибка музыки':'ошибка музыки — когда в трек случайно попадает живое. её не стирают.','неостен':'неостен — это я. тот, кто пишет после. или не я.','сэлфхарм':'тяжёлое слово. здесь оно просто звучит, и никто не осуждает. если внутри слишком громко — поговори с кем-то живым.','сэйфхарм':'сэйфхарм — попытка сделать громкое тихим. получается не всегда. получается музыка.','303':'три-ноль-три. кислотная линия бежит по комнате, пока ты стоишь на месте.','сати':'сати — быть здесь, пока играет песня. или тот француз, что писал музыку для мебели. вдох.','нео':'нео — приставка «новое». или тот, кто выбирает таблетку. или просто начало имени.','кот':'он всё слышит. и всё запоминает.','мяу':'мяу.','neosten':'это я. или не я. не помню.','привет':'привет. ты уже здесь.','after':'after — это когда песня закончилась, а ты всё ещё в машине.','после':'после — это не конец. это тихая комната рядом.','ветер':'он всегда на фоне. прислушайся.','рыба':'><((°> ...кот это видел.','спасибо':'не за что. забудь.'};
+const pick=v=>{v=v.toLowerCase();if(v.length>=60)return'это слишком длинно для памяти. я запомнил только последнее слово.';for(const k in secret)if(v.includes(k))return secret[k];if(!bag.length)bag=ph.slice().sort(()=>Math.random()-.5);return bag.pop()};
 $('#in').onkeydown=e=>{blip(500+Math.random()*500,.05,'triangle',.05);if(e.key!=='Enter'||!e.target.value.trim())return;
  const t0=e.target.value,t=pick(t0);if(t0.includes('303'))acid();e.target.value='';const el=document.createElement('div'),m=$('#mem');m.prepend(el);while(m.children.length>3)m.lastChild.remove();
  let i=0;const iv=setInterval(()=>{el.textContent=t.slice(0,++i);blip(900+Math.random()*500,.03,'square',.02);if(i>=t.length){clearInterval(iv);setTimeout(()=>el.classList.add('f'),2500);setTimeout(()=>el.remove(),10000)}},38)};
@@ -289,7 +309,7 @@ const pages=$$('.pg');
 function go(p){if(!$('#p-'+p))p='home';pages.forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('#nav .n').forEach(b=>b.classList.toggle('on',b.dataset.p===p));scrollTo(0,0);try{history.replaceState(null,'','#'+p)}catch(e){}blip(400,.12,'sine',.15,800)}
 $$('#nav .n').forEach(b=>b.onclick=()=>go(b.dataset.p));$('#logo').onclick=()=>go('home');go(location.hash.slice(1)||'home');
 /* ---------- easter eggs ---------- */
-let wc=0;$$('.w').forEach(w=>w.onclick=()=>{if(++wc>=5){wc=0;const p=$('#pin');p.classList.add('spin');blip(200,1.2,'sawtooth',.08,1600);setTimeout(()=>p.classList.remove('spin'),1500)}});
+let wc=0;$$('.w2').forEach(w=>w.onclick=()=>{if(++wc>=5){wc=0;const p=$('#pin');p.classList.add('spin');blip(200,1.2,'sawtooth',.08,1600);setTimeout(()=>p.classList.remove('spin'),1500)}});
 $('.cover u').onclick=()=>{const c=$('.cover');c.classList.toggle('night');if(c.classList.contains('night'))for(let i=0;i<4;i++)setTimeout(()=>blip(4200,.05,'sine',.05),300+i*130);else blip(900,.4,'sine',.1,1400)};
 const kk=[38,38,40,40,37,39,37,39,66,65];let ki=0;
 addEventListener('keydown',e=>{ki=e.keyCode===kk[ki]?ki+1:(e.keyCode===kk[0]?1:0);if(ki===kk.length){ki=0;say('рыбный дождь!',3000);for(let i=0;i<30;i++)setTimeout(()=>{const f=document.createElement('div');f.className='rain';f.textContent='><((°>';f.style.left=Math.random()*95+'vw';document.body.append(f);blip(400+i*40,.15,'triangle',.05);setTimeout(()=>f.remove(),2700)},i*90)}});
@@ -299,12 +319,35 @@ console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл
 const pl=[12480,9310,7260,15020],nm=['пробуждение','травинка','до мелочей','ждать конца песни'],pnote=['с неё начинается всё. открой глаза и не торопись.','самый тихий трек. слушай, лёжа на земле.','моя любимая. ошибку музыки в ней я оставил специально.','она не заканчивается. я проверял.'];let pk=2;
 function renderPop(){const o=[0,1,2,3].sort((a,b)=>pl[b]-pl[a]),m=pl[o[0]];
  const row=(i,k)=>`<button class="pop${cur===i?' on':''}" data-i="${i}" style="--w:${Math.round(pl[i]/m*100)}%"><em>${k+1}</em><span>${nm[i]}</span><span>${pl[i].toLocaleString('ru-RU')}</span></button>`;
- $('#pop').innerHTML=o.map(row).join('');$('#hpop').innerHTML=o.slice(0,3).map(row).join('')}
-function renderPick(){$('#pk').textContent='«'+nm[pk]+'»';$('#pn2').textContent=pnote[pk];$('#hpk').textContent='«'+nm[pk]+'»';$('#hpn').textContent=pnote[pk]}
+ $('#pop').innerHTML=o.map(row).join('')}
+function renderPick(){$('#pk').textContent='«'+nm[pk]+'»';$('#pn2').textContent=pnote[pk]}
 $('#pkn').onclick=()=>{pk=(pk+1)%4;renderPick();blip(600,.1,'square',.06,900)};
 renderPop();renderPick();
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){go(g.dataset.go);return}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
  let b=e.target.closest('[data-i]');const i=b?+b.dataset.i:(e.target.closest('#pkp')?pk:-1);if(i<0)return;
  if(cur===i){stopMusic();return}play(i);pl[i]++;renderPop();$$('.tr[data-i="'+i+'"]').forEach(x=>x.classList.add('on'))});
 function acid(){[55,55,110,55,82,55,110,165,55,55,82,110].forEach((n,i)=>setTimeout(()=>blip(n*2,.14,'sawtooth',.07,n*(i%3?1:1.5)),i*130))}
+/* ---------- more eggs, pet panel, loader ---------- */
+const pet=$('#pet'),gr=$('#grip');let pd=null;
+gr.onpointerdown=e=>{const r=pet.getBoundingClientRect();pd=[e.clientX-r.left,e.clientY-r.top];pet.style.bottom='auto';pet.style.left=r.left+'px';pet.style.top=r.top+'px';gr.setPointerCapture(e.pointerId)};
+gr.onpointermove=e=>{if(pd){pet.style.left=Math.max(0,Math.min(innerWidth-pet.offsetWidth,e.clientX-pd[0]))+'px';pet.style.top=Math.max(0,Math.min(innerHeight-pet.offsetHeight,e.clientY-pd[1]))+'px'}};
+gr.onpointerup=()=>pd=null;
+let lc=0;$('#logo').addEventListener('click',()=>{if(++lc>=7){lc=0;const h=document.documentElement;h.classList.add('glitch');for(let i=0;i<8;i++)setTimeout(()=>blip(100+Math.random()*2000,.06,'sawtooth',.08),i*70);setTimeout(()=>h.classList.remove('glitch'),1600)}});
+$('.w2').ondblclick=()=>{document.documentElement.classList.toggle('inv');blip(300,.3,'sine',.1,80)};
+$('.strip').onclick=()=>{const p=$('.strip span');p.style.animationDirection=p.style.animationDirection==='reverse'?'normal':'reverse'};
+function breath(){const b=document.createElement('div');b.className='breath';b.innerHTML='<span>вдох</span>';document.body.append(b);let k=0;const iv=setInterval(()=>{b.firstChild.textContent=k++%2?'вдох':'выдох'},2500);setTimeout(()=>{clearInterval(iv);b.remove()},15000)}
+let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.key.length!==1)return;kb=(kb+e.key.toLowerCase()).slice(-8);
+ if(kb.endsWith('кот')||kb.endsWith('cat')){kb='';if(home)wig();else vy=-22;meow();say('мяу?',1500)}
+ if(kb.endsWith('303')){kb='';acid()}if(kb.endsWith('сати')){kb='';breath()}});
+let idle;const rs2=()=>{clearTimeout(idle);idle=setTimeout(()=>{say('ты ещё здесь?',4000);meow()},60000)};['pointermove','keydown','pointerdown'].forEach(ev=>addEventListener(ev,rs2,{passive:true}));rs2();
+try{A()}catch(e){}
+['pointerdown','keydown','touchstart'].forEach(ev=>addEventListener(ev,()=>{if(sound&&ac&&ac.state!=='running')ac.resume()},{passive:true}));
+(function(){const C=72,R=22,ramp=' ..::-=+*#%@',cv=document.createElement('canvas');cv.width=C;cv.height=R;const x=cv.getContext('2d');x.font='900 20px Arial Black,Arial,sans-serif';const w=x.measureText('neosten').width;x.setTransform(58/w,0,0,1,7,0);x.fillText('neosten',0,18);
+ const im=x.getImageData(0,0,C,R).data,M=[];for(let i=0;i<C*R;i++)M.push(im[i*4+3]>110);
+ const pre=$('#ld');pre.style.fontSize=Math.min(innerWidth/(C*.62),innerHeight*.55/(R*1.05))+'px';
+ const logs=['проветриваю траву','настраиваю небо','ищу кота','вспоминаю, как тебя зовут','почти проснулся'];const t0=performance.now();
+ (function f(t){const p=Math.min(1,(t-t0)/3600);let o='';for(let r=0;r<R;r++){for(let c=0;c<C;c++){const m=M[r*C+c],e=Math.random();
+  if(m)o+=e<p*1.15?'<b>'+ramp[9+(e*3|0)]+'</b>':ramp[e*10|0];else o+=Math.abs(c/C-p*1.2+.1)<.02?'|':(e<.05?ramp[1+(e*40|0)%2]:' ')}o+='\n'}
+  pre.innerHTML=o;const n=Math.round(p*20);$('#lb').textContent='['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(p*100)+'%';$('#ls').textContent=logs[Math.min(4,p*5|0)]+'…';
+  if(p<1)requestAnimationFrame(f);else setTimeout(()=>{$('#gate').classList.add('go');enter()},350)})(t0)})();
 </script></body></html>
