@@ -191,6 +191,10 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 .eq{display:flex;gap:2px;align-items:flex-end;height:20px}.eq i{width:4px;height:4px;background:var(--ink)}
 .playing .eq i{animation:eq .6s ease-in-out infinite alternate}.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}@keyframes eq{to{height:20px}}
 @media(max-width:900px){#mp{bottom:78px;width:calc(100vw - 28px);min-width:0}}
+.chips{margin-top:6px}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}.chip:hover{background:var(--ink);color:var(--bg)}
+.disc{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px}.dc{display:block;text-decoration:none;color:inherit}.dc img,.dc .gcover{width:100%;aspect-ratio:1;object-fit:cover;border:3px solid var(--ink);display:block;box-shadow:none;padding:10px}.dc .gcover b{font-size:14px}
+.dc>b{display:block;font:700 18px "Oswald",sans-serif;margin-top:10px}.dc small{font:400 13px "IBM Plex Mono",monospace;opacity:.7}.dc:hover img{filter:contrast(1.2)}.dc:hover>b{text-decoration:underline}
+.gh{font:700 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;margin:38px 0 10px}.gh:first-child{margin-top:0}.bk{margin:0;padding:18px 4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);opacity:.7}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -198,13 +202,13 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 <canvas id="grid"></canvas>
 <div id="gate"><canvas id="ldc"></canvas><div id="lb"></div><div id="ls"></div></div>
 <button class="btn alt" id="mute" hidden>звук: вкл</button>
-<nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">связь</button></nav>
+<nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button></nav>
 
 <main>
 <div class="pg on" id="p-home">
 <header id="hero"><div id="pin"><div class="eyebrow">■ музыкальный проект</div><h1 class="big w2">neosten</h1>
 <div class="intro"><p class="lead">всё в одном месте: новый релиз, самые популярные треки, выбор артиста, карточка и один кот. любой трек играет по одному клику.</p>
-<ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">связь</a> ссылки и букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
+<ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">контакты</a> соцсети, битмейкер, букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
 <div class="slot">кот гуляет по сайту.<br>«позвать кота» вернёт его сюда.</div><div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
 ========================---**#*++=======-==--====-=--==---===+++++++++===-=+*====-----==---=*#++=---
 ============================*##**++==-=+++++===+++==-=------==+++++++++*#@@@==-------==-----=%*+==--
@@ -271,11 +275,12 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 <section class="band b1"><h2 class="big hd">новое</h2><div id="newest"></div></section>
 <section class="band b2"><h2 class="big hd">популярное</h2><div id="pop"></div></section>
 <section class="band b3"><h2 class="big hd">выбор артиста</h2><div class="pick"><div class="stamp">выбор<br>артиста</div><div id="picks"></div></div></section>
+<section class="band" id="discS" hidden><h2 class="big hd">все релизы</h2><div id="disc" class="disc"></div></section>
 </div>
 
 <div class="pg" id="p-art"><section><div class="card"><div class="photo"><span>здесь будет фото</span></div><div><h2 class="big">neosten</h2><dl id="adl"></dl><p id="abio"></p></div></div></section></div>
 
-<div class="pg" id="p-con"><section><div id="links"><a href="#" data-s>spotify</a><a href="#" data-s>soundcloud</a><a href="#" data-s>bandcamp</a><a href="#" data-s>instagram</a><a href="#" data-s>букинг</a></div></section></div>
+<div class="pg" id="p-con"><section><h2 class="big hd">контакты</h2><div id="links"></div></section></div>
 </main>
 <footer>neosten ✶ ты забудешь эту страницу. это нормально.</footer>
 <div id="mp" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><div class="eq"><i></i><i></i><i></i><i></i></div></div>
@@ -352,7 +357,11 @@ document.addEventListener('visibilitychange',()=>document.title=document.hidden?
 console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл консоль — ты из тех, кто заглядывает за кулисы. привет.');
 /* ---------- releases: data-driven + player ---------- */
 const R=(window.RELEASES||[]).slice(),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null;
-const ts=r=>r.date?new Date(r.date).getTime():0,byId=id=>R.find(r=>r.id===id);
+const norm=t=>(t||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,''),L=window.LINKS||{};
+(window.APPLE||[]).forEach(a=>{const m=R.find(r=>norm(r.match||r.title)===norm(a.title)),lk=Object.assign({apple:a.url},a.links);
+ if(m){m.apple=true;if(m.hide)m.title=a.title;m.hide=false;m.date=a.date||m.date;m.cover=m.cover||a.cover;m.url=a.url;m.type=m.type||a.type;m.links=lk}
+ else R.push(Object.assign({},a,{auto:true,apple:true,links:lk}))});
+const ts=r=>r.date?new Date(r.date).getTime():0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.apple)),byId=id=>R.find(r=>r.id===id);
 const mon=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const fd=d=>{const x=new Date(d);return x.getDate()+' '+mon[x.getMonth()]+' '+x.getFullYear()};
 const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace('.',',').replace(',0','')+' млн':n>=1e3?Math.round(n/1e3)+' тыс':''+n;
@@ -366,27 +375,32 @@ function toggle(id,list){const r=byId(id);if(!r)return;if(!r.file){if(r.url)open
 let ctx=[];
 function next(){const i=ctx.indexOf(cur),n=ctx[i+1];if(n)toggle(n);else ui()}
 function ui(){const a=cur&&aud[cur],pl=!!a&&!a.paused;
- $$('[data-id]').forEach(b=>{const on=b.dataset.id===cur;b.classList.toggle('on',on&&pl);b.classList.toggle('cur',on);const ic=$('.ic',b);if(ic&&byId(b.dataset.id).file)ic.textContent=on&&pl?'❚❚':'▶'});
+ $$('[data-id]').forEach(b=>{const on=b.dataset.id===cur;b.classList.toggle('on',on&&pl);b.classList.toggle('cur',on);const ic=b.querySelector('.ic');if(ic&&byId(b.dataset.id).file)ic.textContent=on&&pl?'❚❚':'▶'});
  document.body.classList.toggle('playing',pl);$('#mp').hidden=!cur;if(cur){$('#mpn').textContent=byId(cur).title;$('#mpb').textContent=pl?'❚❚':'▶'}
  if(wg&&ac)wg.gain.setTargetAtTime(pl?.01:.03,ac.currentTime,.4)}
 function prog(id){const a=aud[id];if(!a||!a.duration)return;const p=a.currentTime/a.duration*100;$$('[data-id="'+id+'"]').forEach(b=>b.style.setProperty('--p',p+'%'));if(id===cur){$('#mpf').style.width=p+'%';$('#mpc').textContent=fmt(a.currentTime)+' / '+fmt(a.duration)}}
 const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${r.cover}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b><small>neosten${r.type?' · '+r.type:''}</small></div>`;
+const chips=r=>L.listen?`<div class="chips">${L.listen.map(x=>`<a class="chip" href="${(r.links&&r.links[x.k])||x.u}" target="_blank" rel="noopener">${x.n}</a>`).join('')}</div>`:'';
 const row=(r,l)=>`<button class="trk" data-id="${r.id}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${r.title}</span><span class="ex">${r.note||''}</span></button>`;
-function renderReleases(){const t=Date.now(),up=R.filter(r=>r.date&&ts(r)>t).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&ts(r)<=t).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;
+function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;
  let h='';
- if(nw)h+=`<div class="two"><div>${cover(nw,0)}</div><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p><div class="lst">${row(nw,'n')}</div></div></div>`;
+ if(nw)h+=`<div class="two"><div>${cover(nw,0)}</div><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div>`;
  if(u)h+=`<div class="soon"><div><small>скоро · ${fd(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':u.title}</h3><div id="cd"></div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
  $('#newest').innerHTML=h||'<p>скоро здесь появится новый релиз.</p>';
  const pp=R.filter(r=>r.plays).sort((a,b)=>b.plays-a.plays),mx=pp[0]?pp[0].plays:1;
  $('#pop').innerHTML=pp.map((r,i)=>`<button class="pop" data-id="${r.id}" data-l="p" style="--w:${r.plays/mx*100}%"><em>${i+1}</em><span class="nm">${r.title}</span><span>${fmtN(r.plays)}</span></button>`).join('');
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
+ const dd=R.filter(r=>r.apple).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
+ $('#disc').innerHTML=dd.map((r,i)=>`<a class="dc" href="${r.url||'#'}" target="_blank" rel="noopener">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear():''} · ${r.type||''}</small></a>`).join('');
+ const grp=(t,arr)=>arr&&arr.length?`<h3 class="gh">${t}</h3>`+arr.map(x=>`<a href="${x.u}" target="_blank" rel="noopener" data-s>${x.n}</a>`).join(''):'';
+ $('#links').innerHTML=grp('соцсети',L.social)+grp('слушать',L.listen)+grp('битмейкер',L.beats)+'<h3 class="gh">букинг</h3>'+(L.booking?`<a href="${L.booking}" target="_blank" rel="noopener" data-s>написать</a>`:'<p class="bk">контакт для букинга появится позже.</p>');
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
  $('#adl').innerHTML=[['жанр',AR.genre||'—'],['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',sum?fmtN(sum):'—'],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
  $('#abio').textContent=AR.bio||'';
  $('.strip span').textContent=('neosten ✶ '+(nw?nw.title+' ✶ ':'')).repeat(16);
  R.filter(r=>r.file).forEach(au);ui()}
-setInterval(()=>{const u=shownUp&&byId(shownUp);if(shownUp&&u&&ts(u)<=Date.now()){renderReleases();return}const cd=$('#cd');if(!cd||!u)return;
- const s=Math.max(0,Math.floor((ts(u)-Date.now())/1000)),p=n=>String(n).padStart(2,'0');cd.textContent='через '+Math.floor(s/86400)+' д '+p(Math.floor(s%86400/3600))+':'+p(Math.floor(s%3600/60))+':'+p(s%60)},1000);
+setInterval(()=>{const u=shownUp&&byId(shownUp);if(shownUp&&u&&!isUp(u)){renderReleases();return}const cd=$('#cd');if(!cd||!u)return;
+ const s=Math.max(0,Math.floor((ts(u)-Date.now())/1000)),p=n=>String(n).padStart(2,'0');cd.textContent=s<1?'выходит сегодня':'через '+Math.floor(s/86400)+' д '+p(Math.floor(s%86400/3600))+':'+p(Math.floor(s%3600/60))+':'+p(s%60)},1000);
 renderReleases();
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
  const b=e.target.closest('[data-id]');if(b){toggle(b.dataset.id,$$('[data-id][data-l="'+b.dataset.l+'"]').map(x=>x.dataset.id));return}

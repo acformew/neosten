@@ -11,6 +11,8 @@
    • file                  -> путь к аудио (папка audio/). Без file будет ссылка url.
    • cover:'img/x.jpg'     -> своя обложка (иначе рисуется типографская)
    • hide:true             -> в «скоро» название прячется за чёрной плашкой
+   • match:'название'       -> как только на Apple Music появится релиз с таким названием,
+                              запись сама получит обложку/дату/ссылки и покажет настоящее имя
    ============================================================ */
 window.RELEASES = [
   // --- новое ---
@@ -36,4 +38,25 @@ window.RELEASES = [
 window.ARTIST = {
   genre: '—',                                   // <- жанр
   bio:   'Здесь будет текст про neosten.'       // <- пара абзацев об артисте
+};
+
+/* Контакты и площадки. Пустое значение (booking:'') = «появится позже». */
+window.LINKS = {
+  social: [
+    { n:'Telegram-канал', u:'https://t.me/neostenoff' },
+    { n:'TikTok',         u:'https://www.tiktok.com/@neostenoff' },
+    { n:'Группа VK',      u:'https://vk.com/neost33n' },
+    { n:'YouTube',        u:'https://youtube.com/@neosten' }
+  ],
+  listen: [
+    { k:'apple',   n:'Apple Music',   u:'https://music.apple.com/ru/artist/neosten/1802667747' },
+    { k:'spotify', n:'Spotify',       u:'https://open.spotify.com/artist/5qNk6kVsCQa8fKahWEn9hc' },
+    { k:'yandex',  n:'Яндекс Музыка', u:'https://music.yandex.ru/artist/23866894' },
+    { k:'vk',      n:'VK Музыка',     u:'https://vk.ru/artist/3880687667394172596' }
+  ],
+  beats: [
+    { n:'Сати — битмейкер', u:'https://t.me/svvvtv' },
+    { n:'Биты Сати',        u:'https://t.me/prodbysative' }
+  ],
+  booking: ''
 };
