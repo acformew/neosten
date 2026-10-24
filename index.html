@@ -195,6 +195,12 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 .disc{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px}.dc{display:block;text-decoration:none;color:inherit}.dc img,.dc .gcover{width:100%;aspect-ratio:1;object-fit:cover;border:3px solid var(--ink);display:block;box-shadow:none;padding:10px}.dc .gcover b{font-size:14px}
 .dc>b{display:block;font:700 18px "Oswald",sans-serif;margin-top:10px}.dc small{font:400 13px "IBM Plex Mono",monospace;opacity:.7}.dc:hover img{filter:contrast(1.2)}.dc:hover>b{text-decoration:underline}
 .gh{font:700 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;margin:38px 0 10px}.gh:first-child{margin-top:0}.bk{margin:0;padding:18px 4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);opacity:.7}
+button.dc{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+#pm{position:fixed;inset:0;z-index:95;background:rgba(5,8,6,.6);display:grid;place-items:center;padding:16px}#pm[hidden]{display:none}
+.pmb{position:relative;background:var(--bg);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:26px;width:min(440px,100%);max-height:90vh;overflow:auto}
+#pmx{position:absolute;right:10px;top:6px;background:none;border:0;font:700 30px "Oswald",sans-serif;cursor:pointer;color:var(--ink)}
+.pmi{width:110px;height:110px;object-fit:cover;border:3px solid var(--ink);display:block;margin-bottom:14px}.pmb h3{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
+#pmc a{display:flex;justify-content:space-between;align-items:center;padding:14px 4px;border-top:2px solid var(--ink);text-decoration:none;color:inherit;font:700 18px "Oswald",sans-serif}#pmc a:last-child{border-bottom:2px solid var(--ink)}#pmc a::after{content:"↗"}#pmc a:hover{background:var(--ink);color:var(--bg)}#pmc small{font:400 12px "IBM Plex Mono",monospace;opacity:.7;margin-left:8px}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -283,10 +289,11 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 <div class="pg" id="p-con"><section><h2 class="big hd">контакты</h2><div id="links"></div></section></div>
 </main>
 <footer>neosten ✶ ты забудешь эту страницу. это нормально.</footer>
+<div id="pm" hidden><div class="pmb"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
 <div id="mp" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><div class="eq"><i></i><i></i><i></i><i></i></div></div>
 <div id="pet"><div id="grip">⠿ питомец</div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></div>
 <script src="releases.js"></script>
-<script src="data/apple.js"></script>
+<script src="data/auto.js"></script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let ac,out,mg,an,wf,wg,sound=true,mx=innerWidth/2,my=innerHeight/2,W,H;
@@ -359,17 +366,17 @@ console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл
 /* ---------- releases: data-driven + player ---------- */
 const R=(window.RELEASES||[]).slice(),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null;
 const norm=t=>(t||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,''),L=window.LINKS||{};
-(window.APPLE||[]).forEach(a=>{const m=R.find(r=>norm(r.match||r.title)===norm(a.title)),lk=Object.assign({apple:a.url},a.links);
- if(m){m.apple=true;if(m.hide)m.title=a.title;m.hide=false;m.date=a.date||m.date;m.cover=m.cover||a.cover;m.url=a.url;m.type=m.type||a.type;m.links=lk}
- else R.push(Object.assign({},a,{auto:true,apple:true,links:lk}))});
-const ts=r=>r.date?new Date(r.date).getTime():0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.apple)),byId=id=>R.find(r=>r.id===id);
+(window.AUTO||[]).forEach(a=>{const m=R.find(r=>norm(r.match||r.title)===norm(a.title));
+ if(m){m.auto=true;if(m.hide)m.title=a.title;m.hide=false;m.date=a.date||m.date;m.cover=m.cover||a.cover;m.page=a.page;m.type=m.type||a.type;m.links=a.links||{}}
+ else R.push(Object.assign({},a,{auto:true}))});
+const ts=r=>r.date?new Date(r.date).getTime():0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
 const mon=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const fd=d=>{const x=new Date(d);return x.getDate()+' '+mon[x.getMonth()]+' '+x.getFullYear()};
 const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace('.',',').replace(',0','')+' млн':n>=1e3?Math.round(n/1e3)+' тыс':''+n;
 const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
 const COLS=['#2e86de','#ffd93b','#3a9d4a','#ff9a62'];
 function au(r){if(!aud[r.id]){const a=new Audio();a.preload='auto';a.src=r.file;a.muted=!sound;a.onended=next;a.onplay=a.onpause=ui;a.ontimeupdate=()=>prog(r.id);aud[r.id]=a}return aud[r.id]}
-function toggle(id,list){const r=byId(id);if(!r)return;if(!r.file){if(r.url)open(r.url,'_blank');return}
+function toggle(id,list){const r=byId(id);if(!r)return;if(!r.file){openMenu(r);return}
  if(!sound)setSound(true);const a=au(r);
  if(cur===id){a.paused?a.play():a.pause();return}
  if(cur)aud[cur].pause();cur=id;if(list)ctx=list;if(a.ended)a.currentTime=0;a.play().catch(()=>{});ui()}
@@ -383,6 +390,10 @@ function prog(id){const a=aud[id];if(!a||!a.duration)return;const p=a.currentTim
 const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${r.cover}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b><small>neosten${r.type?' · '+r.type:''}</small></div>`;
 const chips=r=>L.listen?`<div class="chips">${L.listen.map(x=>`<a class="chip" href="${(r.links&&r.links[x.k])||x.u}" target="_blank" rel="noopener">${x.n}</a>`).join('')}</div>`:'';
 const row=(r,l)=>`<button class="trk" data-id="${r.id}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${r.title}</span><span class="ex">${r.note||''}</span></button>`;
+const PN={spotify:'Spotify',yandex:'Яндекс Музыка',vk:'VK Музыка',apple:'Apple Music',youtubeMusic:'YouTube Music',youtube:'YouTube',deezer:'Deezer',tidal:'Tidal',soundcloud:'SoundCloud',amazonMusic:'Amazon Music'};
+function openMenu(r){const lk=r.links||{},fb=Object.fromEntries((L.listen||[]).map(x=>[x.k,x.u])),ks=Object.keys(PN).filter(k=>lk[k]||fb[k]);
+ $('#pmc').innerHTML=(r.cover?`<img class="pmi" src="${r.cover}" alt="">`:'')+`<h3 class="big">${r.title}</h3><p class="meta">слушать на</p>`+ks.map(k=>`<a href="${lk[k]||fb[k]}" target="_blank" rel="noopener" data-s>${PN[k]}${lk[k]?'':' <small>страница артиста</small>'}</a>`).join('')+(r.page?`<a href="${r.page}" target="_blank" rel="noopener" data-s>все площадки <small>song.link</small></a>`:'');$('#pm').hidden=false}
+$('#pm').onclick=e=>{if(e.target.id==='pm'||e.target.id==='pmx')$('#pm').hidden=true};addEventListener('keydown',e=>{if(e.key==='Escape')$('#pm').hidden=true});
 function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;
  let h='';
  if(nw)h+=`<div class="two"><div>${cover(nw,0)}</div><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div>`;
@@ -391,8 +402,8 @@ function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)
  const pp=R.filter(r=>r.plays).sort((a,b)=>b.plays-a.plays),mx=pp[0]?pp[0].plays:1;
  $('#pop').innerHTML=pp.map((r,i)=>`<button class="pop" data-id="${r.id}" data-l="p" style="--w:${r.plays/mx*100}%"><em>${i+1}</em><span class="nm">${r.title}</span><span>${fmtN(r.plays)}</span></button>`).join('');
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
- const dd=R.filter(r=>r.apple).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
- $('#disc').innerHTML=dd.map((r,i)=>`<a class="dc" href="${r.url||'#'}" target="_blank" rel="noopener">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear():''} · ${r.type||''}</small></a>`).join('');
+ const dd=R.filter(r=>r.auto||r.show).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
+ $('#disc').innerHTML=dd.map((r,i)=>`<button class="dc" data-menu="${r.id}">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear()+' · ':''}${r.type||'релиз'}</small></button>`).join('');
  const grp=(t,arr)=>arr&&arr.length?`<h3 class="gh">${t}</h3>`+arr.map(x=>`<a href="${x.u}" target="_blank" rel="noopener" data-s>${x.n}</a>`).join(''):'';
  $('#links').innerHTML=grp('соцсети',L.social)+grp('слушать',L.listen)+grp('битмейкер',L.beats)+'<h3 class="gh">букинг</h3>'+(L.booking?`<a href="${L.booking}" target="_blank" rel="noopener" data-s>написать</a>`:'<p class="bk">контакт для букинга появится позже.</p>');
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
@@ -404,6 +415,7 @@ setInterval(()=>{const u=shownUp&&byId(shownUp);if(shownUp&&u&&!isUp(u)){renderR
  const s=Math.max(0,Math.floor((ts(u)-Date.now())/1000)),p=n=>String(n).padStart(2,'0');cd.textContent=s<1?'выходит сегодня':'через '+Math.floor(s/86400)+' д '+p(Math.floor(s%86400/3600))+':'+p(Math.floor(s%3600/60))+':'+p(s%60)},1000);
 renderReleases();
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
+ const mc=e.target.closest('[data-menu]');if(mc){openMenu(byId(mc.dataset.menu));return}
  const b=e.target.closest('[data-id]');if(b){toggle(b.dataset.id,$$('[data-id][data-l="'+b.dataset.l+'"]').map(x=>x.dataset.id));return}
  if(e.target.closest('#mpb')&&cur)toggle(cur)});
 $('#mps').onclick=e=>{const a=cur&&aud[cur];if(a&&a.duration){const r=e.currentTarget.getBoundingClientRect();a.currentTime=(e.clientX-r.left)/r.width*a.duration}};
