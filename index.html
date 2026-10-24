@@ -292,8 +292,10 @@ button.dc{background:none;border:0;padding:0;text-align:left;font:inherit;color:
 <div id="pm" hidden><div class="pmb"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
 <div id="mp" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><div class="eq"><i></i><i></i><i></i><i></i></div></div>
 <div id="pet"><div id="grip">⠿ питомец</div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></div>
-<script src="releases.js"></script>
-<script src="data/auto.js"></script>
+<script>
+(function(){var v=location.protocol.indexOf('http')===0?'?v='+Math.floor(Date.now()/300000):'';
+['releases.js','data/auto.js'].forEach(function(f){document.write('<script src="'+f+v+'"><\/script>')})})();
+</script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let ac,out,mg,an,wf,wg,sound=true,mx=innerWidth/2,my=innerHeight/2,W,H;
