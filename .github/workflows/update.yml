@@ -2,6 +2,8 @@ name: update-releases
 on:
   schedule:
     - cron: '17 */6 * * *'     # каждые 6 часов
+  push:
+    paths: ['links.txt', 'scripts/update.mjs']   # правка links.txt запускает обновление сразу
   workflow_dispatch:           # + кнопка «Run workflow» вручную
 permissions:
   contents: write
