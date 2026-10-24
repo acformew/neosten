@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>neosten</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#d9e6e1;--ink:#050806;--sky:#2e86de;--sun:#ffd93b;--grass:#2f8f3a;--sh:8px 8px 0 var(--ink)}
 *{box-sizing:border-box}
@@ -201,6 +201,21 @@ button.dc{background:none;border:0;padding:0;text-align:left;font:inherit;color:
 #pmx{position:absolute;right:10px;top:6px;background:none;border:0;font:700 30px "Oswald",sans-serif;cursor:pointer;color:var(--ink)}
 .pmi{width:110px;height:110px;object-fit:cover;border:3px solid var(--ink);display:block;margin-bottom:14px}.pmb h3{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
 #pmc a{display:flex;justify-content:space-between;align-items:center;padding:14px 4px;border-top:2px solid var(--ink);text-decoration:none;color:inherit;font:700 18px "Oswald",sans-serif}#pmc a:last-child{border-bottom:2px solid var(--ink)}#pmc a::after{content:"↗"}#pmc a:hover{background:var(--ink);color:var(--bg)}#pmc small{font:400 12px "IBM Plex Mono",monospace;opacity:.7;margin-left:8px}
+/* ---- polish: calmer type, tidy contacts ---- */
+section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
+.big{letter-spacing:-.025em}.w2{letter-spacing:-.035em}
+.hd,.b1 .hd{font-weight:700;letter-spacing:-.02em}
+#p-rel h3.big,.card .big,.soon h3,.pmb h3{font-weight:700}
+#links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;border:0}
+.cc{border:3px solid var(--ink);background:#fff;min-width:0}
+#links .cc .gh{margin:0;padding:10px 18px;background:var(--ink);color:var(--bg);font:700 12px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase}
+#links .cc a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:16px 18px;margin:0;border:0;border-top:2px solid var(--ink);background:transparent;transform:none;font:600 22px/1.2 "Oswald",sans-serif;letter-spacing:.02em;text-transform:none}
+#links .cc .gh+a{border-top:0}#links .cc a::after{content:none}
+#links .cc a .n::after{content:" ↗";font-size:.65em;opacity:.55}
+#links .cc a .h{font:400 13px "IBM Plex Mono",monospace;letter-spacing:0;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+#links .cc a:hover{background:var(--ink);color:var(--bg)}
+#links .cc .bk{margin:0;padding:18px;border:0;font-size:14px;opacity:.7}
+@media(max-width:800px){#links{grid-template-columns:1fr}#links .cc a .h{max-width:140px}}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -406,8 +421,10 @@ function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
  const dd=R.filter(r=>r.auto||r.show).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
  $('#disc').innerHTML=dd.map((r,i)=>`<button class="dc" data-menu="${r.id}">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear()+' · ':''}${r.type||'релиз'}</small></button>`).join('');
- const grp=(t,arr)=>arr&&arr.length?`<h3 class="gh">${t}</h3>`+arr.map(x=>`<a href="${x.u}" target="_blank" rel="noopener" data-s>${x.n}</a>`).join(''):'';
- $('#links').innerHTML=grp('соцсети',L.social)+grp('слушать',L.listen)+grp('битмейкер',L.beats)+'<h3 class="gh">букинг</h3>'+(L.booking?`<a href="${L.booking}" target="_blank" rel="noopener" data-s>написать</a>`:'<p class="bk">контакт для букинга появится позже.</p>');
+ const hnd=u=>u.replace(/^https?:\/\/(www\.)?/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
+ const card=(t,b)=>`<section class="cc"><h3 class="gh">${t}</h3>${b}</section>`;
+ const rows=a=>(a||[]).map(x=>`<a href="${x.u}" target="_blank" rel="noopener" data-s><span class="n">${x.n}</span><span class="h">${hnd(x.u)}</span></a>`).join('');
+ $('#links').innerHTML=card('соцсети',rows(L.social))+card('слушать',rows(L.listen))+card('битмейкер',rows(L.beats))+card('букинг',L.booking?rows([{n:'Написать',u:L.booking}]):'<p class="bk">контакт для букинга появится позже.</p>');
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
  $('#adl').innerHTML=[['жанр',AR.genre||'—'],['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',sum?fmtN(sum):'—'],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
  $('#abio').textContent=AR.bio||'';
