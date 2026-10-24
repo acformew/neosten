@@ -9,5 +9,5 @@
 # Примеры (убери # чтобы включить):
 # 2026-10-20 | https://open.spotify.com/album/XXXXXXXX
 # https://music.yandex.ru/album/12345678 | vk=https://vk.ru/music/album/...
-https://music.yandex.ru/album/41828596
-https://music.yandex.ru/album/40628842
+https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB
+https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL
