@@ -16,7 +16,6 @@ a,button{color:inherit}
 #gate{position:fixed;inset:0;z-index:100;background:#fff;color:#000;display:block;transition:none cubic-bezier(.8,0,.2,1)}
 #gate.go{pointer-events:none}
 
-
 .btn{font:700 16px "IBM Plex Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}
 .btn:hover{background:#fff}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
 .btn.alt{background:var(--bg)}
@@ -64,12 +63,8 @@ section{padding:clamp(48px,9vw,110px) 5vw}
 #mem{margin-top:26px;min-height:140px}
 #mem div{font:900 clamp(16px,2.8vw,32px)/1.25 "Unbounded",Impact,sans-serif;text-transform:lowercase;transition:opacity 7s linear,filter 7s linear,letter-spacing 7s linear}
 #mem div.f{opacity:0;filter:blur(10px);letter-spacing:.2em}
-#links{display:flex;flex-wrap:wrap;gap:0}
-#links a{flex:1 1 220px;font:900 clamp(18px,2.6vw,32px)/1 "Unbounded",Impact,sans-serif;text-decoration:none;text-transform:lowercase;padding:34px 20px;border:5px solid var(--ink);margin:0 -5px -5px 0;background:#fff;transition:background .1s,color .1s}
-#links a:nth-child(2n){background:var(--sky)}#links a:nth-child(3n){background:var(--sun)}
-#links a:hover{background:var(--ink);color:var(--bg);transform:rotate(-1.5deg) scale(1.03);z-index:2}
 footer{padding:30px 5vw 50px;font-size:12px}
- #catbox.home{position:absolute;left:50%;top:50%;margin:-170px 0 0 -190px;--r:-3deg}
+#catbox.home{position:absolute;left:50%;top:50%;margin:-170px 0 0 -190px;--r:-3deg}
 #catbox:active{cursor:grabbing}
 #catbox.small{border-width:4px;box-shadow:5px 5px 0 var(--ink)}#catbox.small #cat{font-size:3.3px}
 #catbox.small b{font-size:10px}
@@ -128,7 +123,6 @@ dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex
 .pop:hover{background-color:rgba(255,255,255,.1);transform:none}.pop.on{color:var(--sun);border-color:var(--bg);box-shadow:none}
 .pick{box-shadow:none;border-width:3px}.stamp{box-shadow:none}
 .cover,.photo{box-shadow:8px 8px 0 var(--ink)}
-#links a,#links a:nth-child(2n),#links a:nth-child(3n){background:transparent}
 #pet{box-shadow:none;border-width:3px}#grip{cursor:grab;font-weight:700;border-bottom:2px solid var(--ink);margin:-4px -4px 8px;padding:0 4px 4px;touch-action:none;user-select:none}
 html.inv{filter:invert(1) hue-rotate(180deg)}
 html.glitch{animation:gl .25s steps(2) 6}@keyframes gl{25%{filter:invert(1)}50%{filter:hue-rotate(140deg) contrast(1.6)}75%{filter:saturate(5)}}
@@ -164,9 +158,6 @@ section{padding-top:clamp(44px,6vw,72px);padding-bottom:clamp(44px,6vw,72px)}
 #p-rel h3.big{font-size:clamp(22px,2.6vw,34px)!important;margin:0 0 20px!important}
 .card .big{font-size:clamp(32px,4.6vw,56px)!important;margin:0 0 4px}
 .pick h3{font-size:clamp(20px,2.6vw,30px)}.soon{margin-top:40px}.note{font-size:13px;opacity:.7}dt{width:130px}
-#links{display:block;border-top:3px solid var(--ink)}
-#links a,#links a:hover{display:flex;justify-content:space-between;align-items:center;padding:22px 4px;border:0;border-bottom:3px solid var(--ink);margin:0;font-size:clamp(20px,2.6vw,32px);transform:none}
-#links a::after{content:"↗"}
 footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font-size:13px}
 @media(max-width:900px){#hero{grid-template-columns:1fr;padding-top:96px;min-height:0}.slot{display:none}#catbox.home{grid-area:auto;justify-self:start}.toc li{grid-template-columns:100px 1fr}}
 .gcover{aspect-ratio:1;max-width:440px;width:100%;border:5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--c);position:relative;padding:22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
@@ -201,21 +192,33 @@ button.dc{background:none;border:0;padding:0;text-align:left;font:inherit;color:
 #pmx{position:absolute;right:10px;top:6px;background:none;border:0;font:700 30px "Oswald",sans-serif;cursor:pointer;color:var(--ink)}
 .pmi{width:110px;height:110px;object-fit:cover;border:3px solid var(--ink);display:block;margin-bottom:14px}.pmb h3{font-size:clamp(20px,3vw,28px);margin:0 0 6px}
 #pmc a{display:flex;justify-content:space-between;align-items:center;padding:14px 4px;border-top:2px solid var(--ink);text-decoration:none;color:inherit;font:700 18px "Oswald",sans-serif}#pmc a:last-child{border-bottom:2px solid var(--ink)}#pmc a::after{content:"↗"}#pmc a:hover{background:var(--ink);color:var(--bg)}#pmc small{font:400 12px "IBM Plex Mono",monospace;opacity:.7;margin-left:8px}
-/* ---- polish: calmer type, tidy contacts ---- */
+
+/* ---- contacts section layout & polish ---- */
 section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 .big{letter-spacing:-.025em}.w2{letter-spacing:-.035em}
 .hd,.b1 .hd{font-weight:700;letter-spacing:-.02em}
 #p-rel h3.big,.card .big,.soon h3,.pmb h3{font-weight:700}
-#links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;border:0}
-.cc{border:3px solid var(--ink);background:#fff;min-width:0}
-#links .cc .gh{margin:0;padding:10px 18px;background:var(--ink);color:var(--bg);font:700 12px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase}
-#links .cc a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:16px 18px;margin:0;border:0;border-top:2px solid var(--ink);background:transparent;transform:none;font:600 22px/1.2 "Oswald",sans-serif;letter-spacing:.02em;text-transform:none}
-#links .cc .gh+a{border-top:0}#links .cc a::after{content:none}
-#links .cc a .n::after{content:" ↗";font-size:.65em;opacity:.55}
-#links .cc a .h{font:400 13px "IBM Plex Mono",monospace;letter-spacing:0;opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
-#links .cc a:hover{background:var(--ink);color:var(--bg)}
-#links .cc .bk{margin:0;padding:18px;border:0;font-size:14px;opacity:.7}
-@media(max-width:800px){#links{grid-template-columns:1fr}#links .cc a .h{max-width:140px}}
+
+#links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;border:0;margin-top:8px}
+.cc{border:4px solid var(--ink);background:#fff;box-shadow:8px 8px 0 var(--ink);min-width:0;overflow:hidden;padding:0 !important}
+.cc .gh{margin:0;padding:12px 18px;background:var(--ink);color:var(--sun);font:700 13px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--ink)}
+.cc-list{display:flex;flex-direction:column}
+.cc .lnk{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;margin:0;border:0;border-top:2px solid var(--ink);background:#fff;color:var(--ink);text-decoration:none;transition:background .12s,color .12s}
+.cc .lnk:first-child{border-top:0}
+.cc .lnk-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cc .lnk .n{font:700 22px/1.2 "Oswald",sans-serif;letter-spacing:.02em;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc .lnk .h{font:400 13px/1.3 "IBM Plex Mono",monospace;letter-spacing:0;opacity:.65;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc .lnk .arr{font:900 18px "Unbounded",sans-serif;opacity:.45;flex-shrink:0;transition:transform .12s,opacity .12s}
+.cc .lnk:hover{background:var(--ink);color:var(--sun)}
+.cc .lnk:hover .h{color:#fff;opacity:.8}
+.cc .lnk:hover .arr{opacity:1;color:var(--sun);transform:translate(3px,-3px)}
+.cc .bk{margin:0;padding:22px 18px;font:500 14px "IBM Plex Mono",monospace;opacity:.7}
+@media(max-width:800px){
+  #links{grid-template-columns:1fr;gap:20px}
+  .cc .lnk{padding:12px 14px}
+  .cc .lnk .n{font-size:20px}
+}
+
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -411,6 +414,7 @@ const PN={spotify:'Spotify',yandex:'Яндекс Музыка',vk:'VK Музык
 function openMenu(r){const lk=r.links||{},fb=Object.fromEntries((L.listen||[]).map(x=>[x.k,x.u])),ks=Object.keys(PN).filter(k=>lk[k]||fb[k]);
  $('#pmc').innerHTML=(r.cover?`<img class="pmi" src="${r.cover}" alt="">`:'')+`<h3 class="big">${r.title}</h3><p class="meta">слушать на</p>`+ks.map(k=>`<a href="${lk[k]||fb[k]}" target="_blank" rel="noopener" data-s>${PN[k]}${lk[k]?'':' <small>страница артиста</small>'}</a>`).join('')+(r.page?`<a href="${r.page}" target="_blank" rel="noopener" data-s>все площадки <small>song.link</small></a>`:'');$('#pm').hidden=false}
 $('#pm').onclick=e=>{if(e.target.id==='pm'||e.target.id==='pmx')$('#pm').hidden=true};addEventListener('keydown',e=>{if(e.key==='Escape')$('#pm').hidden=true});
+
 function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;
  let h='';
  if(nw)h+=`<div class="two"><div>${cover(nw,0)}</div><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div>`;
@@ -421,10 +425,16 @@ function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
  const dd=R.filter(r=>r.auto||r.show).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
  $('#disc').innerHTML=dd.map((r,i)=>`<button class="dc" data-menu="${r.id}">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear()+' · ':''}${r.type||'релиз'}</small></button>`).join('');
- const hnd=u=>u.replace(/^https?:\/\/(www\.)?/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
- const card=(t,b)=>`<section class="cc"><h3 class="gh">${t}</h3>${b}</section>`;
- const rows=a=>(a||[]).map(x=>`<a href="${x.u}" target="_blank" rel="noopener" data-s><span class="n">${x.n}</span><span class="h">${hnd(x.u)}</span></a>`).join('');
- $('#links').innerHTML=card('соцсети',rows(L.social))+card('слушать',rows(L.listen))+card('битмейкер',rows(L.beats))+card('букинг',L.booking?rows([{n:'Написать',u:L.booking}]):'<p class="bk">контакт для букинга появится позже.</p>');
+
+ const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
+ const card=(t,b)=>`<div class="cc"><h3 class="gh"><span>■ ${t}</span></h3><div class="cc-list">${b}</div></div>`;
+ const rows=a=>(a||[]).map(x=>`<a class="lnk" href="${x.u}" target="_blank" rel="noopener" data-s><div class="lnk-info"><span class="n">${x.n}</span><span class="h">${hnd(x.u)}</span></div><span class="arr">↗</span></a>`).join('');
+ const soc=(L.social&&L.social.length)?rows(L.social):'<p class="bk">ссылки скоро появятся.</p>';
+ const lis=(L.listen&&L.listen.length)?rows(L.listen):'<p class="bk">площадки скоро появятся.</p>';
+ const beats=(L.beats&&L.beats.length)?rows(L.beats):'<p class="bk">по вопросам битов: пишите в соцсети.</p>';
+ const booking=L.booking?rows([{n:'Букинг / Организация',u:L.booking}]):'<p class="bk">контакт для букинга появится позже.</p>';
+ $('#links').innerHTML=card('соцсети',soc)+card('слушать',lis)+card('битмейкер',beats)+card('букинг',booking);
+
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
  $('#adl').innerHTML=[['жанр',AR.genre||'—'],['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',sum?fmtN(sum):'—'],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
  $('#abio').textContent=AR.bio||'';
