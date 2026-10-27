@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>neosten</title>
-<script>(function(){try{var t=localStorage.getItem('ntheme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='night';if(t==='night')document.documentElement.classList.add('night')}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem('ntheme');if(!t)t='night';if(t==='night')document.documentElement.classList.add('night')}catch(e){}})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#d9e6e1;--ink:#050806;--sky:#2e86de;--sun:#ffd93b;--grass:#2f8f3a;--sh:8px 8px 0 var(--ink)}
@@ -274,13 +274,14 @@ html.night .cc .lnk:hover{background:var(--sun);color:#050806}html.night .cc .ln
 @media(max-width:700px){.bgl.raw{filter:blur(8px)}}
 @media(prefers-reduced-motion:reduce){.bgl,#bgw{transition:none}}
 .cc .gh{background:var(--bandbg)}
+#lb,#ls,#lh{text-shadow:0 0 5px #fff,0 0 8px #fff,0 0 12px #fff}.wait #ls{bottom:auto;top:70%}#gate.wait{cursor:pointer}.wait #ls{animation:blk 1.3s ease-in-out infinite;opacity:1;font-size:18px;letter-spacing:.12em}@keyframes blk{50%{opacity:.3}}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
 <canvas id="grid"></canvas>
-<div id="gate"><canvas id="ldc"></canvas><div id="lb"></div><div id="ls"></div><div id="lh">коснись экрана, чтобы включить звук</div></div>
+<div id="gate"><canvas id="ldc"></canvas><div id="lb"></div><div id="ls"></div><div id="lh">клик, касание или любая клавиша — и включится звук</div></div>
 <button class="btn alt" id="mute" hidden>звук: вкл</button>
 <nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button><button id="theme" data-s aria-label="сменить тему">☾ ночь</button></nav>
 
@@ -380,7 +381,7 @@ html.night .cc .lnk:hover{background:var(--sun);color:#050806}html.night .cc .ln
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let ac,out,mg,an,wf,wg,sound=true,mx=innerWidth/2,my=innerHeight/2,W,H;
 /* ---------- audio engine ---------- */
-function A(){if(!ac){ac=new(window.AudioContext||window.webkitAudioContext)();out=ac.createGain();an=ac.createAnalyser();an.fftSize=64;out.connect(an);an.connect(ac.destination);mg=ac.createGain();mg.gain.value=0;mg.connect(out);wind()}ac.resume();out.gain.value=1}
+function A(){if(!ac){ac=new(window.AudioContext||window.webkitAudioContext)();out=ac.createGain();an=ac.createAnalyser();an.fftSize=64;out.connect(an);an.connect(ac.destination);mg=ac.createGain();mg.gain.value=0;mg.connect(out);wind()}ac.resume().catch(()=>{});out.gain.value=1}
 function wind(){const b=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
  const s=ac.createBufferSource();s.buffer=b;s.loop=true;wf=ac.createBiquadFilter();wf.type='lowpass';wf.frequency.value=520;const g=ac.createGain();g.gain.value=.03;wg=g;s.connect(wf);wf.connect(g);g.connect(out);s.start()}
 function blip(f,d,t='sine',v=.05,f2){if(!sound||!ac||ac.state!=='running')return;const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.type=t;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(out);o.start(n);o.stop(n+d+.02)}
@@ -391,19 +392,20 @@ function meow(){if(!sound||!ac||ac.state!=='running')return;const n=ac.currentTi
 const setSound=v=>{sound=v;if(v)A();else if(out)out.gain.value=0;$('#mute').textContent='звук: '+(v?'вкл':'выкл');if(typeof aud!=='undefined')Object.values(aud).forEach(a=>a.muted=!v)};
 
 function enter(){$('#gate').classList.add('go');$('#mute').hidden=false;setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
-let loading=false,chimed=false;
-function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chimed=true;const t=ac.currentTime+.1;
- const bus=ac.createGain(),sh=ac.createBiquadFilter(),dl=ac.createDelay(1),fb=ac.createGain(),lp=ac.createBiquadFilter();
- bus.gain.setValueAtTime(0,t);bus.gain.linearRampToValueAtTime(1,t+1.6);bus.gain.setValueAtTime(1,t+5);bus.gain.linearRampToValueAtTime(0,t+8);
- sh.type='lowpass';sh.frequency.value=700;sh.Q.value=.3;dl.delayTime.value=.42;fb.gain.value=.42;lp.type='lowpass';lp.frequency.value=800;
- bus.connect(sh);sh.connect(out);sh.connect(dl);dl.connect(lp);lp.connect(fb);fb.connect(dl);lp.connect(out);
+let loading=false,chimed=false,waiting=false,ldT0=0;
+function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chimed=true;const t=ac.currentTime+.08,END=4.6;
+ const bus=ac.createGain(),mst=ac.createGain(),sh=ac.createBiquadFilter(),dl=ac.createDelay(1),fb=ac.createGain(),lp=ac.createBiquadFilter();
+ bus.gain.setValueAtTime(0,t);bus.gain.linearRampToValueAtTime(1,t+1);
+ mst.gain.setValueAtTime(1,t);mst.gain.setValueAtTime(1,t+END-1.1);mst.gain.linearRampToValueAtTime(0,t+END);
+ sh.type='lowpass';sh.frequency.value=700;sh.Q.value=.3;dl.delayTime.value=.34;fb.gain.value=.36;lp.type='lowpass';lp.frequency.value=800;
+ bus.connect(sh);sh.connect(mst);sh.connect(dl);dl.connect(lp);lp.connect(fb);fb.connect(dl);lp.connect(mst);mst.connect(out);
  const pad=(fs,st,len,v)=>fs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;o.detune.value=(i%3-1)*5;
-  g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(v,st+len*.4);g.gain.linearRampToValueAtTime(v*.8,st+len*.7);g.gain.linearRampToValueAtTime(0,st+len);o.connect(g);g.connect(bus);o.start(st);o.stop(st+len+.1)});
- pad([73.42,146.83,220,329.63,369.99],t,4.6,.04);
- pad([98,146.83,246.94,369.99],t+2.6,5.4,.04);
+  g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(v,st+len*.4);g.gain.linearRampToValueAtTime(v*.8,st+len*.7);g.gain.linearRampToValueAtTime(0,st+len);o.connect(g);g.connect(bus);o.start(st);o.stop(st+len+.05)});
+ pad([73.42,146.83,220,329.63,369.99],t,3.3,.04);
+ pad([98,146.83,246.94,369.99],t+1.4,END-1.4,.04);
  const nb=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
- const ns=ac.createBufferSource(),nf=ac.createBiquadFilter(),ng=ac.createGain();ns.buffer=nb;ns.loop=true;nf.type='bandpass';nf.frequency.setValueAtTime(220,t);nf.frequency.linearRampToValueAtTime(520,t+5);nf.Q.value=.7;
- ng.gain.setValueAtTime(0,t);ng.gain.linearRampToValueAtTime(.025,t+3);ng.gain.linearRampToValueAtTime(0,t+7.5);ns.connect(nf);nf.connect(ng);ng.connect(bus);ns.start(t);ns.stop(t+7.6)}
+ const ns=ac.createBufferSource(),nf=ac.createBiquadFilter(),ng=ac.createGain();ns.buffer=nb;ns.loop=true;nf.type='bandpass';nf.frequency.setValueAtTime(220,t);nf.frequency.linearRampToValueAtTime(520,t+END);nf.Q.value=.7;
+ ng.gain.setValueAtTime(0,t);ng.gain.linearRampToValueAtTime(.025,t+1.8);ng.gain.linearRampToValueAtTime(0,t+END-.1);ns.connect(nf);nf.connect(ng);ng.connect(bus);ns.start(t);ns.stop(t+END)}
 const mb=$('#mute');mb.onclick=()=>{setSound(!sound);mb.classList.remove('bnc');void mb.offsetWidth;mb.classList.add('bnc')};
 /* UI sounds */
 document.addEventListener('mouseover',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(1300+Math.random()*300,.04,'square',.015)});
@@ -552,21 +554,23 @@ let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagNa
  if(kb.endsWith('303')){kb='';acid()}if(kb.endsWith('сати')){kb='';breath()}});
 let idle;const rs2=()=>{clearTimeout(idle);idle=setTimeout(()=>{say('ты ещё здесь?',4000);meow()},60000)};['pointermove','keydown','pointerdown'].forEach(ev=>addEventListener(ev,rs2,{passive:true}));rs2();
 try{A()}catch(e){}
-['pointerdown','keydown','touchstart'].forEach(ev=>addEventListener(ev,()=>{if(sound&&ac&&ac.state!=='running')ac.resume().then(()=>{if(loading)startupChime()})},{passive:true}));
-function runLoader(){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.style.cssText='';g.classList.remove('go');loading=true;chimed=false;if(ac&&ac.state==='running')setTimeout(startupChime,60);
+const wake=()=>{if(!sound||!ac)return;const go=()=>{if(waiting){waiting=false;ldT0=performance.now();document.getElementById('gate').classList.remove('wait')}if(loading)startupChime()};
+ if(ac.state!=='running')ac.resume().then(go).catch(()=>{});else go()};
+['pointerup','click','keydown','touchend'].forEach(ev=>addEventListener(ev,wake,{passive:true}));
+function runLoader(){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.style.cssText='';g.classList.remove('go');loading=true;chimed=false;waiting=!!sound&&!(ac&&ac.state==='running');g.classList.toggle('wait',waiting);if(!waiting)setTimeout(startupChime,60);
  const W=cv.width=innerWidth,H=cv.height=innerHeight,fs=Math.max(13,Math.min(17,W/80)),cw=fs*.62,C=Math.ceil(W/cw),R=Math.ceil(H/fs),CH='01#@%*+=<>/\\|:;',
  mk=document.createElement('canvas');mk.width=C;mk.height=R;const m=mk.getContext('2d');m.font='900 100px Arial Black,Arial,sans-serif';const w1=m.measureText('neosten').width,P=Math.min(W*.84/(w1/100),H*.36);
  m.setTransform(P/100/cw,0,0,P/100/fs,(W-w1*P/100)/2/cw,(H/2+P*.36)/fs);m.fillText('neosten',0,0);
  const im=m.getImageData(0,0,C,R).data,M=new Uint8Array(C*R),hd=[],sp=[];for(let i=0;i<C*R;i++)M[i]=im[i*4+3]>110;for(let c=0;c<C;c++){hd.push(Math.random()*R);sp.push(.25+Math.random()*.7)}
- const rc=()=>CH[Math.random()*CH.length|0],logs=['проветриваю траву','настраиваю небо','ищу кота','вспоминаю, как тебя зовут','почти проснулся'],t0=performance.now();let ent=false;
+ const rc=()=>CH[Math.random()*CH.length|0],logs=['проветриваю траву','настраиваю небо','ищу кота','вспоминаю, как тебя зовут','почти проснулся'];let ent=false;ldT0=performance.now();
  x.font=fs+'px "IBM Plex Mono",monospace';x.textBaseline='top';
- (function f(t){const e=Math.max(0,t-t0),p=Math.min(1,e/3000),d=Math.max(0,Math.min(1,(e-3400)/1200));
+ (function f(t){const e=waiting?0:Math.max(0,t-ldT0),p=waiting?.14:Math.min(1,e/3000),d=Math.max(0,Math.min(1,(e-3400)/1200));
   x.clearRect(0,0,W,H);
   for(let c=0;c<C;c++){hd[c]=(hd[c]+sp[c])%(R+12);for(let k=0;k<10;k++){const r=Math.floor(hd[c]-k);if(r<0||r>=R)continue;if(M[r*C+c]&&Math.random()<p*1.1)continue;x.fillStyle='rgba(0,0,0,'+(1-k/10)*(k?.3:.9)+')';x.fillText(rc(),c*cw,r*fs)}}
   x.fillStyle='#000';for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(M[r*C+c]&&Math.random()<p*1.1&&Math.random()>d*1.2)x.fillText(rc(),c*cw,r*fs);
-  const n=Math.round(p*20);$('#lb').textContent='['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(p*100)+'%';$('#ls').textContent=logs[Math.min(4,p*5|0)]+'…';$('#lh').style.opacity=(ac&&ac.state==='running')?0:.55;
+  const pd=waiting?0:p,n=Math.round(pd*20);$('#lb').textContent='['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(pd*100)+'%';$('#ls').textContent=waiting?'нажми, чтобы войти':logs[Math.min(4,p*5|0)]+'…';$('#lh').style.opacity=waiting?.7:0;
   if(d>0){if(!ent){ent=true;enter()}g.style.opacity=1-d;g.style.filter='blur('+d*5+'px)'}
-  if(d<1)requestAnimationFrame(f);else{g.style.display='none';loading=false}})(t0)}
+  if(d<1)requestAnimationFrame(f);else{g.style.display='none';loading=false}})(ldT0)}
 runLoader();
 /* ---------- commands ---------- */
 const hop=()=>{if(home)wig();else vy=-22;meow()};
@@ -610,9 +614,14 @@ const fx={
  'перезагрузка':{t:'перезагружаюсь…',f(){setTimeout(runLoader,700)}}
 };
 /* ---------- themes & backgrounds ---------- */
-function setTheme(t,save){document.documentElement.classList.toggle('night',t==='night');$('#theme').textContent=t==='night'?'☀ день':'☾ ночь';
- if(save){try{localStorage.setItem('ntheme',t)}catch(e){}}blip(t==='night'?200:480,.35,'sine',.1,t==='night'?90:760)}
-$('#theme').textContent=isNight()?'☀ день':'☾ ночь';
+function switchSound(up){if(!sound||!ac||ac.state!=='running')return;const n=ac.currentTime;
+ const click=(t,f,v)=>{const b=ac.createBuffer(1,Math.floor(ac.sampleRate*.02),ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+  const s=ac.createBufferSource(),h=ac.createBiquadFilter(),g=ac.createGain();s.buffer=b;h.type='bandpass';h.frequency.value=f;h.Q.value=1.2;g.gain.value=v;s.connect(h);h.connect(g);g.connect(out);s.start(t)};
+ const thunk=(t,f)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*.5,t+.06);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.07);o.connect(g);g.connect(out);o.start(t);o.stop(t+.08)};
+ if(up){click(n,2600,.5);thunk(n,230);click(n+.07,3600,.35)}else{click(n,3600,.5);thunk(n,170);click(n+.07,2200,.35)}}
+function setTheme(t,save){document.documentElement.classList.toggle('night',t==='night');$('#theme').textContent=t==='night'?'☾ ночь':'☀ день';
+ if(save){try{localStorage.setItem('ntheme',t)}catch(e){}}switchSound(t==='day')}
+$('#theme').textContent=isNight()?'☾ ночь':'☀ день';
 $('#theme').onclick=()=>setTheme(isNight()?'day':'night',true);
 /* Просто положи картинки в репозиторий: «Neosten Фон день.jpg» и «Neosten Фон ночь.jpg» (корень или папка img/).
    Подходят jpg / png / webp. Свой путь можно задать в releases.js: window.BG={day:'...',night:'...'} */
