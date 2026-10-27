@@ -2,6 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>neosten</title>
+<script>(function(){try{var t=localStorage.getItem('ntheme');if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='night';if(t==='night')document.documentElement.classList.add('night')}catch(e){}})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#d9e6e1;--ink:#050806;--sky:#2e86de;--sun:#ffd93b;--grass:#2f8f3a;--sh:8px 8px 0 var(--ink)}
@@ -17,7 +18,7 @@ a,button{color:inherit}
 #gate.go{pointer-events:none}
 
 .btn{font:700 16px "IBM Plex Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}
-.btn:hover{background:#fff}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
+.btn:hover{background:var(--card)}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
 .btn.alt{background:var(--bg)}
 #mute{position:fixed;bottom:14px;right:14px;z-index:60;padding:6px 12px;font-size:13px;margin:0;box-shadow:4px 4px 0 var(--ink)}
 /* hero */
@@ -29,7 +30,7 @@ a,button{color:inherit}
 .w.b{bottom:5vh;left:50%;transform:translateX(-50%)}
 .w.l{left:4vw;top:50%;transform:translateY(-50%) rotate(90deg)}
 .w.r{right:4vw;top:50%;transform:translateY(-50%) rotate(-90deg)}
-#catbox{background:#fff;border:5px solid var(--ink);box-shadow:var(--sh);padding:6px 8px 0;position:fixed;z-index:40;left:0;top:0;transform:rotate(var(--r,0deg));cursor:grab;touch-action:none;user-select:none}
+#catbox{background:var(--card);border:5px solid var(--ink);box-shadow:var(--sh);padding:6px 8px 0;position:fixed;z-index:40;left:0;top:0;transform:rotate(var(--r,0deg));cursor:grab;touch-action:none;user-select:none}
 #catbox.wig{animation:wig .4s}
 @keyframes wig{30%{transform:rotate(4deg) scale(1.04)}70%{transform:rotate(-8deg)}}
 #catbox b{display:block;background:var(--ink);color:var(--bg);margin:-6px -8px 6px;padding:2px 8px;font-size:12px}
@@ -44,14 +45,14 @@ section{padding:clamp(48px,9vw,110px) 5vw}
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,70px);align-items:start}
 .cover{aspect-ratio:1;border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);position:relative;overflow:hidden;background:linear-gradient(#1f74c8,#6bb4ec 55%,#2c5a2a 56%,#10260f);transform:rotate(-1.5deg)}
 .cover i{position:absolute;left:5%;top:5%;width:38%;aspect-ratio:1.5;background:radial-gradient(circle,#fff 1.5px,transparent 2px) 0 0/12px 12px}
-.cover u{position:absolute;left:12%;top:8%;width:60px;height:60px;border-radius:50%;background:#fff;box-shadow:0 0 70px 30px #fff}
+.cover u{position:absolute;left:12%;top:8%;width:60px;height:60px;border-radius:50%;background:var(--card);box-shadow:0 0 70px 30px #fff}
 .cover s{position:absolute;right:0;top:0;bottom:0;width:36%;background:#252b2c;border-left:3px solid #111;text-decoration:none}
 .cover s::after{content:"";position:absolute;left:50%;top:0;width:2px;height:45%;background:#9aa;}
 .cover s::before{content:"";position:absolute;left:calc(50% - 10px);top:calc(45% - 10px);width:20px;height:20px;border-radius:50%;background:#000;transition:transform .2s}
 .cover em{position:absolute;right:7%;bottom:12%;font:900 clamp(26px,5.2vw,72px)/1 "Unbounded",Impact,sans-serif;color:#fff;letter-spacing:-.05em}
 #viz{display:flex;gap:4px;align-items:flex-end;height:70px;border:4px solid var(--ink);background:var(--ink);padding:6px;margin:0 0 20px}
 #viz i{flex:1;background:var(--sun);height:5%}
-.tr{display:flex;gap:14px;align-items:center;width:100%;border:4px solid var(--ink);background:#fff;padding:14px 16px;margin:0 0 14px;font:700 16px "IBM Plex Mono",monospace;text-align:left;cursor:pointer;box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.tr{display:flex;gap:14px;align-items:center;width:100%;border:4px solid var(--ink);background:var(--card);padding:14px 16px;margin:0 0 14px;font:700 16px "IBM Plex Mono",monospace;text-align:left;cursor:pointer;box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
 .tr:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);background:var(--sun)}
 .tr.on{background:var(--grass);color:#fff}
 .tr em{font:normal 900 26px "Unbounded",Impact,sans-serif;width:34px}
@@ -76,7 +77,7 @@ footer{padding:30px 5vw 50px;font-size:12px}
 .pg{display:none}.pg.on{display:block}.pg:not(#p-home){padding-top:66px;min-height:100vh}
 #nav{position:fixed;top:0;left:0;right:0;z-index:55;display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--bg);border-bottom:5px solid var(--ink);overflow-x:auto}
 #logo{font:900 18px "Unbounded",Impact,sans-serif;margin-right:10px;cursor:pointer}
-#nav .n{font:700 14px "IBM Plex Mono",monospace;border:3px solid var(--ink);background:#fff;padding:5px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
+#nav .n{font:700 14px "IBM Plex Mono",monospace;border:3px solid var(--ink);background:var(--card);padding:5px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
 #nav .n.on{background:var(--sun)}#nav .n:hover{background:var(--sky)}
 .cover u{cursor:pointer;z-index:3}.cover.night{background:linear-gradient(#050a1c,#1b2a5c 55%,#10260f 56%,#050806)}.cover.night u{background:#dfe8ff;box-shadow:0 0 40px 14px #7f9cff}
 #pin.spin{animation:sp 1.4s cubic-bezier(.7,0,.3,1)}@keyframes sp{to{transform:rotate(720deg)}}
@@ -84,18 +85,18 @@ footer{padding:30px 5vw 50px;font-size:12px}
 .card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,70px);align-items:start}
 .photo{aspect-ratio:4/5;border:5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);transform:rotate(1.5deg);background:radial-gradient(circle,#fff 1.5px,transparent 2px) 0 0/14px 14px,linear-gradient(#2e86de,#9cc9e8);display:grid;place-items:center}
 .photo span{background:var(--sun);border:4px solid var(--ink);padding:8px 14px;font-weight:700;transform:rotate(-4deg)}
-dl{margin:20px 0;border:4px solid var(--ink);background:#fff}dl div{display:flex;gap:14px;padding:10px 14px;border-bottom:3px solid var(--ink)}dl div:last-child{border:0}dt{width:120px;font-weight:700;flex:none}dd{margin:0}
+dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{display:flex;gap:14px;padding:10px 14px;border-bottom:3px solid var(--ink)}dl div:last-child{border:0}dt{width:120px;font-weight:700;flex:none}dd{margin:0}
 .soon{margin-top:50px;border:5px dashed var(--ink);padding:22px;font-weight:700}.soon i{display:inline-block;background:var(--ink);width:140px;height:1em;vertical-align:middle}
 .btn,.tr,#nav .n,#pet .btn,.pop,dt,.strip,.soon{font-family:"Oswald","Arial Narrow",sans-serif;letter-spacing:.03em}
 .btn{font-size:19px;font-weight:700}#nav .n{font-size:18px;font-weight:500}.tr{font-size:23px;font-weight:700}.strip{font-size:26px;font-weight:700}#pet .btn{font-size:15px}
 .hd{font-size:clamp(30px,6vw,80px);margin-bottom:28px;text-shadow:5px 5px 0 #fff}.b1 .hd{text-shadow:5px 5px 0 var(--sun)}#memory h2{text-shadow:5px 5px 0 var(--sky)}
 .band{border-bottom:5px solid var(--ink)}.b2{background:var(--sun)}.b3{background:var(--sky)}
-.pop{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:4px solid var(--ink);margin:0 0 12px;padding:12px 16px;cursor:pointer;color:var(--ink);font-size:23px;font-weight:700;background:linear-gradient(90deg,var(--sky) var(--w),#fff var(--w));box-shadow:5px 5px 0 var(--ink);transition:transform .1s}
+.pop{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:4px solid var(--ink);margin:0 0 12px;padding:12px 16px;cursor:pointer;color:var(--ink);font-size:23px;font-weight:700;background:linear-gradient(90deg,var(--sky) var(--w),var(--card) var(--w));box-shadow:5px 5px 0 var(--ink);transition:transform .1s}
 .pop:hover{transform:translate(-3px,-3px)}.pop em{font:900 22px "Unbounded",sans-serif}.pop.on{border-color:var(--grass);box-shadow:5px 5px 0 var(--grass)}.pop.on em::after{content:"♪"}
-.pick{display:flex;gap:30px;align-items:center;flex-wrap:wrap;background:#fff;border:5px solid var(--ink);box-shadow:var(--sh);padding:26px}
+.pick{display:flex;gap:30px;align-items:center;flex-wrap:wrap;background:var(--card);border:5px solid var(--ink);box-shadow:var(--sh);padding:26px}
 .stamp{flex:none;width:150px;height:150px;border-radius:50%;border:5px solid var(--ink);background:var(--sun);display:grid;place-items:center;text-align:center;font:900 15px/1.2 "Unbounded",sans-serif;transform:rotate(-12deg);box-shadow:6px 6px 0 var(--ink)}
 .pick h3{font:900 clamp(20px,3.4vw,40px)/1.1 "Unbounded",sans-serif;margin:0 0 10px}.pick>div:last-child{flex:1 1 260px}
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}.tile{border:5px solid var(--ink);box-shadow:var(--sh);padding:22px;background:#fff}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}.tile{border:5px solid var(--ink);box-shadow:var(--sh);padding:22px;background:var(--card)}
 .tile h3{font:900 clamp(18px,2.2vw,28px)/1 "Unbounded",sans-serif;margin:0 0 14px}.tile p{margin:0 0 14px}.tile .btn{font-size:16px;padding:7px 12px;margin-bottom:0}
 .t-new{grid-column:span 3;background:var(--sky)}.t-pop{grid-column:span 3;background:var(--sun)}.t-pick{grid-column:span 2;transform:rotate(1deg)}.t-art{grid-column:span 2;background:var(--ink);color:var(--bg)}.t-con{grid-column:span 2;background:var(--grass);color:#fff;transform:rotate(-1deg)}
 .tile .pop{font-size:17px;padding:6px 10px;margin:0 0 8px;box-shadow:3px 3px 0 var(--ink)}
@@ -130,9 +131,9 @@ html.glitch{animation:gl .25s steps(2) 6}@keyframes gl{25%{filter:invert(1)}50%{
 #memory h2{text-shadow:5px 5px 0 var(--sky)}
 #pet{box-shadow:6px 6px 0 var(--ink);border-width:4px}
 #pet .btn{background:var(--sun);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font:700 15px "Oswald",sans-serif;letter-spacing:.03em;text-transform:none;padding:4px 10px;margin:8px 8px 0 0;transition:transform .08s,box-shadow .08s}
-#pet .btn.alt{background:var(--bg)}#pet .btn:hover{background:#fff;color:var(--ink)}#pet .btn:active{transform:translate(3px,3px);box-shadow:none}
-#st .br{display:flex;gap:10px;align-items:center;margin-bottom:5px}#st .br span{width:66px;font:700 14px "Oswald",sans-serif}#st i{display:block;width:110px;height:12px;border:2px solid var(--ink);background:linear-gradient(90deg,var(--ink) var(--v),#fff var(--v))}
-#mute{box-shadow:4px 4px 0 var(--ink);transition:transform .08s,box-shadow .08s;background:var(--sun)}#mute:hover{background:#fff;color:var(--ink)}#mute:active{transform:translate(4px,4px);box-shadow:none}
+#pet .btn.alt{background:var(--bg)}#pet .btn:hover{background:var(--card);color:var(--ink)}#pet .btn:active{transform:translate(3px,3px);box-shadow:none}
+#st .br{display:flex;gap:10px;align-items:center;margin-bottom:5px}#st .br span{width:66px;font:700 14px "Oswald",sans-serif}#st i{display:block;width:110px;height:12px;border:2px solid var(--ink);background:linear-gradient(90deg,var(--ink) var(--v),var(--card) var(--v))}
+#mute{box-shadow:4px 4px 0 var(--ink);transition:transform .08s,box-shadow .08s;background:var(--sun)}#mute:hover{background:var(--card);color:var(--ink)}#mute:active{transform:translate(4px,4px);box-shadow:none}
 .bnc{animation:bnc .45s}@keyframes bnc{30%{transform:scale(1.2) rotate(-4deg)}60%{transform:scale(.92)}100%{transform:none}}
 .rain.d{animation-duration:1.1s;color:var(--sky);font-size:24px}
 .dance .w2,.dance h2,.dance .strip{animation:dn .4s ease-in-out 10}@keyframes dn{50%{transform:translateY(-14px) rotate(-1.5deg)}}
@@ -177,7 +178,7 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 #mp[hidden]{display:none}
 #mpb{font:900 13px "Unbounded",sans-serif;width:38px;height:38px;border:3px solid var(--ink);background:var(--sun);cursor:pointer;flex:none}
 #mpt{flex:1;min-width:0}#mpn{display:block;font:700 15px "Oswald",sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#mps{height:8px;border:2px solid var(--ink);background:#fff;cursor:pointer;margin-top:4px}#mpf{display:block;height:100%;width:0;background:var(--ink)}
+#mps{height:8px;border:2px solid var(--ink);background:var(--card);cursor:pointer;margin-top:4px}#mpf{display:block;height:100%;width:0;background:var(--ink)}
 #mpc{font:500 12px "IBM Plex Mono",monospace;white-space:nowrap}
 .eq{display:flex;gap:2px;align-items:flex-end;height:20px}.eq i{width:4px;height:4px;background:var(--ink)}
 .playing .eq i{animation:eq .6s ease-in-out infinite alternate}.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}@keyframes eq{to{height:20px}}
@@ -200,10 +201,10 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 #p-rel h3.big,.card .big,.soon h3,.pmb h3{font-weight:700}
 
 #links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;border:0;margin-top:8px}
-.cc{border:4px solid var(--ink);background:#fff;box-shadow:8px 8px 0 var(--ink);min-width:0;overflow:hidden;padding:0 !important}
+.cc{border:4px solid var(--ink);background:var(--card);box-shadow:8px 8px 0 var(--ink);min-width:0;overflow:hidden;padding:0 !important}
 .cc .gh{margin:0;padding:12px 18px;background:var(--ink);color:var(--sun);font:700 13px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--ink)}
 .cc-list{display:flex;flex-direction:column}
-.cc .lnk{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;margin:0;border:0;border-top:2px solid var(--ink);background:#fff;color:var(--ink);text-decoration:none;transition:background .12s,color .12s}
+.cc .lnk{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;margin:0;border:0;border-top:2px solid var(--ink);background:var(--card);color:var(--ink);text-decoration:none;transition:background .12s,color .12s}
 .cc .lnk:first-child{border-top:0}
 .cc .lnk-info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cc .lnk .n{font:700 22px/1.2 "Oswald",sans-serif;letter-spacing:.02em;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -222,7 +223,7 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 /* --- volume, sulking cat, closable pet panel, loader hint --- */
 #mp{width:min(560px,calc(100vw - 400px));min-width:340px}
 .vol{display:flex;align-items:center;gap:6px;font:500 11px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
-#mpv{-webkit-appearance:none;appearance:none;width:84px;height:8px;margin:0;border:2px solid var(--ink);background:linear-gradient(90deg,var(--ink) var(--v,80%),#fff var(--v,80%));cursor:pointer;outline:none}
+#mpv{-webkit-appearance:none;appearance:none;width:84px;height:8px;margin:0;border:2px solid var(--ink);background:linear-gradient(90deg,var(--ink) var(--v,80%),var(--card) var(--v,80%));cursor:pointer;outline:none}
 #mpv::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:18px;background:var(--sun);border:2px solid var(--ink);border-radius:0}
 #mpv::-moz-range-thumb{width:8px;height:14px;background:var(--sun);border:2px solid var(--ink);border-radius:0}
 @media(max-width:900px){#mp{width:calc(100vw - 28px);min-width:0}.vol span{display:none}#mpv{width:64px}}
@@ -244,17 +245,44 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 .aq{margin:clamp(44px,6vw,84px) 0 0;padding:28px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}.aq[hidden]{display:none}
 .aq p{margin:0;font:700 clamp(30px,4.6vw,64px)/1 "Oswald",sans-serif;letter-spacing:-.01em}
 .aq cite{display:block;margin-top:14px;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;font-style:normal}
-.tl{list-style:none;margin:0;padding:0}.tl li{display:grid;grid-template-columns:100px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid rgba(5,8,6,.25)}
+.tl{list-style:none;margin:0;padding:0}.tl li{display:grid;grid-template-columns:100px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--dim)}
 .tl b{font:700 26px/1 "Oswald",sans-serif}.tl span{font-size:15px;line-height:1.5}
 @media(max-width:800px){.bio{grid-template-columns:1fr;gap:14px}.tl li{grid-template-columns:70px 1fr}}
+/* ===== themes: day / night over a blurred photo ===== */
+:root{--card:#fff;--dim:rgba(5,8,6,.25);--wash:rgba(217,230,225,.5);--navbg:rgba(217,230,225,.86);--bandbg:#050806;--bandfg:#d9e6e1}
+html.night{--bg:#0b100e;--ink:#e6efeb;--card:#131a17;--dim:rgba(230,239,235,.28);--wash:rgba(5,9,8,.34);--navbg:rgba(7,12,10,.82);--bandbg:rgba(0,0,0,.62);--bandfg:#e6efeb;color-scheme:dark}
+html{background:var(--bg)}body{background:transparent}
+button,input,textarea{color:var(--ink)}
+#bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;--px:0px;--py:0px}
+.bgl{position:absolute;inset:-30px;background:center/cover no-repeat;transform:translate(var(--px),var(--py)) scale(1.04);opacity:0;transition:opacity 1.1s ease;will-change:opacity,transform}
+.bgl.raw{filter:blur(11px) saturate(1.08)}
+html:not(.night) #bgd.on,html.night #bgn.on{opacity:1}
+#bgw{position:absolute;inset:0;background:var(--wash);transition:background .9s}
+html.night #bgw{background:radial-gradient(ellipse at 50% 45%,rgba(4,8,7,0) 30%,rgba(2,4,4,.55) 100%),var(--wash)}
+#nav{background:var(--navbg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#theme{margin-left:auto;font:500 13px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.07em;background:transparent;border:2px solid var(--ink);padding:5px 12px;cursor:pointer;white-space:nowrap}
+#theme:hover{background:var(--ink);color:var(--bg)}
+#memory,.b2{background:var(--bandbg);color:var(--bandfg)}
+.pop{color:var(--bandfg);border-top-color:var(--bandfg)}.pop.on{border-color:var(--bandfg)}
+.soon{background:var(--bandbg);color:var(--bandfg)}.soon i.red{background:var(--bandfg)}.soon .btn{border-color:var(--bandfg);color:var(--bandfg)}.soon .btn:hover{background:var(--bandfg);color:var(--bandbg)}
+.strip{background:var(--bandbg)}
+.gcover{color:#050806}
+#pet .btn:not(.alt),#mute,#mpb,.photo span,#bub,.fish{color:#050806}
+#pet .btn:hover{color:var(--ink)}
+html.night .b3{background:rgba(12,36,70,.74)}
+html.night .cc .lnk:hover{background:var(--sun);color:#050806}html.night .cc .lnk:hover .h,html.night .cc .lnk:hover .arr{color:#050806}
+@media(max-width:700px){.bgl.raw{filter:blur(8px)}}
+@media(prefers-reduced-motion:reduce){.bgl,#bgw{transition:none}}
+.cc .gh{background:var(--bandbg)}
 :focus-visible{outline:4px solid #f0f;outline-offset:3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
+<div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
 <canvas id="grid"></canvas>
 <div id="gate"><canvas id="ldc"></canvas><div id="lb"></div><div id="ls"></div><div id="lh">коснись экрана, чтобы включить звук</div></div>
 <button class="btn alt" id="mute" hidden>звук: вкл</button>
-<nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button></nav>
+<nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button><button id="theme" data-s aria-label="сменить тему">☾ ночь</button></nav>
 
 <main>
 <div class="pg on" id="p-home">
@@ -384,9 +412,11 @@ document.addEventListener('pointerdown',e=>{if(e.target.closest('.tr,a,.btn,.n,.
 const cv=$('#grid'),cx=cv.getContext('2d');
 const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
 addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;0});
-(function loop(t){cx.clearRect(0,0,W,H);const s=26;
+let bx=0,by=0,lx=0,ly=0;const bgEl=document.getElementById('bg'),isNight=()=>document.documentElement.classList.contains('night');
+(function loop(t){cx.clearRect(0,0,W,H);const s=26,nt=isNight();
+ bx+=((mx/W-.5)*-16-bx)*.06;by+=((my/H-.5)*-10-by)*.06;if(Math.abs(bx-lx)>.05||Math.abs(by-ly)>.05){bgEl.style.setProperty('--px',bx.toFixed(1)+'px');bgEl.style.setProperty('--py',by.toFixed(1)+'px');lx=bx;ly=by}
  for(let x=s/2;x<W;x+=s)for(let y=s/2;y<H;y+=s){const n=Math.max(0,1-Math.hypot(x-mx,y-my)/190);
-  cx.globalAlpha=.13+n*.8;cx.fillStyle=n>.5?'#2e86de':'#050806';cx.beginPath();cx.arc(x,y,1+n*5,0,6.3);cx.fill()}
+  cx.globalAlpha=.2+n*.75;cx.fillStyle=n>.5?(nt?'#9cc9ff':'#2e86de'):(nt?'#e6efeb':'#050806');cx.beginPath();cx.arc(x,y,1+n*5,0,6.3);cx.fill()}
  requestAnimationFrame(loop)})(0);
 /* ---------- pet ---------- */
 const cb=$('#catbox'),bub=$('#bub');let vx=0,wrapped=0,tvx=0,tvy=0,tt=0,home=true,d=null,vy=0,rot=0,hunger=70,mood=50,pn,pt,bt,ht,hi,over=0,sulk=false,petOn=false;
@@ -514,7 +544,7 @@ gr.onpointermove=e=>{if(pd){pet.style.left=Math.max(0,Math.min(innerWidth-pet.of
 gr.onpointerup=()=>pd=null;
 $('#px').onclick=()=>pet.classList.remove('on');
 let lc=0;$('#logo').addEventListener('click',()=>{if(++lc>=7){lc=0;const h=document.documentElement;h.classList.add('glitch');for(let i=0;i<8;i++)setTimeout(()=>blip(100+Math.random()*2000,.06,'sawtooth',.08),i*70);setTimeout(()=>h.classList.remove('glitch'),1600)}});
-$('.w2').ondblclick=()=>{document.documentElement.classList.toggle('inv');blip(300,.3,'sine',.1,80)};
+$('.w2').ondblclick=()=>setTheme(isNight()?'day':'night',true);
 $('.strip').onclick=()=>{const p=$('.strip span');p.style.animationDirection=p.style.animationDirection==='reverse'?'normal':'reverse'};
 function breath(){const b=document.createElement('div');b.className='breath';b.innerHTML='<span>вдох</span>';document.body.append(b);let k=0;const iv=setInterval(()=>{b.firstChild.textContent=k++%2?'вдох':'выдох'},2500);setTimeout(()=>{clearInterval(iv);b.remove()},15000)}
 let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.key.length!==1)return;kb=(kb+e.key.toLowerCase()).slice(-8);
@@ -530,7 +560,7 @@ function runLoader(){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.sty
  const im=m.getImageData(0,0,C,R).data,M=new Uint8Array(C*R),hd=[],sp=[];for(let i=0;i<C*R;i++)M[i]=im[i*4+3]>110;for(let c=0;c<C;c++){hd.push(Math.random()*R);sp.push(.25+Math.random()*.7)}
  const rc=()=>CH[Math.random()*CH.length|0],logs=['проветриваю траву','настраиваю небо','ищу кота','вспоминаю, как тебя зовут','почти проснулся'],t0=performance.now();let ent=false;
  x.font=fs+'px "IBM Plex Mono",monospace';x.textBaseline='top';
- (function f(t){const e=t-t0,p=Math.min(1,e/3000),d=Math.max(0,Math.min(1,(e-3400)/1200));
+ (function f(t){const e=Math.max(0,t-t0),p=Math.min(1,e/3000),d=Math.max(0,Math.min(1,(e-3400)/1200));
   x.clearRect(0,0,W,H);
   for(let c=0;c<C;c++){hd[c]=(hd[c]+sp[c])%(R+12);for(let k=0;k<10;k++){const r=Math.floor(hd[c]-k);if(r<0||r>=R)continue;if(M[r*C+c]&&Math.random()<p*1.1)continue;x.fillStyle='rgba(0,0,0,'+(1-k/10)*(k?.3:.9)+')';x.fillText(rc(),c*cw,r*fs)}}
   x.fillStyle='#000';for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(M[r*C+c]&&Math.random()<p*1.1&&Math.random()>d*1.2)x.fillText(rc(),c*cw,r*fs);
@@ -552,22 +582,22 @@ function rainSound(ms){if(!sound||!ac||ac.state!=='running')return;
  const tb=ac.createBuffer(1,Math.floor(sr*.05),sr),td=tb.getChannelData(0);for(let i=0;i<td.length;i++)td[i]=(Math.random()*2-1)*(1-i/td.length);
  const iv=setInterval(()=>{if(ac.state!=='running'||Math.random()<.45)return;const t=ac.createBufferSource(),f=ac.createBiquadFilter(),k=ac.createGain();t.buffer=tb;f.type='bandpass';f.frequency.value=1200+Math.random()*2600;f.Q.value=1.4;k.gain.value=.05+Math.random()*.06;t.connect(f);f.connect(k);k.connect(g);t.start()},70);
  setTimeout(()=>clearInterval(iv),ms-2500)}
-function rainfx(){if(rainOn)return;rainOn=true;const DUR=18000,cv=document.createElement('canvas');cv.id='rain';document.body.append(cv);
+function rainfx(){if(rainOn)return;rainOn=true;const C1=isNight()?'205,224,245':'30,58,88',C0=isNight()?'6,12,20':'55,80,100';const DUR=18000,cv=document.createElement('canvas');cv.id='rain';document.body.append(cv);
  const x=cv.getContext('2d'),W=cv.width=innerWidth,H=cv.height=innerHeight,N=Math.min(420,Math.round(W*H/4800)),dr=[],sp=[];
  const land=z=>H*(.55+.45*z)+(Math.random()-.5)*40;
  for(let i=0;i<N;i++){const z=.2+Math.random()*.8;dr.push({x:Math.random()*(W+240)-40,y:Math.random()*H,z,l:land(z)})}
  rainSound(DUR);const t0=performance.now();
  (function f(t){const e=t-t0;if(e>DUR){cv.remove();rainOn=false;return}
-  const k=Math.min(1,e/1800)*Math.min(1,(DUR-e)/2800);x.clearRect(0,0,W,H);x.fillStyle='rgba(55,80,100,'+.18*k+')';x.fillRect(0,0,W,H);x.lineCap='round';
+  const k=Math.min(1,e/1800)*Math.min(1,(DUR-e)/2800);x.clearRect(0,0,W,H);x.fillStyle='rgba('+C0+','+.18*k+')';x.fillRect(0,0,W,H);x.lineCap='round';
   for(const d of dr){const vy=11+d.z*24,vx=-3-d.z*4.5,L=.9+d.z*.9;
-   x.strokeStyle='rgba(30,58,88,'+((.1+d.z*.42)*k)+')';x.lineWidth=.5+d.z*1.2;x.beginPath();x.moveTo(d.x,d.y);x.lineTo(d.x-vx*L,d.y-vy*L);x.stroke();
+   x.strokeStyle='rgba('+C1+','+((.1+d.z*.42)*k)+')';x.lineWidth=.5+d.z*1.2;x.beginPath();x.moveTo(d.x,d.y);x.lineTo(d.x-vx*L,d.y-vy*L);x.stroke();
    d.x+=vx;d.y+=vy;if(d.y>d.l){if(e<DUR-2500&&Math.random()<.5)sp.push({x:d.x,y:d.l,r:1,z:d.z,a:1});d.y=-20-Math.random()*60;d.x=Math.random()*(W+240)-40;d.l=land(d.z)}}
-  for(let i=sp.length-1;i>=0;i--){const p=sp[i];p.r+=.7+p.z*.7;p.a-=.06;if(p.a<=0){sp.splice(i,1);continue}x.strokeStyle='rgba(30,58,88,'+(p.a*.45*k)+')';x.lineWidth=.8;x.beginPath();x.ellipse(p.x,p.y,p.r*(1.4+p.z),p.r*.45*(1+p.z),0,0,6.3);x.stroke()}
+  for(let i=sp.length-1;i>=0;i--){const p=sp[i];p.r+=.7+p.z*.7;p.a-=.06;if(p.a<=0){sp.splice(i,1);continue}x.strokeStyle='rgba('+C1+','+(p.a*.45*k)+')';x.lineWidth=.8;x.beginPath();x.ellipse(p.x,p.y,p.r*(1.4+p.z),p.r*.45*(1+p.z),0,0,6.3);x.stroke()}
   requestAnimationFrame(f)})(t0)}
 const fx={
  'команды':{t:'ночь · день · дождь · рыба · глюк · тишина · ветер · дыши · танец · быстрее · кот · мяу · перезагрузка',f(){}},
- 'ночь':{t:'выключаю свет.',f(){HT.classList.add('inv')}},
- 'день':{t:'включаю свет.',f(){HT.classList.remove('inv')}},
+ 'ночь':{t:'выключаю свет.',f(){setTheme('night',true)}},
+ 'день':{t:'включаю свет.',f(){setTheme('day',true)}},
  'дождь':{t:'он идёт только в динамике. и ещё здесь.',f(){rainfx()}},
  'рыба':{t:'><((°> кот видел.',f(){rain('><((°>','',30)}},
  'глюк':{t:'ничего не трогай.',f(){HT.classList.add('glitch');setTimeout(()=>HT.classList.remove('glitch'),1600)}},
@@ -579,4 +609,23 @@ const fx={
  'кот':{t:'он слышит.',f:hop},'мяу':{t:'мяу.',f:hop},
  'перезагрузка':{t:'перезагружаюсь…',f(){setTimeout(runLoader,700)}}
 };
+/* ---------- themes & backgrounds ---------- */
+function setTheme(t,save){document.documentElement.classList.toggle('night',t==='night');$('#theme').textContent=t==='night'?'☀ день':'☾ ночь';
+ if(save){try{localStorage.setItem('ntheme',t)}catch(e){}}blip(t==='night'?200:480,.35,'sine',.1,t==='night'?90:760)}
+$('#theme').textContent=isNight()?'☀ день':'☾ ночь';
+$('#theme').onclick=()=>setTheme(isNight()?'day':'night',true);
+/* Просто положи картинки в репозиторий: «Neosten Фон день.jpg» и «Neosten Фон ночь.jpg» (корень или папка img/).
+   Подходят jpg / png / webp. Свой путь можно задать в releases.js: window.BG={day:'...',night:'...'} */
+const probe=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(u);i.onerror=()=>r(null);i.src=u});
+function bgCands(kind){const w=kind==='day'?'день':'ночь',o=(window.BG||{})[kind],out=o?[o]:[];
+ for(const n of ['Neosten Фон '+w,'Neosten_Фон_'+w,'bg-'+kind])for(const d of ['','img/'])for(const e of ['jpg','JPG','png','webp','jpeg'])out.push(encodeURI(d+n+'.'+e));return out}
+async function findBg(kind){const key='nbg_'+kind;try{const sv=localStorage.getItem(key);if(sv&&await probe(sv))return sv}catch(e){}
+ const c=bgCands(kind);for(let i=0;i<c.length;i+=8){const hit=(await Promise.all(c.slice(i,i+8).map(probe))).find(Boolean);if(hit){try{localStorage.setItem(key,hit)}catch(e){}return hit}}return null}
+/* размытие считается один раз: картинка уменьшается и мягко растягивается обратно (без тяжёлого CSS-фильтра) */
+async function loadBg(kind,el){const u=await findBg(kind);if(!u)return;const img=new Image();
+ img.onload=()=>{let out=u;try{const ar=img.height/img.width,c1=document.createElement('canvas'),c2=document.createElement('canvas');c1.width=180;c1.height=Math.round(180*ar);c2.width=720;c2.height=Math.round(720*ar);
+  const x1=c1.getContext('2d'),x2=c2.getContext('2d');x1.imageSmoothingQuality='high';x1.drawImage(img,0,0,c1.width,c1.height);x2.imageSmoothingQuality='high';x2.filter='blur(6px) saturate(1.08)';x2.drawImage(c1,0,0,c2.width,c2.height);out=c2.toDataURL('image/jpeg',.85)}catch(e){el.classList.add('raw')}
+  el.style.backgroundImage='url("'+out+'")';el.classList.add('on')};img.src=u}
+{const first=isNight()?'night':'day',other=first==='day'?'night':'day',el=k=>document.getElementById(k==='day'?'bgd':'bgn');
+ loadBg(first,el(first));setTimeout(()=>loadBg(other,el(other)),1200)}
 </script></body></html>
