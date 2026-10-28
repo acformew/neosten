@@ -245,34 +245,35 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 .aq{margin:clamp(44px,6vw,84px) 0 0;padding:28px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}.aq[hidden]{display:none}
 .aq p{margin:0;font:700 clamp(30px,4.6vw,64px)/1 "Oswald",sans-serif;letter-spacing:-.01em}
 .aq cite{display:block;margin-top:14px;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;font-style:normal}
-.tl-wrap{min-width:0}
-.tl-track{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:16px 6px 26px;overflow-x:auto;scrollbar-width:thin}
-.tl-line{position:absolute;left:24px;right:24px;top:40px;height:5px;background:var(--ink);z-index:0;pointer-events:none}
+#tlS{display:block;text-align:center}
+#tlS .bh{margin-bottom:18px}
+.tl-wrap{min-width:0;max-width:920px;margin:0 auto;text-align:left}
+.tl-track{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:16px 6px 28px;overflow-x:auto;scrollbar-width:thin}
+.tl-line{position:absolute;left:36px;right:36px;top:40px;height:5px;background:var(--ink);z-index:0;pointer-events:none}
 .tl-line i{display:block;height:100%;width:var(--tlp,0%);background:var(--sky);transition:width .35s cubic-bezier(.4,0,.2,1)}
-.tl-node{position:relative;z-index:1;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink);font:700 18px/1 "Oswald",sans-serif;min-width:78px;flex:1;text-align:center;transition:transform .15s}
+.tl-node{position:relative;z-index:1;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink);font:700 18px/1 "Oswald",sans-serif;min-width:86px;flex:1;text-align:center;transition:transform .15s}
 .tl-node:hover{transform:translateY(-3px)}
-.tl-dot{width:48px;height:48px;border:4px solid var(--ink);background:var(--card);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;font:900 13px/1 "Unbounded",sans-serif;color:var(--ink);transition:transform .15s,background .15s,box-shadow .15s}
+.tl-dot{width:48px;height:48px;border:4px solid var(--ink);background:var(--navbg);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;font:900 13px/1 "Unbounded",sans-serif;color:var(--ink);transition:transform .15s,background .15s,box-shadow .15s}
 .tl-node.done .tl-dot{background:var(--sky);color:#fff}
 .tl-node.on .tl-dot{background:var(--sun);color:#050806;transform:scale(1.14) rotate(-4deg);box-shadow:6px 6px 0 var(--ink)}
 .tl-yr{padding:3px 8px;border:2px solid transparent;letter-spacing:.04em;transition:background .15s,color .15s}
 .tl-node.on .tl-yr{background:var(--ink);color:var(--sun);border-color:var(--ink)}
-.tl-sub-lbl{font:500 11px/1.2 "IBM Plex Mono",monospace;opacity:.65;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tl-card{border:4px solid var(--ink);background:var(--card);box-shadow:8px 8px 0 var(--ink);display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);overflow:hidden;animation:tlIn .28s ease-out}
+.tl-sub-lbl{font:500 11px/1.2 "IBM Plex Mono",monospace;opacity:.65;max-width:116px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-card{border:4px solid var(--ink);background:var(--navbg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:8px 8px 0 var(--ink);display:grid;grid-template-columns:minmax(220px,290px) minmax(0,1fr);overflow:hidden;animation:tlIn .28s ease-out}
 @keyframes tlIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.tl-vis{border-right:4px solid var(--ink);background:var(--ink);position:relative;min-height:230px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.tl-vis svg,.tl-vis img{width:100%;height:100%;object-fit:cover;display:block}
-.tl-vis-badge{position:absolute;left:12px;top:12px;background:var(--sun);color:#050806;border:3px solid #050806;padding:3px 9px;font:900 13px/1.1 "Unbounded",sans-serif;box-shadow:3px 3px 0 #050806}
+.tl-vis{border-right:4px solid var(--ink);background:rgba(5,8,6,.12);position:relative;min-height:230px;display:grid;place-items:center;padding:18px;overflow:hidden}
+.tl-vis img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.tl-ph{width:100%;height:100%;min-height:170px;border:3px dashed var(--ink);display:grid;place-items:center;padding:14px;text-align:center;font:500 13px/1.4 "IBM Plex Mono",monospace;opacity:.55}
+.tl-vis-badge{position:absolute;left:12px;top:12px;background:var(--sun);color:#050806;border:3px solid #050806;padding:3px 9px;font:900 13px/1.1 "Unbounded",sans-serif;box-shadow:3px 3px 0 #050806;z-index:2}
 .tl-body{padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
 .tl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;border-bottom:3px solid var(--ink);padding-bottom:12px}
 .tl-head h4{font:900 clamp(20px,2.4vw,28px)/1.1 "Unbounded",sans-serif;margin:0}
 .tl-head span{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
 .tl-body p{font-size:16px;line-height:1.65;margin:0}
-.tl-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.tl-tag{font:700 12px "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:2px solid var(--ink);background:var(--bg);padding:4px 9px;box-shadow:2px 2px 0 var(--ink)}
 .tl-nav{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:2px dashed var(--dim)}
 .tl-nav .btn{margin:0;padding:6px 12px;font-size:14px}
 .tl-step{font:500 12px "IBM Plex Mono",monospace;opacity:.7}
-@media(max-width:760px){.tl-card{grid-template-columns:1fr}.tl-vis{border-right:0;border-bottom:4px solid var(--ink);min-height:190px}.tl-line{top:36px}.tl-dot{width:42px;height:42px}}
+@media(max-width:760px){.tl-card{grid-template-columns:1fr}.tl-vis{border-right:0;border-bottom:4px solid var(--ink);min-height:180px}.tl-line{top:36px}.tl-dot{width:42px;height:42px}}
 @media(max-width:800px){.bio{grid-template-columns:1fr;gap:14px}.tl li{grid-template-columns:70px 1fr}}
 /* ===== themes: day / night over a blurred photo ===== */
 :root{--card:#fff;--dim:rgba(5,8,6,.25);--wash:rgba(217,230,225,.5);--navbg:rgba(217,230,225,.86);--bandbg:#050806;--bandfg:#d9e6e1}
@@ -524,79 +525,9 @@ function openMenu(r){const lk=r.links||{},fb=Object.fromEntries((L.listen||[]).m
  $('#pmc').innerHTML=(r.cover?`<img class="pmi" src="${r.cover}" alt="">`:'')+`<h3 class="big">${r.title}</h3><p class="meta">слушать на</p>`+ks.map(k=>`<a href="${lk[k]||fb[k]}" target="_blank" rel="noopener" data-s>${PN[k]}${lk[k]?'':' <small>страница артиста</small>'}</a>`).join('')+(r.page?`<a href="${r.page}" target="_blank" rel="noopener" data-s>все площадки <small>song.link</small></a>`:'');$('#pm').hidden=false}
 $('#pm').onclick=e=>{if(e.target.id==='pm'||e.target.id==='pmx')$('#pm').hidden=true};addEventListener('keydown',e=>{if(e.key==='Escape')$('#pm').hidden=true});
 
-function tlArt(x,i){
+function tlArt(x){
  if(x.img)return `<img src="${x.img}" alt="${x.title||x.y}">`;
- const th=x.theme||['code','reset','media','breakout','core303','future'][i%6];
- const arts={
-  code:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <rect width="320" height="260" fill="#101814"/>
-   <g opacity=".18" stroke="#2f8f3a" stroke-width="1"><path d="M0 40h320M0 80h320M0 120h320M0 160h320M0 200h320M0 240h320M40 0v260M80 0v260M120 0v260M160 0v260M200 0v260M240 0v260M280 0v260"/></g>
-   <rect x="28" y="48" width="264" height="176" fill="#050806" stroke="#e6efeb" stroke-width="4"/>
-   <rect x="28" y="48" width="264" height="26" fill="#2f8f3a" stroke="#e6efeb" stroke-width="4"/>
-   <circle cx="44" cy="61" r="5" fill="#ffd93b"/><circle cx="60" cy="61" r="5" fill="#ff5f56"/><circle cx="76" cy="61" r="5" fill="#e6efeb"/>
-   <text x="94" y="66" fill="#050806" font-family="monospace" font-weight="700" font-size="12">server.properties</text>
-   <text x="44" y="102" fill="#2f8f3a" font-family="monospace" font-size="13">&gt; starting minecraft server...</text>
-   <text x="44" y="124" fill="#e6efeb" font-family="monospace" font-size="13">&gt; plugins loaded: [3/3]</text>
-   <text x="44" y="146" fill="#ffd93b" font-family="monospace" font-size="13">&gt; role: ADMIN / DEV</text>
-   <text x="44" y="168" fill="#9cc9ff" font-family="monospace" font-size="13">&gt; online_mode=true</text>
-   <rect x="214" y="142" width="54" height="54" fill="#2f8f3a" stroke="#e6efeb" stroke-width="3"/>
-   <rect x="224" y="154" width="10" height="10" fill="#050806"/><rect x="248" y="154" width="10" height="10" fill="#050806"/>
-   <rect x="234" y="164" width="14" height="16" fill="#050806"/><rect x="228" y="172" width="6" height="14" fill="#050806"/><rect x="248" y="172" width="6" height="14" fill="#050806"/>
-  </svg>`,
-  reset:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <defs><linearGradient id="g23" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f74c8"/><stop offset="62%" stop-color="#9cc9e8"/><stop offset="63%" stop-color="#2f8f3a"/><stop offset="100%" stop-color="#10260f"/></linearGradient></defs>
-   <rect width="320" height="260" fill="url(#g23)"/>
-   <circle cx="242" cy="74" r="34" fill="#ffd93b" stroke="#050806" stroke-width="4"/>
-   <path d="M0 164 Q85 138 160 164 T320 158 L320 260 L0 260 Z" fill="#2f8f3a" stroke="#050806" stroke-width="4"/>
-   <path d="M138 260 L156 164 L172 164 L196 260 Z" fill="#ffd93b" stroke="#050806" stroke-width="4"/>
-   <rect x="34" y="188" width="132" height="44" fill="#fff" stroke="#050806" stroke-width="4"/>
-   <text x="46" y="216" fill="#050806" font-family="monospace" font-weight="700" font-size="16">OFFLINE MODE</text>
-  </svg>`,
-  media:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <rect width="320" height="260" fill="#18121e"/>
-   <rect x="28" y="50" width="190" height="126" fill="#ff3d57" stroke="#e6efeb" stroke-width="4"/>
-   <polygon points="108,88 108,138 152,113" fill="#ffd93b" stroke="#050806" stroke-width="4"/>
-   <rect x="126" y="132" width="166" height="96" fill="#050806" stroke="#ffd93b" stroke-width="4"/>
-   <text x="142" y="164" fill="#ffd93b" font-family="Arial Black,sans-serif" font-weight="900" font-size="20">BAZA MUSIC</text>
-   <path d="M142 192 L172 192 L182 174 L194 212 L206 182 L218 198 L274 198" fill="none" stroke="#2e86de" stroke-width="4"/>
-   <text x="142" y="218" fill="#e6efeb" font-family="monospace" font-size="11">YOUTUBE · COLLAB · 2024</text>
-  </svg>`,
-  breakout:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <rect width="320" height="260" fill="#0d1424"/>
-   <g fill="#2e86de" stroke="#050806" stroke-width="3">
-    <rect x="34" y="176" width="28" height="54"/><rect x="74" y="148" width="28" height="82"/><rect x="114" y="118" width="28" height="112"/><rect x="154" y="88" width="28" height="142"/>
-   </g>
-   <rect x="194" y="52" width="32" height="178" fill="#ffd93b" stroke="#050806" stroke-width="4"/>
-   <rect x="238" y="34" width="46" height="196" fill="#2f8f3a" stroke="#e6efeb" stroke-width="4"/>
-   <rect x="26" y="54" width="188" height="54" fill="#ffd93b" stroke="#050806" stroke-width="4" transform="rotate(-4 120 81)"/>
-   <text x="38" y="86" fill="#050806" font-family="Arial Black,sans-serif" font-weight="900" font-size="16" transform="rotate(-4 120 81)">Я ОШИБКА МУЗЫКИ</text>
-   <rect x="34" y="192" width="144" height="34" fill="#e6efeb" stroke="#050806" stroke-width="3"/>
-   <text x="44" y="214" fill="#050806" font-family="monospace" font-weight="700" font-size="14">100 000+ STREAMS</text>
-  </svg>`,
-  core303:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <rect width="320" height="260" fill="#080c0a"/>
-   <rect x="22" y="46" width="276" height="186" fill="#1b2420" stroke="#ffd93b" stroke-width="4"/>
-   <text x="38" y="80" fill="#ffd93b" font-family="Arial Black,sans-serif" font-weight="900" font-size="22">303core.mp3</text>
-   <circle cx="62" cy="126" r="18" fill="#050806" stroke="#e6efeb" stroke-width="3"/><line x1="62" y1="126" x2="72" y2="114" stroke="#ffd93b" stroke-width="3"/>
-   <circle cx="118" cy="126" r="18" fill="#050806" stroke="#e6efeb" stroke-width="3"/><line x1="118" y1="126" x2="106" y2="114" stroke="#2e86de" stroke-width="3"/>
-   <circle cx="174" cy="126" r="18" fill="#050806" stroke="#e6efeb" stroke-width="3"/><line x1="174" y1="126" x2="188" y2="126" stroke="#2f8f3a" stroke-width="3"/>
-   <path d="M216 142 Q232 94 248 142 T280 120" fill="none" stroke="#ffd93b" stroke-width="4"/>
-   <g stroke="#050806" stroke-width="2">
-    <rect x="38" y="168" width="28" height="44" fill="#e6efeb"/><rect x="70" y="168" width="28" height="44" fill="#ffd93b"/><rect x="102" y="168" width="28" height="44" fill="#e6efeb"/><rect x="134" y="168" width="28" height="44" fill="#2e86de"/><rect x="166" y="168" width="28" height="44" fill="#e6efeb"/><rect x="198" y="168" width="28" height="44" fill="#ffd93b"/><rect x="230" y="168" width="28" height="44" fill="#e6efeb"/><rect x="262" y="168" width="20" height="44" fill="#2f8f3a"/>
-   </g>
-  </svg>`,
-  future:`<svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-   <defs><linearGradient id="g27" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0b2e"/><stop offset="100%" stop-color="#050806"/></linearGradient></defs>
-   <rect width="320" height="260" fill="url(#g27)"/>
-   <path d="M58 156 a34 34 0 0 1 62 -18 a44 44 0 0 1 84 10 a28 28 0 0 1 18 52 L58 200 a22 22 0 0 1 0 -44 Z" fill="#ff6b35" stroke="#e6efeb" stroke-width="4"/>
-   <g stroke="#ffd93b" stroke-width="3">
-    <line x1="78" y1="214" x2="78" y2="238"/><line x1="106" y1="214" x2="106" y2="246"/><line x1="134" y1="214" x2="134" y2="232"/><line x1="162" y1="214" x2="162" y2="248"/><line x1="190" y1="214" x2="190" y2="236"/><line x1="218" y1="214" x2="218" y2="242"/>
-   </g>
-   <rect x="174" y="44" width="122" height="36" fill="#ffd93b" stroke="#050806" stroke-width="3"/>
-   <text x="184" y="67" fill="#050806" font-family="monospace" font-weight="700" font-size="13">ALBUM IV · SOON</text>
-  </svg>`
- };
- return arts[th]||arts.code;
+ return `<div class="tl-ph"><span>место под фото</span></div>`;
 }
 let tlIdx=0;
 function renderTimeline(tl){
@@ -614,7 +545,7 @@ function renderTimeline(tl){
   </div>
   <div class="tl-card" role="tabpanel">
    <div class="tl-vis">
-    ${tlArt(curItem,tlIdx)}
+    ${tlArt(curItem)}
     <span class="tl-vis-badge">${curItem.y}</span>
    </div>
    <div class="tl-body">
@@ -624,7 +555,6 @@ function renderTimeline(tl){
       ${curItem.sub?`<span>${curItem.sub}</span>`:''}
      </div>
      <p style="margin-top:14px">${curItem.t}</p>
-     ${curItem.tags&&curItem.tags.length?`<div class="tl-tags">${curItem.tags.map(tg=>`<span class="tl-tag">#${tg}</span>`).join('')}</div>`:''}
     </div>
     <div class="tl-nav">
      <button type="button" class="btn" data-tlstep="-1" data-s ${tlIdx===0?'disabled style="opacity:.35;pointer-events:none"':''}>← раньше</button>
