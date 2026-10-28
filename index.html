@@ -519,7 +519,7 @@ function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)
  $('#links').innerHTML=card('соцсети',soc)+card('слушать',lis)+card('битмейкер',beats)+card('букинг',booking);
 
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
- $('#adl').innerHTML=[['жанр',AR.genre||'—'],...(AR.facts||[]),['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',sum?fmtN(sum):'—'],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+ $('#adl').innerHTML=[['жанр',AR.genre||'—'],...(AR.facts||[]),['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',AR.totalPlays||(sum?fmtN(sum):'—')],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
  $('#abio').innerHTML=[].concat(AR.bio||[]).map(p=>`<p>${p}</p>`).join('');
  $('#atag').textContent=AR.tagline||'';$('#atag').hidden=!AR.tagline;
  const qq=AR.quote;$('#aq').hidden=!qq;if(qq)$('#aq').innerHTML=`<p>${qq.text||qq}</p>${qq.who?`<cite>— ${qq.who}</cite>`:''}`;
