@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>neosten</title>
 <script>(function(){try{var t=localStorage.getItem('ntheme');if(!t)t='night';if(t==='night')document.documentElement.classList.add('night')}catch(e){}})();</script>
@@ -8,7 +8,7 @@
 :root{--bg:#d9e6e1;--ink:#050806;--sky:#2e86de;--sun:#ffd93b;--grass:#2f8f3a;--sh:8px 8px 0 var(--ink)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-weight:500;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Mono","Courier New",monospace;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Mono","Courier New",monospace;overflow-x:hidden}
 #grid{position:fixed;inset:0;z-index:0;pointer-events:none}
 main,header,footer{position:relative;z-index:1}
 .big{font-weight:900;font-family:"Unbounded","Arial Black",Impact,sans-serif;text-transform:lowercase;letter-spacing:-.045em;line-height:.9;margin:0}
@@ -22,14 +22,6 @@ a,button{color:inherit}
 .btn.alt{background:var(--bg)}
 #mute{position:fixed;bottom:14px;right:14px;z-index:60;padding:6px 12px;font-size:13px;margin:0;box-shadow:4px 4px 0 var(--ink)}
 /* hero */
-#hero{height:100vh;min-height:620px;position:relative;overflow:hidden}
-#pin{position:absolute;inset:0;transition:transform .25s ease-out}
-.w{position:absolute;font-size:clamp(30px,7.5vmin,88px);white-space:nowrap}
-.w small{display:block;font:400 11px/1.4 "IBM Plex Mono",monospace;letter-spacing:0;margin-top:8px}
-.w.t{top:max(5vh,86px);left:50%;transform:translateX(-50%) rotate(180deg)}
-.w.b{bottom:5vh;left:50%;transform:translateX(-50%)}
-.w.l{left:4vw;top:50%;transform:translateY(-50%) rotate(90deg)}
-.w.r{right:4vw;top:50%;transform:translateY(-50%) rotate(-90deg)}
 #catbox{background:var(--card);border:5px solid var(--ink);box-shadow:var(--sh);padding:6px 8px 0;position:fixed;z-index:40;left:0;top:0;transform:rotate(var(--r,0deg));cursor:grab;touch-action:none;user-select:none}
 #catbox.wig{animation:wig .4s}
 @keyframes wig{30%{transform:rotate(4deg) scale(1.04)}70%{transform:rotate(-8deg)}}
@@ -50,8 +42,6 @@ section{padding:clamp(48px,9vw,110px) 5vw}
 .cover s::after{content:"";position:absolute;left:50%;top:0;width:2px;height:45%;background:#9aa;}
 .cover s::before{content:"";position:absolute;left:calc(50% - 10px);top:calc(45% - 10px);width:20px;height:20px;border-radius:50%;background:#000;transition:transform .2s}
 .cover em{position:absolute;right:7%;bottom:12%;font:900 clamp(26px,5.2vw,72px)/1 "Unbounded",Impact,sans-serif;color:#fff;letter-spacing:-.05em}
-#viz{display:flex;gap:4px;align-items:flex-end;height:70px;border:4px solid var(--ink);background:var(--ink);padding:6px;margin:0 0 20px}
-#viz i{flex:1;background:var(--sun);height:5%}
 .tr{display:flex;gap:14px;align-items:center;width:100%;border:4px solid var(--ink);background:var(--card);padding:14px 16px;margin:0 0 14px;font:700 16px "IBM Plex Mono",monospace;text-align:left;cursor:pointer;box-shadow:6px 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
 .tr:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);background:var(--sun)}
 .tr.on{background:var(--grass);color:#fff}
@@ -65,7 +55,6 @@ section{padding:clamp(48px,9vw,110px) 5vw}
 #mem div{font:900 clamp(16px,2.8vw,32px)/1.25 "Unbounded",Impact,sans-serif;text-transform:lowercase;transition:opacity 7s linear,filter 7s linear,letter-spacing 7s linear}
 #mem div.f{opacity:0;filter:blur(10px);letter-spacing:.2em}
 footer{padding:30px 5vw 50px;font-size:12px}
-#catbox.home{position:absolute;left:50%;top:50%;margin:-170px 0 0 -190px;--r:-3deg}
 #catbox:active{cursor:grabbing}
 #catbox.small{border-width:4px;box-shadow:5px 5px 0 var(--ink)}#catbox.small #cat{font-size:3.3px}
 #catbox.small b{font-size:10px}
@@ -76,7 +65,7 @@ footer{padding:30px 5vw 50px;font-size:12px}
 #pet.on{display:block}#pet pre{margin:0;font:inherit}#pet .btn{font-size:12px;padding:4px 10px;margin:8px 8px 0 0;box-shadow:3px 3px 0 var(--ink);border-width:3px}
 .pg{display:none}.pg.on{display:block}.pg:not(#p-home){padding-top:66px;min-height:100vh}
 #nav{position:fixed;top:0;left:0;right:0;z-index:55;display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--bg);border-bottom:5px solid var(--ink);overflow-x:auto}
-#logo{font:900 18px "Unbounded",Impact,sans-serif;margin-right:10px;cursor:pointer}
+#logo{font:900 18px "Unbounded",Impact,sans-serif;margin-right:10px;cursor:pointer;background:none;border:0;padding:0;color:inherit}
 #nav .n{font:700 14px "IBM Plex Mono",monospace;border:3px solid var(--ink);background:var(--card);padding:5px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
 #nav .n.on{background:var(--sun)}#nav .n:hover{background:var(--sky)}
 .cover u{cursor:pointer;z-index:3}.cover.night{background:linear-gradient(#050a1c,#1b2a5c 55%,#10260f 56%,#050806)}.cover.night u{background:#dfe8ff;box-shadow:0 0 40px 14px #7f9cff}
@@ -94,7 +83,6 @@ dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{displ
 .pop{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:4px solid var(--ink);margin:0 0 12px;padding:12px 16px;cursor:pointer;color:var(--ink);font-size:23px;font-weight:700;background:linear-gradient(90deg,var(--sky) var(--w),var(--card) var(--w));box-shadow:5px 5px 0 var(--ink);transition:transform .1s}
 .pop:hover{transform:translate(-3px,-3px)}.pop em{font:900 22px "Unbounded",sans-serif}.pop.on{border-color:var(--grass);box-shadow:5px 5px 0 var(--grass)}.pop.on em::after{content:"♪"}
 .pick{display:flex;gap:30px;align-items:center;flex-wrap:wrap;background:var(--card);border:5px solid var(--ink);box-shadow:var(--sh);padding:26px}
-.stamp{flex:none;width:150px;height:150px;border-radius:50%;border:5px solid var(--ink);background:var(--sun);display:grid;place-items:center;text-align:center;font:900 15px/1.2 "Unbounded",sans-serif;transform:rotate(-12deg);box-shadow:6px 6px 0 var(--ink)}
 .pick h3{font:900 clamp(20px,3.4vw,40px)/1.1 "Unbounded",sans-serif;margin:0 0 10px}.pick>div:last-child{flex:1 1 260px}
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}.tile{border:5px solid var(--ink);box-shadow:var(--sh);padding:22px;background:var(--card)}
 .tile h3{font:900 clamp(18px,2.2vw,28px)/1 "Unbounded",sans-serif;margin:0 0 14px}.tile p{margin:0 0 14px}.tile .btn{font-size:16px;padding:7px 12px;margin-bottom:0}
@@ -109,7 +97,6 @@ dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{displ
 .toc a{font:700 20px "Oswald",sans-serif;text-decoration:none;margin-right:10px;letter-spacing:.04em;text-transform:uppercase;padding:0 3px}.toc a:hover{background:var(--ink);color:var(--bg)}
 #catbox.home{position:absolute;left:auto;top:auto;right:6vw;bottom:70px;margin:0;--r:-3deg}
 #catbox.home #cat{font-size:min(5px,.9vw)}
-@media(max-width:1100px){#hero{display:block}#catbox.home{position:relative;right:auto;bottom:auto;margin:36px 0 0;display:inline-block;--r:-2deg}}
 .btn,#pet .btn{background:transparent;border:2px solid var(--ink);box-shadow:none;padding:8px 14px;font:500 15px "IBM Plex Mono",monospace;letter-spacing:.05em;text-transform:uppercase;margin:0 8px 8px 0}
 .btn:hover,#pet .btn:hover{background:var(--ink);color:var(--bg)}.btn:active{transform:none}
 #nav{border-bottom-width:3px}
@@ -122,14 +109,12 @@ dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{displ
 .b2{background:var(--ink);color:var(--bg)}
 .pop{color:var(--bg);border:0;border-top:2px solid var(--bg);box-shadow:none;margin:0;padding:14px 4px;background:linear-gradient(var(--sun),var(--sun)) 0 100%/var(--w) 6px no-repeat}
 .pop:hover{background-color:rgba(255,255,255,.1);transform:none}.pop.on{color:var(--sun);border-color:var(--bg);box-shadow:none}
-.pick{box-shadow:none;border-width:3px}.stamp{box-shadow:none}
+.pick{box-shadow:none;border-width:3px}
 .cover,.photo{box-shadow:8px 8px 0 var(--ink)}
-#pet{box-shadow:none;border-width:3px}#grip{cursor:grab;font-weight:700;border-bottom:2px solid var(--ink);margin:-4px -4px 8px;padding:0 4px 4px;touch-action:none;user-select:none}
+#grip{cursor:grab;font-weight:700;border-bottom:2px solid var(--ink);margin:-4px -4px 8px;padding:0 4px 4px;touch-action:none;user-select:none}
 html.inv{filter:invert(1) hue-rotate(180deg)}
 html.glitch{animation:gl .25s steps(2) 6}@keyframes gl{25%{filter:invert(1)}50%{filter:hue-rotate(140deg) contrast(1.6)}75%{filter:saturate(5)}}
 .breath{position:fixed;inset:0;z-index:80;display:grid;place-items:center;pointer-events:none}.breath span{width:min(60vmin,420px);aspect-ratio:1;border:4px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:700 28px "Oswald",sans-serif;background:rgba(217,230,225,.75);animation:br 5s ease-in-out infinite}@keyframes br{0%,100%{transform:scale(.4)}50%{transform:scale(1)}}
-#memory h2{text-shadow:5px 5px 0 var(--sky)}
-#pet{box-shadow:6px 6px 0 var(--ink);border-width:4px}
 #pet .btn{background:var(--sun);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font:700 15px "Oswald",sans-serif;letter-spacing:.03em;text-transform:none;padding:4px 10px;margin:8px 8px 0 0;transition:transform .08s,box-shadow .08s}
 #pet .btn.alt{background:var(--bg)}#pet .btn:hover{background:var(--card);color:var(--ink)}#pet .btn:active{transform:translate(3px,3px);box-shadow:none}
 #st .br{display:flex;gap:10px;align-items:center;margin-bottom:5px}#st .br span{width:66px;font:700 14px "Oswald",sans-serif}#st i{display:block;width:110px;height:12px;border:2px solid var(--ink);background:linear-gradient(90deg,var(--ink) var(--v),var(--card) var(--v))}
@@ -155,7 +140,7 @@ section{padding-top:clamp(44px,6vw,72px);padding-bottom:clamp(44px,6vw,72px)}
 #memory h2{font-size:clamp(30px,4.6vw,60px);line-height:1.05;margin:0 0 28px;text-shadow:4px 4px 0 var(--sky)}
 #in{max-width:720px;font-size:17px}#mem div{font-size:clamp(18px,2.2vw,28px)}
 .strip{font-size:18px;padding:8px 0}
-.two{gap:clamp(28px,5vw,64px)}.cover{max-width:440px;width:100%;transform:none}.photo{max-width:420px;width:100%;transform:none}.stamp{transform:none}
+.two{gap:clamp(28px,5vw,64px)}.cover{max-width:440px;width:100%;transform:none}.photo{max-width:420px;width:100%;transform:none}
 #p-rel h3.big{font-size:clamp(22px,2.6vw,34px)!important;margin:0 0 20px!important}
 .card .big{font-size:clamp(32px,4.6vw,56px)!important;margin:0 0 4px}
 .pick h3{font-size:clamp(20px,2.6vw,30px)}.soon{margin-top:40px}.note{font-size:13px;opacity:.7}dt{width:130px}
@@ -235,7 +220,7 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 #lh{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:400 11px "IBM Plex Mono",monospace;letter-spacing:.08em;opacity:.55;transition:opacity .4s;color:#000}
 /* --- pet panel on the right above sound; artist page; rain --- */
 #pet{left:auto;right:14px;bottom:70px}
-@media(max-width:900px){#pet{bottom:132px}}
+@media(max-width:900px){#pet{bottom:156px}}
 #rain{position:fixed;inset:0;width:100%;height:100%;z-index:85;pointer-events:none}
 .tag{font:500 18px/1.4 "IBM Plex Mono",monospace;margin:6px 0 0;max-width:36ch}
 .photo{overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block}
@@ -302,7 +287,8 @@ html.night .cc .lnk:hover{background:var(--sun);color:#050806}html.night .cc .ln
 @media(prefers-reduced-motion:reduce){.bgl,#bgw{transition:none}}
 .cc .gh{background:var(--bandbg)}
 #lb,#ls,#lh{text-shadow:0 0 5px #fff,0 0 8px #fff,0 0 12px #fff}.wait #ls{bottom:auto;top:70%}#gate.wait{cursor:pointer}.wait #ls{animation:blk 1.3s ease-in-out infinite;opacity:1;font-size:18px;letter-spacing:.12em}@keyframes blk{50%{opacity:.3}}
-:focus-visible{outline:4px solid #f0f;outline-offset:3px}
+:focus-visible{outline:3px solid #f0f;outline-offset:3px}
+#logo:focus-visible,#nav .n:focus-visible,#theme:focus-visible{outline-offset:-3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* ===== мини-игры ===== */
@@ -364,17 +350,17 @@ body.wdone #wKb{display:none}
 @media(max-width:600px){.wk{box-shadow:2px 2px 0 var(--ink);height:48px}.w-kr{gap:4px}.w-row,#wBoard{gap:5px}}
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
-<canvas id="grid"></canvas>
-<div id="gate"><canvas id="ldc"></canvas><div id="lb"></div><div id="ls"></div><div id="lh">клик, касание или любая клавиша — и включится звук</div></div>
+<canvas id="grid" aria-hidden="true"></canvas>
+<div id="gate"><canvas id="ldc" aria-hidden="true"></canvas><div id="lb"></div><div id="ls"></div><div id="lh">клик, касание или любая клавиша — и включится звук</div></div>
 <button class="btn alt" id="mute" hidden>звук: вкл</button>
-<nav id="nav"><b id="logo" data-s>neosten</b><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button><button class="n gm" data-p="games">мини-игры</button><button id="theme" data-s aria-label="сменить тему">☾ ночь</button></nav>
+<nav id="nav" aria-label="основная навигация"><button type="button" id="logo" data-s>neosten</button><button class="n on" data-p="home">главная</button><button class="n" data-p="rel">релизы</button><button class="n" data-p="art">артист</button><button class="n" data-p="con">контакты</button><button class="n gm" data-p="games">мини-игры</button><button id="theme" data-s aria-label="сменить тему">☾ ночь</button></nav>
 
 <main>
 <div class="pg on" id="p-home">
 <header id="hero"><div id="pin"><div class="eyebrow">■ музыкальный проект</div><h1 class="big w2">neosten</h1>
 <div class="intro"><p class="lead">всё в одном месте: новый релиз, самые популярные треки, выбор артиста, карточка и один кот. любой трек играет по одному клику.</p>
 <ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">контакты</a> соцсети, битмейкер, букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
-<div class="slot">кот гуляет по сайту.<br>«позвать кота» вернёт его сюда.</div><div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
+<div class="slot">кот гуляет по сайту.<br>«позвать кота» вернёт его сюда.</div><div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat" role="img" aria-label="ASCII-арт: кот">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
 ========================---**#*++=======-==--====-=--==---===+++++++++===-=+*====-----==---=*#++=---
 ============================*##**++==-=+++++===+++==-=------==+++++++++*#@@@==-------==-----=%*+==--
 ========+===========++++=*==+**++++++==-**+++=============-------====+%@@@@@*==-----==------=%%+++=-
@@ -429,7 +415,7 @@ body.wdone #wKb{display:none}
 +======+===+===++++++++++++++*++++++**#@@@@@@@@@@@@@@@@@@@@@@#***+++++++++++==++++++============++++
 +++====+++++==+==++++=+++++++++++++*****@@@@@@@@@@@@@@@@@@@@@%***+***=+++++===++==++=====+===++==+++
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
-<div class="strip"><span>neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ </span></div>
+<div class="strip" aria-hidden="true"><span>neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ </span></div>
 
 <section id="memory"><h2 class="big">оставь мысль</h2>
 <input id="in" maxlength="70" placeholder="напиши что угодно и нажми enter" autocomplete="off" aria-label="твоя мысль">
@@ -471,9 +457,9 @@ body.wdone #wKb{display:none}
 </section></div>
 </main>
 <footer>neosten ✶ ты забудешь эту страницу. это нормально.</footer>
-<div id="pm" hidden><div class="pmb"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
-<div id="mp" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><label class="vol" title="громкость"><span>vol</span><input id="mpv" type="range" min="0" max="100" value="80" aria-label="громкость"></label><div class="eq"><i></i><i></i><i></i><i></i></div></div>
-<div id="pet"><div id="grip"><span>⠿ питомец</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></div>
+<div id="pm" hidden><div class="pmb" role="dialog" aria-modal="true" aria-label="где слушать"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
+<aside id="mp" aria-label="плеер" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><label class="vol" title="громкость"><span>vol</span><input id="mpv" type="range" min="0" max="100" value="80" aria-label="громкость"></label><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div></aside>
+<aside id="pet" aria-label="питомец"><div id="grip"><span>⠿ питомец</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></aside>
 <script>
 (function(){var v=location.protocol.indexOf('http')===0?'?v='+Math.floor(Date.now()/300000):'';
 ['releases.js','data/auto.js'].forEach(function(f){document.write('<script src="'+f+v+'"><\/script>')})})();
