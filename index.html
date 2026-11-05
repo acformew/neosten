@@ -361,6 +361,20 @@ section{padding-top:clamp(36px,9vw,56px);padding-bottom:clamp(36px,9vw,56px)}
 input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 @media (max-width:480px){#pet{right:10px}.w-bar .btn{flex:1 1 auto}}
+
+/* ---- правки 21: новое / баланс линий ---- */
+.nw{display:grid;grid-template-columns:clamp(130px,20vw,210px) minmax(0,1fr);gap:clamp(20px,3.5vw,44px);align-items:stretch}
+.nw-c{min-width:0}.nw .gcover{max-width:none;width:100%;padding:12px;box-shadow:6px 6px 0 var(--ink)}
+.nw .gcover b{font-size:clamp(16px,2.2vw,26px)}.nw .gcover small{font-size:11px}
+.nw-i{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
+.nw-i h3.big{margin:0 0 8px}.nw-i .meta{margin:0}.nw-i .chips{margin-top:0}.nw-i .chip:first-child{margin-left:0}
+@media(max-width:560px){.nw{grid-template-columns:110px minmax(0,1fr);gap:16px}.nw-i{gap:12px}}
+#pop .pop{border:0;padding:14px 4px 18px;margin:0 0 6px;background-position:0 100%}
+#pop .pop.on{border:0;box-shadow:none}
+#pop .pop:last-child{margin-bottom:0}
+#picks .trk,#picks .trk:last-child{border:0;padding:13px 12px}
+#picks .trk::after{bottom:0;height:3px}
+.pick{border-width:3px}
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
 <canvas id="grid" aria-hidden="true"></canvas>
@@ -371,7 +385,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 <main>
 <div class="pg on" id="p-home">
 <header id="hero"><div id="pin"><div class="eyebrow">■ музыкальный проект</div><h1 class="big w2">neosten</h1>
-<div class="intro"><p class="lead">всё в одном месте: новый релиз, самые популярные треки, выбор артиста, карточка и один кот. любой трек играет по одному клику.</p>
+<div class="intro"><p class="lead">официальный сайт исполнителя neosten. здесь выходят новые релизы, собраны самые популярные треки, выбор артиста, биография и контакты. любой трек играет по одному клику, а за порядком на сайте следит кот.</p>
 <ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">контакты</a> соцсети, битмейкер, букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
 <div class="slot">кот гуляет по сайту.<br>«позвать кота» вернёт его сюда.</div><div id="catbox" class="home" data-s><div id="bub"></div><b>kot^^.txt</b><pre id="cat" role="img" aria-label="ASCII-арт: кот">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
 ========================---**#*++=======-==--====-=--==---===+++++++++===-=+*====-----==---=*#++=---
@@ -557,7 +571,7 @@ $('#in').onkeydown=e=>{blip(500+Math.random()*500,.05,'triangle',.05);if(e.key!=
 /* ---------- pages ---------- */
 const pages=$$('.pg');
 function go(p){if(!$('#p-'+p))p='home';pages.forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('#nav .n').forEach(b=>b.classList.toggle('on',b.dataset.p===p));scrollTo(0,0);try{history.replaceState(null,'','#'+p)}catch(e){}blip(400,.12,'sine',.15,800)}
-$$('#nav .n').forEach(b=>b.onclick=()=>go(b.dataset.p));$('#logo').onclick=()=>go('home');go(location.hash.slice(1)||'home');
+$$('#nav .n').forEach(b=>b.onclick=()=>go(b.dataset.p));$('#logo').onclick=()=>go('home');try{history.scrollRestoration='manual'}catch(e){}go('home');
 /* ---------- easter eggs ---------- */
 let wc=0;$$('.w2').forEach(w=>w.onclick=()=>{if(++wc>=5){wc=0;const p=$('#pin');p.classList.add('spin');blip(200,1.2,'sawtooth',.08,1600);setTimeout(()=>p.classList.remove('spin'),1500)}});
 document.addEventListener('click',e=>{const c=e.target.closest('.gcover');if(!c)return;c.classList.toggle('night');if(c.classList.contains('night'))for(let i=0;i<4;i++)setTimeout(()=>blip(4200,.05,'sine',.05),300+i*130);else blip(900,.4,'sine',.1,1400)});
@@ -571,9 +585,11 @@ const norm=t=>(t||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,''),L=window.LINK
 (window.AUTO||[]).forEach(a=>{const m=R.find(r=>norm(r.match||r.title)===norm(a.title));
  if(m){m.auto=true;if(m.hide)m.title=a.title;m.hide=false;m.date=a.date||m.date;m.cover=m.cover||a.cover;m.page=a.page;m.type=m.type||a.type;m.links=a.links||{}}
  else R.push(Object.assign({},a,{auto:true}))});
-const ts=r=>r.date?new Date(r.date).getTime():0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
+const MSK=d=>{d=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(d))return Date.parse(d+'T00:00:00+03:00');if(/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/.test(d))return Date.parse(d.replace(' ','T')+'+03:00');return new Date(d).getTime()},hasT=d=>/[T ]\d{2}:\d{2}/.test(String(d)),
+ts=r=>r.date?MSK(r.date):0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
 const mon=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-const fd=d=>{const x=new Date(d);return x.getDate()+' '+mon[x.getMonth()]+' '+x.getFullYear()};
+const fd=d=>{const x=new Date(MSK(d)+108e5);return x.getUTCDate()+' '+mon[x.getUTCMonth()]+' '+x.getUTCFullYear()};
+const fdt=d=>{if(!hasT(d))return fd(d);const x=new Date(MSK(d)+108e5),p=n=>String(n).padStart(2,'0');return fd(d)+', '+p(x.getUTCHours())+':'+p(x.getUTCMinutes())+' МСК'};
 const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace('.',',').replace(',0','')+' млн':n>=1e3?Math.round(n/1e3)+' тыс':''+n;
 const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
 const COLS=['#2e86de','#ffd93b','#3a9d4a','#ff9a62'];
@@ -640,14 +656,14 @@ function renderTimeline(tl){
 
 function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;
  let h='';
- if(nw)h+=`<div class="two"><div>${cover(nw,0)}</div><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div>`;
- if(u)h+=`<div class="soon"><div><small>скоро · ${fd(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':u.title}</h3><div id="cd"></div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
+ if(nw)h+=`<div class="nw"><div class="nw-c">${cover(nw,0)}</div><div class="nw-i"><div><h3 class="big">${nw.title}</h3><p class="meta">${nw.type||'релиз'} · ${fd(nw.date)}</p></div><div><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div></div>`;
+ if(u)h+=`<div class="soon"><div><small>скоро · ${fdt(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':u.title}</h3><div id="cd"></div><div class="note">таймер идёт по московскому времени (МСК, UTC+3)</div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
  $('#newest').innerHTML=h||'<p>скоро здесь появится новый релиз.</p>';
  const pp=R.filter(r=>r.plays).sort((a,b)=>b.plays-a.plays),mx=pp[0]?pp[0].plays:1;
  $('#pop').innerHTML=pp.map((r,i)=>`<button class="pop" data-id="${r.id}" data-l="p" style="--w:${r.plays/mx*100}%"><em>${i+1}</em><span class="nm">${r.title}</span><span>${fmtN(r.plays)}</span></button>`).join('');
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
  const dd=R.filter(r=>r.auto||r.show).sort((a,b)=>ts(b)-ts(a));$('#discS').hidden=!dd.length;
- $('#disc').innerHTML=dd.map((r,i)=>`<button class="dc" data-menu="${r.id}">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(r.date).getFullYear()+' · ':''}${r.type||'релиз'}</small></button>`).join('');
+ $('#disc').innerHTML=dd.map((r,i)=>`<button class="dc" data-menu="${r.id}">${r.cover?`<img src="${r.cover}" alt="" loading="lazy">`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b></div>`}<b>${r.title}</b><small>${r.date?new Date(ts(r)+108e5).getUTCFullYear()+' · ':''}${r.type||'релиз'}</small></button>`).join('');
 
  const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
  const card=(t,b)=>`<div class="cc"><h3 class="gh"><span>■ ${t}</span></h3><div class="cc-list">${b}</div></div>`;
@@ -659,9 +675,9 @@ function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)
  $('#links').innerHTML=card('соцсети',soc)+card('слушать',lis)+card('битмейкер',beats)+card('букинг',booking);
 
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
- $('#adl').innerHTML=[['жанр',AR.genre||'—'],...(AR.facts||[]),['треков на сайте',R.filter(r=>r.file).length],['прослушиваний',AR.totalPlays||(sum?fmtN(sum):'—')],['следующий релиз',u?fd(u.date):'—'],['питомец','кот (живёт на сайте)']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+ $('#adl').innerHTML=[['жанр',AR.genre||'—'],...(AR.facts||[]).filter(f=>!/^(треков на сайте|питомец)$/i.test(String(f[0]).trim())),['прослушиваний',AR.totalPlays||(sum?fmtN(sum):'—')],['следующий релиз',u?fdt(u.date):'—']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
  $('#abio').innerHTML=[].concat(AR.bio||[]).map(p=>`<p>${p}</p>`).join('');
- $('#atag').textContent=AR.tagline||'';$('#atag').hidden=!AR.tagline;
+ $('#atag').textContent='краткая сводка';$('#atag').hidden=false;
  const qq=AR.quote;$('#aq').hidden=!qq;if(qq)$('#aq').innerHTML=`<p>${qq.text||qq}</p>${qq.who?`<cite>— ${qq.who}</cite>`:''}`;
  const tl=AR.timeline||[];$('#tlS').hidden=!tl.length;if(tl.length)renderTimeline(tl);
  if(AR.photo)$('#aph').innerHTML=`<img src="${AR.photo}" alt="neosten">`;
@@ -696,10 +712,10 @@ let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagNa
  if(kb.endsWith('303')){kb='';acid()}if(kb.endsWith('сати')){kb='';breath()}});
 let idle;const rs2=()=>{clearTimeout(idle);idle=setTimeout(()=>{say('ты ещё здесь?',4000);meow()},60000)};['pointermove','keydown','pointerdown'].forEach(ev=>addEventListener(ev,rs2,{passive:true}));rs2();
 try{A()}catch(e){}
-const wake=()=>{if(!sound||!ac)return;const go=()=>{if(waiting){waiting=false;ldT0=performance.now();document.getElementById('gate').classList.remove('wait')}if(loading)startupChime()};
- if(ac.state!=='running')ac.resume().then(go).catch(()=>{});else go()};
+const wake=()=>{const go=()=>{if(waiting){waiting=false;ldT0=performance.now();document.getElementById('gate').classList.remove('wait')}if(loading)startupChime()};
+ if(!sound||!ac){go();return}if(ac.state!=='running')ac.resume().then(go).catch(go);else go()};
 ['pointerup','click','keydown','touchend'].forEach(ev=>addEventListener(ev,wake,{passive:true}));
-function runLoader(){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.style.cssText='';g.classList.remove('go');loading=true;chimed=false;waiting=!!sound&&!(ac&&ac.state==='running');g.classList.toggle('wait',waiting);if(!waiting)setTimeout(startupChime,60);
+function runLoader(force){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.style.cssText='';g.classList.remove('go');loading=true;chimed=false;waiting=!!force||(!!sound&&!(ac&&ac.state==='running'));g.classList.toggle('wait',waiting);if(!waiting)setTimeout(startupChime,60);
  const W=cv.width=innerWidth,H=cv.height=innerHeight,fs=Math.max(13,Math.min(17,W/80)),cw=fs*.62,C=Math.ceil(W/cw),R=Math.ceil(H/fs),CH='01#@%*+=<>/\\|:;',
  mk=document.createElement('canvas');mk.width=C;mk.height=R;const m=mk.getContext('2d');m.font='900 100px Arial Black,Arial,sans-serif';const w1=m.measureText('neosten').width,P=Math.min(W*.84/(w1/100),H*.36);
  m.setTransform(P/100/cw,0,0,P/100/fs,(W-w1*P/100)/2/cw,(H/2+P*.36)/fs);m.fillText('neosten',0,0);
@@ -710,10 +726,10 @@ function runLoader(){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');g.sty
   x.clearRect(0,0,W,H);
   for(let c=0;c<C;c++){hd[c]=(hd[c]+sp[c])%(R+12);for(let k=0;k<10;k++){const r=Math.floor(hd[c]-k);if(r<0||r>=R)continue;if(M[r*C+c]&&Math.random()<p*1.1)continue;x.fillStyle='rgba(0,0,0,'+(1-k/10)*(k?.3:.9)+')';x.fillText(rc(),c*cw,r*fs)}}
   x.fillStyle='#000';for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(M[r*C+c]&&Math.random()<p*1.1&&Math.random()>d*1.2)x.fillText(rc(),c*cw,r*fs);
-  const pd=waiting?0:p,n=Math.round(pd*20);$('#lb').textContent='['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(pd*100)+'%';$('#ls').textContent=waiting?'нажми, чтобы войти':logs[Math.min(4,p*5|0)]+'…';$('#lh').style.opacity=waiting?.7:0;
+  const pd=waiting?0:p,n=Math.round(pd*20);$('#lb').textContent=waiting?'':'['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(pd*100)+'%';$('#ls').textContent=waiting?'нажми, чтобы войти':logs[Math.min(4,p*5|0)]+'…';$('#lh').style.opacity=waiting?.7:0;
   if(d>0){if(!ent){ent=true;enter()}g.style.opacity=1-d;g.style.filter='blur('+d*5+'px)'}
   if(d<1)requestAnimationFrame(f);else{g.style.display='none';loading=false}})(ldT0)}
-runLoader();
+runLoader(true);
 /* ---------- commands ---------- */
 const hop=()=>{if(home)wig();else vy=-22;meow()};
 const rain=(ch,cls,n)=>{for(let i=0;i<n;i++)setTimeout(()=>{const f=document.createElement('div');f.className='rain '+cls;f.textContent=ch;f.style.left=Math.random()*98+'vw';document.body.append(f);setTimeout(()=>f.remove(),2700)},i*60)};
