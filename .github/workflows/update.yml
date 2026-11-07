@@ -3,19 +3,27 @@ on:
   schedule:
     - cron: '17 */6 * * *'     # каждые 6 часов
   push:
-    paths: ['links.txt', 'scripts/update.mjs']   # правка links.txt запускает обновление сразу
+    paths: ['links.txt', 'sources.json', 'scripts/update.mjs']   # правка этих файлов запускает обновление сразу
   workflow_dispatch:           # + кнопка «Run workflow» вручную
 permissions:
   contents: write
   pages: write
+concurrency:
+  group: update-releases
+  cancel-in-progress: false
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - run: node scripts/update.mjs
+        env:
+          # необязательно: ключи Spotify (Settings -> Secrets and variables -> Actions)
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
       - name: commit and rebuild pages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
