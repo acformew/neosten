@@ -10,4 +10,4 @@
 # 2026-10-20 | https://open.spotify.com/album/XXXXXXXX
 # https://music.yandex.ru/album/12345678 | vk=https://vk.ru/music/album/...
 2026-11-06 | https://open.spotify.com/album/https://music.yandex.ru/album/44794240
-2026-11-05 | https://music.yandex.ru/album/https://music.yandex.ru/album/44794240 | title=#SAFEHARM | type=сингл
+2026-11-06 | https://music.yandex.ru/album/https://music.yandex.ru/album/44794240 | title=#SAFEHARM | type=сингл
