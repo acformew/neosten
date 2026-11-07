@@ -165,23 +165,6 @@ window.AUTO=[
   ]
  },
  {
-  "id": "link-463ff86b",
-  "title": "303core.mp3",
-  "type": "альбом",
-  "date": "",
-  "cover": "covers/link-463ff86b.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
-   "yandex": "https://music.yandex.ru/album/40628842",
-   "deezer": "https://www.deezer.com/album/919930291"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
- },
- {
   "id": "link-0e061c51",
   "title": "ДОФАМИНОВАЯ ЯМА",
   "type": "EP",
@@ -197,6 +180,23 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB"
+ },
+ {
+  "id": "link-463ff86b",
+  "title": "303core.mp3",
+  "type": "альбом",
+  "date": "",
+  "cover": "covers/link-463ff86b.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
+   "yandex": "https://music.yandex.ru/album/40628842",
+   "deezer": "https://www.deezer.com/album/919930291"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
  },
  {
   "id": "link-57f3e0b0",
