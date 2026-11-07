@@ -163,37 +163,5 @@ window.AUTO=[
   "srcs": [
    "apple"
   ]
- },
- {
-  "id": "link-04c8884b",
-  "title": "ДОФАМИНОВАЯ ЯМА",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-04c8884b.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB",
-   "deezer": "https://www.deezer.com/album/973546611"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB"
- },
- {
-  "id": "link-a4c61b8b",
-  "title": "303core.mp3",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-a4c61b8b.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
-   "deezer": "https://www.deezer.com/album/919930291"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
  }
 ];
