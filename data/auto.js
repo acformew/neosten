@@ -171,14 +171,14 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-463ff86b.jpg",
   "links": {
-   "yandex": "https://music.yandex.ru/album/https://https://music.yandex.ru/album/40628842",
+   "yandex": "https://music.yandex.ru/album/40628842",
    "deezer": "https://www.deezer.com/album/919930291"
   },
   "page": "",
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/https://https://music.yandex.ru/album/40628842"
+  "src": "https://music.yandex.ru/album/40628842"
  },
  {
   "id": "link-0e061c51",
@@ -187,14 +187,14 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-0e061c51.jpg",
   "links": {
-   "yandex": "https://music.yandex.ru/album/https://https://https://music.yandex.ru/album/41828596",
+   "yandex": "https://music.yandex.ru/album/41828596",
    "deezer": "https://www.deezer.com/album/973546611"
   },
   "page": "",
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/https://https://https://music.yandex.ru/album/41828596"
+  "src": "https://music.yandex.ru/album/41828596"
  },
  {
   "id": "link-57f3e0b0",
@@ -203,13 +203,13 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-57f3e0b0.jpg",
   "links": {
-   "yandex": "https://music.yandex.ru/album/https://music.yandex.ru/album/37798894",
+   "yandex": "https://music.yandex.ru/album/37798894",
    "deezer": "https://www.deezer.com/album/859484762"
   },
   "page": "",
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/https://music.yandex.ru/album/37798894"
+  "src": "https://music.yandex.ru/album/37798894"
  }
 ];
