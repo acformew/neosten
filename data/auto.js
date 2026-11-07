@@ -171,6 +171,7 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-463ff86b.jpg",
   "links": {
+   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
    "yandex": "https://music.yandex.ru/album/40628842",
    "deezer": "https://www.deezer.com/album/919930291"
   },
@@ -178,7 +179,7 @@ window.AUTO=[
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/40628842"
+  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
  },
  {
   "id": "link-0e061c51",
@@ -187,6 +188,7 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-0e061c51.jpg",
   "links": {
+   "spotify": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB",
    "yandex": "https://music.yandex.ru/album/41828596",
    "deezer": "https://www.deezer.com/album/973546611"
   },
@@ -194,7 +196,7 @@ window.AUTO=[
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/41828596"
+  "src": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB"
  },
  {
   "id": "link-57f3e0b0",
@@ -203,6 +205,7 @@ window.AUTO=[
   "date": "",
   "cover": "covers/link-57f3e0b0.jpg",
   "links": {
+   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP",
    "yandex": "https://music.yandex.ru/album/37798894",
    "deezer": "https://www.deezer.com/album/859484762"
   },
@@ -210,6 +213,6 @@ window.AUTO=[
   "srcs": [
    "links"
   ],
-  "src": "https://music.yandex.ru/album/37798894"
+  "src": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP"
  }
 ];
