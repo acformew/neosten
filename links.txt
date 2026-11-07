@@ -9,7 +9,7 @@
 # Примеры (убери # чтобы включить):
 # 2026-10-20 | https://open.spotify.com/album/XXXXXXXX
 # https://music.yandex.ru/album/12345678 | vk=https://vk.ru/music/album/...
-https://open.spotify.com/album/https://https://music.yandex.ru/album/40628842
-https://music.yandex.ru/album/https://https://music.yandex.ru/album/40628842 | title=303core.mp3 | type=альбом
-https://music.yandex.ru/album/https://https://https://music.yandex.ru/album/41828596 | title=ДОФАМИНОВАЯ ЯМА | type=EP
-https://music.yandex.ru/album/https://music.yandex.ru/album/37798894 | title=НАКОЛОЧКИ | type=сингл
+https://music.yandex.ru/album/40628842
+https://music.yandex.ru/album/40628842 | title=303core.mp3 | type=альбом
+https://music.yandex.ru/album/41828596 | title=ДОФАМИНОВАЯ ЯМА | type=EP
+https://music.yandex.ru/album/37798894 | title=НАКОЛОЧКИ | type=сингл
