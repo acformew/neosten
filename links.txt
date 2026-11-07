@@ -10,6 +10,8 @@
 # 2026-10-20 | https://open.spotify.com/album/XXXXXXXX
 # https://music.yandex.ru/album/12345678 | vk=https://vk.ru/music/album/...
 https://music.yandex.ru/album/40628842
-https://music.yandex.ru/album/40628842 | title=303core.mp3 | type=альбом
-https://music.yandex.ru/album/41828596 | title=ДОФАМИНОВАЯ ЯМА | type=EP
-https://music.yandex.ru/album/37798894 | title=НАКОЛОЧКИ | type=сингл
+https://music.yandex.ru/album/41828596
+https://music.yandex.ru/album/37798894
+https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB
+https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL
+https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP
