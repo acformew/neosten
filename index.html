@@ -407,33 +407,33 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 /* ===== правка 5: крестик плеера ===== */
 #mp{transition:opacity .25s ease,transform .25s ease}
 #mp.out{opacity:0;transform:translateX(-50%) translateY(18px);pointer-events:none}
-#mpx{flex:none;order:99;width:36px;height:36px;padding:0;margin-left:2px;background:var(--card);color:var(--ink);border:3px solid var(--ink);font:700 22px/1 "Oswald",sans-serif;cursor:pointer}
+#mpx{flex:none;order:99;width:26px;height:26px;padding:0;margin-left:2px;background:transparent;color:var(--ink);border:2px solid var(--ink);font:700 16px/1 "Oswald",sans-serif;cursor:pointer}
 @media (hover:hover) and (pointer:fine){#mpx:hover{background:var(--ink);color:var(--bg)}}
 
 /* ===== правка 4: ретро-баннер (web 1.0) ===== */
-#ad{position:fixed;left:0;top:0;z-index:70;width:min(300px,calc(100vw - 24px));background:#ffe600;color:#000;border:4px solid #000;
+#rb{position:fixed;left:0;top:0;z-index:70;width:min(300px,calc(100vw - 24px));background:#ffe600;color:#000;border:4px solid #000;
  box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 6px #000,8px 8px 0 #000;font-family:"Oswald","Arial Narrow",sans-serif;
  transform:rotate(var(--r,-2deg)) scale(.86);opacity:0;transition:opacity .45s ease,transform .45s cubic-bezier(.2,1.4,.4,1);
  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
-#ad[hidden]{display:none}
-#ad.in{opacity:1;transform:rotate(var(--r,-2deg)) scale(1)}
-#ad.drag{cursor:grabbing;transition:none;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 6px #000,12px 12px 0 #000}
-.ad-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:9px 9px 0;padding:2px 3px 2px 10px;background:#e1251b;color:#fff}
-.ad-top b{font:700 21px/1.1 "Oswald",sans-serif;letter-spacing:.05em;text-transform:uppercase;text-shadow:2px 2px 0 #000}
-#adx{flex:none;min-width:44px;min-height:34px;padding:0 6px;background:#fff;color:#000;border:2px solid #000;font:700 18px/1 "IBM Plex Mono",monospace;cursor:pointer}
-@media (hover:hover) and (pointer:fine){#adx:hover{background:#000;color:#ffe600}}
-.ad-main{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:center;width:calc(100% - 18px);margin:0 9px;padding:14px 2px;background:transparent;border:0;color:#000;font:inherit;text-align:left;cursor:inherit}
-.ad-cv{aspect-ratio:1;display:block;overflow:hidden;background:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000}
-.ad-cv img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:auto}
-.ad-cv.fb{display:flex;align-items:flex-end;padding:6px;background:#2e86de}.ad-cv.fb b{font:900 13px/1.05 "Unbounded",sans-serif;color:#fff;overflow-wrap:anywhere}
-.ad-tx{display:flex;flex-direction:column;gap:7px;min-width:0}
-.ad-tx em{font:italic 700 27px/.95 "Oswald",sans-serif;text-transform:uppercase;color:#e1251b;-webkit-text-stroke:1px #000;text-shadow:2px 2px 0 #000;animation:adbl 1.1s steps(2,jump-none) infinite}
-@keyframes adbl{50%{color:#fff}}
-.ad-tx b{font:700 18px/1.15 "Oswald",sans-serif;text-transform:uppercase;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.ad-tx i{align-self:flex-start;font:700 13px/1 "IBM Plex Mono",monospace;font-style:normal;letter-spacing:.04em;background:#000;color:#ffe600;padding:7px 9px}
-.ad-bot{margin:0 9px 9px;background:#e1251b;color:#fff;overflow:hidden;white-space:nowrap;font:700 15px/1 "Oswald",sans-serif;letter-spacing:.06em;padding:6px 0}
-.ad-bot span{display:inline-block;animation:mq 14s linear infinite}
-.ad-burst{position:absolute;left:-18px;bottom:50px;width:68px;height:68px;display:grid;place-items:center;background:#e1251b;color:#fff;font:900 14px/1 "Unbounded",sans-serif;
+#rb[hidden]{display:none}
+#rb.in{opacity:1;transform:rotate(var(--r,-2deg)) scale(1)}
+#rb.drag{cursor:grabbing;transition:none;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 6px #000,12px 12px 0 #000}
+.rb-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:9px 9px 0;padding:2px 3px 2px 10px;background:#e1251b;color:#fff}
+.rb-top b{font:700 21px/1.1 "Oswald",sans-serif;letter-spacing:.05em;text-transform:uppercase;text-shadow:2px 2px 0 #000}
+#rbx{flex:none;min-width:44px;min-height:34px;padding:0 6px;background:#fff;color:#000;border:2px solid #000;font:700 18px/1 "IBM Plex Mono",monospace;cursor:pointer}
+@media (hover:hover) and (pointer:fine){#rbx:hover{background:#000;color:#ffe600}}
+.rb-main{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:center;width:calc(100% - 18px);margin:0 9px;padding:14px 2px;background:transparent;border:0;color:#000;font:inherit;text-align:left;cursor:inherit}
+.rb-cv{aspect-ratio:1;display:block;overflow:hidden;background:#fff;border:3px solid #000;box-shadow:4px 4px 0 #000}
+.rb-cv img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:auto}
+.rb-cv.fb{display:flex;align-items:flex-end;padding:6px;background:#2e86de}.rb-cv.fb b{font:900 13px/1.05 "Unbounded",sans-serif;color:#fff;overflow-wrap:anywhere}
+.rb-tx{display:flex;flex-direction:column;gap:7px;min-width:0}
+.rb-tx em{font:italic 700 27px/.95 "Oswald",sans-serif;text-transform:uppercase;color:#e1251b;-webkit-text-stroke:1px #000;text-shadow:2px 2px 0 #000;animation:rbbl 1.1s steps(2,jump-none) infinite}
+@keyframes rbbl{50%{color:#fff}}
+.rb-tx b{font:700 18px/1.15 "Oswald",sans-serif;text-transform:uppercase;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rb-tx i{align-self:flex-start;font:700 13px/1 "IBM Plex Mono",monospace;font-style:normal;letter-spacing:.04em;background:#000;color:#ffe600;padding:7px 9px}
+.rb-bot{margin:0 9px 9px;background:#e1251b;color:#fff;overflow:hidden;white-space:nowrap;font:700 15px/1 "Oswald",sans-serif;letter-spacing:.06em;padding:6px 0}
+.rb-bot span{display:inline-block;animation:mq 14s linear infinite}
+.rb-burst{position:absolute;left:-18px;bottom:50px;width:68px;height:68px;display:grid;place-items:center;background:#e1251b;color:#fff;font:900 14px/1 "Unbounded",sans-serif;
  clip-path:polygon(50.0% 0.0%,63.8% 16.7%,85.4% 14.6%,83.3% 36.2%,100.0% 50.0%,83.3% 63.8%,85.4% 85.4%,63.8% 83.3%,50.0% 100.0%,36.2% 83.3%,14.6% 85.4%,16.7% 63.8%,0.0% 50.0%,16.7% 36.2%,14.6% 14.6%,36.2% 16.7%);transform:rotate(14deg);pointer-events:none;text-shadow:1px 1px 0 #000}
 
 /* ===== правка 3: мобильный «воздух» ===== */
@@ -466,9 +466,9 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
  .gm-grid{gap:28px}.tl-body{padding:22px 20px}.tl-nav{gap:10px}
  #mem{margin-top:32px}
  footer{padding-bottom:160px;line-height:1.8}
- #mpx{width:44px;height:44px}
- #ad{width:min(280px,calc(100vw - 24px))}
- .ad-top b{font-size:17px;white-space:nowrap}
+ #mpx{width:32px;height:32px;font-size:18px}
+ #rb{width:min(280px,calc(100vw - 24px))}
+ .rb-top b{font-size:17px;white-space:nowrap}
 }
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
@@ -539,7 +539,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
 <div class="strip" aria-hidden="true"><span>neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ </span></div>
 
-<section id="memory"><h2 class="big">leave a thought</h2>
+<section id="memory"><h2 class="big">оставь мысль</h2>
 <input id="in" maxlength="70" placeholder="write anything and press enter" autocomplete="off" aria-label="твоя мысль">
 <div id="mem"></div></section>
 </div>
@@ -547,7 +547,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 <div class="pg" id="p-rel">
 <section class="band b1"><h2 class="big hd">новое</h2><div id="newest"></div></section>
 <!-- правка 2: «популярное» + «выбор артиста» в одном блоке с переключателем -->
-<section class="band b2" id="rotS"><h2 class="big hd">в ротации</h2>
+<section class="band b2" id="rotS"><h2 class="big hd">что слушать</h2>
 <div class="seg" role="tablist" aria-label="подборки"><button type="button" role="tab" id="tabPop" data-tab="pop" aria-selected="true" data-s>популярное</button><button type="button" role="tab" id="tabPick" data-tab="pick" aria-selected="false" tabindex="-1" data-s>выбор артиста</button></div>
 <div id="pop" role="tabpanel" aria-labelledby="tabPop"></div><div id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div></section>
 <section class="band" id="discS" hidden><h2 class="big hd">все релизы</h2><div id="disc" class="disc"></div></section>
@@ -583,13 +583,13 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 <footer>neosten ✶ you will forget this page. it's okay.</footer>
 <div id="pm" hidden><div class="pmb" role="dialog" aria-modal="true" aria-label="где слушать"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
 <aside id="mp" aria-label="плеер" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><label class="vol" title="громкость"><span>vol</span><input id="mpv" type="range" min="0" max="100" value="80" aria-label="громкость"></label><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div><button type="button" id="mpx" aria-label="закрыть плеер" title="закрыть">×</button></aside>
-<aside id="pet" aria-label="питомец"><div id="grip"><span>⠿ pet</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">feed</button><button class="btn alt" id="call">call cat</button><div style="margin-top:8px;font-weight:400">hold the cat to pet it</div></aside>
+<aside id="pet" aria-label="питомец"><div id="grip"><span>⠿ питомец</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></aside>
 <!-- правка 4: ретро-баннер «реклама последнего релиза» -->
-<aside id="ad" hidden aria-label="реклама последнего релиза">
-<div class="ad-top"><b>HOT RELEASE!!!</b><button type="button" id="adx" aria-label="закрыть рекламу">[×]</button></div>
-<button type="button" class="ad-main" id="adgo" aria-label="где послушать последний релиз"></button>
-<span class="ad-burst" aria-hidden="true">NEW!</span>
-<div class="ad-bot" aria-hidden="true"><span>NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ </span></div>
+<aside id="rb" hidden aria-label="реклама последнего релиза">
+<div class="rb-top"><b>HOT RELEASE!!!</b><button type="button" id="rbx" aria-label="закрыть рекламу">[×]</button></div>
+<button type="button" class="rb-main" id="rbgo" aria-label="где послушать последний релиз"></button>
+<span class="rb-burst" aria-hidden="true">NEW!</span>
+<div class="rb-bot" aria-hidden="true"><span>NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ NEW TRACK ✶ HOT ✶ LISTEN NOW ✶ </span></div>
 </aside>
 <script>
 (function(){var v=location.protocol.indexOf('http')===0?'?v='+Math.floor(Date.now()/300000):'';
@@ -609,7 +609,7 @@ function meow(){if(!sound||!ac||ac.state!=='running')return;const n=ac.currentTi
  g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.22,n+.06);g.gain.linearRampToValueAtTime(0,n+.65);o.connect(f);f.connect(g);g.connect(out);o.start(n);l.start(n);o.stop(n+.7);l.stop(n+.7)}
 const setSound=v=>{sound=v;if(v)A();else if(out)out.gain.value=0;$('#mute').textContent='звук: '+(v?'вкл':'выкл');if(typeof aud!=='undefined')Object.values(aud).forEach(a=>a.muted=!v)};
 
-function enter(){adSchedule(10000+Math.random()*5000);$('#gate').classList.add('go');$('#mute').hidden=false;setTimeout(()=>say('pick me up'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('why are you awake?',3500),4500)}
+function enter(){adSchedule(10000+Math.random()*5000);$('#gate').classList.add('go');$('#mute').hidden=false;setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
 let loading=false,chimed=false,waiting=false,ldT0=0;
 function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chimed=true;const t=ac.currentTime+.08,END=4.6;
  const bus=ac.createGain(),mst=ac.createGain(),sh=ac.createBiquadFilter(),dl=ac.createDelay(1),fb=ac.createGain(),lp=ac.createBiquadFilter();
@@ -645,7 +645,7 @@ const heart=()=>{const r=cb.getBoundingClientRect(),h=document.createElement('sp
 const wig=()=>{cb.classList.remove('wig');void cb.offsetWidth;cb.classList.add('wig')};
 const bar=v=>'█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));
 const showPet=()=>{petOn=true;$('#pet').classList.add('on')};
-const draw=()=>$('#st').innerHTML='<div class="br"><span>satiety</span><i style="--v:'+hunger+'%"></i></div><div class="br"><span>love</span><i style="--v:'+mood+'%"></i></div><div class="mst">'+(sulk?'sulking':hunger<30?'hungry':'all good')+'</div>';draw();
+const draw=()=>$('#st').innerHTML='<div class="br"><span>satiety</span><i style="--v:'+hunger+'%"></i></div><div class="br"><span>love</span><i style="--v:'+mood+'%"></i></div><div class="mst">'+(sulk?'обижен':hunger<30?'голодный':'всё хорошо')+'</div>';draw();
 function purr(){if(!sound||!ac||ac.state!=='running')return;if(!pn){const o=ac.createOscillator(),l=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter(),g=ac.createGain(),g2=ac.createGain();o.type='sawtooth';o.frequency.value=48;f.type='lowpass';f.frequency.value=260;l.frequency.value=22;lg.gain.value=.5;g.gain.value=.5;g2.gain.value=0;l.connect(lg);lg.connect(g.gain);o.connect(f);f.connect(g);g.connect(g2);g2.connect(out);o.start();l.start();pn=g2}
  pn.gain.setTargetAtTime(.3,ac.currentTime,.1);clearTimeout(pt);pt=setTimeout(()=>pn.gain.setTargetAtTime(0,ac.currentTime,.15),300)}
 cb.onpointerdown=e=>{if(e.button)return;showPet();const r=cb.getBoundingClientRect();d={x:e.clientX,y:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,m:false,h:false};clearInterval(hi);ht=setTimeout(()=>{if(d&&!d.m){d.h=true;hi=setInterval(()=>{if(sulk){say('не трогай!',900);if(!home){vx=(Math.random()<.5?-1:1)*14;vy=-6}return}purr();mood=Math.min(100,mood+1);draw();if(Math.random()<.5)heart();say('мррр',900);navigator.vibrate&&navigator.vibrate([25,35,25])},260)}},350);cb.setPointerCapture(e.pointerId)};
@@ -812,11 +812,11 @@ $('#px').onclick=()=>pet.classList.remove('on');
 let lc=0;$('#logo').addEventListener('click',()=>{if(++lc>=7){lc=0;const h=document.documentElement;h.classList.add('glitch');for(let i=0;i<8;i++)setTimeout(()=>blip(100+Math.random()*2000,.06,'sawtooth',.08),i*70);setTimeout(()=>h.classList.remove('glitch'),1600)}});
 $('.w2').ondblclick=()=>setTheme(isNight()?'day':'night',true);
 $('.strip').onclick=()=>{const p=$('.strip span');p.style.animationDirection=p.style.animationDirection==='reverse'?'normal':'reverse'};
-function breath(){const b=document.createElement('div');b.className='breath';b.innerHTML='<span>inhale</span>';document.body.append(b);let k=0;const iv=setInterval(()=>{b.firstChild.textContent=k++%2?'inhale':'exhale'},2500);setTimeout(()=>{clearInterval(iv);b.remove()},15000)}
+function breath(){const b=document.createElement('div');b.className='breath';b.innerHTML='<span>вдох</span>';document.body.append(b);let k=0;const iv=setInterval(()=>{b.firstChild.textContent=k++%2?'вдох':'выдох'},2500);setTimeout(()=>{clearInterval(iv);b.remove()},15000)}
 let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.key.length!==1)return;kb=(kb+e.key.toLowerCase()).slice(-8);
  if(kb.endsWith('кот')||kb.endsWith('cat')){kb='';if(home)wig();else vy=-22;meow();say('мяу?',1500)}
  if(kb.endsWith('303')){kb='';acid()}if(kb.endsWith('сати')){kb='';breath()}});
-let idle;const rs2=()=>{clearTimeout(idle);idle=setTimeout(()=>{say('are you still here?',4000);meow()},60000)};['pointermove','keydown','pointerdown'].forEach(ev=>addEventListener(ev,rs2,{passive:true}));rs2();
+let idle;const rs2=()=>{clearTimeout(idle);idle=setTimeout(()=>{say('ты ещё здесь?',4000);meow()},60000)};['pointermove','keydown','pointerdown'].forEach(ev=>addEventListener(ev,rs2,{passive:true}));rs2();
 try{A()}catch(e){}
 const wake=()=>{const go=()=>{if(waiting){waiting=false;ldT0=performance.now();document.getElementById('gate').classList.remove('wait')}if(loading)startupChime()};
  if(!sound||!ac){go();return}if(ac.state!=='running')ac.resume().then(go).catch(go);else go()};
@@ -845,8 +845,8 @@ rotTabs.forEach(b=>{b.onclick=()=>setTab(b.dataset.tab);b.onkeydown=e=>{if(e.key
 $('#mpx').onclick=()=>{const m=$('#mp'),a=cur&&aud[cur];if(a)a.pause();m.classList.add('out');
  setTimeout(()=>{if(a)a.currentTime=0;cur=null;$$('[data-id]').forEach(b=>b.style.setProperty('--p','0%'));$('#mpf').style.width='0%';$('#mpc').textContent='0:00';ui();m.classList.remove('out')},260)};
 
-/* ---------- правка 4: ретро-баннер последнего релиза ---------- */
-const adEl=$('#ad'),adMain=$('#adgo');let adTimer=0,adDone=false,adDrag=null,adMoved=false;
+/* ---------- правка 4: ретро-баннер последнего релиза (id/классы rb-* — без «ad», чтобы не резали блокировщики) ---------- */
+const adEl=$('#rb'),adMain=$('#rbgo');let adTimer=0,adDone=false,adDrag=null,adMoved=false;
 try{sessionStorage.removeItem('nad')}catch(e){}            // новый заход / перезагрузка — реклама снова разрешена
 const adSeen=()=>{try{return adDone||sessionStorage.getItem('nad')==='1'}catch(e){return adDone}};
 /* звук «вставили устройство»: если положить файл audio/xp-hardware-insert.mp3 — играет он, иначе синтезированный аналог */
@@ -858,14 +858,14 @@ function adPlace(x,y){const w=adEl.offsetWidth,h=adEl.offsetHeight;adEl.style.le
 function adSchedule(ms){clearTimeout(adTimer);adTimer=setTimeout(adShow,ms)}
 function adShow(){clearTimeout(adTimer);if(adSeen()||!adRel||!adEl.hidden)return;
  if(loading||document.hidden||!$('#pm').hidden){adSchedule(8000);return}
- const r=adRel;adMain.innerHTML=(r.cover?`<span class="ad-cv"><img src="${r.cover}" alt=""></span>`:`<span class="ad-cv fb"><b>${r.title}</b></span>`)+`<span class="ad-tx"><em>NEW TRACK!</em><b>${r.title}</b><i>LISTEN NOW ▶</i></span>`;
+ const r=adRel;adMain.innerHTML=(r.cover?`<span class="rb-cv"><img src="${r.cover}" alt=""></span>`:`<span class="rb-cv fb"><b>${r.title}</b></span>`)+`<span class="rb-tx"><em>NEW TRACK!</em><b>${r.title}</b><i>LISTEN NOW ▶</i></span>`;
  adEl.style.setProperty('--r',(Math.random()*6-3).toFixed(1)+'deg');adEl.classList.remove('in');adEl.hidden=false;
  const w=adEl.offsetWidth,h=adEl.offsetHeight;adPlace(8+Math.random()*Math.max(0,innerWidth-w-16),72+Math.random()*Math.max(0,innerHeight-h-190));
  void adEl.offsetWidth;adEl.classList.add('in');adSound()}
 function adHide(){adEl.classList.remove('in');setTimeout(()=>{if(!adEl.classList.contains('in'))adEl.hidden=true},380)}
-$('#adx').onclick=e=>{e.stopPropagation();adHide();adSchedule(60000+Math.random()*30000)};   // × : вернётся через 60–90 с
+$('#rbx').onclick=e=>{e.stopPropagation();adHide();adSchedule(60000+Math.random()*30000)};   // × : вернётся через 60–90 с
 adMain.addEventListener('click',()=>{if(adMoved)return;adDone=true;try{sessionStorage.setItem('nad','1')}catch(e){}clearTimeout(adTimer);adHide();if(adRel)openMenu(adRel)});   // клик: модалка + флаг до нового захода
-adEl.addEventListener('pointerdown',e=>{if(e.button||e.target.closest('#adx'))return;const r=adEl.getBoundingClientRect();adDrag={ox:e.clientX-r.left,oy:e.clientY-r.top,sx:e.clientX,sy:e.clientY,m:false}});
+adEl.addEventListener('pointerdown',e=>{if(e.button||e.target.closest('#rbx'))return;const r=adEl.getBoundingClientRect();adDrag={ox:e.clientX-r.left,oy:e.clientY-r.top,sx:e.clientX,sy:e.clientY,m:false}});
 adEl.addEventListener('pointermove',e=>{if(!adDrag)return;if(!adDrag.m&&Math.hypot(e.clientX-adDrag.sx,e.clientY-adDrag.sy)>6){adDrag.m=true;adEl.classList.add('drag');try{adEl.setPointerCapture(e.pointerId)}catch(x){}}if(adDrag.m)adPlace(e.clientX-adDrag.ox,e.clientY-adDrag.oy)});
 const adUp=()=>{if(adDrag&&adDrag.m){adMoved=true;setTimeout(()=>adMoved=false,0)}adEl.classList.remove('drag');adDrag=null};
 adEl.addEventListener('pointerup',adUp);adEl.addEventListener('pointercancel',adUp);
@@ -905,7 +905,7 @@ const fx={
  'глюк':{t:'ничего не трогай.',f(){HT.classList.add('glitch');setTimeout(()=>HT.classList.remove('glitch'),1600)}},
  'тишина':{t:'тссс.',f(){const m=v=>Object.values(aud).forEach(x=>x.muted=v);if(out)out.gain.value=0;m(true);setTimeout(()=>{if(sound){if(out)out.gain.value=1;m(false)}},8000)}},
  'ветер':{t:'слушай.',f(){if(wg){wg.gain.setTargetAtTime(.25,ac.currentTime,.5);setTimeout(()=>wg.gain.setTargetAtTime(windLvl(),ac.currentTime,1),7000)}}},
- 'дыши':{t:'inhale.',f:breath},
+ 'дыши':{t:'вдох.',f:breath},
  'танец':{t:'три, два, раз.',f(){document.body.classList.add('dance');for(let i=0;i<10;i++)setTimeout(()=>blip(i%2?110:165,.12,'square',.08),i*400);setTimeout(()=>document.body.classList.remove('dance'),4200)}},
  'быстрее':{t:'держись.',f(){const p=$('.strip span');p.style.animationDuration='4s';setTimeout(()=>p.style.animationDuration='',8000)}},
  'кот':{t:'он слышит.',f:hop},'мяу':{t:'мяу.',f:hop},
