@@ -141,7 +141,7 @@ window.AUTO=[
   "cover": "covers/1840949420.jpg",
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
-   "deezer": "https://www.deezer.com/album/827973731"
+   "deezer": "https://www.deezer.com/album/1148145831"
   },
   "page": "",
   "srcs": [
