@@ -1,5 +1,19 @@
 window.AUTO=[
  {
+  "id": "apple-6835430007",
+  "title": "ПРЫГАЙ (Remix)",
+  "type": "сингл",
+  "date": "2026-11-20",
+  "cover": "covers/apple-6835430007.jpg",
+  "links": {
+   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-remix-single/6835430007?uo=4"
+  },
+  "page": "",
+  "srcs": [
+   "apple"
+  ]
+ },
+ {
   "id": "apple-6820449428",
   "title": "ДИСС НА НЕФОРОВ",
   "type": "сингл",
