@@ -14,9 +14,11 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import identity from '../data/release-identity.js';
 
-const {cleanTitle: clean, titleKey: norm, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor} = identity;
+const {cleanTitle: clean, titleKey: norm, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias} = identity;
 
 const OUT = 'data/auto.js';
+// Суффикс типа от Apple — часть ответа каталога iTunes, а не названия.
+const appleTitle = title => clean(title).replace(/\s+[-–—]\s+(?:single|сингл|ep)$/i, '').trim();
 let cfg = { name: 'neosten', apple: '1802667747', spotify: '5qNk6kVsCQa8fKahWEn9hc', deezer: '', yandex: '23866894' };
 try { Object.assign(cfg, JSON.parse(fs.readFileSync('sources.json', 'utf8'))); } catch {}
 for (const k of ['apple', 'spotify', 'deezer', 'yandex']) { const e = process.env[k.toUpperCase() + '_ARTIST_ID']; if (e) cfg[k] = e; }
@@ -60,7 +62,7 @@ async function apple() {
   if (!ap.length) throw new Error('пустой ответ');
   return ap.map(a => {
     const name = a.collectionName || '';
-    return { id: 'apple-' + a.collectionId, title: clean(name), date: (a.releaseDate || '').slice(0, 10),
+    return { id: 'apple-' + a.collectionId, title: appleTitle(name), date: (a.releaseDate || '').slice(0, 10),
       type: /\s-\s(Single|Сингл)$/i.test(name) || a.trackCount === 1 ? 'сингл' : /\s-\sEP$/i.test(name) ? 'EP' : 'альбом',
       covers: ['1000x1000', '600x600', '300x300', '100x100'].map(s => (a.artworkUrl100 || '').replace(/\d+x\d+bb/, s + 'bb')).filter(Boolean),
       links: a.collectionViewUrl ? { apple: a.collectionViewUrl } : {} };
@@ -127,6 +129,8 @@ function applyLinks(entry, links, priority) {
 }
 
 function mergeRelease(entry, release, source) {
+  const replacesAlias = isSpotifyAlias(entry, release);
+  const incomingAlias = isSpotifyAlias(release, entry);
   for (const id of [release.id, ...(release.ids || [])]) {
     if (id && !entry.ids.includes(id)) entry.ids.push(id);
   }
@@ -136,10 +140,13 @@ function mergeRelease(entry, release, source) {
   entry.date ||= release.date;
   entry.manualDate ||= release.manualDate;
   entry.covers.push(...(release.covers || []));
-  entry.cover ||= release.cover;
+  entry.cover = (replacesAlias && release.cover) || entry.cover || release.cover;
   entry.page ||= release.page;
-  entry.src ||= release.src;
-  applyLinks(entry, release.links, key => release.linkPriorities?.[key] ?? (source === 'cache' ? 1 : 2));
+  entry.src = (replacesAlias && release.src) || entry.src || release.src;
+  const links = directLinks(release.links);
+  if (incomingAlias) delete links.spotify;
+  if (replacesAlias && (entry.linkPriorities.spotify || 0) < 4) delete entry.links.spotify;
+  applyLinks(entry, links, key => release.linkPriorities?.[key] ?? (source === 'cache' ? 1 : 2));
 }
 
 function put(release, source) {
@@ -243,7 +250,7 @@ async function resolveLink(url, manualDate) {
     for (const c of ['ru', 'us']) {
       const a = ((await get(`https://itunes.apple.com/lookup?id=${id}&country=${c}`, { tries: 1 })).results || [])[0]; if (!a) continue;
       const isT = a.wrapperType === 'track', nm = isT ? a.trackName : a.collectionName || '';
-      return { title: clean(nm), type: a.trackCount === 1 ? 'сингл' : /\s-\sEP$/i.test(a.collectionName || '') ? 'EP' : isT ? '' : 'альбом', date: (a.releaseDate || '').slice(0, 10),
+      return { title: isT ? clean(nm) : appleTitle(nm), type: a.trackCount === 1 ? 'сингл' : /\s-\sEP$/i.test(a.collectionName || '') ? 'EP' : isT ? '' : 'альбом', date: (a.releaseDate || '').slice(0, 10),
         covers: ['1000x1000', '600x600', '300x300'].map(z => (a.artworkUrl100 || '').replace(/\d+x\d+bb/, z + 'bb')).filter(Boolean), links: { apple: url } };
     }
     return null;
@@ -339,7 +346,9 @@ function attachRow(row, metadata) {
     links: {...directLinks(metadata?.links), ...directLinks(known?.links), ...row.links},
   }, 'links');
   if (row.date) entry.manualDate = row.date;
-  applyLinks(entry, row.links, key => Object.hasOwn(row.explicit, key) ? 4 : 3);
+  const manualLinks = {...row.links};
+  if (!row.targetId && !row.explicit.spotify && isSpotifyAlias({...row, title}, entry)) delete manualLinks.spotify;
+  applyLinks(entry, manualLinks, key => Object.hasOwn(row.explicit, key) ? 4 : 3);
   return true;
 }
 
@@ -368,16 +377,20 @@ for (const e of items) {
   } catch {} await sleep(250); }
   if (!e.links.apple) { try {
     const j = await get('https://itunes.apple.com/search?entity=album&limit=10&country=ru&term=' + encodeURIComponent(cfg.name + ' ' + e.title), { tries: 1 });
-    const h = (j.results || []).find(a => norm(clean(a.collectionName)) === title && artistOk(a.artistName));
+    const h = (j.results || []).find(a => norm(appleTitle(a.collectionName)) === title && artistOk(a.artistName));
     if (h) e.links.apple = h.collectionViewUrl;
   } catch {} await sleep(250); }
 }
 
 // финал: ids, обложки, запись
 const list = [];
+const usedIds = new Set();
 for (const e of items) {
-  const cached = matchesFor(old, e)[0];
-  const id = cached?.id || e.ids.slice().sort((a, b) => PRIO.indexOf(a.split('-')[0]) - PRIO.indexOf(b.split('-')[0]))[0];
+  const cached = matchesFor(old, e).find(item => !isSpotifyAlias(item, e));
+  const sourceIds = e.ids.slice().sort((a, b) => PRIO.indexOf(a.split('-')[0]) - PRIO.indexOf(b.split('-')[0]));
+  const id = [cached?.id, ...sourceIds].find(id => id && !usedIds.has(id))
+    || 'release-' + crypto.createHash('sha256').update(norm(e.title)).digest('hex').slice(0, 16);
+  usedIds.add(id);
   let cover = [e.cover, cached?.cover].find(path => path && exists(path)) || '';
   if (!cover && e.covers.length) {
     const path = `covers/${id}.jpg`;
