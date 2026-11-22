@@ -26,7 +26,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%B4%D0%B8%D1%81%D1%81-%D0%BD%D0%B0-%D0%BD%D0%B5%D1%84%D0%BE%D1%80%D0%BE%D0%B2-single/6820449428?uo=4",
    "spotify": "https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj",
-   "deezer": "https://www.deezer.com/album/1116153832"
+   "deezer": "https://www.deezer.com/album/1116153832",
+   "yandex": "https://music.yandex.ru/album/44320421/track/156772950"
   },
   "srcs": [
    "apple",
@@ -43,7 +44,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BC%D0%B0%D0%BB%D0%BE-single/6817133665?uo=4",
    "deezer": "https://www.deezer.com/album/1108838102",
-   "spotify": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL"
+   "spotify": "https://open.spotify.com/album/3mzSyA8PHRZMK9flrOvd7Y",
+   "yandex": "https://music.yandex.ru/album/44163739/track/156288049"
   },
   "srcs": [
    "apple",
@@ -60,7 +62,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%B1%D0%B5%D0%B3%D0%B8-%D1%87%D0%B5%D0%BB%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6-single/6803075869?uo=4",
    "spotify": "https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz",
-   "deezer": "https://www.deezer.com/album/1057889122"
+   "deezer": "https://www.deezer.com/album/1057889122",
+   "yandex": "https://music.yandex.ru/album/43584725/track/154898898"
   },
   "srcs": [
    "apple",
@@ -77,7 +80,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/mainstream-season-ep/6793814756?uo=4",
    "spotify": "https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4",
-   "deezer": "https://www.deezer.com/album/1036006132"
+   "deezer": "https://www.deezer.com/album/1036006132",
+   "yandex": "https://music.yandex.ru/album/43117937"
   },
   "srcs": [
    "apple",
@@ -94,7 +98,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D1%81%D0%B0%D0%BC%D1%8B%D0%B5%D1%81%D0%BC%D0%B5%D1%88%D0%BD%D1%8B%D0%B5%D0%BC%D0%B5%D0%BC%D1%8B-single/6782640121?uo=4",
    "spotify": "https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4",
-   "deezer": "https://www.deezer.com/album/1006156131"
+   "deezer": "https://www.deezer.com/album/1006156131",
+   "yandex": "https://music.yandex.ru/album/42511617/track/152360465"
   },
   "srcs": [
    "apple",
@@ -110,7 +115,8 @@ window.AUTO=[
   "cover": "covers/link-73277e70.jpg",
   "links": {
    "spotify": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW",
-   "deezer": "https://www.deezer.com/album/983209891"
+   "deezer": "https://www.deezer.com/album/983209891",
+   "yandex": "https://music.yandex.ru/album/41828540/track/150833161"
   },
   "srcs": [
    "links"
@@ -142,7 +148,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BF%D0%B0%D0%B4%D1%88%D0%B8%D0%B9-%D1%80%D1%8B%D1%86%D0%B0%D1%80%D1%8C-single/1888205996?uo=4",
    "spotify": "https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7",
-   "deezer": "https://www.deezer.com/album/948787201"
+   "deezer": "https://www.deezer.com/album/948787201",
+   "yandex": "https://music.yandex.ru/album/41346984/track/149715475"
   },
   "srcs": [
    "apple",
@@ -175,7 +182,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5%D0%B3%D0%BE-single/1865501047?uo=4",
    "spotify": "https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF",
-   "deezer": "https://www.deezer.com/album/893808812"
+   "deezer": "https://www.deezer.com/album/893808812",
+   "yandex": "https://music.yandex.ru/album/40020312"
   },
   "srcs": [
    "apple",
@@ -191,7 +199,8 @@ window.AUTO=[
   "cover": "covers/link-6920ec84.jpg",
   "links": {
    "spotify": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT",
-   "deezer": "https://www.deezer.com/album/880903912"
+   "deezer": "https://www.deezer.com/album/880903912",
+   "yandex": "https://music.yandex.ru/album/39692759"
   },
   "srcs": [
    "links"
@@ -205,7 +214,8 @@ window.AUTO=[
   "date": "2025-11-09",
   "cover": "covers/link-875f9763.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
+   "spotify": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x",
+   "yandex": "https://music.yandex.ru/album/39131024"
   },
   "srcs": [
    "links"
@@ -221,7 +231,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/phantom-single/1847870244?uo=4",
    "spotify": "https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy",
-   "deezer": "https://www.deezer.com/album/839976882"
+   "deezer": "https://www.deezer.com/album/839976882",
+   "yandex": "https://music.yandex.ru/album/38648077"
   },
   "srcs": [
    "apple",
@@ -232,14 +243,17 @@ window.AUTO=[
  {
   "id": "apple-6835430007",
   "title": "ПРЫГАЙ",
-  "type": "",
+  "type": "сингл",
   "date": "2025-09-26",
   "cover": "covers/apple-6835430007.jpg",
   "links": {
+   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
    "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
+   "yandex": "https://music.yandex.ru/album/38302359",
    "deezer": "https://www.deezer.com/album/1148145831"
   },
   "srcs": [
+   "apple",
    "links"
   ],
   "src": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis"
@@ -269,7 +283,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/uglymuzik-2025/1827902319?uo=4",
    "spotify": "https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq",
-   "deezer": "https://www.deezer.com/album/793800631"
+   "deezer": "https://www.deezer.com/album/793800631",
+   "yandex": "https://music.yandex.ru/album/37269016"
   },
   "srcs": [
    "apple",
@@ -286,7 +301,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D1%82%D1%80%D0%B8-%D0%B1%D1%83%D0%BA%D0%B2%D1%8B-single/1855545231?uo=4",
    "spotify": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU",
-   "deezer": "https://www.deezer.com/album/863120072"
+   "deezer": "https://www.deezer.com/album/863120072",
+   "yandex": "https://music.yandex.ru/album/35652284"
   },
   "srcs": [
    "apple",
