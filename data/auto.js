@@ -38,16 +38,13 @@ window.AUTO=[
   "date": "2026-10-02",
   "cover": "covers/link-2d0b5887.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/3mzSyA8PHRZMK9flrOvd7Y",
    "apple": "https://music.apple.com/ru/album/%D0%BC%D0%B0%D0%BB%D0%BE-single/6817133665?uo=4",
    "deezer": "https://www.deezer.com/album/1108838102"
   },
   "page": "",
   "srcs": [
-   "apple",
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/3mzSyA8PHRZMK9flrOvd7Y"
+   "apple"
+  ]
  },
  {
   "id": "apple-6803075869",
@@ -104,6 +101,39 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4"
  },
  {
+  "id": "link-73277e70",
+  "title": "А МНЕ НРАВИТСЯ",
+  "type": "",
+  "date": "2026-05-15",
+  "cover": "covers/link-73277e70.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW",
+   "deezer": "https://www.deezer.com/album/983209891"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW"
+ },
+ {
+  "id": "link-0e061c51",
+  "title": "ДОФАМИНОВАЯ ЯМА",
+  "type": "EP",
+  "date": "2026-05-01",
+  "cover": "covers/link-0e061c51.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB",
+   "yandex": "https://music.yandex.ru/album/41828596",
+   "deezer": "https://www.deezer.com/album/973546611"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB"
+ },
+ {
   "id": "apple-1888205996",
   "title": "ПАДШИЙ РЫЦАРЬ",
   "type": "сингл",
@@ -122,6 +152,23 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7"
  },
  {
+  "id": "link-463ff86b",
+  "title": "303core.mp3",
+  "type": "альбом",
+  "date": "2026-01-23",
+  "cover": "covers/link-463ff86b.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
+   "yandex": "https://music.yandex.ru/album/40628842",
+   "deezer": "https://www.deezer.com/album/919930291"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
+ },
+ {
   "id": "apple-1865501047",
   "title": "БОЛЬШЕГО",
   "type": "сингл",
@@ -138,6 +185,37 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF"
+ },
+ {
+  "id": "link-6920ec84",
+  "title": "я ошибка музыки (Remixes)",
+  "type": "",
+  "date": "2025-12-19",
+  "cover": "covers/link-6920ec84.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT",
+   "deezer": "https://www.deezer.com/album/880903912"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT"
+ },
+ {
+  "id": "link-875f9763",
+  "title": "ХОЧУ МАШИН",
+  "type": "",
+  "date": "2025-11-09",
+  "cover": "covers/link-875f9763.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
  },
  {
   "id": "apple-1847870244",
@@ -176,6 +254,23 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis"
  },
  {
+  "id": "link-57f3e0b0",
+  "title": "НАКОЛОЧКИ",
+  "type": "сингл",
+  "date": "2025-08-22",
+  "cover": "covers/link-76a07395.jpg",
+  "links": {
+   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP",
+   "yandex": "https://music.yandex.ru/album/37798894",
+   "deezer": "https://www.deezer.com/album/859484762"
+  },
+  "page": "",
+  "srcs": [
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg"
+ },
+ {
   "id": "apple-1827902319",
   "title": "UGLYMUZIK 2025",
   "type": "альбом",
@@ -210,103 +305,5 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU"
- },
- {
-  "id": "link-0e061c51",
-  "title": "ДОФАМИНОВАЯ ЯМА",
-  "type": "EP",
-  "date": "",
-  "cover": "covers/link-0e061c51.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB",
-   "yandex": "https://music.yandex.ru/album/41828596",
-   "deezer": "https://www.deezer.com/album/973546611"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB"
- },
- {
-  "id": "link-463ff86b",
-  "title": "303core.mp3",
-  "type": "альбом",
-  "date": "",
-  "cover": "covers/link-463ff86b.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL",
-   "yandex": "https://music.yandex.ru/album/40628842",
-   "deezer": "https://www.deezer.com/album/919930291"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL"
- },
- {
-  "id": "link-57f3e0b0",
-  "title": "НАКОЛОЧКИ",
-  "type": "сингл",
-  "date": "",
-  "cover": "covers/link-57f3e0b0.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP",
-   "yandex": "https://music.yandex.ru/album/37798894",
-   "deezer": "https://www.deezer.com/album/859484762"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg"
- },
- {
-  "id": "link-73277e70",
-  "title": "А МНЕ НРАВИТСЯ",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-73277e70.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW",
-   "deezer": "https://www.deezer.com/album/983209891"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW"
- },
- {
-  "id": "link-6920ec84",
-  "title": "я ошибка музыки (Remixes)",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-6920ec84.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT",
-   "deezer": "https://www.deezer.com/album/880903912"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT"
- },
- {
-  "id": "link-875f9763",
-  "title": "ХОЧУ МАШИН",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-875f9763.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
-  },
-  "page": "",
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
  }
 ];
