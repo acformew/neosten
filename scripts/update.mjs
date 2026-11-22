@@ -6,8 +6,8 @@
 //   2) Deezer        — публичный API, без ключей
 //   3) Яндекс Музыка — неофициальный публичный API, без ключей
 //   4) Spotify       — официальный API (нужны SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET, необязательно)
-//   5) links.txt     — ссылки на релизы с ЛЮБОЙ площадки (в т.ч. VK) -> song.link
-//   + song.link дополняет найденные релизы ссылками на остальные площадки
+//   5) links.txt     — прямые ссылки и ручные поправки названий, типов и дат
+//   + song.link может дополнить метаданные при наличии ODESLI_KEY
 //
 // ID артиста на площадках лежат в sources.json (или в переменных окружения).
 import fs from 'node:fs';
@@ -25,11 +25,11 @@ const clean = t => (t || '').replace(/\s*[-–—]\s*(Single|Сингл|EP)\s*$/
 const exists = p => { try { return fs.statSync(p).size > 1000; } catch { return false; } };
 const isImg = b => b.length > 1000 && (b[0] === 0xff || b[0] === 0x89 || b.slice(0, 4).toString() === 'RIFF');
 
-async function get(u, { bin = false, headers = {}, method = 'GET', body, tries = 2 } = {}) {
+async function get(u, { bin = false, headers = {}, method = 'GET', body, tries = 2, timeout = 25000 } = {}) {
   let err;
   for (let i = 0; i < tries; i++) {
     try {
-      const r = await fetch(u, { method, body, signal: AbortSignal.timeout(25000), headers: { 'user-agent': 'Mozilla/5.0 neosten-site', ...headers } });
+      const r = await fetch(u, { method, body, signal: AbortSignal.timeout(timeout), headers: { 'user-agent': 'Mozilla/5.0 neosten-site', ...headers } });
       if (!r.ok) throw new Error(r.status + ' ' + u);
       return bin ? Buffer.from(await r.arrayBuffer()) : await r.json();
     } catch (e) { err = e; if (i + 1 < tries) await sleep(1500); }
@@ -45,8 +45,7 @@ async function img(urls, dest) {
 fs.mkdirSync('covers', { recursive: true }); fs.mkdirSync('data', { recursive: true });
 let old = [];
 try { old = JSON.parse(fs.readFileSync(OUT, 'utf8').replace(/^window\.AUTO=/, '').replace(/;\s*$/, '')); } catch {}
-const oldByKey = new Map(old.map(x => [norm(x.title), x]));
-const bySrc = Object.fromEntries(old.filter(x => x.src).map(x => [x.src, x]));
+const oldByKey = new Map(old.filter(x => !x.pendingMetadata).map(x => [norm(x.title), x]));
 
 // ================= источники: каждый возвращает [{title,type,date,covers[],links{},id}] =================
 const typeOf = (n, hint) => n === 1 ? 'сингл' : hint === 'ep' || (hint === 'single' && n <= 6) ? 'EP' : n && n <= 1 ? 'сингл' : 'альбом';
@@ -131,7 +130,7 @@ const put = (it, src) => {
   if (it.enriched) e.enriched = true;
   if (it.src) e.src = it.src;
 };
-const carry = name => { for (const x of old) if ((x.srcs || (String(x.id).startsWith('apple-') ? ['apple'] : [])).includes(name)) put({ ...x, covers: [] }, name); };
+const carry = name => { for (const x of old) if (!x.pendingMetadata && (x.srcs || (String(x.id).startsWith('apple-') ? ['apple'] : [])).includes(name)) put({ ...x, covers: [] }, name); };
 
 for (const name of ['apple', 'deezer', 'yandex', 'spotify']) {
   const fn = { apple, deezer, yandex, spotify }[name];
@@ -145,11 +144,90 @@ for (const name of ['apple', 'deezer', 'yandex', 'spotify']) {
 
 // ---------- links.txt: «[дата |] ссылка [| title=Название | type=сингл | vk=ссылка ...]» ----------
 // Spotify / Apple / Deezer / Яндекс читаются напрямую (song.link больше не нужен).
-const HOST = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
+function webURL(value) {
+  try {
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) ? url : null;
+  } catch { return null; }
+}
+const HOST = value => webURL(value)?.hostname.replace(/^www\./, '') || '';
 const platOf = u => { const h = HOST(u);
-  return /spotify\.com$/.test(h) ? 'spotify' : /music\.apple\.com$/.test(h) ? 'apple' : /deezer\.com$/.test(h) ? 'deezer' : /yandex\./.test(h) ? 'yandex'
+  return h === 'open.spotify.com' ? 'spotify' : /music\.apple\.com$/.test(h) ? 'apple' : /deezer\.com$/.test(h) ? 'deezer' : /^music\.yandex\.(?:ru|com|kz|by|uz)$/.test(h) ? 'yandex'
     : /(^|\.)vk\.(com|ru)$/.test(h) ? 'vk' : h === 'music.youtube.com' ? 'youtubeMusic' : /youtube\.com$|youtu\.be$/.test(h) ? 'youtube'
     : /soundcloud\.com$/.test(h) ? 'soundcloud' : /tidal\.com$/.test(h) ? 'tidal' : ''; };
+function releasePath(value) {
+  const url = webURL(value);
+  if (!url) return null;
+  const platform = platOf(value);
+  const path = url.pathname.replace(/\/$/, '');
+  if (platform === 'yandex') {
+    const track = path.match(/^\/(?:album\/(\d+)\/)?track\/(\d+)$/);
+    if (track) return {platform, kind: 'track', id: track[2], album: track[1]};
+    const album = path.match(/^\/album\/(\d+)$/);
+    return album ? {platform, kind: 'album', id: album[1]} : null;
+  }
+  if (platform === 'spotify') {
+    const match = path.match(/^\/(?:intl-[\w-]+\/)?(album|track)\/([A-Za-z0-9]+)$/);
+    return match ? {platform, kind: match[1], id: match[2]} : null;
+  }
+  return {platform, url: url.href};
+}
+
+function linkKey(value) {
+  const link = releasePath(value);
+  if (!link) return '';
+  return link.id ? `${link.platform}:${link.kind}:${link.id}` : link.url;
+}
+
+function releaseLinkMap(links) {
+  const direct = {};
+  for (const [key, url] of Object.entries(links || {})) {
+    const link = releasePath(url);
+    if (!link) continue;
+    if (link.platform === 'spotify' || link.platform === 'yandex') direct[link.platform] = url;
+    else if (key !== 'spotify' && key !== 'yandex') direct[key] = url;
+  }
+  return direct;
+}
+
+function yandexFields(album, track, url) {
+  const cover = track?.coverUri || album.coverUri;
+  return {
+    title: clean(track?.title || album.title),
+    type: track ? '' : typeOf(album.trackCount, (album.type || '').toLowerCase() === 'single' ? 'single' : ''),
+    date: (album.releaseDate || '').slice(0, 10),
+    covers: cover ? ['https://' + cover.replace('%%', '1000x1000')] : [],
+    links: {yandex: url},
+  };
+}
+
+async function resolveYandex(url, link) {
+  const headers = {'x-yandex-music-client': 'YandexMusicAndroid/24023231'};
+  const options = {tries: 1, timeout: 9000, headers};
+  if (link.kind === 'album') {
+    const {result} = await get(`https://api.music.yandex.net/albums/${link.id}`, options);
+    return result?.title ? yandexFields(result, null, url) : null;
+  }
+
+  const id = link.album ? `${link.id}:${link.album}` : link.id;
+  const {result} = await get(`https://api.music.yandex.net/tracks/${id}`, options);
+  const track = Array.isArray(result) ? result[0] : result;
+  if (!track?.title) return null;
+  const albums = track.albums || [];
+  const album = link.album ? albums.find(item => String(item.id) === link.album) : albums[0];
+  if ((!album?.releaseDate || !album.coverUri) && (link.album || album?.id)) {
+    try {
+      const {result: full} = await get(`https://api.music.yandex.net/albums/${link.album || album.id}`, options);
+      if (full) return yandexFields({
+        ...full,
+        releaseDate: album?.releaseDate || full.releaseDate,
+        coverUri: album?.coverUri || full.coverUri,
+      }, track, url);
+    } catch {}
+  }
+  return yandexFields(album || {}, track, url);
+}
+
 let spTok = null;
 async function spToken() {
   if (spTok !== null) return spTok || null;
@@ -159,8 +237,10 @@ async function spToken() {
   catch (e) { console.log('spotify token:', e.message); spTok = ''; }
   return spTok || null;
 }
-async function resolveLink(url) {
-  const p = platOf(url), enc = encodeURIComponent(url);
+async function resolveLink(url, manualDate) {
+  const link = releasePath(url);
+  if (!link) return null;
+  const p = link.platform, enc = encodeURIComponent(url);
   if (p === 'spotify') {
     const m = url.match(/spotify\.com\/(?:intl-[\w-]+\/)?(album|track)\/([A-Za-z0-9]+)/); if (!m) return null;
     const canon = `https://open.spotify.com/${m[1]}/${m[2]}`, tok = await spToken();
@@ -168,9 +248,9 @@ async function resolveLink(url) {
       const j = await get(`https://api.spotify.com/v1/${m[1]}s/${m[2]}?market=RU`, { headers: { authorization: 'Bearer ' + tok }, tries: 1 }), al = m[1] === 'album' ? j : (j.album || {});
       return { title: m[1] === 'album' ? clean(j.name) : j.name, type: typeOf(al.total_tracks, al.album_type), date: al.release_date_precision === 'day' ? al.release_date : '', covers: (al.images || []).map(i => i.url), links: { spotify: canon } };
     } catch (e) { console.log('spotify api:', e.message); } }
-    const o = await get('https://open.spotify.com/oembed?url=' + encodeURIComponent(canon));   // без ключей: название + обложка
+    const o = await get('https://open.spotify.com/oembed?url=' + encodeURIComponent(canon), {tries: 1, timeout: 9000});   // без ключей: название + обложка
     let date = '';
-    try { const r = await fetch(`https://open.spotify.com/embed/${m[1]}/${m[2]}`, { signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'Mozilla/5.0' } });
+    if (!manualDate) try { const r = await fetch(`https://open.spotify.com/embed/${m[1]}/${m[2]}`, { signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'Mozilla/5.0' } });
       const d = (await r.text()).match(/"(?:releaseDate|release_date)"[^0-9]{0,80}(\d{4}-\d{2}-\d{2})/); if (d) date = d[1]; } catch {}
     const th = o.thumbnail_url || '';
     return { title: clean(o.title), type: '', date, covers: [th.replace('00001e02', '0000b273'), th].filter(Boolean), links: { spotify: canon } };
@@ -193,11 +273,11 @@ async function resolveLink(url) {
       date: (j.release_date || '').slice(0, 10), covers: [al.cover_xl, al.cover_big].filter(Boolean), links: { deezer: url.replace(/\?.*$/, '') } };
   }
   if (p === 'yandex') {
-    const m = url.match(/album\/(\d+)/); if (m) {
-      const a = (await get(`https://api.music.yandex.net/albums/${m[1]}`, { tries: 1, headers: { 'x-yandex-music-client': 'YandexMusicAndroid/24023231' } })).result || {};
-      return { title: clean(a.title), type: typeOf(a.trackCount, (a.type || '').toLowerCase() === 'single' ? 'single' : ''), date: (a.releaseDate || '').slice(0, 10),
-        covers: a.coverUri ? ['https://' + a.coverUri.replace('%%', '1000x1000')] : [], links: { yandex: url } };
-    }
+    if (!process.env.ODESLI_KEY) return resolveYandex(url, link);
+    try {
+      const result = await resolveYandex(url, link);
+      if (result) return result;
+    } catch {}
   }
   if (process.env.ODESLI_KEY) {   // необязательно: ключ song.link (api.song.link) для VK и прочих площадок
     const d = await get(`https://api.song.link/v1-alpha.1/links?url=${enc}&userCountry=RU&key=${process.env.ODESLI_KEY}`, { tries: 1 });
@@ -208,36 +288,144 @@ async function resolveLink(url) {
   return null;
 }
 
-const manualDate = new Map();
-const lines = fs.existsSync('links.txt') ? fs.readFileSync('links.txt', 'utf8').split(/\r?\n/) : [];
-for (const raw of lines) {
-  const ln = raw.replace(/#.*$/, '').trim(); if (!ln) continue;
-  let date = '', url = '', extra = {}, man = {};
-  for (const p of ln.split('|').map(x => x.trim())) {
-    if (/^\d{4}-\d{2}-\d{2}/.test(p)) date = p.slice(0, 10);
-    else if (/^https?:/.test(p)) url = p;
-    else if (/^(title|type)=/i.test(p)) man[p.split('=')[0].toLowerCase()] = p.slice(p.indexOf('=') + 1).trim();
-    else if (/^\w+=https?:/.test(p)) extra[p.split('=')[0]] = p.slice(p.indexOf('=') + 1);
+function parseLinkRow(raw) {
+  const line = raw.trim().replace(/\s+#(?:\s|$).*$/, '').trim();
+  if (!line || line.startsWith('#')) return null;
+  const row = {date: '', title: '', type: '', urls: [], extra: {}};
+  for (const field of line.split('|').map(value => value.trim())) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(field)) {
+      row.date = field;
+      continue;
+    }
+    const assignment = field.match(/^([\w.-]+)=(.*)$/s);
+    if (assignment) {
+      const key = assignment[1].toLowerCase();
+      const value = assignment[2].trim();
+      if (key === 'title' || key === 'type') row[key] = value;
+      else if (releasePath(value)) {
+        row.extra[key] = value;
+        row.urls.push(value);
+      }
+    } else if (releasePath(field)) {
+      row.urls.push(field);
+    }
   }
-  if (!url) continue;
-  let it = bySrc[url];
-  if (!it || !it.title || !it.cover) {
-    let r = null;
-    try { r = await resolveLink(url); } catch (e) { console.log('link: не удалось получить данные', url, '-', e.message); }
-    if (r || man.title) {
-      const base = r || { title: '', type: '', date: '', covers: [], links: {} };
-      const id = 'link-' + crypto.createHash('md5').update(url).digest('hex').slice(0, 8), cp = `covers/${id}.jpg`;
-      const ok = base.covers.length ? await img(base.covers, cp) : false;
-      it = { id, src: url, title: base.title, type: base.type || '', date: base.date || '', cover: ok ? cp : (it && it.cover) || '', links: base.links || {} };
-      await sleep(400);
-    } else if (!it) { console.log('link пропущен: не получил данные. Добавь в строку | title=Название:', url); continue; }
-  }
-  const title = man.title || it.title; if (!title) { console.log('link без названия:', url); continue; }
-  const pl = platOf(url), links = Object.assign({}, pl ? { [pl]: url } : {}, it.links, extra);
-  if (date) manualDate.set(norm(title), date);
-  else if (!it.date) console.log('нет даты у «' + title + '» — укажи её в links.txt (ГГГГ-ММ-ДД | ссылка), иначе он не станет «новым»');
-  put({ ...it, title, type: man.type || it.type, date: date || it.date || '', links, covers: [] }, 'links');
+  return row.urls.length ? row : null;
 }
+
+const knownByLink = new Map();
+function rememberRelease(release) {
+  if (!release.title || release.pendingMetadata) return;
+  for (const url of [release.src, ...Object.values(release.links || {})]) {
+    const key = linkKey(url);
+    if (!key) continue;
+    const previous = knownByLink.get(key);
+    if (!previous) knownByLink.set(key, release);
+    else {
+      knownByLink.set(key, {
+        ...previous, ...release,
+        cover: release.cover || previous.cover,
+        date: release.date || previous.date,
+        links: {...previous.links, ...release.links},
+      });
+    }
+  }
+}
+old.forEach(rememberRelease);
+for (const item of items.values()) rememberRelease(item);
+
+const lines = fs.existsSync('links.txt') ? fs.readFileSync('links.txt', 'utf8').split(/\r?\n/) : [];
+const rows = lines.map(parseLinkRow).filter(Boolean);
+const requests = new Map();
+
+async function lookupRow(row) {
+  const known = row.urls.map(url => knownByLink.get(linkKey(url))).find(Boolean);
+  if (known && (row.date || known.date) && (known.cover || known.localCover || known.covers?.length)) return known;
+  for (const url of row.urls) {
+    const key = linkKey(url);
+    if (!requests.has(key)) {
+      requests.set(key, resolveLink(url, row.date).catch(error => {
+        console.log('link: не удалось получить данные', url, '-', error.message);
+        return null;
+      }));
+    }
+    const found = await requests.get(key);
+    if (found?.title) return {
+      ...known, ...found,
+      date: found.date || known?.date,
+      links: {...known?.links, ...found.links},
+    };
+  }
+  return known;
+}
+
+function applyManualLinks(release, direct, explicit) {
+  const priorities = release.linkPriorities ||= {};
+  for (const [key, address] of Object.entries(direct)) {
+    const priority = Object.hasOwn(explicit, key) ? 2 : 1;
+    if ((priorities[key] || 0) > priority) continue;
+    release.links[key] = address;
+    priorities[key] = priority;
+  }
+}
+
+const manualDate = new Map();
+const pendingRows = [];
+for (let start = 0; start < rows.length; start += 4) {
+  const batch = rows.slice(start, start + 4);
+  const metadata = await Promise.all(batch.map(lookupRow));
+  for (const [index, row] of batch.entries()) {
+    const found = metadata[index] || row.urls.map(url => knownByLink.get(linkKey(url))).find(Boolean);
+    const title = row.title || found?.title;
+    const url = row.urls[0];
+    const id = 'link-' + crypto.createHash('md5').update(linkKey(url) || url).digest('hex').slice(0, 8);
+    const supplied = {};
+    for (const address of row.urls) {
+      const platform = platOf(address);
+      if (platform) supplied[platform] = address;
+    }
+    const explicit = releaseLinkMap(row.extra);
+    const direct = {...releaseLinkMap(supplied), ...explicit};
+    if (!title) { pendingRows.push({row, id, url, direct, explicit}); continue; }
+    const item = {
+      ...found, id, src: url, title,
+      type: row.type || found?.type,
+      date: row.date || found?.date,
+      cover: found?.cover || found?.localCover,
+      links: releaseLinkMap({...found?.links, ...direct}),
+    };
+    if (row.date) manualDate.set(norm(title), row.date);
+    put(item, 'links');
+    const stored = items.get(norm(title));
+    applyManualLinks(stored, direct, explicit);
+    rememberRelease({...item, links: stored.links});
+  }
+}
+
+const unresolved = new Map();
+for (const {row, id, url, direct, explicit} of pendingRows) {
+  const matched = row.urls.map(address => knownByLink.get(linkKey(address))).find(Boolean);
+  if (matched) {
+    if (!items.has(norm(matched.title))) put({...matched, id, src: url}, 'links');
+    applyManualLinks(items.get(norm(matched.title)), direct, explicit);
+    if (row.date) manualDate.set(norm(matched.title), row.date);
+    continue;
+  }
+
+  // Сохраняем прямую ссылку даже при первой недоступности метаданных.
+  const platform = platOf(url);
+  const name = platform === 'yandex' ? 'Яндекс Музыке' : platform === 'spotify' ? 'Spotify' : '';
+  const previous = unresolved.get(id);
+  const pending = previous || {
+    id, title: name ? `релиз в ${name}` : 'релиз', type: '', date: '', cover: '', links: {}, page: '',
+    src: url, srcs: ['links'], pendingMetadata: true,
+  };
+  pending.date = row.date || pending.date;
+  pending.type = row.type || pending.type;
+  applyManualLinks(pending, direct, explicit);
+  unresolved.set(id, pending);
+}
+if (unresolved.size) console.log('сохранены ссылки без полученных метаданных:', unresolved.size);
 
 // дополняем ссылки: ищем тот же релиз на Deezer и в Apple Music по названию (строгое совпадение названия и артиста)
 const artistOk = n => norm(n).includes(norm(cfg.name));
@@ -255,7 +443,7 @@ for (const e of items.values()) {
 }
 
 // финал: ids, обложки, запись
-const list = [];
+const list = Array.from(unresolved.values(), ({linkPriorities, ...release}) => release);
 for (const e of items.values()) {
   const o = oldByKey.get(e.key);
   const id = (o && o.id) || e.ids.slice().sort((a, b) => PRIO.indexOf(a.split('-')[0]) - PRIO.indexOf(b.split('-')[0]))[0];
@@ -263,7 +451,7 @@ for (const e of items.values()) {
   const prev = [e.localCover, o && o.cover].find(p => p && exists(p));
   if (prev) cover = prev; else { const cp = `covers/${id}.jpg`; if (await img(e.covers, cp)) cover = cp; }
   const date = manualDate.get(e.key) || e.date;
-  list.push({ id, title: e.title, type: e.type, date, cover, links: e.links, page: e.page, srcs: [...e.srcs],
+  list.push({ id, title: e.title, type: e.type, date, cover, links: releaseLinkMap(e.links), page: e.page, srcs: [...e.srcs],
     ...(e.src ? { src: e.src } : {}), ...(e.enriched ? { enriched: true } : {}) });
 }
 list.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
