@@ -158,7 +158,7 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 #mpc{font:500 12px "IBM Plex Mono",monospace;white-space:nowrap}
 .eq{display:flex;gap:2px;align-items:flex-end;height:20px}.eq i{width:4px;height:4px;background:var(--ink)}
 .playing .eq i{animation:eq .6s ease-in-out infinite alternate}.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}@keyframes eq{to{height:20px}}
-.chips{margin-top:6px}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;text-transform:lowercase;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}@media (hover:hover) and (pointer:fine){.chip:hover{background:var(--ink);color:var(--bg)}}
+.chips{margin-top:6px}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}@media (hover:hover) and (pointer:fine){.chip:hover{background:var(--ink);color:var(--bg)}}
 .gh{font:700 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:lowercase;margin:38px 0 10px}.gh:first-child{margin-top:0}.bk{margin:0;padding:18px 4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);opacity:.7}
 #pm{position:fixed;inset:0;z-index:95;background:rgba(5,8,6,.6);display:grid;place-items:center;padding:16px}#pm[hidden]{display:none}
 .pmb{position:relative;background:var(--bg);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:26px;width:min(440px,100%);max-height:90vh;overflow:auto}
@@ -236,7 +236,7 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 .tl-body{padding:24px 26px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
 .tl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px;border-bottom:3px solid var(--ink);padding-bottom:12px}
 .tl-head h4{font:900 clamp(20px,2.4vw,28px)/1.1 "Unbounded",sans-serif;margin:0}
-.tl-head span{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:lowercase;opacity:.75}
+.tl-head span{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.08em;opacity:.75}
 .tl-body p{font-size:16px;line-height:1.65;margin:0}
 .tl-nav{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:2px dashed var(--dim)}
 .tl-nav .btn{margin:0;padding:6px 12px;font-size:14px}
@@ -455,43 +455,45 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
  #rb{width:min(280px,calc(100vw - 24px))}
  .rb-top b{font-size:17px;white-space:nowrap}
 }
-/* Каталог релизов: одна разметка для ленты и полного списка. */
+/* Каталог релизов */
 #discS {
   --release-width: clamp(172px, 28vw, 272px);
   --release-gap: clamp(12px, 2vw, 26px);
 }
-.catalog-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 18px;
-  margin-bottom: clamp(22px, 4vw, 38px);
-}
-#p-rel .catalog-head .hd { margin: 0; }
-.catalog-switch, .catalog-controls { display: flex; align-items: center; }
-.catalog-switch { border: 2px solid var(--ink); padding: 3px; background: var(--navbg); }
+#discTitle { scroll-margin-top: 85px; }
+.catalog-stage { position: relative; }
+.catalog-stage.is-changing { overflow: clip; }
+.catalog-panel[hidden] { display: none; }
+.catalog-panel.is-leaving { position: absolute; inset: 0 0 auto; pointer-events: none; }
+.catalog-switch, .catalog-controls { display: flex; justify-content: center; align-items: center; }
+.catalog-switch { gap: 16px; margin-top: clamp(16px, 4vw, 34px); }
 .catalog-switch button, .catalog-controls button {
   min-height: 44px;
   border: 0;
   background: transparent;
-  color: var(--ink);
+  color: inherit;
   cursor: pointer;
   font: 500 14px "IBM Plex Mono", monospace;
 }
-.catalog-switch button { padding: 8px 13px; }
-.catalog-switch [aria-pressed="true"] { background: var(--sun); color: #050806; }
+.catalog-switch button {
+  padding: 4px 8px;
+  color: color-mix(in srgb, var(--ink) 78%, var(--bg));
+  text-underline-offset: .4em;
+  text-decoration-thickness: 1px;
+}
+.catalog-switch [aria-pressed="true"] { color: var(--ink); text-decoration-line: underline; }
 .catalog-viewport {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--dim) transparent;
+  scrollbar-width: none;
   padding-block: 8px 14px;
 }
-.catalog-cards { display: flex; gap: var(--release-gap); margin: 0; padding: 0; list-style: none; }
+.catalog-viewport::-webkit-scrollbar { display: none; }
+.catalog-cards, .catalog-list { margin: 0; padding: 0; list-style: none; }
+.catalog-cards { display: flex; gap: var(--release-gap); }
 .catalog-card { flex: 0 0 var(--release-width); min-width: 0; scroll-snap-align: center; }
-.catalog-card:first-child { margin-inline-start: calc((100% - var(--release-width)) / 2); }
-.catalog-card:last-child { margin-inline-end: calc((100% - var(--release-width)) / 2); }
+.catalog-cards:has(> :only-child) { justify-content: center; }
 .catalog-entry {
   display: grid;
   width: 100%;
@@ -511,75 +513,79 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   aspect-ratio: 1;
   min-width: 0;
   overflow: hidden;
-  border: 3px solid var(--ink);
   background: var(--card);
+}
+.catalog-card .catalog-art {
+  border: 3px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
   transform: scale(.88);
   opacity: .65;
   transition: transform .24s ease, opacity .24s ease;
 }
+.catalog-card.is-current .catalog-art { transform: none; opacity: 1; box-shadow: 4px 4px 0 var(--sun); }
+.catalog-cards.is-recentering .catalog-art { transition: none; }
 .catalog-art img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.catalog-art .catalog-placeholder {
-  padding: 9px;
-  font: 700 clamp(12px, 2vw, 22px)/1.2 "Oswald", sans-serif;
+.catalog-placeholder {
+  max-width: 100%;
+  padding: 6px;
+  font: 700 13px/1.1 "Oswald", sans-serif;
   overflow-wrap: anywhere;
 }
-.catalog-card.is-current .catalog-art, .catalog-entry:focus-visible .catalog-art {
-  transform: none;
-  opacity: 1;
-}
-.catalog-card.is-current .catalog-art { box-shadow: 4px 4px 0 var(--sun); }
 .catalog-copy { display: grid; min-width: 0; align-content: center; gap: 5px; }
 .catalog-copy strong { font: 700 clamp(18px, 2.2vw, 23px)/1.2 "Oswald", sans-serif; overflow-wrap: anywhere; }
 .catalog-copy small { font-size: 12px; line-height: 1.4; }
-.catalog-controls { justify-content: center; margin-top: 14px; gap: 14px; }
-.catalog-controls[hidden] { display: none; }
-.catalog-controls button {
-  min-width: 44px;
-  border: 2px solid var(--ink);
-  background: var(--navbg);
-  font-size: 20px;
-}
+.catalog-controls { margin-top: 8px; gap: 10px; }
+.catalog-controls button { min-width: 44px; font-size: 20px; }
 .catalog-controls button:disabled { opacity: .45; cursor: default; }
 #discPosition { min-width: 8ch; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
-.catalog-platforms { display: none; }
-.catalog-list .catalog-viewport { overflow: visible; scroll-snap-type: none; padding: 0; }
-.catalog-list .catalog-cards {
+.catalog-list {
+  --release-rule: color-mix(in srgb, var(--ink) 26%, transparent);
+  border-top: 1px solid var(--release-rule);
+}
+.catalog-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: clamp(14px, 3vw, 36px);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--release-rule);
 }
-.catalog-list .catalog-card {
-  margin: 0;
-  padding: 14px;
-  border: 2px solid var(--ink);
-  background: var(--card);
-  box-shadow: 4px 4px 0 var(--ink);
+.catalog-list .catalog-entry {
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 14px;
+  text-align: left;
 }
-.catalog-list .catalog-entry { grid-template-columns: 66px minmax(0, 1fr); text-align: left; }
-.catalog-list .catalog-art { transform: none; opacity: 1; box-shadow: none; border-width: 2px; }
-.catalog-list .catalog-platforms { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+.catalog-list .catalog-copy strong { font-size: clamp(17px, 2vw, 21px); }
+.catalog-list .catalog-copy small { opacity: .82; }
+.catalog-list .catalog-placeholder { font-size: 10px; }
+.catalog-platforms { display: flex; flex-wrap: wrap; justify-content: flex-end; column-gap: 16px; }
 .catalog-platforms a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
-  padding: 4px 8px;
-  border: 1px solid var(--ink);
-  font-size: 12px;
-  text-decoration: none;
+  gap: 4px;
+  min-height: 36px;
+  padding: 2px 0;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+  text-decoration-color: var(--dim);
 }
-.catalog-platforms a span { margin-inline-start: 4px; }
-.catalog-platforms small { align-self: center; font-size: 12px; }
+.catalog-platforms a span { opacity: .65; }
+.catalog-platforms small { align-self: center; font-size: 12px; opacity: .75; }
 @media (hover: hover) and (pointer: fine) {
-  .catalog-entry:hover strong { text-decoration: underline; text-underline-offset: .2em; }
-  .catalog-entry:hover .catalog-art { opacity: 1; }
-  .catalog-controls button:not(:disabled):hover, .catalog-platforms a:hover {
-    background: var(--ink);
-    color: var(--bg);
-  }
+  .catalog-entry:hover strong, .catalog-switch button:hover { text-decoration: underline; text-underline-offset: .22em; }
+  .catalog-card .catalog-entry:hover .catalog-art { opacity: 1; }
+  .catalog-platforms a:hover { text-decoration-color: currentColor; }
+  .catalog-controls button:not(:disabled):hover { color: var(--sky); }
+}
+@media (max-width: 560px) {
+  .catalog-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .catalog-platforms { justify-content: flex-start; margin-inline-start: 68px; }
+  .catalog-platforms a { min-height: 44px; }
+  .catalog-platforms small { margin-block: 8px; }
 }
 @media (max-width: 480px) {
   #discS { --release-width: clamp(158px, 54vw, 230px); }
-  .catalog-platforms a { min-height: 44px; }
 }
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
@@ -662,20 +668,25 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 <div class="seg" role="tablist" aria-label="подборки"><button type="button" role="tab" id="tabPop" data-tab="pop" aria-selected="true" data-s>популярное</button><button type="button" role="tab" id="tabPick" data-tab="pick" aria-selected="false" tabindex="-1" data-s>выбор артиста</button></div>
 <div id="pop" role="tabpanel" aria-labelledby="tabPop"></div><div id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div></section>
 <section class="band" id="discS" aria-labelledby="discTitle" hidden>
-  <div class="catalog-head">
-    <h2 class="big hd" id="discTitle">все релизы</h2>
-    <div class="catalog-switch" role="group" aria-label="вид каталога">
-      <button type="button" data-catalog-mode="rail" aria-pressed="true" aria-controls="disc" data-s>лента</button>
-      <button type="button" data-catalog-mode="list" aria-pressed="false" aria-controls="disc" data-s>полный список</button>
+  <h2 class="big hd" id="discTitle">все релизы</h2>
+  <div class="catalog-stage" id="discStage">
+    <div class="catalog-panel" id="discRail">
+      <div class="catalog-viewport" id="discViewport" role="region" aria-label="лента релизов" tabindex="0">
+        <ul class="catalog-cards" id="disc" role="list"></ul>
+      </div>
+      <div class="catalog-controls" id="discControls" role="group" aria-label="листать релизы">
+        <button type="button" id="discPrev" aria-label="предыдущий релиз" data-s>←</button>
+        <span id="discPosition" aria-live="polite"></span>
+        <button type="button" id="discNext" aria-label="следующий релиз" data-s>→</button>
+      </div>
+    </div>
+    <div class="catalog-panel" id="discList" role="region" aria-label="полный список релизов" hidden inert>
+      <ul class="catalog-list" role="list"></ul>
     </div>
   </div>
-  <div class="catalog-viewport" id="discViewport" role="region" aria-label="лента релизов" tabindex="0">
-    <ul class="catalog-cards" id="disc" role="list"></ul>
-  </div>
-  <div class="catalog-controls" id="discControls" role="group" aria-label="листать релизы">
-    <button type="button" id="discPrev" aria-label="предыдущий релиз" data-s>←</button>
-    <span id="discPosition" aria-live="polite"></span>
-    <button type="button" id="discNext" aria-label="следующий релиз" data-s>→</button>
+  <div class="catalog-switch" role="group" aria-label="вид каталога">
+    <button type="button" data-catalog-mode="rail" aria-pressed="true" aria-controls="discRail" data-s>лента</button>
+    <button type="button" data-catalog-mode="list" aria-pressed="false" aria-controls="discList" data-s>полный список</button>
   </div>
 </section>
 </div>
@@ -793,83 +804,261 @@ $('#feed').onclick=()=>{const r=cb.getBoundingClientRect(),f=document.createElem
  setTimeout(()=>{f.remove();if(hunger>=100){say('сыт. хватит.');if(++over>=3){over=0;say('ты меня раскормишь!');rot=180}return}hunger=Math.min(100,hunger+35);mood=Math.min(100,mood+5);draw();wig();if(sulk){if(hunger>=60){sulk=false;cb.classList.remove('sulk');say('ладно. прощаю.',3000);meow();for(let i=0;i<4;i++)setTimeout(heart,i*180)}else say('ем. но я всё ещё обижен.',3000)}else say('ням-ням');draw();for(let i=0;i<5;i++)setTimeout(()=>blip(240-i*15,.07,'square',.08,120),i*110);heart()},750)};
 $('#call').onclick=()=>{go('home');$('#hero').append(cb);home=true;vy=0;vx=0;rot=0;cb.classList.remove('small');cb.classList.add('home');cb.style.cssText='';say('мяу!');meow()};
 /* ---------- thoughts ---------- */
-// Совместимые начала и окончания. В каждом цикле каждая комбинация выпадает один раз.
-const thoughtPatterns = [
-  [
-    [
-      'у каждой тишины', 'у несказанного слова', 'у пустой комнаты',
-      'у дальнего окна', 'у первого снега', 'у забытого сна',
-      'у зимнего света', 'у медленной реки', 'у короткой паузы',
-      'у отражения в воде', 'у сумерек', 'у дороги домой',
-    ],
-    [
-      'свой способ остаться.', 'своё время, о котором никто не знает.',
-      'есть другая сторона.', 'есть место между двумя мгновениями.',
-      'свой язык, и в нём не нужно спешить.', 'есть что-то общее с ожиданием.',
-      'своя мера глубины.', 'свой способ менять очертания.',
-      'есть память длиннее нашей.', 'свой ответ на вопрос, которого ещё нет.',
-      'есть граница, видимая только издалека.', 'свой способ начинаться заново.',
-    ],
-  ],
-  [
-    [
-      'когда вода в стакане успокаивается', 'когда снег скрывает следы',
-      'когда улицы пустеют', 'когда последнее окно гаснет',
-      'когда свет касается пола', 'когда остывает чай',
-      'когда облака отражаются в лужах', 'когда часы перестают быть слышны',
-      'когда ветер стихает у двери', 'когда песок оседает на дно',
-      'когда туман отступает от берега', 'когда ночь светлеет по краям',
-    ],
-    [
-      'время становится почти различимым.', 'близкое и далёкое меняются местами.',
-      'всё видимое получает немного больше пространства.', 'бывает проще услышать себя.',
-      'даже привычное кажется впервые увиденным.', 'ожидание меняет форму.',
-      'замечаешь, сколько всего умещается в паузе.', 'не каждый вопрос требует ответа.',
-      'снова ощущается вес мгновения.', 'прошлое лежит чуть дальше обычного.',
-      'тишина звучит иначе.', 'простые вещи на минуту перестают быть фоном.',
-    ],
-  ],
-  [
-    [
-      'можно оставить вопрос открытым', 'можно дать себе время',
-      'можно ничего не объяснять', 'можно вернуться другой дорогой',
-      'можно позволить непонятному побыть рядом', 'можно начинать с малого',
-      'можно отложить ответ до утра', 'можно услышать тишину по-другому',
-      'можно перестать торопить перемены', 'можно заметить, как изменился свет',
-      'можно закрыть окно чуть позже', 'можно ещё немного побыть здесь',
-    ],
-    [
-      'даже посреди обыкновенного дня.', ', пока всё постепенно находит своё место.',
-      'без обещания сделать из этого вывод.', 'и на этом пока остановиться.',
-      ', прежде чем день станет воспоминанием.', 'и посмотреть, что останется важным.',
-      ', даже если вчера казалось иначе.', ', пока тишина ещё не стала привычной.',
-      'и позволить следующему мгновению прийти своим чередом.', ', если так будет спокойнее.',
-      'не выстраивая из этого целую историю.', 'с той же осторожностью, с какой держат тёплую чашку.',
-    ],
-  ],
-];
-let thoughtBag = [];
-let previousThought = '';
+// В колоде только цельные фразы. При изменении состава обновляй ключ хранения колоды.
+const thoughtPhrases = `пыль на подоконнике знает больше закатов, чем человек у окна.
+старая лестница помнит шаги лучше, чем жильцы помнят лица.
+зеркалу всё равно, кем ты собираешься стать к понедельнику.
+белая тарелка на пустом столе похожа на луну, которая устала висеть.
+море не возражает, если мы называем его разными именами.
+сажень тумана отделяет знакомую тропу от незнакомого мира.
+иногда слово опаздывает, но приходит ровно к тому, кто готов его услышать.
+зачем торопить ответ, если вопрос ещё не успел раскрыться?
+между двумя скрипами пола успевает поместиться целый дом.
+снежинка исчезла на рукаве, оставив одно мокрое доказательство зимы.
+вчера казалось, что света осталось мало. сегодня его хватило на всю стену.
+фонарь за окном ни разу не видел звёзд. он всё время был занят.
+пуговица в коробке — маленькая вещь, пережившая свою одежду.
+бесполезная карта становится нужной, если хочется заблудиться по собственному выбору.
+воробьи не ждут, пока кто-нибудь назовёт их утренними.
+облако терпеливо примеряет форму, которой ему не придётся хранить.
+кипяток в чашке переживает свой короткий бурный век.
+самое тихое место на площади — человеческая ладонь.
+колодец держит небо в круглой оправе.
+перепутанная дверь иногда ведёт к разговору, которого не хватало.
+спокойствие похоже на кошелёк без мелочи. привычная тяжесть вдруг исчезает.
+полночь давно миновала, а дом всё ещё прислушивается к её шагам.
+крошки на скатерти — последняя часть разговора за завтраком.
+яблоко упало, и сад на миг стал громче дороги.
+чужой почерк на полях делает старую книгу немного обитаемой.
+спроси у берега, сколько шагов до места, где начинается глубина.
+ожидание похоже на пальто, снятое в слишком тёплой комнате.
+кленовый лист застрял между страницами и прожил там дольше осени.
+зелёный светофор даёт дорогу даже тем, кто никуда не спешит.
+середина дня настаёт по часам, а середина жизни узнаётся задним числом.
+ножницы лежат раскрытыми, будто собирались что-то сказать.
+озеро молчит так убедительно, что у гор кончаются слова.
+взгляд на пустую скамейку иногда длится дольше прощания.
+безымянная улица всё равно куда-нибудь приведёт.
+утюг остыл, а на простыне ещё держится тепло.
+разговор закончился, но место между чашками всё ещё занято.
+полоска света под дверью шире любого обещания, данного в темноте.
+издалека дом кажется маленьким. вблизи в нём помещается детство.
+вечер опустился на город, как плечи после долгого дня.
+обрывок нитки держится за пуговицу с упорством старой привычки.
+овраг не обязан объяснять, куда делась ровная земля.
+дрожащий отблеск — подпись воды под знакомым пейзажем.
+вдруг оказалось, что стук был веткой, а не чьим-то возвращением.
+даже у гладкой гальки хватило времени стать собой.
+странно, как много пустого места занимает вещь, которой больше нет.
+последний трамвай увёз людей. остановка осталась греться под фонарём.
+горизонт отступает без всякого шума и никогда не выглядит побеждённым.
+стрелки часов расходятся после каждой встречи.
+пальцы забывают перчатки быстрее, чем тепло чужих рук.
+остаток дня лёг на ступеньку и оказался почти невесомым.
+дворник вымел листья, но порядок на ветру продержался недолго.
+обычная кружка. тепло в обеих руках.
+лес начинает вечер с нижних веток.
+открытая дверь пугает сквозняком, пока не появляется воздух.
+запотевшее стекло хранит рисунок ровно столько, сколько нужно, чтобы пожалеть о нём.
+камыш стоит по колено в воде и не решает, берег он или река.
+колесо велосипеда ещё долго крутится после остановки.
+бережно сложенная бумага всё равно помнит сгиб.
+доброе утро для кого-то начинается только после второй попытки.
+неловкая пауза иногда оказывается местом, где можно наконец выдохнуть.
+прощание затянулось. лифт пришлось вызвать ещё раз.
+нежность легко пропустить, если ждёшь большого жеста.
+сколько уюта выдержит один квадрат света на стене?
+плечи вспоминают вес рюкзака уже после того, как он поставлен на пол.
+янтарная капля на сосне — время, забывшее, куда течь.
+струя на секунду соединяет кран и ладонь.
+чемодан стоял раскрытым, и комната казалась готовой уехать.
+сенокос узнаётся по запаху раньше, чем по виду поля.
+вода у пирса разбирает небо на мелкие монеты.
+некоторые мосты сначала приходится построить в памяти.
+след самолёта дольше всего держится там, куда никто не смотрит.
+пока чай заваривался, исчезла необходимость решать всё сегодня.
+капля на потолке пещеры держит паузу лучше любого рассказчика.
+пустая полка не требует, чтобы её сразу чем-нибудь заняли.
+грифель сломался на самом обычном слове.
+связка ключей у входа весит меньше, чем знание, что тебя ждут.
+ночные балконы похожи на маленькие пристани в неподвижном море.
+соль на столе ослепительно белая, пока рядом не положат снег.
+расколотый орех похож на письмо, которое не хотело открываться.
+время идёт, и вдруг то, что пришлось пережить, перестаёт быть тем, чем живёшь.
+крыльцо — промежуточное решение между домом и улицей.
+угол ковра упрямо заворачивается туда, где все привыкли ходить.
+от стены пахнет дождём, хотя небо уже расчистилось.
+слово «впервые» не помещается в календарь.
+песок в ботинке доказывает, что уходишь с берега не сразу.
+поздний автобус привёз тишину, пока двери не открылись.
+спички в пустой коробке гремели бы, если бы осталась хотя бы одна.
+радуга уложилась в тонкий слой воды посреди парковки.
+набережная хороша тем, что рядом можно идти молча и смотреть в одну сторону.
+обещание затягивается, как узел, быстрее, чем развязывается.
+столб дыма поднимается прямо лишь до встречи с ветром.
+разве обязательно знать название дерева, чтобы остановиться в его тени?
+ошибка на чертеже выглядит аккуратно, пока по нему ничего не построили.
+пятно света медленно переползло через ковёр, словно у него был свой адрес.
+роса делает утро заметным даже на самом обыкновенном заборе.
+тёплая стена держит солнце после того, как оно ушло за крыши.
+тиканье часов через стену легко принять за чьё-то нетерпение.
+тишина после гостей. две куртки забыты, один стул придвинут к стене.
+ворота остаются открытыми ещё долго после того, как кончилась ярмарка.
+легко ли уйти вовремя, если последние слова всегда приходят у двери?
+рельсы блестят от поездов, которых уже не видно.
+звук ключа в замке. на этом ночь закончилась.
+забытая на лавке газета старится быстрее деревьев вокруг.
+глоток воздуха отделяет бег от разговора о том, куда ты бежал.
+рука над чашкой знает о зиме гораздо меньше, чем рука за окном.
+круги по воде не проверяют, далеко ли они ушли.
+ночи в разных городах порой отличаются только гулом холодильника.
+цветок на лестничной площадке тянется к окну, которым пользуются все.
+стоит ли вычёркивать день до того, как он успел закончиться?
+луна на втором этаже застряла в раме между занавеской и геранью.
+тропинка исчезает в высокой траве, не обязательно заканчиваясь.
+первый сугроб выглядит вечным только для того, кто видит снег впервые.
+шторы колышутся, хотя никто не вошёл.
+луговая глина проступила между пальцами. домой пошли босиком.
+палец на запотевшем окне проводит границу между двумя способами смотреть наружу.
+кувшин хорош и пустым. свету тоже нужно куда-то падать.
+доверие растёт незаметно, как деревце на краю пустыря.
+сорванное расписание подарило полчаса человеку, который не знал, куда их деть.
+башня с часами пережила тех, кто сверял по ней карманные часы.
+хлебная корка хрустит громче всего в доме, где все ещё спят.
+холод первым добрался до ручки двери.
+глубину ли мы боимся, или того, что перестанем видеть дно?
+ракушка ничего не знает о твоих поездках, однако бережёт их лучше билета.
+жёлтая плитка на кухне меняет оттенок, если долго смотреть на неё в сумерках.
+коробка с фотографиями тяжелее, чем все отдельные снимки.
+рисунок древесных волокон проступает на листе, если вести карандашом плашмя.
+трава под снегом не выглядит торопливой, когда снег наконец уходит.
+зонт над двумя людьми работает, если оба немного согласятся промокнуть.
+касание прохладной ручки иногда будит лучше будильника.
+птичий след на снегу кончается посреди двора, и объяснение находится сверху.
+медленнее всего темнеет на крыше, где больше всего неба.
+яркость витрины делает улицу темнее, чем она есть.
+свеча не помнит, как выглядела целой.
+потёртый порог свидетельствует лишь о том, что дверь была нужна.
+тонкая корочка льда знает вес утра ещё до первого шага.
+монета, найденная в старом кармане, на миг возвращает чужое время.
+ручеёк на асфальте свернул к водостоку. за ним поехал лист.
+прихожая сразу становится большой, если из неё убрать лишний стул.
+отголосок разговора ушёл не вслед за собеседником, а внутрь комнаты.
+гравий выдаёт даже человека, который решил пройти тихо.
+за спиной у витрины улице позволено выглядеть обыкновенно.
+хвоя под снегом хранит цвет, который никто от неё не требует.
+листок с одним номером иногда важнее целой записной книжки.
+вид из окна меняется, если пересесть в другое кресло.
+потереть глаза — самый короткий способ закрыть пейзаж.
+как отличить равнодушие от усталости, если человек говорит одинаково тихо?
+мороз оставил на стекле узор, случайно похожий на побережье.
+шахматная доска после партии выглядит так, словно ничего не произошло.
+поместится ли целая история в одном взгляде через комнату?
+«позже» бывает почти таким же далёким местом, как «никогда».
+сумерки стирают границы двора, оставляя только самые знакомые окна.
+лодка на берегу тратит время на ожидание дождя.
+резиновый мяч отскакивает только потому, что земля его не удержала.
+эхо возвращает слова, но никогда не дожидается ответа.
+под лампой у открытой книги область дневного света держится дольше.
+наледь на камне прозрачна, но от этого не становится менее скользкой.
+рассвет сначала касается всего, до чего неудобно дотянуться рукой.
+парк закрывается, когда последние посетители перестают быть силуэтами.
+неровная стопка книг даёт столу одну простую причину не пустовать.
+апрель умеет работать над зимой снизу, не привлекая внимания.
+темнота отдала дорогу шагам, а деревья оставила себе.
+лампа в пустом вагоне освещает ручки, за которые никто не держится.
+туман скрывает дальнее и тем самым подчёркивает ближнее.
+где заканчивается знакомая улица, если идти по ней с закрытыми глазами?
+перила ненадолго продолжают чужое тепло.
+гвоздь в стене — всё, что осталось от картины, которую давно сняли.
+камушек из чужого сада оказывается обычным только после возвращения.
+палисадник тесен для больших решений, зато там хватает места для мяты.
+расстояние от кнопки звонка до открытой двери измеряется не метрами.
+собеседник замолчал, а тебе впервые за вечер стало интересно, о чём он думает.
+свечка на торте дымит после того, как желание уже загадано.
+ждать легче, если можно поставить чайник.
+два окна напротив друг друга светятся, не зная, кто у кого в гостях.
+паутина держит дождь на весу, пока дождь не станет слишком тяжёлым.
+картонный домик на столе пережил больше переездов, чем настоящий.
+зима подкрашивает края крыши, будто в остальном всё уже готово.
+клумба во дворе учит не перепутать запустение с концом сезона.
+фантик в кармане шумит громче тех вещей, которые там действительно важны.
+тоннель заканчивается не сразу. сперва свет возвращается на лица.
+люстра в выключенной комнате висит как вопрос, который отложили.
+попутный ветер замечают реже, чем встречный.
+стена ответила прохладой, хотя к ней прижались за теплом.
+сирень цветёт. пять шагов от подъезда до ворот занимают целую минуту.
+объезд не отменяет дороги, зато возвращает ей пейзаж.
+маркер высох, оставив на пальце последнее доказательство работы.
+карман на пальто помнит очертания рук, хотя не может их согреть.
+предел терпения иногда отмечен звуком собственных шагов к двери.
+мел на доске скрипит даже тогда, когда задача давно решена.
+книгам не обязательно стоять ровно, чтобы полка казалась жилой.
+ширина реки меняется в зависимости от того, с кем ты остаёшься на берегу.
+кора дерева не обязана выглядеть молодой, чтобы под ней шёл сок.
+заноза — крошечный фрагмент предмета, слишком близко принятый к себе.
+края облака распадаются даже без ветра, стоит только смотреть достаточно долго.
+переулок пуст. слышно, как кто-то роется в кармане на другом конце.
+шаг по сухим листьям слышен тому, кто уже свернул за угол.
+подушка хранит отпечаток лица, которое ничего не помнит о сне.
+печенье ломается пополам, но одна половина почему-то вкуснее.
+зёрнышко в бумажном пакете хранит весну, хотя вокруг ещё ноябрь.
+синица прыгнула с забора, и двор вдруг показался достаточно большим.
+сквозняк подал знак пустому коридору.
+чайка сидит на крыше и смотрит на улицу так, будто вода когда-нибудь вернётся.
+торопиться вперёд легко, если не замечать, на чём стоишь.
+осьминогом октябрь обнял все мокрые ветки разом.
+ухо привыкает к дождю раньше, чем рука перестаёт искать зонт.
+читать чужое письмо — всё равно что открыть окно в комнате, где никого нет.
+слепой дождь. теней под деревьями больше, чем людей на улице.
+куча тетрадей на подоконнике хранит меньше ответов, чем обещала в сентябре.
+промолчать иногда значит дать другому человеку договорить не только вслух.
+повернуть к реке можно раньше, чем станет видно воду.
+хрупкая вазочка спокойно держит воду, пока никто не проверяет её на прочность.
+кнопка лифта позволяет попросить о движении и не уточнять, когда оно начнётся.
+подождать на остановке ещё минуту — обычное дело, пока минута не стала важной.
+персик на кухне пахнет летом точнее любого настенного календаря.
+голос из соседней комнаты особенно знаком, когда не разбираешь слов.
+белка на проводе занимает горизонт осторожнее любой птицы.
+шли без цели и вышли к месту, о котором давно хотели поговорить.
+крыши на смене света кажутся подвижными. особенно если смотреть из уходящего поезда.
+синий вечер доедает последние отражения в лужах.`.split('\n');
+const thoughtDeckKey = 'neosten-thought-deck-v1';
+let thoughtDeck = {remaining: [], last: null};
+
+function loadThoughtDeck() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(thoughtDeckKey));
+    const validIndex = index => Number.isInteger(index) && index >= 0 && index < thoughtPhrases.length;
+    if (saved && validIndex(saved.last) && Array.isArray(saved.remaining)
+      && saved.remaining.every(validIndex) && !saved.remaining.includes(saved.last)
+      && new Set(saved.remaining).size === saved.remaining.length) {
+      thoughtDeck = saved;
+    }
+  } catch {
+    // При недоступном хранилище колода продолжает работать в памяти.
+  }
+}
 
 function nextThought() {
-  if (!thoughtBag.length) {
-    thoughtBag = thoughtPatterns.flatMap(([starts, ends], pattern) =>
-      starts.flatMap(start => ends.map(end =>
-        start + (pattern === 1 ? ', ' : end.startsWith(',') ? '' : ' ') + end
-      ))
-    );
-    for (let i = thoughtBag.length - 1; i > 0; i--) {
+  loadThoughtDeck();
+  if (!thoughtDeck.remaining.length) {
+    const deck = thoughtPhrases.map((_, index) => index);
+    for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [thoughtBag[i], thoughtBag[j]] = [thoughtBag[j], thoughtBag[i]];
+      [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-    // На стыке циклов тоже не выдаём ту же комбинацию дважды подряд.
-    const last = thoughtBag.length - 1;
-    if (thoughtBag[last] === previousThought) {
-      [thoughtBag[0], thoughtBag[last]] = [thoughtBag[last], thoughtBag[0]];
+    // Последняя фраза прошлого круга не должна стать первой фразой нового.
+    const end = deck.length - 1;
+    if (deck[end] === thoughtDeck.last) {
+      const j = Math.floor(Math.random() * end);
+      [deck[end], deck[j]] = [deck[j], deck[end]];
     }
+    thoughtDeck.remaining = deck;
   }
-  previousThought = thoughtBag.pop();
-  return previousThought;
+  thoughtDeck.last = thoughtDeck.remaining.pop();
+  try { localStorage.setItem(thoughtDeckKey, JSON.stringify(thoughtDeck)); } catch {}
+  return thoughtPhrases[thoughtDeck.last];
 }
 const secret={'дождь':'он идёт только в динамике.','тишина':'самый громкий трек.','сон':'продолжай. я подожду.','42':'ответ найден. вопрос потерян.','спокойной ночи':'и тебе. оставлю свет в траве.','ошибка музыки':'ошибка музыки — когда в трек случайно попадает живое. её не стирают.','неостен':'неостен — это я. тот, кто пишет после. или не я.','сэлфхарм':'тяжёлое слово. здесь оно просто звучит, и никто не осуждает. если внутри слишком громко — поговори с кем-то живым.','сэйфхарм':'сэйфхарм — попытка сделать громкое тихим. получается не всегда. получается музыка.','303':'три-ноль-три. кислотная линия бежит по комнате, пока ты стоишь на месте.','сати':'сати — быть здесь, пока играет песня. или тот француз, что писал музыку для мебели. вдох.','нео':'нео — приставка «новое». или тот, кто выбирает таблетку. или просто начало имени.','кот':'он всё слышит. и всё запоминает.','мяу':'мяу.','neosten':'это я. или не я. не помню.','привет':'привет. ты уже здесь.','after':'after — это когда песня закончилась, а ты всё ещё в машине.','после':'после — это не конец. это тихая комната рядом.','ветер':'он всегда на фоне. прислушайся.','рыба':'><((°> ...кот это видел.','спасибо':'не за что. забудь.'};
 function pickThought(value) {
@@ -928,9 +1117,9 @@ const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${r.cover}" alt=""></d
 const chips=r=>L.listen?`<div class="chips">${L.listen.map(x=>`<a class="chip" href="${(r.links&&r.links[x.k])||x.u}" target="_blank" rel="noopener">${x.n}</a>`).join('')}</div>`:'';
 const row=(r,l)=>`<button class="trk" data-id="${r.id}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${r.title}</span><span class="ex">${r.note||''}</span></button>`;
 const PN = {
-  spotify: 'спотифай', yandex: 'яндекс музыка', vk: 'вк музыка', apple: 'эпл мьюзик',
-  youtubeMusic: 'ютуб музыка', youtube: 'ютуб', deezer: 'дизер', tidal: 'тайдал',
-  soundcloud: 'саундклауд', amazonMusic: 'амазон мьюзик',
+  spotify: 'Spotify', yandex: 'Яндекс Музыка', vk: 'VK Музыка', apple: 'Apple Music',
+  youtubeMusic: 'YouTube Music', youtube: 'YouTube', deezer: 'Deezer', tidal: 'TIDAL',
+  soundcloud: 'SoundCloud', amazonMusic: 'Amazon Music',
 };
 const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'};
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
@@ -985,78 +1174,229 @@ addEventListener('keydown', event => {
 });
 
 const catalog = $('#discS');
+const catalogStage = $('#discStage');
 const catalogViewport = $('#discViewport');
 const catalogCards = $('#disc');
+const catalogList = $('#discList ul');
 const catalogPrev = $('#discPrev');
 const catalogNext = $('#discNext');
 const catalogPosition = $('#discPosition');
 const catalogModeButtons = $$('[data-catalog-mode]');
-let catalogIndex = 0;
+const catalogPanels = {rail: $('#discRail'), list: $('#discList')};
+const catalogMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let catalogMode = 'rail';
+let catalogTransition = null;
+let releaseCount = 0;
+let railBuffer = 0;
+let railIndex = 0;
+let railTarget = null;
+let railWidth = 0;
+let railSettleTimer;
+let railFocusClassFrame;
 
-function setCatalogPosition(index) {
-  catalogCards.children[catalogIndex]?.classList.remove('is-current');
-  catalogIndex = index;
-  catalogCards.children[index]?.classList.add('is-current');
-  const total = catalogCards.children.length;
-  const label = total ? `${index + 1} из ${total}` : '';
-  if (catalogPosition.textContent !== label) catalogPosition.textContent = label;
-  catalogPrev.disabled = index <= 0;
-  catalogNext.disabled = index >= total - 1;
+function releaseIndex(index) {
+  return ((index - railBuffer) % releaseCount + releaseCount) % releaseCount;
 }
 
-function scrollCatalog(index, behavior = 'instant') {
-  const card = catalogCards.children[index];
-  if (!card || !catalogViewport.clientWidth) return;
-  const viewportLeft = catalogViewport.getBoundingClientRect().left;
-  const left = card.getBoundingClientRect().left - viewportLeft + catalogViewport.scrollLeft;
-  catalogViewport.scrollTo({left: left - (catalogViewport.clientWidth - card.offsetWidth) / 2, behavior});
+function markRailPosition(index, carryFocus = true) {
+  const previous = catalogCards.children[railIndex];
+  const current = catalogCards.children[index];
+  if (!current) return;
+  if (previous && previous !== current) {
+    previous.classList.remove('is-current');
+    previous.firstElementChild.tabIndex = -1;
+  }
+  current.classList.add('is-current');
+  current.firstElementChild.tabIndex = 0;
+  if (current.dataset.copy === 'true') current.removeAttribute('aria-hidden');
+  if (previous && previous !== current && carryFocus && previous.contains(document.activeElement)) {
+    current.firstElementChild.focus({preventScroll: true});
+  }
+  if (previous && previous !== current && previous.dataset.copy === 'true' && !previous.contains(document.activeElement)) {
+    previous.setAttribute('aria-hidden', 'true');
+  }
+  railIndex = index;
+  const label = `${releaseIndex(index) + 1} из ${releaseCount}`;
+  if (catalogPosition.textContent !== label) catalogPosition.textContent = label;
+}
+
+function railGeometry() {
+  const viewWidth = catalogViewport.clientWidth;
+  if (!viewWidth || releaseCount < 2) return null;
+  const first = catalogCards.children[0].getBoundingClientRect();
+  const second = catalogCards.children[1].getBoundingClientRect();
+  const step = second.left - first.left;
+  const zero = catalogViewport.scrollLeft + first.left - catalogViewport.getBoundingClientRect().left
+    + (first.width - viewWidth) / 2;
+  return {step, zero};
+}
+
+function railNearest({step, zero}) {
+  return Math.max(0, Math.min(catalogCards.children.length - 1, Math.round((catalogViewport.scrollLeft - zero) / step)));
+}
+
+function jumpRail(index, left) {
+  // Экран остаётся на тех же обложках, пока лента смещается на целое число оборотов.
+  catalogCards.classList.add('is-recentering');
+  markRailPosition(index);
+  catalogViewport.scrollTo({left, behavior: 'instant'});
+  cancelAnimationFrame(railFocusClassFrame);
+  railFocusClassFrame = requestAnimationFrame(() => {
+    railFocusClassFrame = requestAnimationFrame(() => catalogCards.classList.remove('is-recentering'));
+  });
+}
+
+function centerCatalogRail() {
+  const geometry = railGeometry();
+  if (!geometry) return;
+  clearTimeout(railSettleTimer);
+  railWidth = catalogViewport.clientWidth;
+  railTarget = null;
+  const index = railBuffer + releaseIndex(railIndex);
+  jumpRail(index, geometry.zero + index * geometry.step);
+}
+
+function rebaseRail() {
+  const geometry = railGeometry();
+  if (!geometry || catalogMode !== 'rail') return;
+  const nearest = railNearest(geometry);
+  const canonical = railBuffer + releaseIndex(nearest);
+  railTarget = null;
+  if (nearest === canonical) {
+    markRailPosition(nearest);
+    return;
+  }
+  jumpRail(canonical, catalogViewport.scrollLeft + (canonical - nearest) * geometry.step);
 }
 
 function syncCatalogScroll() {
-  if (catalog.classList.contains('catalog-list') || !catalogViewport.clientWidth) return;
-  const viewport = catalogViewport.getBoundingClientRect();
-  const center = (viewport.left + viewport.right) / 2;
-  let nearest = catalogIndex;
-  let minDistance = Infinity;
-  Array.from(catalogCards.children).forEach((card, index) => {
-    const rect = card.getBoundingClientRect();
-    const distance = Math.abs((rect.left + rect.right) / 2 - center);
-    if (distance < minDistance) { nearest = index; minDistance = distance; }
-  });
-  if (nearest !== catalogIndex) setCatalogPosition(nearest);
+  const geometry = railGeometry();
+  if (!geometry || catalogMode !== 'rail') return;
+  const nearest = railNearest(geometry);
+  const edgeBuffer = Math.ceil(catalogViewport.clientWidth / (2 * geometry.step));
+  if (nearest <= edgeBuffer || nearest >= catalogCards.children.length - 1 - edgeBuffer) {
+    rebaseRail();
+  } else {
+    markRailPosition(nearest);
+  }
+  clearTimeout(railSettleTimer);
+  railSettleTimer = setTimeout(rebaseRail, 160);
 }
 
-function moveCatalog(index) {
-  const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
-  scrollCatalog(index, behavior);
+function scrollCatalog(index, geometry) {
+  railTarget = index;
+  const left = geometry.zero + index * geometry.step;
+  if (catalogMotion.matches) {
+    catalogViewport.scrollTo({left, behavior: 'instant'});
+    rebaseRail();
+  } else {
+    catalogViewport.scrollTo({left, behavior: 'smooth'});
+  }
+}
+
+function moveCatalog(direction) {
+  const geometry = railGeometry();
+  if (!geometry) return;
+  const pending = railTarget ?? railNearest(geometry);
+  const index = pending + direction;
+  const edgeBuffer = Math.ceil(catalogViewport.clientWidth / (2 * geometry.step)) + 1;
+  if (index < edgeBuffer || index >= catalogCards.children.length - edgeBuffer) return;
+  scrollCatalog(index, geometry);
 }
 
 catalogViewport.addEventListener('scroll', syncCatalogScroll, {passive: true});
-catalogPrev.onclick = () => moveCatalog(catalogIndex - 1);
-catalogNext.onclick = () => moveCatalog(catalogIndex + 1);
+catalogViewport.addEventListener('pointerdown', () => { railTarget = null; }, {passive: true});
+catalogViewport.addEventListener('wheel', () => { railTarget = null; }, {passive: true});
+catalogPrev.onclick = () => moveCatalog(-1);
+catalogNext.onclick = () => moveCatalog(1);
 catalogViewport.addEventListener('keydown', event => {
-  if (catalog.classList.contains('catalog-list')) return;
-  const targets = {ArrowLeft: catalogIndex - 1, ArrowRight: catalogIndex + 1, Home: 0, End: catalogCards.children.length - 1};
-  if (!Object.hasOwn(targets, event.key)) return;
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
   event.preventDefault();
-  const index = Math.max(0, Math.min(catalogCards.children.length - 1, targets[event.key]));
-  if (event.target !== catalogViewport) catalogCards.children[index]?.querySelector('button').focus({preventScroll: true});
-  moveCatalog(index);
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    moveCatalog(event.key === 'ArrowLeft' ? -1 : 1);
+    return;
+  }
+  const geometry = railGeometry();
+  if (!geometry) return;
+  scrollCatalog(railBuffer + (event.key === 'End' ? releaseCount - 1 : 0), geometry);
 });
 
-catalogModeButtons.forEach(button => button.onclick = () => {
-  const isList = button.dataset.catalogMode === 'list';
-  catalog.classList.toggle('catalog-list', isList);
-  catalogModeButtons.forEach(option => option.setAttribute('aria-pressed', option === button));
-  catalogViewport.setAttribute('aria-label', isList ? 'полный список релизов' : 'лента релизов');
-  catalogViewport.tabIndex = isList ? -1 : 0;
-  $('#discControls').hidden = isList;
-  if (!isList) scrollCatalog(catalogIndex);
+new ResizeObserver(() => {
+  const width = catalogViewport.clientWidth;
+  if (!width) railWidth = 0;
+  else if (catalogMode === 'rail' && width !== railWidth) centerCatalogRail();
+}).observe(catalogViewport);
+
+function finishCatalogTransition() {
+  if (!catalogTransition) return;
+  const {outgoing, animations} = catalogTransition;
+  catalogTransition = null;
+  outgoing.hidden = true;
+  outgoing.classList.remove('is-leaving');
+  animations.forEach(animation => animation.cancel());
+  catalogStage.classList.remove('is-changing');
+}
+
+function setCatalogMode(mode) {
+  if (mode === catalogMode) return;
+  const startHeight = catalogStage.getBoundingClientRect().height;
+  finishCatalogTransition();
+  const outgoing = catalogPanels[catalogMode];
+  const incoming = catalogPanels[mode];
+  const heading = $('#discTitle');
+  // Когда переключатель внизу длинного списка, показываем начало нового вида.
+  if (heading.getBoundingClientRect().top < $('#nav').offsetHeight) {
+    heading.scrollIntoView({block: 'start', behavior: 'instant'});
+  }
+  catalogMode = mode;
+  catalogModeButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.catalogMode === mode));
+  outgoing.inert = true;
+  incoming.hidden = false;
+  incoming.inert = false;
+  if (mode === 'rail') centerCatalogRail();
+  if (catalogMotion.matches || !catalogStage.animate || !startHeight) {
+    outgoing.hidden = true;
+    return;
+  }
+
+  outgoing.classList.add('is-leaving');
+  catalogStage.classList.add('is-changing');
+  const endHeight = incoming.getBoundingClientRect().height;
+  const timing = {duration: 350, easing: 'cubic-bezier(.25,.7,.25,1)', fill: 'both'};
+  const height = catalogStage.animate([{height: `${startHeight}px`}, {height: `${endHeight}px`}], timing);
+  const fadeOut = outgoing.animate(
+    [{opacity: 1, transform: 'translateY(0)'}, {opacity: 0, transform: 'translateY(-7px)'}],
+    {...timing, duration: 140}
+  );
+  const fadeIn = incoming.animate(
+    [{opacity: 0, transform: 'translateY(9px)'}, {opacity: 1, transform: 'translateY(0)'}],
+    {...timing, duration: 270, delay: 70}
+  );
+  catalogTransition = {outgoing, animations: [height, fadeOut, fadeIn]};
+  height.onfinish = () => {
+    if (catalogTransition?.animations[0] === height) finishCatalogTransition();
+  };
+}
+
+catalogModeButtons.forEach(button => button.onclick = () => setCatalogMode(button.dataset.catalogMode));
+catalogMotion.addEventListener('change', () => {
+  if (catalogMotion.matches) finishCatalogTransition();
 });
 
 function renderCatalog(releases) {
-  catalog.hidden = !releases.length;
-  catalogCards.innerHTML = releases.map(release => {
+  const currentId = catalogCards.children[railIndex]?.firstElementChild.dataset.menu;
+  const previous = releases.findIndex(release => release.id === currentId);
+  releaseCount = releases.length;
+  // По краям оставляем полные копии и запас для широкого экрана с коротким каталогом.
+  railBuffer = releaseCount > 1 ? Math.ceil(6 / releaseCount) * releaseCount : 0;
+  catalog.hidden = !releaseCount;
+  catalogPrev.disabled = catalogNext.disabled = releaseCount < 2;
+  catalogPosition.textContent = '';
+  clearTimeout(railSettleTimer);
+  railTarget = null;
+  railWidth = 0;
+
+  const entries = releases.map(release => {
     const title = escapeHTML(release.title);
     const art = release.cover
       ? `<img src="${escapeHTML(release.cover)}" width="272" height="272" loading="lazy" decoding="async" alt="">`
@@ -1065,16 +1405,23 @@ function renderCatalog(releases) {
     const links = releaseLinks(release).map(({name, url}) =>
       `<a href="${escapeHTML(url)}" target="_blank" rel="noopener" aria-label="${name} — ${title}">${name}<span aria-hidden="true">↗</span></a>`
     ).join('');
-    return `<li class="catalog-card">
-      <button type="button" class="catalog-entry" data-menu="${escapeHTML(release.id)}" aria-haspopup="dialog" data-s>
-        <span class="catalog-art">${art}</span>
-        <span class="catalog-copy"><strong>${title}</strong><small>${date}${escapeHTML(releaseType(release.type))}</small></span>
-      </button>
-      <div class="catalog-platforms">${links || '<small>ссылки на релиз пока недоступны</small>'}</div>
-    </li>`;
+    const entry = (isRail) => `<button type="button" class="catalog-entry" data-menu="${escapeHTML(release.id)}" aria-haspopup="dialog" ${isRail ? 'tabindex="-1"' : ''} data-s>
+      <span class="catalog-art">${art}</span>
+      <span class="catalog-copy"><strong>${title}</strong><small>${date}${escapeHTML(releaseType(release.type))}</small></span>
+    </button>`;
+    return {entry, links};
+  });
+  catalogCards.innerHTML = Array.from({length: releaseCount + 2 * railBuffer}, (_, index) => {
+    const copy = index < railBuffer || index >= railBuffer + releaseCount;
+    return `<li class="catalog-card"${copy ? ' data-copy="true" aria-hidden="true"' : ''}>${entries[releaseIndex(index)].entry(true)}</li>`;
   }).join('');
-  setCatalogPosition(Math.max(0, Math.min(catalogIndex, releases.length - 1)));
-  if (!catalog.classList.contains('catalog-list')) scrollCatalog(catalogIndex);
+  catalogList.innerHTML = entries.map(({entry, links}) => `<li class="catalog-row">${entry(false)}
+    <div class="catalog-platforms">${links || '<small>ссылки на релиз пока недоступны</small>'}</div>
+  </li>`).join('');
+  if (!releaseCount) { railIndex = 0; return; }
+  railIndex = railBuffer + Math.max(0, previous);
+  markRailPosition(railIndex);
+  if (catalogMode === 'rail') centerCatalogRail();
 }
 
 function tlArt(x){
