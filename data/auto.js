@@ -14,6 +14,22 @@ window.AUTO=[
   ]
  },
  {
+  "id": "link-d60a7607",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "2026-11-06",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/44794240"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/44794240",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
   "id": "apple-6820449428",
   "title": "ДИСС НА НЕФОРОВ",
   "type": "сингл",
@@ -30,6 +46,22 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj"
+ },
+ {
+  "id": "link-dc7ac1d3",
+  "title": "релиз в Spotify",
+  "type": "",
+  "date": "2026-10-02",
+  "cover": "",
+  "links": {
+   "spotify": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL"
+  },
+  "page": "",
+  "src": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
  },
  {
   "id": "apple-6817133665",
@@ -242,7 +274,7 @@ window.AUTO=[
   "date": "2025-09-26",
   "cover": "covers/link-ec087d3c.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07",
+   "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
    "deezer": "https://www.deezer.com/album/1148145831"
   },
@@ -260,7 +292,7 @@ window.AUTO=[
   "date": "2025-08-22",
   "cover": "covers/link-76a07395.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP",
+   "spotify": "https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg",
    "yandex": "https://music.yandex.ru/album/37798894",
    "deezer": "https://www.deezer.com/album/859484762"
   },
@@ -305,5 +337,245 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU"
+ },
+ {
+  "id": "link-88c4b497",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/44987626"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/44987626",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-2a115641",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/44320421"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/44320421",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-1d13b961",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/44163739"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/44163739",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-b62dc750",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/43584725"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/43584725",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-4041f90a",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/43117937"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/43117937",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-e9208f7b",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/42511617"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/42511617",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-cf376e3b",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/41828540"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/41828540",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-9a3aa633",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/41346984"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/41346984",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-46c857d9",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/40020312"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/40020312",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-6321719a",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/39692759"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/39692759",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-3198606b",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/39131024"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/39131024",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-2ae046e2",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/38648077"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/38648077",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-8a53daf6",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/38302359"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/38302359",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-10a2a1b9",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/37269016"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/37269016",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
+ },
+ {
+  "id": "link-e06aeaef",
+  "title": "релиз в Яндекс Музыке",
+  "type": "",
+  "date": "",
+  "cover": "",
+  "links": {
+   "yandex": "https://music.yandex.ru/album/35652284"
+  },
+  "page": "",
+  "src": "https://music.yandex.ru/album/35652284",
+  "srcs": [
+   "links"
+  ],
+  "pendingMetadata": true
  }
 ];
