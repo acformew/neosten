@@ -417,9 +417,11 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 /* Две редакционные витрины на странице релизов */
 #featureS, #rotS {
-  --editorial-line: color-mix(in srgb, var(--ink) 28%, transparent);
-  --editorial-surface: color-mix(in srgb, var(--card) 94%, transparent);
-  --editorial-muted: color-mix(in srgb, var(--ink) 76%, var(--card));
+  --editorial-line: rgba(255, 255, 255, .25);
+  --editorial-line-active: rgba(255, 255, 255, .55);
+  --editorial-surface: rgba(0, 0, 0, .82);
+  --editorial-ink: #f1f1f1;
+  --editorial-muted: #c3c3c3;
 }
 #featureS { padding-bottom: clamp(42px, 6vw, 72px); }
 .feature-release {
@@ -427,6 +429,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
   border: 1px solid var(--editorial-line);
   background: var(--editorial-surface);
+  color: var(--editorial-ink);
 }
 .feature-art {
   display: grid;
@@ -434,16 +437,16 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   min-width: 0;
   padding: clamp(20px, 3.5vw, 46px);
   border-inline-end: 1px solid var(--editorial-line);
-  background: radial-gradient(ellipse at 38% 30%, color-mix(in srgb, var(--sky) 18%, transparent), transparent 73%), var(--bg);
+  background: rgba(0, 0, 0, .25);
 }
 .feature-cover {
   position: relative;
   display: block;
   width: min(100%, 360px);
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--ink) 48%, transparent);
-  box-shadow: 5px 5px 0 var(--sun);
-  background: var(--card);
+  border: 1px solid var(--editorial-line);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .45);
+  background: rgba(0, 0, 0, .25);
   color: inherit;
   cursor: pointer;
   transition: border-color .18s ease, box-shadow .18s ease;
@@ -453,7 +456,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   position: relative;
   place-items: center;
   overflow: hidden;
-  background: color-mix(in srgb, var(--art-accent, var(--sky)) 21%, var(--bg));
+  background: rgba(0, 0, 0, .35);
 }
 .feature-cover .editorial-art { aspect-ratio: 1; }
 .editorial-art img {
@@ -467,8 +470,8 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 .editorial-art.no-art {
   background:
-    radial-gradient(circle at 76% 24%, color-mix(in srgb, var(--art-accent) 52%, transparent), transparent 70%),
-    color-mix(in srgb, var(--art-accent) 12%, var(--bg));
+    radial-gradient(circle at 76% 24%, rgba(255, 255, 255, .12), transparent 70%),
+    rgba(0, 0, 0, .28);
 }
 .editorial-art.no-art::before {
   content: "";
@@ -476,13 +479,13 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   height: 76%;
   max-width: 82%;
   aspect-ratio: 1;
-  border: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  border: 1px solid var(--editorial-line);
   border-radius: 50%;
   background:
-    radial-gradient(circle, var(--ink) 0 2%, var(--art-accent) 2.5% 15%, transparent 15.5%),
-    repeating-radial-gradient(circle, color-mix(in srgb, var(--ink) 13%, transparent) 0 1px, transparent 2px 5px),
-    color-mix(in srgb, var(--art-accent) 22%, var(--card));
-  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+    radial-gradient(circle, #bdbdbd 0 2%, #444 2.5% 15%, transparent 15.5%),
+    repeating-radial-gradient(circle, rgba(255, 255, 255, .11) 0 1px, transparent 2px 5px),
+    #101010;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, .3);
 }
 .feature-cover-label {
   position: absolute;
@@ -492,8 +495,8 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   align-items: center;
   gap: 10px;
   padding: 7px 10px;
-  color: var(--ink);
-  background: var(--card);
+  color: var(--editorial-ink);
+  background: rgba(0, 0, 0, .86);
   font-size: 12px;
 }
 .feature-preview {
@@ -538,8 +541,8 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   min-height: 46px;
   padding: 9px 13px;
   border: 1px solid var(--editorial-line);
-  background: var(--card);
-  color: var(--ink);
+  background: rgba(0, 0, 0, .45);
+  color: var(--editorial-ink);
   font: 500 13px/1.25 "IBM Plex Mono", monospace;
   text-decoration: none;
   cursor: pointer;
@@ -574,24 +577,24 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   margin-top: 18px;
   padding: 17px clamp(18px, 3vw, 30px);
   border: 1px solid var(--editorial-line);
-  border-inline-start: 2px solid var(--sun);
   background: var(--editorial-surface);
-  color: var(--ink);
+  color: var(--editorial-ink);
 }
-.feature-soon .btn { border-color: currentColor; color: inherit; }
+.feature-soon .btn { border-color: var(--editorial-line-active); color: inherit; }
 .feature-soon #cd { color: inherit; }
 .feature-soon i.red { background: currentColor; }
 @media (hover: hover) and (pointer: fine) {
-  .feature-soon .btn:hover { background: var(--ink); color: var(--bg); }
-  .feature-cover:hover { border-color: var(--ink); box-shadow: 7px 7px 0 var(--sun); }
-  .feature-link:hover, .feature-player:hover { border-color: var(--ink); }
-  .feature-more a:hover { text-decoration-color: currentColor; color: var(--ink); }
+  .feature-soon .btn:hover { background: #e8e8e8; color: #101010; }
+  .feature-cover:hover { border-color: var(--editorial-line-active); box-shadow: 7px 7px 0 rgba(0, 0, 0, .45); }
+  .feature-link:hover, .feature-player:hover { border-color: var(--editorial-line-active); }
+  .feature-more a:hover { text-decoration-color: currentColor; color: var(--editorial-ink); }
 }
 
 #rotS {
   border-block: 1px solid var(--editorial-line);
   padding-block: clamp(34px, 5vw, 67px);
-  background: color-mix(in srgb, var(--bg) 57%, transparent);
+  background: rgba(0, 0, 0, .52);
+  color: var(--editorial-ink);
 }
 .recommendation-head {
   display: flex;
@@ -619,8 +622,9 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   cursor: pointer;
   transition: border-color .16s ease, color .16s ease;
 }
-.recommendation-tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--sun); }
+.recommendation-tabs button[aria-selected="true"] { color: var(--editorial-ink); border-color: var(--sun); }
 .recommendation-tabs button[hidden], .recommendation-panel[hidden] { display: none; }
+.recommendation-panels.is-changing { overflow: clip; }
 .recommendations {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 188px), 1fr));
@@ -633,30 +637,21 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 .recommendation-track {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
   width: 100%;
   height: 100%;
   min-width: 0;
-  padding: 0;
+  min-height: 64px;
+  padding: 10px 13px;
   border: 1px solid var(--editorial-line);
   background: var(--editorial-surface);
-  color: var(--ink);
+  color: var(--editorial-ink);
   font: inherit;
   text-align: left;
   cursor: pointer;
   transition: background .2s ease, border-color .2s ease, transform .2s ease;
-}
-.recommendation-track .editorial-art {
-  aspect-ratio: 5 / 3;
-  border-bottom: 1px solid var(--editorial-line);
-}
-.recommendation-copy {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-  padding: 13px 14px;
 }
 .recommendation-name { display: grid; min-width: 0; gap: 4px; }
 .recommendation-name strong {
@@ -670,11 +665,11 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   width: 36px;
   height: 36px;
   border: 1px solid var(--editorial-line);
-  background: var(--card);
+  background: rgba(255, 255, 255, .05);
   font: 700 14px/1 "IBM Plex Mono", monospace;
   transition: color .18s ease, background .18s ease, border-color .18s ease;
 }
-.recommendation-track.cur { border-color: var(--ink); }
+.recommendation-track.cur { border-color: var(--editorial-line-active); }
 .recommendation-track.on .recommendation-action { background: var(--sun); color: #090c0b; border-color: var(--sun); }
 .recommendation-track[data-id]::after, .feature-player::after {
   content: "";
@@ -688,15 +683,15 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 .feature-player { position: relative; }
 .feature-player.on::after { background: #090c0b; }
-:is(#featureS, #rotS) :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+:is(.feature-release, .feature-soon, #rotS) :focus-visible { outline: 2px solid var(--editorial-ink); outline-offset: 3px; }
 @media (hover: hover) and (pointer: fine) {
-  .recommendation-tabs button:hover { color: var(--ink); }
+  .recommendation-tabs button:hover { color: var(--editorial-ink); }
   .recommendation-tabs button[aria-selected="false"]:hover { border-color: var(--editorial-line); }
-  .recommendation-track:hover { background: var(--card); border-color: var(--ink); }
-  .recommendation-track:hover .recommendation-action { border-color: var(--ink); }
+  .recommendation-track:hover { background: rgba(0, 0, 0, .65); border-color: var(--editorial-line-active); }
+  .recommendation-track:hover .recommendation-action { border-color: var(--editorial-line-active); }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .feature-cover:hover img, .recommendation-track:hover img { transform: scale(1.025); }
+  .feature-cover:hover img { transform: scale(1.025); }
   .feature-link:hover span, .feature-cover:hover .feature-cover-label span { transform: translate(2px, -2px); }
   .recommendation-track:hover { transform: translateY(-2px); }
   .recommendation-track:active, .feature-link:active, .feature-player:active { transform: translateY(1px); }
@@ -709,9 +704,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 @media (max-width: 480px) {
   .recommendations { grid-template-columns: minmax(0, 1fr); }
-  .recommendation-track { grid-template: minmax(74px, auto) / 74px minmax(0, 1fr); }
-  .recommendation-track .editorial-art { aspect-ratio: auto; border-bottom: 0; border-inline-end: 1px solid var(--editorial-line); }
-  .recommendation-copy { padding: 10px; gap: 8px; }
+  .recommendation-track { min-height: 60px; }
   .recommendation-action { width: 32px; height: 32px; }
 }
 
@@ -748,7 +741,7 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-block: 8px 14px;
+  padding-block: 16px 14px;
 }
 .catalog-viewport::-webkit-scrollbar { display: none; }
 .catalog-cards, .catalog-list { margin: 0; padding: 0; list-style: none; }
@@ -779,11 +772,11 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 .catalog-card .catalog-art {
   border: 3px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
-  transform: scale(.88);
+  transform: translateY(var(--cover-lift, 0px)) scale(var(--cover-scale, .88));
   opacity: .65;
   transition: transform .24s ease, opacity .24s ease;
 }
-.catalog-card.is-current .catalog-art { transform: none; opacity: 1; box-shadow: 4px 4px 0 var(--sun); }
+.catalog-card.is-current .catalog-art { --cover-scale: 1; opacity: 1; box-shadow: 4px 4px 0 var(--sun); }
 .catalog-cards.is-recentering .catalog-art { transition: none; }
 .catalog-art img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
 .catalog-placeholder {
@@ -837,6 +830,9 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
   .catalog-card .catalog-entry:hover .catalog-art { opacity: 1; }
   .catalog-platforms a:hover { text-decoration-color: currentColor; }
   .catalog-controls button:not(:disabled):hover { color: var(--sky); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .catalog-card:hover .catalog-art { --cover-lift: -6px; }
 }
 @media (max-width: 560px) {
   .catalog-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -933,8 +929,10 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
       <button type="button" role="tab" id="tabPick" data-tab="pick" aria-selected="false" aria-controls="picks" tabindex="-1" data-s>выбор артиста</button>
     </div>
   </div>
-  <div class="recommendation-panel" id="pop" role="tabpanel" aria-labelledby="tabPop"></div>
-  <div class="recommendation-panel" id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div>
+  <div class="recommendation-panels">
+    <div class="recommendation-panel" id="pop" role="tabpanel" aria-labelledby="tabPop"></div>
+    <div class="recommendation-panel" id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div>
+  </div>
 </section>
 <section class="band" id="discS" aria-labelledby="discTitle" hidden>
   <h2 class="big hd" id="discTitle">все релизы</h2>
@@ -1370,7 +1368,6 @@ const fd=d=>{const x=new Date(MSK(d)+108e5);return x.getUTCDate()+' '+mon[x.getU
 const fdt=d=>{if(!hasT(d))return fd(d);const x=new Date(MSK(d)+108e5),p=n=>String(n).padStart(2,'0');return fd(d)+', '+p(x.getUTCHours())+':'+p(x.getUTCMinutes())+' МСК'};
 const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace('.',',').replace(',0','')+' млн':n>=1e3?Math.round(n/1e3)+' тыс':''+n;
 const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
-const COLS=['#2e86de','#ffd93b','#3a9d4a','#ff9a62'];
 function au(r){if(!aud[r.id]){const a=new Audio();a.preload='auto';a.src=r.file;a.muted=!sound;a.volume=vol;a.onended=next;a.onplay=a.onpause=ui;a.ontimeupdate=()=>prog(r.id);aud[r.id]=a}return aud[r.id]}
 function toggle(id,list){const r=byId(id);if(!r)return;if(!r.file){openMenu(r);return}
  if(!sound)setSound(true);const a=au(r);
@@ -1832,12 +1829,9 @@ function renderTimeline(tl){
   </div>`;
 }
 
-function editorialArtwork(release, index = 0, lazy = false) {
-  const accent = COLS[index % COLS.length];
-  const image = release.cover
-    ? `<img src="${escapeHTML(release.cover)}" alt="" decoding="async"${lazy ? ' loading="lazy"' : ''}>`
-    : '';
-  return `<span class="editorial-art${image ? '' : ' no-art'}" style="--art-accent:${accent}" aria-hidden="true">${image}</span>`;
+function editorialArtwork(release) {
+  const image = release.cover ? `<img src="${escapeHTML(release.cover)}" alt="" decoding="async">` : '';
+  return `<span class="editorial-art${image ? '' : ' no-art'}" aria-hidden="true">${image}</span>`;
 }
 
 function audioButtonAttrs(release, context) {
@@ -1895,25 +1889,32 @@ function renderUpcomingRelease(release) {
 }
 
 function recommendationGrid(releases, context) {
-  return `<ul class="recommendations" role="list">${releases.map((release, index) => {
-    const summary = release.plays ? `${fmtN(release.plays)} прослушиваний` : release.note || (release.type && releaseType(release.type));
+  return `<ul class="recommendations" role="list">${releases.map(release => {
+    const year = String(release.date || '').match(/^([0-9]{4})(?:-|$)/)?.[1];
+    const type = releaseType(release.type || (release.file ? 'трек' : 'релиз'));
+    const summary = release.plays ? `${fmtN(release.plays)} прослушиваний` : [type, year].filter(Boolean).join(' · ');
     return `<li><button type="button" class="recommendation-track" ${release.file ? audioButtonAttrs(release, context) : releaseMenuAttrs(release)}>
-      ${editorialArtwork(release, index, true)}
-      <span class="recommendation-copy">
-        <span class="recommendation-name">
-          <strong>${escapeHTML(release.title)}</strong>
-          ${summary ? `<small>${escapeHTML(summary)}</small>` : ''}
-        </span>
-        <span class="recommendation-action ic" aria-hidden="true">${release.file ? '▶' : '↗'}</span>
+      <span class="recommendation-name">
+        <strong>${escapeHTML(release.title)}</strong>
+        <small>${escapeHTML(summary)}</small>
       </span>
+      <span class="recommendation-action ic" aria-hidden="true">${release.file ? '▶' : '↗'}</span>
     </button></li>`;
   }).join('')}</ul>`;
 }
 
 const recommendationTabs = $$('.recommendation-tabs [role=tab]');
+const recommendationPanels = $('.recommendation-panels');
+const recommendationMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let selectedRecommendation = 'pop';
+let recommendationTransition = null;
 
-function setRecommendationTab(key) {
+function recommendationPanel(key) {
+  const tab = recommendationTabs.find(option => option.dataset.tab === key);
+  return tab ? document.getElementById(tab.getAttribute('aria-controls')) : null;
+}
+
+function showRecommendationTab(key) {
   selectedRecommendation = key;
   recommendationTabs.forEach(tab => {
     const selected = !tab.hidden && tab.dataset.tab === key;
@@ -1923,8 +1924,73 @@ function setRecommendationTab(key) {
   });
 }
 
+function clearRecommendationTransition() {
+  const transition = recommendationTransition;
+  recommendationTransition = null;
+  if (!transition) return;
+  transition.animations.forEach(animation => animation.cancel());
+  recommendationPanels.style.removeProperty('height');
+  recommendationPanels.classList.remove('is-changing');
+}
+
+function setRecommendationTab(key, animate = false) {
+  if (animate && recommendationTransition?.key === key) return;
+  const previous = recommendationPanel(selectedRecommendation);
+  const next = recommendationPanel(key);
+  const canAnimate = animate && !recommendationMotion.matches && previous && !previous.hidden && next
+    && typeof previous.animate === 'function' && typeof next.animate === 'function';
+  const opacity = canAnimate ? Number(getComputedStyle(previous).opacity) : 1;
+  const startHeight = canAnimate ? recommendationPanels.getBoundingClientRect().height : 0;
+  clearRecommendationTransition();
+
+  if (!canAnimate || (previous === next && opacity === 1)) {
+    showRecommendationTab(key);
+    return;
+  }
+
+  const transition = {key, animations: []};
+  recommendationTransition = transition;
+  const fadeIn = (from, oldHeight) => {
+    const endHeight = recommendationPanels.getBoundingClientRect().height;
+    if (oldHeight && Math.abs(oldHeight - endHeight) > 1 && typeof recommendationPanels.animate === 'function') {
+      recommendationPanels.classList.add('is-changing');
+      transition.animations.push(recommendationPanels.animate(
+        [{height: `${oldHeight}px`}, {height: `${endHeight}px`}],
+        {duration: 210, easing: 'ease-out', fill: 'both'}
+      ));
+    }
+    const fade = next.animate([{opacity: from}, {opacity: 1}], {duration: 210, easing: 'ease-out', fill: 'both'});
+    transition.animations.push(fade);
+    fade.onfinish = () => {
+      if (recommendationTransition === transition) clearRecommendationTransition();
+    };
+  };
+
+  if (previous === next) {
+    fadeIn(opacity, startHeight);
+    return;
+  }
+  if (startHeight) {
+    recommendationPanels.style.height = `${startHeight}px`;
+    recommendationPanels.classList.add('is-changing');
+  }
+  const fade = previous.animate([{opacity}, {opacity: 0}], {duration: 130, easing: 'ease-in', fill: 'both'});
+  transition.animations.push(fade);
+  fade.onfinish = () => {
+    if (recommendationTransition !== transition) return;
+    showRecommendationTab(key);
+    fade.cancel();
+    recommendationPanels.style.removeProperty('height');
+    fadeIn(0, startHeight);
+  };
+}
+
+recommendationMotion.addEventListener('change', () => {
+  if (recommendationMotion.matches && recommendationTransition) setRecommendationTab(recommendationTransition.key);
+});
+
 recommendationTabs.forEach(tab => {
-  tab.onclick = () => setRecommendationTab(tab.dataset.tab);
+  tab.onclick = () => setRecommendationTab(tab.dataset.tab, true);
   tab.onkeydown = event => {
     const available = recommendationTabs.filter(option => !option.hidden);
     const at = available.indexOf(tab);
@@ -1938,7 +2004,7 @@ recommendationTabs.forEach(tab => {
     }
     if (!available[next]) return;
     event.preventDefault();
-    setRecommendationTab(available[next].dataset.tab);
+    setRecommendationTab(available[next].dataset.tab, true);
     available[next].focus();
   };
 });
@@ -1952,7 +2018,8 @@ function renderRecommendations() {
   $('#tabPick').hidden = !picks.length;
   $('#pop').innerHTML = recommendationGrid(popular, 'p');
   $('#picks').innerHTML = recommendationGrid(picks, 'k');
-  const tab = recommendationTabs.find(option => !option.hidden && option.dataset.tab === selectedRecommendation)
+  const preferred = recommendationTransition?.key ?? selectedRecommendation;
+  const tab = recommendationTabs.find(option => !option.hidden && option.dataset.tab === preferred)
     || recommendationTabs.find(option => !option.hidden);
   setRecommendationTab(tab?.dataset.tab);
 }
