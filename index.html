@@ -158,7 +158,6 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 #mpc{font:500 12px "IBM Plex Mono",monospace;white-space:nowrap}
 .eq{display:flex;gap:2px;align-items:flex-end;height:20px}.eq i{width:4px;height:4px;background:var(--ink)}
 .playing .eq i{animation:eq .6s ease-in-out infinite alternate}.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}@keyframes eq{to{height:20px}}
-.chips{margin-top:6px}.chip small{margin-inline-start:5px;opacity:.72;font-size:.82em}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}@media (hover:hover) and (pointer:fine){.chip:hover{background:var(--ink);color:var(--bg)}}
 .gh{font:700 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:lowercase;margin:38px 0 10px}.gh:first-child{margin-top:0}.bk{margin:0;padding:18px 4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);opacity:.7}
 #pm{position:fixed;inset:0;z-index:95;background:rgba(5,8,6,.6);display:grid;place-items:center;padding:16px}#pm[hidden]{display:none}
 .pmb{position:relative;background:var(--bg);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:26px;width:min(440px,100%);max-height:90vh;overflow:auto}
@@ -347,7 +346,7 @@ section{padding-top:clamp(36px,9vw,56px);padding-bottom:clamp(36px,9vw,56px)}
 #nav{gap:6px;padding:8px var(--gx);scrollbar-width:none}
 #nav::-webkit-scrollbar{display:none}
 #logo,#nav .n,#theme{flex:none;display:inline-flex;align-items:center;min-height:44px;padding-inline:10px}
-.btn,#pet .btn,#mute,.w-lnk,.chip,.gm-go,.tl-nav .btn,#px,#pmx,.wmx{min-height:44px}
+.btn,#pet .btn,#mute,.w-lnk,.gm-go,.tl-nav .btn,#px,#pmx,.wmx{min-height:44px}
 #mute,#px,#pmx,.wmx{min-width:44px}
 #pmx,.wmx{right:2px;top:2px}
 #mpb{width:44px;height:44px}
@@ -359,41 +358,9 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 }
 @media (max-width:480px){#pet{right:10px}.w-bar .btn{flex:1 1 auto}}
 
-/* ---- правки 21: новое / баланс линий ---- */
-.nw{display:grid;grid-template-columns:clamp(130px,20vw,210px) minmax(0,1fr);gap:clamp(20px,3.5vw,44px);align-items:stretch}
-.nw-c{min-width:0}.nw .gcover{max-width:none;width:100%;padding:12px;box-shadow:6px 6px 0 var(--ink)}
-.nw .gcover b{font-size:clamp(16px,2.2vw,26px)}.nw .gcover small{font-size:11px}
-.nw-i{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
-.nw-i h3.big{margin:0 0 8px}.nw-i .meta{margin:0}.nw-i .chips{margin-top:0}.nw-i .chip:first-child{margin-left:0}
-@media(max-width:560px){.nw{grid-template-columns:110px minmax(0,1fr);gap:16px}.nw-i{gap:12px}}
-#pop .pop{border:0;padding:14px 4px 18px;margin:0 0 6px;background-position:0 100%}
-#pop .pop.on{border:0;box-shadow:none}
-#pop .pop:last-child{margin-bottom:0}
-#picks .trk,#picks .trk:last-child{border:0;padding:13px 12px}
-#picks .trk::after{bottom:0;height:3px}
-.pick{border-width:3px}
-
-/* ===== правки 2: релизы — воздух, переключатель, без лишних линий ===== */
+/* Общие правила страницы релизов */
 #p-rel .band{border-bottom:0}
 #p-rel .hd{border-bottom:0;padding-bottom:0;margin-bottom:clamp(24px,3.4vw,40px)}
-.soon{border:0}
-.nw .trk,.nw .trk:last-child{border:0}.nw .trk::after{bottom:0;height:3px}
-/* исправление наложения длинных названий: колонки могут сжиматься, слова переносятся */
-.trk{grid-template-columns:36px minmax(0,1fr) auto}.pop{grid-template-columns:44px minmax(0,1fr) auto}
-.trk .nm,.pop .nm{min-width:0;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;hyphens:auto;line-height:1.2}
-/* переключатель */
-.seg{display:inline-flex;max-width:100%;margin:0 0 clamp(24px,3vw,36px);padding:3px;border:3px solid var(--bandfg)}
-.seg button{font:500 15px "IBM Plex Mono",monospace;text-transform:lowercase;letter-spacing:.07em;background:transparent;color:var(--bandfg);border:0;padding:11px 20px;min-height:44px;cursor:pointer;transition:background .12s,color .12s}
-@media (hover:hover) and (pointer:fine){.seg button[aria-selected=false]:hover{background:rgba(255,255,255,.14)}}
-.seg button[aria-selected=true]{background:var(--sun);color:#050806;font-weight:700}
-#pop,#picks{max-width:860px;animation:tlIn .25s ease-out}
-#rotS .pop{border:0;margin:0;padding:16px 10px 20px;background-size:var(--w) 3px}
-#rotS .pop.on{border:0}
-#rotS .trk,#rotS .trk:last-child{border:0;padding:16px 10px;color:var(--bandfg)}
-#rotS .trk::after{bottom:0;height:3px}
-#rotS .trk.on,#rotS .trk.cur{color:var(--sun)}
-@media (hover:hover) and (pointer:fine){#rotS .trk:hover,#rotS .trk.on:hover{background:rgba(255,255,255,.09);color:var(--sun)}}
-
 /* ===== правка 5: крестик плеера ===== */
 #mp{transition:opacity .25s ease,transform .25s ease}
 #mp.out{opacity:0;transform:translateX(-50%) translateY(18px);pointer-events:none}
@@ -436,15 +403,8 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
  .hd,.b1 .hd,#p-rel .hd{margin-bottom:30px}
  .toc li{grid-template-columns:1fr;gap:2px;padding:14px 0}
  .toc a{min-height:48px}
- .nw{grid-template-columns:1fr;gap:28px}
- .nw .gcover{max-width:min(68%,260px)}.nw .gcover b{font-size:clamp(18px,6vw,26px)}
- .nw-i{gap:26px}
  .soon{padding:28px 22px;gap:24px;margin-top:52px}
- .seg{display:flex;width:100%}
- .seg button{flex:1 1 0;min-width:0;padding:12px 6px;font-size:13px;min-height:48px}
- #rotS .pop,#rotS .trk{min-height:56px;padding:18px 8px;font-size:20px}
  .btn{min-height:48px;padding-inline:18px}
- .chip{display:inline-flex;align-items:center;min-height:48px;padding:12px 15px;margin:12px 10px 0 0}
  dl div{flex-direction:column;gap:2px;padding:14px 16px}dt{width:auto}
  .card{gap:40px}.bio{gap:18px;margin-top:56px}
  #links{gap:28px}.cc .lnk{padding:16px;min-height:56px}
@@ -455,6 +415,306 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
  #rb{width:min(280px,calc(100vw - 24px))}
  .rb-top b{font-size:17px;white-space:nowrap}
 }
+/* Две редакционные витрины на странице релизов */
+#featureS, #rotS {
+  --editorial-line: color-mix(in srgb, var(--ink) 28%, transparent);
+  --editorial-surface: color-mix(in srgb, var(--card) 94%, transparent);
+  --editorial-muted: color-mix(in srgb, var(--ink) 76%, var(--card));
+}
+#featureS { padding-bottom: clamp(42px, 6vw, 72px); }
+.feature-release {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  border: 1px solid var(--editorial-line);
+  background: var(--editorial-surface);
+}
+.feature-art {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: clamp(20px, 3.5vw, 46px);
+  border-inline-end: 1px solid var(--editorial-line);
+  background: radial-gradient(ellipse at 38% 30%, color-mix(in srgb, var(--sky) 18%, transparent), transparent 73%), var(--bg);
+}
+.feature-cover {
+  position: relative;
+  display: block;
+  width: min(100%, 360px);
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--ink) 48%, transparent);
+  box-shadow: 5px 5px 0 var(--sun);
+  background: var(--card);
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.editorial-art {
+  display: grid;
+  position: relative;
+  place-items: center;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--art-accent, var(--sky)) 21%, var(--bg));
+}
+.feature-cover .editorial-art { aspect-ratio: 1; }
+.editorial-art img {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .24s ease;
+}
+.editorial-art.no-art {
+  background:
+    radial-gradient(circle at 76% 24%, color-mix(in srgb, var(--art-accent) 52%, transparent), transparent 70%),
+    color-mix(in srgb, var(--art-accent) 12%, var(--bg));
+}
+.editorial-art.no-art::before {
+  content: "";
+  position: absolute;
+  height: 76%;
+  max-width: 82%;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--ink) 0 2%, var(--art-accent) 2.5% 15%, transparent 15.5%),
+    repeating-radial-gradient(circle, color-mix(in srgb, var(--ink) 13%, transparent) 0 1px, transparent 2px 5px),
+    color-mix(in srgb, var(--art-accent) 22%, var(--card));
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+}
+.feature-cover-label {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  color: var(--ink);
+  background: var(--card);
+  font-size: 12px;
+}
+.feature-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(24px, 5.2vw, 72px);
+}
+.feature-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 0 0 16px;
+  color: var(--editorial-muted);
+  font-size: clamp(12px, 1.35vw, 14px);
+}
+.feature-meta time {
+  padding-inline-start: 14px;
+  border-inline-start: 1px solid var(--editorial-line);
+}
+#p-rel .feature-title {
+  margin: 0;
+  font-size: clamp(30px, 4.65vw, 68px);
+  line-height: 1.04;
+  text-transform: none;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: clamp(22px, 3.8vw, 44px);
+}
+.feature-link, .feature-player {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-height: 46px;
+  padding: 9px 13px;
+  border: 1px solid var(--editorial-line);
+  background: var(--card);
+  color: var(--ink);
+  font: 500 13px/1.25 "IBM Plex Mono", monospace;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+}
+.feature-link:first-child, .feature-player.on {
+  border-color: var(--sun);
+  background: var(--sun);
+  color: #090c0b;
+}
+.feature-link span, .feature-cover-label span { transition: transform .16s ease; }
+.feature-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 17px;
+  margin-top: 17px;
+  padding-top: 9px;
+  border-top: 1px solid var(--editorial-line);
+}
+.feature-more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--editorial-muted);
+  font-size: 12px;
+  text-decoration-color: var(--editorial-line);
+  text-underline-offset: .23em;
+}
+.feature-more small { font-size: 10px; opacity: .86; }
+.feature-soon.soon {
+  margin-top: 18px;
+  padding: 17px clamp(18px, 3vw, 30px);
+  border: 1px solid var(--editorial-line);
+  border-inline-start: 2px solid var(--sun);
+  background: var(--editorial-surface);
+  color: var(--ink);
+}
+.feature-soon .btn { border-color: currentColor; color: inherit; }
+.feature-soon #cd { color: inherit; }
+.feature-soon i.red { background: currentColor; }
+@media (hover: hover) and (pointer: fine) {
+  .feature-soon .btn:hover { background: var(--ink); color: var(--bg); }
+  .feature-cover:hover { border-color: var(--ink); box-shadow: 7px 7px 0 var(--sun); }
+  .feature-link:hover, .feature-player:hover { border-color: var(--ink); }
+  .feature-more a:hover { text-decoration-color: currentColor; color: var(--ink); }
+}
+
+#rotS {
+  border-block: 1px solid var(--editorial-line);
+  padding-block: clamp(34px, 5vw, 67px);
+  background: color-mix(in srgb, var(--bg) 57%, transparent);
+}
+.recommendation-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 13px 24px;
+  margin-bottom: clamp(16px, 2.7vw, 30px);
+}
+#p-rel .recommendation-head .hd { margin: 0; }
+.recommendation-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 17px;
+}
+.recommendation-tabs button {
+  position: relative;
+  min-height: 44px;
+  padding: 5px 2px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--editorial-muted);
+  font: 500 13px "IBM Plex Mono", monospace;
+  cursor: pointer;
+  transition: border-color .16s ease, color .16s ease;
+}
+.recommendation-tabs button[aria-selected="true"] { color: var(--ink); border-color: var(--sun); }
+.recommendation-tabs button[hidden], .recommendation-panel[hidden] { display: none; }
+.recommendations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 188px), 1fr));
+  gap: clamp(12px, 2vw, 22px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.recommendations > li { min-width: 0; }
+.recommendation-track {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid var(--editorial-line);
+  background: var(--editorial-surface);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.recommendation-track .editorial-art {
+  aspect-ratio: 5 / 3;
+  border-bottom: 1px solid var(--editorial-line);
+}
+.recommendation-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 13px 14px;
+}
+.recommendation-name { display: grid; min-width: 0; gap: 4px; }
+.recommendation-name strong {
+  font: 700 clamp(18px, 2.05vw, 24px)/1.12 "Oswald", "Arial Narrow", sans-serif;
+  overflow-wrap: anywhere;
+}
+.recommendation-name small { color: var(--editorial-muted); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
+.recommendation-action {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--editorial-line);
+  background: var(--card);
+  font: 700 14px/1 "IBM Plex Mono", monospace;
+  transition: color .18s ease, background .18s ease, border-color .18s ease;
+}
+.recommendation-track.cur { border-color: var(--ink); }
+.recommendation-track.on .recommendation-action { background: var(--sun); color: #090c0b; border-color: var(--sun); }
+.recommendation-track[data-id]::after, .feature-player::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--p, 0%);
+  height: 2px;
+  background: var(--sun);
+  pointer-events: none;
+}
+.feature-player { position: relative; }
+.feature-player.on::after { background: #090c0b; }
+:is(#featureS, #rotS) :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .recommendation-tabs button:hover { color: var(--ink); }
+  .recommendation-tabs button[aria-selected="false"]:hover { border-color: var(--editorial-line); }
+  .recommendation-track:hover { background: var(--card); border-color: var(--ink); }
+  .recommendation-track:hover .recommendation-action { border-color: var(--ink); }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .feature-cover:hover img, .recommendation-track:hover img { transform: scale(1.025); }
+  .feature-link:hover span, .feature-cover:hover .feature-cover-label span { transform: translate(2px, -2px); }
+  .recommendation-track:hover { transform: translateY(-2px); }
+  .recommendation-track:active, .feature-link:active, .feature-player:active { transform: translateY(1px); }
+}
+@media (max-width: 700px) {
+  .feature-release { grid-template-columns: minmax(0, 1fr); }
+  .feature-art { border-inline-end: 0; border-bottom: 1px solid var(--editorial-line); }
+  .feature-cover { width: min(100%, 290px); }
+  .feature-preview { padding: clamp(18px, 5.6vw, 32px); }
+}
+@media (max-width: 480px) {
+  .recommendations { grid-template-columns: minmax(0, 1fr); }
+  .recommendation-track { grid-template: minmax(74px, auto) / 74px minmax(0, 1fr); }
+  .recommendation-track .editorial-art { aspect-ratio: auto; border-bottom: 0; border-inline-end: 1px solid var(--editorial-line); }
+  .recommendation-copy { padding: 10px; gap: 8px; }
+  .recommendation-action { width: 32px; height: 32px; }
+}
+
 /* Каталог релизов */
 #discS {
   --release-width: clamp(172px, 28vw, 272px);
@@ -661,11 +921,21 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 </div>
 
 <div class="pg" id="p-rel">
-<section class="band b1"><h2 class="big hd">новое</h2><div id="newest"></div></section>
-<!-- правка 2: «популярное» + «выбор артиста» в одном блоке с переключателем -->
-<section class="band b2" id="rotS"><h2 class="big hd">что слушать</h2>
-<div class="seg" role="tablist" aria-label="подборки"><button type="button" role="tab" id="tabPop" data-tab="pop" aria-selected="true" data-s>популярное</button><button type="button" role="tab" id="tabPick" data-tab="pick" aria-selected="false" tabindex="-1" data-s>выбор артиста</button></div>
-<div id="pop" role="tabpanel" aria-labelledby="tabPop"></div><div id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div></section>
+<section class="band" id="featureS" aria-labelledby="newTitle">
+  <h2 class="big hd" id="newTitle">новое</h2>
+  <div id="newest"></div>
+</section>
+<section id="rotS" aria-labelledby="recommendationTitle">
+  <div class="recommendation-head">
+    <h2 class="big hd" id="recommendationTitle">что слушать</h2>
+    <div class="recommendation-tabs" role="tablist" aria-label="подборки">
+      <button type="button" role="tab" id="tabPop" data-tab="pop" aria-selected="true" aria-controls="pop" data-s>популярное</button>
+      <button type="button" role="tab" id="tabPick" data-tab="pick" aria-selected="false" aria-controls="picks" tabindex="-1" data-s>выбор артиста</button>
+    </div>
+  </div>
+  <div class="recommendation-panel" id="pop" role="tabpanel" aria-labelledby="tabPop"></div>
+  <div class="recommendation-panel" id="picks" role="tabpanel" aria-labelledby="tabPick" hidden></div>
+</section>
 <section class="band" id="discS" aria-labelledby="discTitle" hidden>
   <h2 class="big hd" id="discTitle">все релизы</h2>
   <div class="catalog-stage" id="discStage">
@@ -1110,19 +1380,23 @@ let ctx=[];
 function next(){const i=ctx.indexOf(cur),n=ctx[i+1];if(n)toggle(n);else ui()}
 const windLvl=()=>cur&&aud[cur]&&!aud[cur].paused?.0003:.03;
 function ui(){const a=cur&&aud[cur],pl=!!a&&!a.paused;
- $$('[data-id]').forEach(b=>{const on=b.dataset.id===cur;b.classList.toggle('on',on&&pl);b.classList.toggle('cur',on);const ic=b.querySelector('.ic');if(ic&&byId(b.dataset.id).file)ic.textContent=on&&pl?'❚❚':'▶'});
+ $$('[data-id]').forEach(button=>{
+  const release=byId(button.dataset.id), current=release?.id===cur, playing=current&&pl;
+  button.classList.toggle('on',playing);
+  button.classList.toggle('cur',current);
+  const icon=button.querySelector('.ic');
+  if(icon&&release?.file)icon.textContent=playing?'❚❚':'▶';
+  if(button.hasAttribute('data-audio-control')&&release?.file){
+    const action=playing?'пауза':'слушать здесь';
+    button.setAttribute('aria-label',action+' — '+release.title);
+    const caption=button.querySelector('.play-caption');
+    if(caption)caption.textContent=action;
+  }
+ });
  document.body.classList.toggle('playing',pl);$('#mp').hidden=!cur;if(cur){$('#mpn').textContent=byId(cur).title;$('#mpb').textContent=pl?'❚❚':'▶'}
  if(wg&&ac)wg.gain.setTargetAtTime(pl?.0003:.03,ac.currentTime,pl?.5:1.5)}
 function prog(id){const a=aud[id];if(!a||!a.duration)return;const p=a.currentTime/a.duration*100;$$('[data-id="'+id+'"]').forEach(b=>b.style.setProperty('--p',p+'%'));if(id===cur){$('#mpf').style.width=p+'%';$('#mpc').textContent=fmt(a.currentTime)+' / '+fmt(a.duration)}}
 const releaseType = type => /^ep$/i.test(type || '') ? 'мини-альбом' : (type || 'релиз').toLowerCase();
-const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${escapeHTML(r.cover)}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${escapeHTML(r.title)}</b><small>neosten${r.type?' · '+escapeHTML(releaseType(r.type)):''}</small></div>`;
-function chips(release) {
-  const links = listeningOptions(release);
-  return links.length ? `<div class="chips">${links.map(link =>
-    renderListeningLink(link, 'chip')
-  ).join('')}</div>` : '';
-}
-const row=(r,l)=>`<button class="trk" data-id="${escapeHTML(r.id)}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${escapeHTML(r.title)}</span><span class="ex">${escapeHTML(r.note||'')}</span></button>`;
 const PN = {
   spotify: 'Spotify', yandex: 'Яндекс Музыка', vk: 'VK Музыка', apple: 'Apple Music',
   youtubeMusic: 'YouTube Music', youtube: 'YouTube', deezer: 'Deezer', tidal: 'TIDAL',
@@ -1558,16 +1832,142 @@ function renderTimeline(tl){
   </div>`;
 }
 
-function renderReleases(){const t=Date.now(),up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!r.pendingMetadata&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
- let h='';
- if(nw)h+=`<div class="nw"><div class="nw-c">${cover(nw,0)}</div><div class="nw-i"><div><h3 class="big">${escapeHTML(nw.title)}</h3><p class="meta">${escapeHTML(releaseType(nw.type))} · ${fd(nw.date)}</p></div><div><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div></div>`;
- if(u)h+=`<div class="soon"><div><small>скоро · ${fdt(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':escapeHTML(u.title)}</h3><div id="cd"></div><div class="note">таймер идёт по московскому времени (МСК, UTC+3)</div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
+function editorialArtwork(release, index = 0, lazy = false) {
+  const accent = COLS[index % COLS.length];
+  const image = release.cover
+    ? `<img src="${escapeHTML(release.cover)}" alt="" decoding="async"${lazy ? ' loading="lazy"' : ''}>`
+    : '';
+  return `<span class="editorial-art${image ? '' : ' no-art'}" style="--art-accent:${accent}" aria-hidden="true">${image}</span>`;
+}
+
+function audioButtonAttrs(release, context) {
+  return `data-id="${escapeHTML(release.id)}" data-l="${context}" data-audio-control
+    aria-label="слушать здесь — ${escapeHTML(release.title)}" data-s`;
+}
+
+function releaseMenuAttrs(release) {
+  return `data-menu="${escapeHTML(release.id)}" aria-haspopup="dialog"
+    aria-label="где слушать — ${escapeHTML(release.title)}" data-s`;
+}
+
+function renderFeaturedRelease(release) {
+  const title = escapeHTML(release.title);
+  const quickLinks = releaseLinks(release, listPlatforms);
+  const more = listeningOptions(release).filter(option => !quickLinks.some(link => link.key === option.key));
+  const links = quickLinks.map(({name, url}) =>
+    `<a class="feature-link" href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(name)}<span aria-hidden="true">↗</span></a>`
+  ).join('');
+  const play = release.file
+    ? `<button type="button" class="feature-player" ${audioButtonAttrs(release, 'n')}>
+        <span class="play-caption">слушать здесь</span><span class="ic" aria-hidden="true">▶</span>
+      </button>`
+    : '';
+  const date = /^\d{4}-\d{2}-\d{2}/.test(release.date)
+    ? `<time datetime="${escapeHTML(release.date.slice(0, 10))}">${fd(release.date)}</time>`
+    : `<span>${fd(release.date)}</span>`;
+  return `<article class="feature-release" aria-labelledby="featureTitle">
+    <div class="feature-art">
+      <button type="button" class="feature-cover" ${releaseMenuAttrs(release)}>
+        ${editorialArtwork(release)}
+        <span class="feature-cover-label" aria-hidden="true">где слушать <span>↗</span></span>
+      </button>
+    </div>
+    <div class="feature-preview">
+      <p class="feature-meta"><span>${escapeHTML(releaseType(release.type))}</span>${date}</p>
+      <h3 class="big feature-title" id="featureTitle">${title}</h3>
+      ${links || play ? `<div class="feature-actions">${links}${play}</div>` : ''}
+      ${more.length ? `<div class="feature-more">${more.map(link => renderListeningLink(link)).join('')}</div>` : ''}
+    </div>
+  </article>`;
+}
+
+function renderUpcomingRelease(release) {
+  const title = release.hide ? '<i class="red"></i>' : escapeHTML(release.title);
+  const presave = webURL(release.presave)
+    ? `<a class="btn" href="${escapeHTML(release.presave)}" target="_blank" rel="noopener">пресейв ↗</a>`
+    : '<span>ссылка на пресейв скоро</span>';
+  return `<div class="soon feature-soon">
+    <div>
+      <small>скоро · ${fdt(release.date)}</small><h3 class="big">${title}</h3>
+      <div id="cd"></div><div class="note">таймер идёт по московскому времени (мск, UTC+3)</div>
+    </div>${presave}
+  </div>`;
+}
+
+function recommendationGrid(releases, context) {
+  return `<ul class="recommendations" role="list">${releases.map((release, index) => {
+    const summary = release.plays ? `${fmtN(release.plays)} прослушиваний` : release.note || (release.type && releaseType(release.type));
+    return `<li><button type="button" class="recommendation-track" ${release.file ? audioButtonAttrs(release, context) : releaseMenuAttrs(release)}>
+      ${editorialArtwork(release, index, true)}
+      <span class="recommendation-copy">
+        <span class="recommendation-name">
+          <strong>${escapeHTML(release.title)}</strong>
+          ${summary ? `<small>${escapeHTML(summary)}</small>` : ''}
+        </span>
+        <span class="recommendation-action ic" aria-hidden="true">${release.file ? '▶' : '↗'}</span>
+      </span>
+    </button></li>`;
+  }).join('')}</ul>`;
+}
+
+const recommendationTabs = $$('.recommendation-tabs [role=tab]');
+let selectedRecommendation = 'pop';
+
+function setRecommendationTab(key) {
+  selectedRecommendation = key;
+  recommendationTabs.forEach(tab => {
+    const selected = !tab.hidden && tab.dataset.tab === key;
+    tab.setAttribute('aria-selected', selected);
+    tab.tabIndex = selected ? 0 : -1;
+    document.getElementById(tab.getAttribute('aria-controls')).hidden = !selected;
+  });
+}
+
+recommendationTabs.forEach(tab => {
+  tab.onclick = () => setRecommendationTab(tab.dataset.tab);
+  tab.onkeydown = event => {
+    const available = recommendationTabs.filter(option => !option.hidden);
+    const at = available.indexOf(tab);
+    let next;
+    switch (event.key) {
+      case 'ArrowRight': next = (at + 1) % available.length; break;
+      case 'ArrowLeft': next = (at + available.length - 1) % available.length; break;
+      case 'Home': next = 0; break;
+      case 'End': next = available.length - 1; break;
+      default: return;
+    }
+    if (!available[next]) return;
+    event.preventDefault();
+    setRecommendationTab(available[next].dataset.tab);
+    available[next].focus();
+  };
+});
+
+function renderRecommendations() {
+  const popular = R.filter(release => release.plays && !release.hide && hasReleaseTitle(release))
+    .sort((a, b) => b.plays - a.plays).slice(0, 4);
+  const picks = R.filter(release => release.pick && !release.hide && hasReleaseTitle(release)).slice(0, 4);
+  $('#rotS').hidden = !popular.length && !picks.length;
+  $('#tabPop').hidden = !popular.length;
+  $('#tabPick').hidden = !picks.length;
+  $('#pop').innerHTML = recommendationGrid(popular, 'p');
+  $('#picks').innerHTML = recommendationGrid(picks, 'k');
+  const tab = recommendationTabs.find(option => !option.hidden && option.dataset.tab === selectedRecommendation)
+    || recommendationTabs.find(option => !option.hidden);
+  setRecommendationTab(tab?.dataset.tab);
+}
+
+document.addEventListener('error', event => {
+  if (!event.target.matches?.('.editorial-art img')) return;
+  event.target.parentElement.classList.add('no-art');
+  event.target.remove();
+}, true);
+
+function renderReleases(){const up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&Number.isFinite(ts(r))&&!r.pendingMetadata&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
+ let h=nw?renderFeaturedRelease(nw):'';
+ if(u)h+=renderUpcomingRelease(u);
  $('#newest').innerHTML=h||'<p>скоро здесь появится новый релиз.</p>';
- const pp=R.filter(r=>r.plays).sort((a,b)=>b.plays-a.plays),mx=pp[0]?pp[0].plays:1;
- $('#pop').innerHTML=pp.map((r,i)=>`<button class="pop" data-id="${r.id}" data-l="p" style="--w:${r.plays/mx*100}%"><em>${i+1}</em><span class="nm">${r.title}</span><span>${fmtN(r.plays)}</span></button>`).join('');
- $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
-  {const hp=pp.length>0,hk=R.some(r=>r.pick);$('#rotS').hidden=!(hp||hk);$('#tabPop').hidden=!hp;$('#tabPick').hidden=!hk;
-   if(!hp&&hk){$('#pop').hidden=true;$('#picks').hidden=false;$('#tabPick').setAttribute('aria-selected','true');$('#tabPop').setAttribute('aria-selected','false')}}
+ renderRecommendations();
  renderCatalog(R.filter(r=>!r.hide&&hasReleaseTitle(r)&&(r.auto||r.show||releaseLinks(r).length)).sort((a,b)=>ts(b)-ts(a)));
 
  const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
@@ -1635,11 +2035,6 @@ function runLoader(force){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');
   if(d>0){if(!ent){ent=true;enter()}g.style.opacity=1-d;g.style.filter='blur('+d*5+'px)'}
   if(d<1)requestAnimationFrame(f);else{g.style.display='none';loading=false}})(ldT0)}
 runLoader(true);
-/* ---------- правка 2: переключатель «популярное / выбор артиста» ---------- */
-const rotTabs=$$('.seg [role=tab]');
-function setTab(k){rotTabs.forEach(b=>{const on=b.dataset.tab===k;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});$('#pop').hidden=k!=='pop';$('#picks').hidden=k!=='pick'}
-rotTabs.forEach(b=>{b.onclick=()=>setTab(b.dataset.tab);b.onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const v=rotTabs.filter(x=>!x.hidden),n=v[(v.indexOf(b)+1)%v.length];if(n){setTab(n.dataset.tab);n.focus()}}}});
-
 /* ---------- правка 5: крестик на плеере — стоп + плавное скрытие ---------- */
 $('#mpx').onclick=()=>{const m=$('#mp'),a=cur&&aud[cur];if(a)a.pause();m.classList.add('out');
  setTimeout(()=>{if(a)a.currentTime=0;cur=null;$$('[data-id]').forEach(b=>b.style.setProperty('--p','0%'));$('#mpf').style.width='0%';$('#mpc').textContent='0:00';ui();m.classList.remove('out')},260)};
