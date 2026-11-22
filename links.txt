@@ -1,14 +1,9 @@
-# Сюда добавляй релизы, которых нет на Apple Music (или любые другие).
-# Одна строка = один релиз. Достаточно ссылки с ЛЮБОЙ площадки (Spotify, Яндекс, YouTube Music...):
-# сайт сам возьмёт обложку, название и ссылки на остальные площадки.
+# Ссылки и ручные уточнения каталога. Один релиз можно указать на нескольких площадках в одной строке.
+# Формат: [ГГГГ-ММ-ДД |] URL [| title=точное название] [| type=тип] [| id=ID_в_каталоге] [| yandex=URL | spotify=URL ...]
+# Укажи title или помести ссылки одного релиза в одну строку, если площадка не отдаёт метаданные.
+# Неподтверждённая ссылка остаётся в этом файле до следующей сборки или ручного уточнения.
+# Строки, начинающиеся с #, — комментарии.
 #
-# Формат:   [дата ГГГГ-ММ-ДД |] ссылка [| vk=ссылка_на_релиз_в_VK]
-# Дату пиши для НОВЫХ релизов (чтобы попали в «новое»). Для старых можно без даты.
-# Строки с # — комментарии.
-#
-# Примеры (убери # чтобы включить):
-# 2026-10-20 | https://open.spotify.com/album/XXXXXXXX
-# https://music.yandex.ru/album/12345678 | vk=https://vk.ru/music/album/...
 https://music.yandex.ru/album/40628842
 https://music.yandex.ru/album/41828596
 https://music.yandex.ru/album/37798894
@@ -30,9 +25,9 @@ https://music.yandex.ru/album/38648077
 https://music.yandex.ru/album/38302359
 https://music.yandex.ru/album/37269016
 https://music.yandex.ru/album/35652284
-2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07
+2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007
 2026-10-09 | https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj
-2026-10-02 | https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL
+2026-10-02 | https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL | title=МАЛО | id=apple-6817133665
 2026-08-21 | https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz
 2026-07-24 | https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4
 2026-06-12 | https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4
