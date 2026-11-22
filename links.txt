@@ -39,6 +39,5 @@ https://music.yandex.ru/album/35652284
 2025-11-09 | https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x | yandex=https://music.yandex.ru/album/39131024
 2025-10-17 | https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy | yandex=https://music.yandex.ru/album/38648077
 2025-09-26 | https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis | title=ПРЫГАЙ | id=apple-1840949421 | yandex=https://music.yandex.ru/album/38302359
-2025-08-22 | https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg | yandex=
 2025-07-25 | https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq | yandex=https://music.yandex.ru/album/37269016
 2025-03-21 | https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU | yandex=https://music.yandex.ru/album/35652284
