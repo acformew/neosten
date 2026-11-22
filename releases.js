@@ -25,7 +25,8 @@ window.RELEASES = [
 
   // --- популярное ---
   { id:'oshibka', title:'я ошибка музыки', plays:2100000, file:'audio/ya-oshibka-muzyki.mp3' },
-  { id:'prygay',  title:'прыгай',          plays:1700000, file:'audio/prygay.mp3' },
+  { id:'prygay', title:'ПРЫГАЙ', plays:1700000, file:'audio/prygay.mp3',
+    show:true, date:'2025-09-26', type:'сингл', cover:'covers/1840949420.jpg' },
   { id:'tri',     title:'три буквы',       plays:300000,  file:'audio/tri-bukvy.m4a' },
 
   // --- выбор артиста ---

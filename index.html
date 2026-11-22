@@ -1132,7 +1132,7 @@ const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#3
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
 const listPlatforms = ['spotify', 'yandex'];
 
-const {directLinks, hasReleaseTitle, matchesFor, webURL} = window.ReleaseIdentity;
+const {directLinks, hasReleaseTitle, matchesFor, isSpotifyAlias, webURL} = window.ReleaseIdentity;
 
 function releaseLinks(release, platforms = Object.keys(PN)) {
   const links = directLinks(release.links);
@@ -1153,18 +1153,30 @@ function renderListeningLink({name, url, profile}, className = '') {
   return `<a class="${className}" href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(name)}${profile ? ' <small>страница артиста</small>' : ''}</a>`;
 }
 
+function mergeCatalogLinks(release, incoming) {
+  const existingLinks = directLinks(release.links);
+  const incomingLinks = directLinks(incoming.links);
+  return isSpotifyAlias(release, incoming)
+    ? {...existingLinks, ...incomingLinks}
+    : {...incomingLinks, ...existingLinks};
+}
+
 for (const automatic of window.AUTO || []) {
   if (!hasReleaseTitle(automatic)) continue;
   const matches = matchesFor(R, automatic).sort((a, b) => R.indexOf(a) - R.indexOf(b));
   const release = matches[0];
   if (!release) {
-    R.push({...automatic, auto: true, links: directLinks(automatic.links)});
+    const ids = [automatic.id, ...(automatic.ids || [])];
+    let id = automatic.id;
+    for (let suffix = 2; R.some(item => item.id === id); suffix++) id = automatic.id + '-' + suffix;
+    R.push({...automatic, id, ids, auto: true, links: directLinks(automatic.links)});
     continue;
   }
   for (const duplicate of matches.slice(1)) {
-    release.links = {...directLinks(duplicate.links), ...directLinks(release.links)};
+    const replacesAlias = isSpotifyAlias(release, duplicate);
+    release.links = mergeCatalogLinks(release, duplicate);
     release.ids = [...new Set([...(release.ids || []), duplicate.id, ...(duplicate.ids || [])])];
-    release.cover ||= duplicate.cover;
+    release.cover = (replacesAlias && duplicate.cover) || release.cover || duplicate.cover;
     release.date ||= duplicate.date;
     release.page ||= duplicate.page;
     release.type ||= duplicate.type;
@@ -1174,16 +1186,18 @@ for (const automatic of window.AUTO || []) {
     release.show ||= duplicate.show;
     R.splice(R.indexOf(duplicate), 1);
   }
+  const replacesAlias = isSpotifyAlias(release, automatic);
+  const links = mergeCatalogLinks(release, automatic);
   if (release.hide) release.title = automatic.title;
   if (!release.auto) release.date = automatic.date || release.date;
   release.auto = true;
   release.ids = [...new Set([...(release.ids || []), automatic.id, ...(automatic.ids || [])])];
   release.hide = false;
-  release.cover ||= automatic.cover;
+  release.cover = (replacesAlias && automatic.cover) || release.cover || automatic.cover;
   release.date ||= automatic.date;
   release.page ||= automatic.page;
   release.type ||= automatic.type;
-  release.links = {...directLinks(automatic.links), ...directLinks(release.links)};
+  release.links = links;
 }
 
 const platformDialog = $('#pm');
