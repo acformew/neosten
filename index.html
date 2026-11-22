@@ -463,6 +463,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 #discTitle { scroll-margin-top: 85px; }
 .catalog-stage { position: relative; }
 .catalog-stage.is-changing { overflow: clip; }
+html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 .catalog-panel[hidden] { display: none; }
 .catalog-panel.is-leaving { position: absolute; inset: 0 0 auto; pointer-events: none; }
 .catalog-switch, .catalog-controls { display: flex; justify-content: center; align-items: center; }
@@ -571,7 +572,6 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   text-decoration-color: var(--dim);
 }
 .catalog-platforms a span { opacity: .65; }
-.catalog-platforms small { align-self: center; font-size: 12px; opacity: .75; }
 @media (hover: hover) and (pointer: fine) {
   .catalog-entry:hover strong, .catalog-switch button:hover { text-decoration: underline; text-underline-offset: .22em; }
   .catalog-card .catalog-entry:hover .catalog-art { opacity: 1; }
@@ -582,7 +582,6 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   .catalog-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .catalog-platforms { justify-content: flex-start; margin-inline-start: 68px; }
   .catalog-platforms a { min-height: 44px; }
-  .catalog-platforms small { margin-block: 8px; }
 }
 @media (max-width: 480px) {
   #discS { --release-width: clamp(158px, 54vw, 230px); }
@@ -764,7 +763,17 @@ function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chim
  ng.gain.setValueAtTime(0,t);ng.gain.linearRampToValueAtTime(.025,t+1.8);ng.gain.linearRampToValueAtTime(0,t+END-.1);ns.connect(nf);nf.connect(ng);ng.connect(bus);ns.start(t);ns.stop(t+END)}
 const mb=$('#mute');mb.onclick=()=>{setSound(!sound);mb.classList.remove('bnc');void mb.offsetWidth;mb.classList.add('bnc')};
 /* UI sounds */
-document.addEventListener('mouseover',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(1300+Math.random()*300,.04,'square',.015)});
+const hoverSoundTargets = '#nav .n, #logo, #theme, #catbox, #grip > span, .catalog-switch button';
+let lastHoverSound = -Infinity;
+document.addEventListener('pointerover', event => {
+  if (event.pointerType !== 'mouse' || !sound || ac?.state !== 'running') return;
+  const target = event.target.closest(hoverSoundTargets);
+  if (!target || target.contains(event.relatedTarget)) return;
+  const now = performance.now();
+  if (now - lastHoverSound < 150) return;
+  lastHoverSound = now;
+  blip(1300 + Math.random() * 300, .04, 'square', .015);
+});
 document.addEventListener('pointerdown',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(220,.14,'sine',.2,60)});
 /* ---------- dotted grid ---------- */
 const cv=$('#grid'),cx=cv.getContext('2d');
@@ -1088,9 +1097,6 @@ console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл
 /* ---------- releases: data-driven + player ---------- */
 const R=(window.RELEASES||[]).slice(),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
 const norm=t=>(t||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,''),L=window.LINKS||{};
-(window.AUTO||[]).forEach(a=>{const m=R.find(r=>norm(r.match||r.title)===norm(a.title));
- if(m){m.auto=true;if(m.hide)m.title=a.title;m.hide=false;m.date=a.date||m.date;m.cover=m.cover||a.cover;m.page=a.page;m.type=m.type||a.type;m.links=a.links||{}}
- else R.push(Object.assign({},a,{auto:true}))});
 const MSK=d=>{d=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(d))return Date.parse(d+'T00:00:00+03:00');if(/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/.test(d))return Date.parse(d.replace(' ','T')+'+03:00');return new Date(d).getTime()},hasT=d=>/[T ]\d{2}:\d{2}/.test(String(d)),
 ts=r=>r.date?MSK(r.date):0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
 const mon=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -1113,9 +1119,14 @@ function ui(){const a=cur&&aud[cur],pl=!!a&&!a.paused;
  if(wg&&ac)wg.gain.setTargetAtTime(pl?.0003:.03,ac.currentTime,pl?.5:1.5)}
 function prog(id){const a=aud[id];if(!a||!a.duration)return;const p=a.currentTime/a.duration*100;$$('[data-id="'+id+'"]').forEach(b=>b.style.setProperty('--p',p+'%'));if(id===cur){$('#mpf').style.width=p+'%';$('#mpc').textContent=fmt(a.currentTime)+' / '+fmt(a.duration)}}
 const releaseType = type => /^ep$/i.test(type || '') ? 'мини-альбом' : (type || 'релиз').toLowerCase();
-const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${r.cover}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${r.title}</b><small>neosten${r.type?' · '+releaseType(r.type):''}</small></div>`;
-const chips=r=>L.listen?`<div class="chips">${L.listen.map(x=>`<a class="chip" href="${(r.links&&r.links[x.k])||x.u}" target="_blank" rel="noopener">${x.n}</a>`).join('')}</div>`:'';
-const row=(r,l)=>`<button class="trk" data-id="${r.id}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${r.title}</span><span class="ex">${r.note||''}</span></button>`;
+const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${escapeHTML(r.cover)}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${escapeHTML(r.title)}</b><small>neosten${r.type?' · '+escapeHTML(releaseType(r.type)):''}</small></div>`;
+function chips(release) {
+  const links = releaseLinks(release);
+  return links.length ? `<div class="chips">${links.map(({name, url}) =>
+    `<a class="chip" href="${escapeHTML(url)}" target="_blank" rel="noopener">${name}</a>`
+  ).join('')}</div>` : '';
+}
+const row=(r,l)=>`<button class="trk" data-id="${escapeHTML(r.id)}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${escapeHTML(r.title)}</span><span class="ex">${escapeHTML(r.note||'')}</span></button>`;
 const PN = {
   spotify: 'Spotify', yandex: 'Яндекс Музыка', vk: 'VK Музыка', apple: 'Apple Music',
   youtubeMusic: 'YouTube Music', youtube: 'YouTube', deezer: 'Deezer', tidal: 'TIDAL',
@@ -1123,15 +1134,53 @@ const PN = {
 };
 const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'};
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
-const isPlatformURL = value => typeof value === 'string' && /^https?:\/\/[^\s]+$/i.test(value);
+const listPlatforms = ['spotify', 'yandex'];
 
-function releaseLinks(release) {
-  const links = release.links || {};
-  const result = Object.entries(PN)
-    .filter(([key]) => isPlatformURL(links[key]))
-    .map(([key, name]) => ({key, name, url: links[key]}));
-  if (isPlatformURL(release.page)) result.push({name: 'все площадки', url: release.page});
-  return result;
+function normalizedReleaseLinks(links) {
+  const direct = {};
+  for (const [key, value] of Object.entries(links || {})) {
+    if (typeof value !== 'string') continue;
+    const url = value.trim();
+    let parsed;
+    try { parsed = new URL(url); } catch { continue; }
+    if (!['http:', 'https:'].includes(parsed.protocol)) continue;
+    const host = parsed.hostname.replace(/^www\./, '');
+    const path = parsed.pathname;
+    if (/^music\.yandex\.(?:ru|com|kz|by|uz)$/.test(host)) {
+      if (/^\/(?:album\/\d+(?:\/track\/\d+)?|track\/\d+)\/?$/.test(path)) direct.yandex = url;
+      continue;
+    }
+    if (host === 'open.spotify.com') {
+      if (/^\/(?:intl-[\w-]+\/)?(?:album|track)\/[\w]+\/?$/.test(path)) direct.spotify = url;
+      continue;
+    }
+    if (listPlatforms.includes(key) || !Object.hasOwn(PN, key)) continue;
+    if (/\/(?:artists?|users?|channels?|@[^/]+)(?:\/|$)/i.test(path)) continue;
+    if (key === 'soundcloud' && path.split('/').filter(Boolean).length < 2) continue;
+    direct[key] = url;
+  }
+  return direct;
+}
+
+function releaseLinks(release, platforms = Object.keys(PN)) {
+  const links = normalizedReleaseLinks(release.links);
+  return platforms.filter(key => links[key]).map(key => ({key, name: PN[key], url: links[key]}));
+}
+
+const manualReleases = new Map(R.map(release => [norm(release.match || release.title), release]));
+for (const automatic of window.AUTO || []) {
+  const manual = !automatic.pendingMetadata && manualReleases.get(norm(automatic.title));
+  if (!manual) {
+    R.push({...automatic, auto: true});
+    continue;
+  }
+  manual.auto = true;
+  if (manual.hide) manual.title = automatic.title;
+  manual.hide = false;
+  manual.date = automatic.date || manual.date;
+  manual.cover ||= automatic.cover;
+  manual.type ||= automatic.type;
+  manual.links = {...normalizedReleaseLinks(automatic.links), ...normalizedReleaseLinks(manual.links)};
 }
 
 const platformDialog = $('#pm');
@@ -1139,12 +1188,8 @@ let platformTrigger;
 
 function openMenu(release, trigger = document.activeElement) {
   const links = releaseLinks(release);
-  const profiles = (L.listen || []).filter(({k, u}) => isPlatformURL(u) && !links.some(link => link.key === k));
   const cover = release.cover ? `<img class="pmi" src="${escapeHTML(release.cover)}" alt="">` : '';
-  const options = [
-    ...links.map(({name, url}) => `<a href="${escapeHTML(url)}" target="_blank" rel="noopener" data-s>${name}</a>`),
-    ...profiles.map(({k, n, u}) => `<a href="${escapeHTML(u)}" target="_blank" rel="noopener" data-s>${escapeHTML(PN[k] || n)} <small>страница артиста</small></a>`),
-  ];
+  const options = links.map(({name, url}) => `<a href="${escapeHTML(url)}" target="_blank" rel="noopener">${name}</a>`);
   $('#pmc').innerHTML = `${cover}<h3 class="big">${escapeHTML(release.title)}</h3><p class="meta">где слушать</p>${options.join('') || '<p>ссылок пока нет</p>'}`;
   platformTrigger = trigger;
   platformDialog.hidden = false;
@@ -1327,54 +1372,82 @@ new ResizeObserver(() => {
   else if (catalogMode === 'rail' && width !== railWidth) centerCatalogRail();
 }).observe(catalogViewport);
 
+function keepCatalogSwitchInView(transition) {
+  if (transition.anchorTop === null) return;
+  const delta = transition.control.getBoundingClientRect().top - transition.anchorTop;
+  if (Math.abs(delta) >= 1) window.scrollBy({top: delta, behavior: 'instant'});
+}
+
 function finishCatalogTransition() {
   if (!catalogTransition) return;
-  const {outgoing, animations} = catalogTransition;
+  const transition = catalogTransition;
   catalogTransition = null;
-  outgoing.hidden = true;
-  outgoing.classList.remove('is-leaving');
-  animations.forEach(animation => animation.cancel());
+  cancelAnimationFrame(transition.frame);
+  transition.outgoing.hidden = true;
+  transition.outgoing.classList.remove('is-leaving');
+  transition.animations.forEach(animation => animation.cancel());
+  keepCatalogSwitchInView(transition);
   catalogStage.classList.remove('is-changing');
+}
+
+function panelFrame(panel, hiddenFrame) {
+  if (panel.hidden) return hiddenFrame;
+  const style = getComputedStyle(panel);
+  return {opacity: style.opacity, transform: style.transform};
 }
 
 function setCatalogMode(mode) {
   if (mode === catalogMode) return;
-  const startHeight = catalogStage.getBoundingClientRect().height;
-  finishCatalogTransition();
+  const start = catalogStage.getBoundingClientRect();
   const outgoing = catalogPanels[catalogMode];
   const incoming = catalogPanels[mode];
-  const heading = $('#discTitle');
-  // Когда переключатель внизу длинного списка, показываем начало нового вида.
-  if (heading.getBoundingClientRect().top < $('#nav').offsetHeight) {
-    heading.scrollIntoView({block: 'start', behavior: 'instant'});
+  const outgoingStart = panelFrame(outgoing, {opacity: 1, transform: 'none'});
+  const incomingStart = panelFrame(incoming, {opacity: 0, transform: 'translateY(8px)'});
+  const control = catalogModeButtons.find(button => button.dataset.catalogMode === mode);
+  const controlTop = control.getBoundingClientRect().top;
+  if (catalogTransition) {
+    catalogTransition.anchorTop = null;
+    finishCatalogTransition();
   }
+
+  // При сворачивании длинного списка удерживаем кнопку на месте, пока блок уменьшается.
+  const anchorTop = mode === 'rail' && start.top < $('#nav').offsetHeight
+    && controlTop >= 0 && controlTop < innerHeight ? controlTop : null;
+  catalogStage.classList.add('is-changing');
   catalogMode = mode;
-  catalogModeButtons.forEach(button => button.setAttribute('aria-pressed', button.dataset.catalogMode === mode));
+  catalogModeButtons.forEach(button => button.setAttribute('aria-pressed', button === control));
   outgoing.inert = true;
+  outgoing.classList.add('is-leaving');
   incoming.hidden = false;
   incoming.inert = false;
   if (mode === 'rail') centerCatalogRail();
-  if (catalogMotion.matches || !catalogStage.animate || !startHeight) {
-    outgoing.hidden = true;
+
+  const endHeight = incoming.getBoundingClientRect().height;
+  const transition = {outgoing, control, anchorTop, animations: []};
+  catalogTransition = transition;
+  if (catalogMotion.matches || !catalogStage.animate || !start.height) {
+    finishCatalogTransition();
     return;
   }
 
-  outgoing.classList.add('is-leaving');
-  catalogStage.classList.add('is-changing');
-  const endHeight = incoming.getBoundingClientRect().height;
-  const timing = {duration: 350, easing: 'cubic-bezier(.25,.7,.25,1)', fill: 'both'};
-  const height = catalogStage.animate([{height: `${startHeight}px`}, {height: `${endHeight}px`}], timing);
-  const fadeOut = outgoing.animate(
-    [{opacity: 1, transform: 'translateY(0)'}, {opacity: 0, transform: 'translateY(-7px)'}],
-    {...timing, duration: 140}
-  );
-  const fadeIn = incoming.animate(
-    [{opacity: 0, transform: 'translateY(9px)'}, {opacity: 1, transform: 'translateY(0)'}],
-    {...timing, duration: 270, delay: 70}
-  );
-  catalogTransition = {outgoing, animations: [height, fadeOut, fadeIn]};
+  const duration = 440;
+  const timing = {duration, easing: 'cubic-bezier(.28,.62,.32,1)', fill: 'both'};
+  const height = catalogStage.animate([{height: `${start.height}px`}, {height: `${endHeight}px`}], timing);
+  transition.animations = [
+    height,
+    outgoing.animate([outgoingStart, {opacity: 0, transform: 'translateY(-6px)'}], {...timing, duration: 230}),
+    incoming.animate([incomingStart, {opacity: 1, transform: 'translateY(0)'}], {...timing, delay: 70, duration: duration - 70}),
+  ];
+  if (anchorTop !== null) {
+    const followSwitch = () => {
+      if (catalogTransition !== transition || transition.anchorTop === null) return;
+      keepCatalogSwitchInView(transition);
+      transition.frame = requestAnimationFrame(followSwitch);
+    };
+    transition.frame = requestAnimationFrame(followSwitch);
+  }
   height.onfinish = () => {
-    if (catalogTransition?.animations[0] === height) finishCatalogTransition();
+    if (catalogTransition === transition) finishCatalogTransition();
   };
 }
 
@@ -1382,6 +1455,11 @@ catalogModeButtons.forEach(button => button.onclick = () => setCatalogMode(butto
 catalogMotion.addEventListener('change', () => {
   if (catalogMotion.matches) finishCatalogTransition();
 });
+for (const event of ['wheel', 'touchstart', 'pointerdown', 'keydown']) {
+  addEventListener(event, () => {
+    if (catalogTransition) catalogTransition.anchorTop = null;
+  }, {passive: true});
+}
 
 function renderCatalog(releases) {
   const currentId = catalogCards.children[railIndex]?.firstElementChild.dataset.menu;
@@ -1402,7 +1480,7 @@ function renderCatalog(releases) {
       ? `<img src="${escapeHTML(release.cover)}" width="272" height="272" loading="lazy" decoding="async" alt="">`
       : `<span class="catalog-placeholder" aria-hidden="true">${title}</span>`;
     const date = release.date && Number.isFinite(ts(release)) ? `${fd(release.date)} · ` : '';
-    const links = releaseLinks(release).map(({name, url}) =>
+    const links = releaseLinks(release, listPlatforms).map(({name, url}) =>
       `<a href="${escapeHTML(url)}" target="_blank" rel="noopener" aria-label="${name} — ${title}">${name}<span aria-hidden="true">↗</span></a>`
     ).join('');
     const entry = (isRail) => `<button type="button" class="catalog-entry" data-menu="${escapeHTML(release.id)}" aria-haspopup="dialog" ${isRail ? 'tabindex="-1"' : ''} data-s>
@@ -1416,7 +1494,7 @@ function renderCatalog(releases) {
     return `<li class="catalog-card"${copy ? ' data-copy="true" aria-hidden="true"' : ''}>${entries[releaseIndex(index)].entry(true)}</li>`;
   }).join('');
   catalogList.innerHTML = entries.map(({entry, links}) => `<li class="catalog-row">${entry(false)}
-    <div class="catalog-platforms">${links || '<small>ссылки на релиз пока недоступны</small>'}</div>
+    <div class="catalog-platforms">${links}</div>
   </li>`).join('');
   if (!releaseCount) { railIndex = 0; return; }
   railIndex = railBuffer + Math.max(0, previous);
@@ -1464,17 +1542,17 @@ function renderTimeline(tl){
   </div>`;
 }
 
-function renderReleases(){const t=Date.now(),up=R.filter(isUp).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
+function renderReleases(){const t=Date.now(),up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&!r.pendingMetadata&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
  let h='';
- if(nw)h+=`<div class="nw"><div class="nw-c">${cover(nw,0)}</div><div class="nw-i"><div><h3 class="big">${nw.title}</h3><p class="meta">${releaseType(nw.type)} · ${fd(nw.date)}</p></div><div><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div></div>`;
- if(u)h+=`<div class="soon"><div><small>скоро · ${fdt(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':u.title}</h3><div id="cd"></div><div class="note">таймер идёт по московскому времени (МСК, UTC+3)</div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
+ if(nw)h+=`<div class="nw"><div class="nw-c">${cover(nw,0)}</div><div class="nw-i"><div><h3 class="big">${escapeHTML(nw.title)}</h3><p class="meta">${escapeHTML(releaseType(nw.type))} · ${fd(nw.date)}</p></div><div><div class="lst">${row(nw,'n')}</div>${chips(nw)}</div></div></div>`;
+ if(u)h+=`<div class="soon"><div><small>скоро · ${fdt(u.date)}</small><h3 class="big">${u.hide?'<i class="red"></i>':escapeHTML(u.title)}</h3><div id="cd"></div><div class="note">таймер идёт по московскому времени (МСК, UTC+3)</div></div>${u.presave&&u.presave!=='#'?`<a class="btn" href="${u.presave}" target="_blank" rel="noopener">пресейв ↗</a>`:'<span>ссылка на пресейв скоро</span>'}</div>`;
  $('#newest').innerHTML=h||'<p>скоро здесь появится новый релиз.</p>';
  const pp=R.filter(r=>r.plays).sort((a,b)=>b.plays-a.plays),mx=pp[0]?pp[0].plays:1;
  $('#pop').innerHTML=pp.map((r,i)=>`<button class="pop" data-id="${r.id}" data-l="p" style="--w:${r.plays/mx*100}%"><em>${i+1}</em><span class="nm">${r.title}</span><span>${fmtN(r.plays)}</span></button>`).join('');
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
   {const hp=pp.length>0,hk=R.some(r=>r.pick);$('#rotS').hidden=!(hp||hk);$('#tabPop').hidden=!hp;$('#tabPick').hidden=!hk;
    if(!hp&&hk){$('#pop').hidden=true;$('#picks').hidden=false;$('#tabPick').setAttribute('aria-selected','true');$('#tabPop').setAttribute('aria-selected','false')}}
- renderCatalog(R.filter(r=>r.auto||r.show).sort((a,b)=>ts(b)-ts(a)));
+ renderCatalog(R.filter(r=>!r.hide&&(r.auto||r.show||releaseLinks(r).length)).sort((a,b)=>ts(b)-ts(a)));
 
  const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
  const card=(t,b)=>`<div class="cc"><h3 class="gh"><span>■ ${t}</span></h3><div class="cc-list">${b}</div></div>`;
@@ -1563,7 +1641,7 @@ function adPlace(x,y){const w=adEl.offsetWidth,h=adEl.offsetHeight;adEl.style.le
 function adSchedule(ms){clearTimeout(adTimer);adTimer=setTimeout(adShow,ms)}
 function adShow(){clearTimeout(adTimer);if(adSeen()||!adRel||!adEl.hidden)return;
  if(loading||document.hidden||!$('#pm').hidden){adSchedule(8000);return}
- const r=adRel;adMain.innerHTML=(r.cover?`<span class="rb-cv"><img src="${r.cover}" alt=""></span>`:`<span class="rb-cv fb"><b>${r.title}</b></span>`)+`<span class="rb-tx"><em>новый трек!</em><b>${r.title}</b><i>слушать ▶</i></span>`;
+ const r=adRel;adMain.innerHTML=(r.cover?`<span class="rb-cv"><img src="${escapeHTML(r.cover)}" alt=""></span>`:`<span class="rb-cv fb"><b>${escapeHTML(r.title)}</b></span>`)+`<span class="rb-tx"><em>новый трек!</em><b>${escapeHTML(r.title)}</b><i>слушать ▶</i></span>`;
  adEl.style.setProperty('--r',(Math.random()*6-3).toFixed(1)+'deg');adEl.classList.remove('in');adEl.hidden=false;
  const w=adEl.offsetWidth,h=adEl.offsetHeight;adPlace(8+Math.random()*Math.max(0,innerWidth-w-16),72+Math.random()*Math.max(0,innerHeight-h-190));
  void adEl.offsetWidth;adEl.classList.add('in');adSound()}
