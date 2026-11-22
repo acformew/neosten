@@ -241,7 +241,7 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy"
  },
  {
-  "id": "apple-6835430007",
+  "id": "link-8a53daf6",
   "title": "ПРЫГАЙ",
   "type": "сингл",
   "date": "2025-09-26",
@@ -309,19 +309,5 @@ window.AUTO=[
    "links"
   ],
   "src": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU"
- },
- {
-  "id": "link-334e187c",
-  "title": "НАКОЛОЧКИ",
-  "type": "",
-  "date": "",
-  "cover": "covers/link-334e187c.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP"
-  },
-  "srcs": [
-   "links"
-  ],
-  "src": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP"
  }
 ];
