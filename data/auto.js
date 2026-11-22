@@ -243,15 +243,17 @@ window.AUTO=[
  {
   "id": "apple-6835430007",
   "title": "ПРЫГАЙ",
-  "type": "",
+  "type": "сингл",
   "date": "2025-09-26",
   "cover": "covers/apple-6835430007.jpg",
   "links": {
+   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
    "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "yandex": "https://music.yandex.ru/album/38302359",
    "deezer": "https://www.deezer.com/album/1148145831"
   },
   "srcs": [
+   "apple",
    "links"
   ],
   "src": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis"
