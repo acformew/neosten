@@ -6,23 +6,12 @@ window.AUTO=[
   "date": "2026-11-20",
   "cover": "covers/apple-6835430007.jpg",
   "links": {
-   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-remix-single/6835430007?uo=4"
-  },
-  "page": "",
-  "srcs": [
-   "apple"
-  ]
- },
- {
-  "id": "link-2c33cefe",
-  "title": "ПРЫГАЙ",
-  "type": "",
-  "date": "2026-11-20",
-  "cover": "covers/link-2c33cefe.jpg",
-  "links": {
-   "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07"
+   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-remix-single/6835430007?uo=4",
+   "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07",
+   "deezer": "https://www.deezer.com/album/1148145831"
   },
   "srcs": [
+   "apple",
    "links"
   ],
   "src": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07"
@@ -52,12 +41,14 @@ window.AUTO=[
   "cover": "covers/link-2d0b5887.jpg",
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BC%D0%B0%D0%BB%D0%BE-single/6817133665?uo=4",
-   "deezer": "https://www.deezer.com/album/1108838102"
+   "deezer": "https://www.deezer.com/album/1108838102",
+   "spotify": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL"
   },
-  "page": "",
   "srcs": [
-   "apple"
-  ]
+   "apple",
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL"
  },
  {
   "id": "apple-6803075869",
@@ -240,16 +231,14 @@ window.AUTO=[
  {
   "id": "apple-1840949420",
   "title": "ПРЫГАЙ",
-  "type": "сингл",
+  "type": "",
   "date": "2025-09-26",
   "cover": "covers/link-ec087d3c.jpg",
   "links": {
-   "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
    "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "deezer": "https://www.deezer.com/album/1148145831"
   },
   "srcs": [
-   "apple",
    "links"
   ],
   "src": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis"
