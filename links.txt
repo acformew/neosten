@@ -7,7 +7,6 @@
 https://music.yandex.ru/album/40628842
 https://music.yandex.ru/album/41828596
 https://music.yandex.ru/album/37798894
-https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP
 2026-11-06 | https://music.yandex.ru/album/44794240
 https://music.yandex.ru/album/44987626
 https://music.yandex.ru/album/44794240
@@ -25,7 +24,7 @@ https://music.yandex.ru/album/38648077
 https://music.yandex.ru/album/38302359
 https://music.yandex.ru/album/37269016
 https://music.yandex.ru/album/35652284
-2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007
+2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007 | yandex=https://music.yandex.ru/album/44987626
 2026-10-09 | https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj
 2026-10-02 | https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL | title=МАЛО | id=apple-6817133665
 2026-08-21 | https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz
