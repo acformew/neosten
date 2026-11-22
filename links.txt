@@ -25,20 +25,20 @@ https://music.yandex.ru/album/38302359
 https://music.yandex.ru/album/37269016
 https://music.yandex.ru/album/35652284
 2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007 | yandex=https://music.yandex.ru/album/44987626
-2026-10-09 | https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj
-2026-10-02 | https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL | title=МАЛО | id=apple-6817133665
-2026-08-21 | https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz
-2026-07-24 | https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4
-2026-06-12 | https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4
-2026-05-15 | https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW
-2026-05-01 | https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB
-2026-03-27 | https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7
-2026-01-23 | https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL
-2026-01-09 | https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF
-2025-12-19 | https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT
-2025-11-09 | https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x
-2025-10-17 | https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy
-2025-09-26 | https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis
-2025-08-22 | https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg
-2025-07-25 | https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq
-2025-03-21 | https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU
+2026-10-09 | https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj | yandex=https://music.yandex.ru/album/44320421/track/156772950
+2026-10-02 | https://open.spotify.com/album/3mzSyA8PHRZMK9flrOvd7Y | title=МАЛО | id=apple-6817133665 | yandex=https://music.yandex.ru/album/44163739/track/156288049
+2026-08-21 | https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz | yandex=https://music.yandex.ru/album/43584725/track/154898898
+2026-07-24 | https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4 | yandex=https://music.yandex.ru/album/43117937
+2026-06-12 | https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4 | yandex=https://music.yandex.ru/album/42511617/track/152360465
+2026-05-15 | https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW | yandex=https://music.yandex.ru/album/41828540/track/150833161
+2026-05-01 | https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB | yandex=https://music.yandex.ru/album/41828596
+2026-03-27 | https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7 | yandex=https://music.yandex.ru/album/41346984/track/149715475
+2026-01-23 | https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL | yandex=https://music.yandex.ru/album/40628842
+2026-01-09 | https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF | yandex=https://music.yandex.ru/album/40020312
+2025-12-19 | https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT | yandex=https://music.yandex.ru/album/39692759
+2025-11-09 | https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x | yandex=https://music.yandex.ru/album/39131024
+2025-10-17 | https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy | yandex=https://music.yandex.ru/album/38648077
+2025-09-26 | https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis | title=ПРЫГАЙ | id=apple-1840949421 | yandex=https://music.yandex.ru/album/38302359
+2025-08-22 | https://open.spotify.com/album/5cjrDL2aviIqTCT2PcI0dg | yandex=
+2025-07-25 | https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq | yandex=https://music.yandex.ru/album/37269016
+2025-03-21 | https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU | yandex=https://music.yandex.ru/album/35652284
