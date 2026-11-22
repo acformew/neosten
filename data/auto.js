@@ -8,7 +8,8 @@ window.AUTO=[
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-remix-single/6835430007?uo=4",
    "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07",
-   "deezer": "https://www.deezer.com/album/1148145831"
+   "deezer": "https://www.deezer.com/album/1148145831",
+   "yandex": "https://music.yandex.ru/album/44987626"
   },
   "srcs": [
    "apple",
@@ -229,11 +230,11 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy"
  },
  {
-  "id": "apple-1840949420",
+  "id": "apple-6835430007",
   "title": "ПРЫГАЙ",
   "type": "",
   "date": "2025-09-26",
-  "cover": "covers/link-ec087d3c.jpg",
+  "cover": "covers/apple-6835430007.jpg",
   "links": {
    "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "deezer": "https://www.deezer.com/album/1148145831"
