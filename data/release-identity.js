@@ -3,9 +3,10 @@
 
   const cleanTitle = title => String(title || '')
     .normalize('NFKC')
-    .replace(/\s*[-–—]\s*(Single|Сингл|EP)\s*$/i, '')
+    .replace(/\p{Default_Ignorable_Code_Point}/gu, '')
+    .replace(/\s+/g, ' ')
     .trim();
-  const titleKey = title => cleanTitle(title).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+  const titleKey = title => cleanTitle(title).toLowerCase();
   const placeholderTitles = new Set([
     'релиз', 'релиз в Spotify', 'релиз в Яндекс Музыке', 'релиз в Яндекс Музыка',
     'release', 'release on Spotify', 'release on Yandex Music',
@@ -13,7 +14,7 @@
 
   function hasReleaseTitle(release) {
     const title = titleKey(release.title);
-    return !release.pendingMetadata && !!title && !placeholderTitles.has(title);
+    return !release.pendingMetadata && /[\p{L}\p{N}]/u.test(title) && !placeholderTitles.has(title);
   }
 
   function webURL(value) {
@@ -81,9 +82,25 @@
     return result;
   }
 
+  const releaseTitleKey = release => titleKey(release.match || release.title);
+
+  function isSpotifyAlias(candidate, main) {
+    const title = releaseTitleKey(candidate);
+    if (!title || title !== releaseTitleKey(main)) return false;
+    const candidateLinks = directLinks(candidate.links);
+    const mainLinks = directLinks(main.links);
+    if (!candidateLinks.spotify || Object.keys(candidateLinks).length !== 1 ||
+        !mainLinks.spotify || Object.keys(mainLinks).length < 2) return false;
+    if (linkKey(candidateLinks.spotify) === linkKey(mainLinks.spotify)) return false;
+    const candidateDate = (candidate.manualDate || candidate.date || '').slice(0, 10);
+    const mainDate = (main.manualDate || main.date || '').slice(0, 10);
+    return !candidateDate || !mainDate || candidateDate === mainDate;
+  }
+
   function sameTitle(first, second) {
-    const firstTitle = titleKey(first.match || first.title);
-    if (!firstTitle || firstTitle !== titleKey(second.match || second.title)) return false;
+    const title = releaseTitleKey(first);
+    if (!title || title !== releaseTitleKey(second)) return false;
+    if (isSpotifyAlias(first, second) || isSpotifyAlias(second, first)) return true;
     const firstLinks = directLinks(first.links);
     const secondLinks = directLinks(second.links);
     return Object.keys(firstLinks).every(platform => {
@@ -96,16 +113,23 @@
   function matchesFor(catalog, release) {
     const ids = new Set([release.id, ...(release.ids || [])].filter(Boolean));
     const links = new Set([release.src, ...Object.values(directLinks(release.links))].map(linkKey).filter(Boolean));
-    const strong = catalog.filter(item =>
+    const title = releaseTitleKey(release);
+    // Даже совпавший URL или ID из кэша не отменяет явное различие названий.
+    const candidates = catalog.filter(item => !title || releaseTitleKey(item) === title);
+    const strong = candidates.filter(item =>
       [item.id, ...(item.ids || [])].some(id => ids.has(id)) ||
       [item.src, ...Object.values(directLinks(item.links))].some(url => links.has(linkKey(url)))
     );
-    const byTitle = catalog.filter(item => !strong.includes(item) && sameTitle(item, release));
-    if (byTitle.length === 1 && strong.every(item => sameTitle(item, byTitle[0]))) return [...strong, byTitle[0]];
+    const byTitle = candidates.filter(item => !strong.includes(item) && sameTitle(item, release));
+    const aliases = byTitle.filter(item => isSpotifyAlias(item, release));
+    const otherTitles = byTitle.filter(item => !aliases.includes(item));
+    if (otherTitles.length <= 1 && strong.every(item => otherTitles.every(candidate => sameTitle(item, candidate)))) {
+      return [...strong, ...otherTitles, ...aliases];
+    }
     return strong;
   }
 
-  const api = {cleanTitle, titleKey, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor};
+  const api = {cleanTitle, titleKey, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else window.ReleaseIdentity = api;
 })();
