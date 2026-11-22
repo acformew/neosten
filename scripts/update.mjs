@@ -12,6 +12,9 @@
 // ID артиста на площадках лежат в sources.json (или в переменных окружения).
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import identity from '../data/release-identity.js';
+
+const {cleanTitle: clean, titleKey: norm, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor} = identity;
 
 const OUT = 'data/auto.js';
 let cfg = { name: 'neosten', apple: '1802667747', spotify: '5qNk6kVsCQa8fKahWEn9hc', deezer: '', yandex: '23866894' };
@@ -20,8 +23,6 @@ for (const k of ['apple', 'spotify', 'deezer', 'yandex']) { const e = process.en
 cfg.apple = String(cfg.apple || ''); cfg.yandex = String(cfg.yandex || ''); cfg.deezer = String(cfg.deezer || '');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const norm = t => (t || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
-const clean = t => (t || '').replace(/\s*[-–—]\s*(Single|Сингл|EP)\s*$/i, '').trim();
 const exists = p => { try { return fs.statSync(p).size > 1000; } catch { return false; } };
 const isImg = b => b.length > 1000 && (b[0] === 0xff || b[0] === 0x89 || b.slice(0, 4).toString() === 'RIFF');
 
@@ -45,7 +46,7 @@ async function img(urls, dest) {
 fs.mkdirSync('covers', { recursive: true }); fs.mkdirSync('data', { recursive: true });
 let old = [];
 try { old = JSON.parse(fs.readFileSync(OUT, 'utf8').replace(/^window\.AUTO=/, '').replace(/;\s*$/, '')); } catch {}
-const oldByKey = new Map(old.filter(x => !x.pendingMetadata).map(x => [norm(x.title), x]));
+old = old.filter(hasReleaseTitle);
 
 // ================= источники: каждый возвращает [{title,type,date,covers[],links{},id}] =================
 const typeOf = (n, hint) => n === 1 ? 'сингл' : hint === 'ep' || (hint === 'single' && n <= 6) ? 'EP' : n && n <= 1 ? 'сингл' : 'альбом';
@@ -115,80 +116,62 @@ async function spotify() {
 
 // ================= сборка =================
 const PRIO = ['apple', 'deezer', 'yandex', 'spotify', 'links'];
-const items = new Map();
-const put = (it, src) => {
-  const k = norm(it.title); if (!k) return;
-  let e = items.get(k);
-  if (!e) { e = { key: k, ids: [], title: it.title, type: '', date: '', covers: [], links: {}, srcs: new Set(), page: '' }; items.set(k, e); }
-  e.ids.push(it.id); e.srcs.add(src);
-  if (!e.type) e.type = it.type || '';
-  if (it.date && (!e.date || it.date < e.date)) e.date = it.date;     // из разных источников берём самую раннюю дату
-  e.covers.push(...(it.covers || []));
-  e.links = Object.assign({}, it.links, e.links);                       // у более приоритетного источника преимущество
-  if (!e.page) e.page = it.page || '';
-  if (it.cover) e.localCover = e.localCover || it.cover;
-  if (it.enriched) e.enriched = true;
-  if (it.src) e.src = it.src;
-};
-const carry = name => { for (const x of old) if (!x.pendingMetadata && (x.srcs || (String(x.id).startsWith('apple-') ? ['apple'] : [])).includes(name)) put({ ...x, covers: [] }, name); };
+const items = [];
+
+function applyLinks(entry, links, priority) {
+  for (const [platform, url] of Object.entries(directLinks(links))) {
+    if (entry.links[platform] && priority(platform) <= entry.linkPriorities[platform]) continue;
+    entry.links[platform] = url;
+    entry.linkPriorities[platform] = priority(platform);
+  }
+}
+
+function mergeRelease(entry, release, source) {
+  for (const id of [release.id, ...(release.ids || [])]) {
+    if (id && !entry.ids.includes(id)) entry.ids.push(id);
+  }
+  if (source !== 'cache') entry.srcs.add(source);
+  for (const origin of release.srcs || []) entry.srcs.add(origin);
+  entry.type ||= release.type;
+  entry.date ||= release.date;
+  entry.manualDate ||= release.manualDate;
+  entry.covers.push(...(release.covers || []));
+  entry.cover ||= release.cover;
+  entry.page ||= release.page;
+  entry.src ||= release.src;
+  applyLinks(entry, release.links, key => release.linkPriorities?.[key] ?? (source === 'cache' ? 1 : 2));
+}
+
+function put(release, source) {
+  if (!hasReleaseTitle(release)) return null;
+  const matches = matchesFor(items, release).sort((a, b) => items.indexOf(a) - items.indexOf(b));
+  const entry = matches[0] || {
+    title: clean(release.title), type: '', date: '', cover: '', page: '', src: '',
+    ids: [], srcs: new Set(), covers: [], links: {}, linkPriorities: {},
+  };
+  if (!matches.length) items.push(entry);
+  for (const duplicate of matches.slice(1)) {
+    mergeRelease(entry, duplicate, 'cache');
+    items.splice(items.indexOf(duplicate), 1);
+  }
+  mergeRelease(entry, release, source);
+  return entry;
+}
 
 for (const name of ['apple', 'deezer', 'yandex', 'spotify']) {
-  const fn = { apple, deezer, yandex, spotify }[name];
+  const fn = {apple, deezer, yandex, spotify}[name];
   try {
-    const known = new Set([...items.keys(), ...oldByKey.keys()]);
-    const r = await fn(known);
-    if (r === undefined) { console.log(name + ': выключен (нет ключей)'); carry(name); continue; }
-    r.forEach(x => put(x, name)); console.log(name + ':', r.length, 'релизов');
-  } catch (e) { console.log(name + ' пропущен:', e.message); carry(name); }
-}
-
-// ---------- links.txt: «[дата |] ссылка [| title=Название | type=сингл | vk=ссылка ...]» ----------
-// Spotify / Apple / Deezer / Яндекс читаются напрямую (song.link больше не нужен).
-function webURL(value) {
-  try {
-    const url = new URL(value);
-    return ['http:', 'https:'].includes(url.protocol) ? url : null;
-  } catch { return null; }
-}
-const HOST = value => webURL(value)?.hostname.replace(/^www\./, '') || '';
-const platOf = u => { const h = HOST(u);
-  return h === 'open.spotify.com' ? 'spotify' : /music\.apple\.com$/.test(h) ? 'apple' : /deezer\.com$/.test(h) ? 'deezer' : /^music\.yandex\.(?:ru|com|kz|by|uz)$/.test(h) ? 'yandex'
-    : /(^|\.)vk\.(com|ru)$/.test(h) ? 'vk' : h === 'music.youtube.com' ? 'youtubeMusic' : /youtube\.com$|youtu\.be$/.test(h) ? 'youtube'
-    : /soundcloud\.com$/.test(h) ? 'soundcloud' : /tidal\.com$/.test(h) ? 'tidal' : ''; };
-function releasePath(value) {
-  const url = webURL(value);
-  if (!url) return null;
-  const platform = platOf(value);
-  const path = url.pathname.replace(/\/$/, '');
-  if (platform === 'yandex') {
-    const track = path.match(/^\/(?:album\/(\d+)\/)?track\/(\d+)$/);
-    if (track) return {platform, kind: 'track', id: track[2], album: track[1]};
-    const album = path.match(/^\/album\/(\d+)$/);
-    return album ? {platform, kind: 'album', id: album[1]} : null;
+    const known = new Set([...items, ...old].map(release => norm(release.title)));
+    const releases = await fn(known);
+    if (!releases) { console.log(name + ': выключен (нет ключей)'); continue; }
+    releases.forEach(release => put(release, name));
+    console.log(name + ':', releases.length, 'релизов');
+  } catch (error) {
+    console.log(name + ' пропущен:', error.message);
   }
-  if (platform === 'spotify') {
-    const match = path.match(/^\/(?:intl-[\w-]+\/)?(album|track)\/([A-Za-z0-9]+)$/);
-    return match ? {platform, kind: match[1], id: match[2]} : null;
-  }
-  return {platform, url: url.href};
 }
-
-function linkKey(value) {
-  const link = releasePath(value);
-  if (!link) return '';
-  return link.id ? `${link.platform}:${link.kind}:${link.id}` : link.url;
-}
-
-function releaseLinkMap(links) {
-  const direct = {};
-  for (const [key, url] of Object.entries(links || {})) {
-    const link = releasePath(url);
-    if (!link) continue;
-    if (link.platform === 'spotify' || link.platform === 'yandex') direct[link.platform] = url;
-    else if (key !== 'spotify' && key !== 'yandex') direct[key] = url;
-  }
-  return direct;
-}
+// Кэш дополняет свежие метаданные и сохраняет релизы при частичном отказе площадок.
+for (const release of old) put(release, 'cache');
 
 function yandexFields(album, track, url) {
   const cover = track?.coverUri || album.coverUri;
@@ -302,6 +285,7 @@ function parseLinkRow(raw) {
       const key = assignment[1].toLowerCase();
       const value = assignment[2].trim();
       if (key === 'title' || key === 'type') row[key] = value;
+      else if (key === 'id' && /^[a-z]+-[\w-]+$/i.test(value)) row.targetId = value;
       else if (releasePath(value)) {
         row.extra[key] = value;
         row.urls.push(value);
@@ -313,34 +297,22 @@ function parseLinkRow(raw) {
   return row.urls.length ? row : null;
 }
 
-const knownByLink = new Map();
-function rememberRelease(release) {
-  if (!release.title || release.pendingMetadata) return;
-  for (const url of [release.src, ...Object.values(release.links || {})]) {
-    const key = linkKey(url);
-    if (!key) continue;
-    const previous = knownByLink.get(key);
-    if (!previous) knownByLink.set(key, release);
-    else {
-      knownByLink.set(key, {
-        ...previous, ...release,
-        cover: release.cover || previous.cover,
-        date: release.date || previous.date,
-        links: {...previous.links, ...release.links},
-      });
-    }
-  }
-}
-old.forEach(rememberRelease);
-for (const item of items.values()) rememberRelease(item);
-
 const lines = fs.existsSync('links.txt') ? fs.readFileSync('links.txt', 'utf8').split(/\r?\n/) : [];
-const rows = lines.map(parseLinkRow).filter(Boolean);
+const rows = lines.map(parseLinkRow).filter(Boolean).map(row => {
+  const src = row.urls[0];
+  const id = 'link-' + crypto.createHash('md5').update(linkKey(src) || src).digest('hex').slice(0, 8);
+  const supplied = Object.fromEntries(row.urls.map(url => [platOf(url), url]));
+  const explicit = directLinks(row.extra);
+  return {
+    ...row, src, id, explicit, ids: row.targetId ? [row.targetId] : [],
+    links: {...directLinks(supplied), ...explicit},
+  };
+});
 const requests = new Map();
 
 async function lookupRow(row) {
-  const known = row.urls.map(url => knownByLink.get(linkKey(url))).find(Boolean);
-  if (known && (row.date || known.date) && (known.cover || known.localCover || known.covers?.length)) return known;
+  const known = matchesFor(items, row)[0];
+  if (known && (row.date || known.date) && (known.cover || known.covers.length)) return known;
   for (const url of row.urls) {
     const key = linkKey(url);
     if (!requests.has(key)) {
@@ -350,111 +322,73 @@ async function lookupRow(row) {
       }));
     }
     const found = await requests.get(key);
-    if (found?.title) return {
-      ...known, ...found,
-      date: found.date || known?.date,
-      links: {...known?.links, ...found.links},
-    };
+    if (found && hasReleaseTitle(found)) return found;
   }
-  return known;
+  return null;
 }
 
-function applyManualLinks(release, direct, explicit) {
-  const priorities = release.linkPriorities ||= {};
-  for (const [key, address] of Object.entries(direct)) {
-    const priority = Object.hasOwn(explicit, key) ? 2 : 1;
-    if ((priorities[key] || 0) > priority) continue;
-    release.links[key] = address;
-    priorities[key] = priority;
-  }
+function attachRow(row, metadata) {
+  const known = matchesFor(items, row)[0];
+  const title = row.title || known?.title || metadata?.title;
+  if (!hasReleaseTitle({title})) return false;
+  const entry = put({
+    title, id: row.id, ids: [...row.ids, ...(known?.ids || [])], src: row.src,
+    type: row.type || known?.type || metadata?.type,
+    date: row.date || known?.date || metadata?.date,
+    cover: known?.cover, covers: metadata?.covers,
+    links: {...directLinks(metadata?.links), ...directLinks(known?.links), ...row.links},
+  }, 'links');
+  if (row.date) entry.manualDate = row.date;
+  applyLinks(entry, row.links, key => Object.hasOwn(row.explicit, key) ? 4 : 3);
+  return true;
 }
 
-const manualDate = new Map();
-const pendingRows = [];
+const deferredRows = [];
 for (let start = 0; start < rows.length; start += 4) {
   const batch = rows.slice(start, start + 4);
   const metadata = await Promise.all(batch.map(lookupRow));
   for (const [index, row] of batch.entries()) {
-    const found = metadata[index] || row.urls.map(url => knownByLink.get(linkKey(url))).find(Boolean);
-    const title = row.title || found?.title;
-    const url = row.urls[0];
-    const id = 'link-' + crypto.createHash('md5').update(linkKey(url) || url).digest('hex').slice(0, 8);
-    const supplied = {};
-    for (const address of row.urls) {
-      const platform = platOf(address);
-      if (platform) supplied[platform] = address;
-    }
-    const explicit = releaseLinkMap(row.extra);
-    const direct = {...releaseLinkMap(supplied), ...explicit};
-    if (!title) { pendingRows.push({row, id, url, direct, explicit}); continue; }
-    const item = {
-      ...found, id, src: url, title,
-      type: row.type || found?.type,
-      date: row.date || found?.date,
-      cover: found?.cover || found?.localCover,
-      links: releaseLinkMap({...found?.links, ...direct}),
-    };
-    if (row.date) manualDate.set(norm(title), row.date);
-    put(item, 'links');
-    const stored = items.get(norm(title));
-    applyManualLinks(stored, direct, explicit);
-    rememberRelease({...item, links: stored.links});
+    if (!attachRow(row, metadata[index])) deferredRows.push(row);
   }
 }
-
-const unresolved = new Map();
-for (const {row, id, url, direct, explicit} of pendingRows) {
-  const matched = row.urls.map(address => knownByLink.get(linkKey(address))).find(Boolean);
-  if (matched) {
-    if (!items.has(norm(matched.title))) put({...matched, id, src: url}, 'links');
-    applyManualLinks(items.get(norm(matched.title)), direct, explicit);
-    if (row.date) manualDate.set(norm(matched.title), row.date);
-    continue;
-  }
-
-  // Сохраняем прямую ссылку даже при первой недоступности метаданных.
-  const platform = platOf(url);
-  const name = platform === 'yandex' ? 'Яндекс Музыке' : platform === 'spotify' ? 'Spotify' : '';
-  const previous = unresolved.get(id);
-  const pending = previous || {
-    id, title: name ? `релиз в ${name}` : 'релиз', type: '', date: '', cover: '', links: {}, page: '',
-    src: url, srcs: ['links'], pendingMetadata: true,
-  };
-  pending.date = row.date || pending.date;
-  pending.type = row.type || pending.type;
-  applyManualLinks(pending, direct, explicit);
-  unresolved.set(id, pending);
+// Отложенная строка могла получить совпадение через другую площадку в той же сборке.
+for (const row of deferredRows) {
+  if (!attachRow(row)) console.log('нет подтверждённого релиза, ссылка оставлена в links.txt:', row.src);
 }
-if (unresolved.size) console.log('сохранены ссылки без полученных метаданных:', unresolved.size);
 
 // дополняем ссылки: ищем тот же релиз на Deezer и в Apple Music по названию (строгое совпадение названия и артиста)
-const artistOk = n => norm(n).includes(norm(cfg.name));
-for (const e of items.values()) {
+const artistOk = name => norm(name) === norm(cfg.name);
+for (const e of items) {
+  const title = norm(e.title);
+  if (items.some(other => other !== e && norm(other.title) === title)) continue;
   if (!e.links.deezer) { try {
     const j = await get('https://api.deezer.com/search/album?limit=10&q=' + encodeURIComponent(`artist:"${cfg.name}" album:"${e.title.replace(/"/g, '')}"`), { tries: 1 });
-    const h = (j.data || []).find(a => norm(clean(a.title)) === e.key && artistOk(a.artist && a.artist.name));
+    const h = (j.data || []).find(a => norm(clean(a.title)) === title && artistOk(a.artist && a.artist.name));
     if (h) { e.links.deezer = h.link; if (h.cover_xl) e.covers.push(h.cover_xl); console.log('deezer: найден «' + e.title + '», id артиста', h.artist.id, '(можно вписать в sources.json)'); }
   } catch {} await sleep(250); }
   if (!e.links.apple) { try {
     const j = await get('https://itunes.apple.com/search?entity=album&limit=10&country=ru&term=' + encodeURIComponent(cfg.name + ' ' + e.title), { tries: 1 });
-    const h = (j.results || []).find(a => norm(clean(a.collectionName)) === e.key && artistOk(a.artistName));
+    const h = (j.results || []).find(a => norm(clean(a.collectionName)) === title && artistOk(a.artistName));
     if (h) e.links.apple = h.collectionViewUrl;
   } catch {} await sleep(250); }
 }
 
 // финал: ids, обложки, запись
-const list = Array.from(unresolved.values(), ({linkPriorities, ...release}) => release);
-for (const e of items.values()) {
-  const o = oldByKey.get(e.key);
-  const id = (o && o.id) || e.ids.slice().sort((a, b) => PRIO.indexOf(a.split('-')[0]) - PRIO.indexOf(b.split('-')[0]))[0];
-  let cover = '';
-  const prev = [e.localCover, o && o.cover].find(p => p && exists(p));
-  if (prev) cover = prev; else { const cp = `covers/${id}.jpg`; if (await img(e.covers, cp)) cover = cp; }
-  const date = manualDate.get(e.key) || e.date;
-  list.push({ id, title: e.title, type: e.type, date, cover, links: releaseLinkMap(e.links), page: e.page, srcs: [...e.srcs],
-    ...(e.src ? { src: e.src } : {}), ...(e.enriched ? { enriched: true } : {}) });
+const list = [];
+for (const e of items) {
+  const cached = matchesFor(old, e)[0];
+  const id = cached?.id || e.ids.slice().sort((a, b) => PRIO.indexOf(a.split('-')[0]) - PRIO.indexOf(b.split('-')[0]))[0];
+  let cover = [e.cover, cached?.cover].find(path => path && exists(path)) || '';
+  if (!cover && e.covers.length) {
+    const path = `covers/${id}.jpg`;
+    if (await img(e.covers, path)) cover = path;
+  }
+  list.push({
+    id, title: e.title, type: e.type || '', date: e.manualDate || e.date || '', cover,
+    links: directLinks(e.links), page: e.page, srcs: [...e.srcs],
+    ...(e.src ? {src: e.src} : {}),
+  });
 }
 list.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-if (!list.length && old.length) { console.log('все источники недоступны — оставляю прошлые данные'); process.exit(0); }
 const out = 'window.AUTO=' + JSON.stringify(list, null, 1) + ';\n';
 if (!fs.existsSync(OUT) || fs.readFileSync(OUT, 'utf8') !== out) { fs.writeFileSync(OUT, out); console.log('updated:', list.length, 'releases'); } else console.log('no changes');
