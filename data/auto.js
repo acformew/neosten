@@ -14,20 +14,18 @@ window.AUTO=[
   ]
  },
  {
-  "id": "link-d60a7607",
-  "title": "релиз в Яндекс Музыке",
+  "id": "link-2c33cefe",
+  "title": "ПРЫГАЙ",
   "type": "",
-  "date": "2026-11-06",
-  "cover": "",
+  "date": "2026-11-20",
+  "cover": "covers/link-2c33cefe.jpg",
   "links": {
-   "yandex": "https://music.yandex.ru/album/44794240"
+   "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07"
   },
-  "page": "",
-  "src": "https://music.yandex.ru/album/44794240",
   "srcs": [
    "links"
   ],
-  "pendingMetadata": true
+  "src": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07"
  },
  {
   "id": "apple-6820449428",
@@ -36,32 +34,15 @@ window.AUTO=[
   "date": "2026-10-09",
   "cover": "covers/link-f36ce3be.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj",
    "apple": "https://music.apple.com/ru/album/%D0%B4%D0%B8%D1%81%D1%81-%D0%BD%D0%B0-%D0%BD%D0%B5%D1%84%D0%BE%D1%80%D0%BE%D0%B2-single/6820449428?uo=4",
+   "spotify": "https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj",
    "deezer": "https://www.deezer.com/album/1116153832"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
   ],
   "src": "https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj"
- },
- {
-  "id": "link-dc7ac1d3",
-  "title": "релиз в Spotify",
-  "type": "",
-  "date": "2026-10-02",
-  "cover": "",
-  "links": {
-   "spotify": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL"
-  },
-  "page": "",
-  "src": "https://open.spotify.com/album/3mzSyA8SR3vVmk4jHKpbXL",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
  },
  {
   "id": "apple-6817133665",
@@ -85,11 +66,10 @@ window.AUTO=[
   "date": "2026-08-21",
   "cover": "covers/link-f160f990.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz",
    "apple": "https://music.apple.com/ru/album/%D0%B1%D0%B5%D0%B3%D0%B8-%D1%87%D0%B5%D0%BB%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6-single/6803075869?uo=4",
+   "spotify": "https://open.spotify.com/album/6I4LPL9Oswovumml3zXYlz",
    "deezer": "https://www.deezer.com/album/1057889122"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -103,11 +83,10 @@ window.AUTO=[
   "date": "2026-07-24",
   "cover": "covers/link-87e9e881.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4",
    "apple": "https://music.apple.com/ru/album/mainstream-season-ep/6793814756?uo=4",
+   "spotify": "https://open.spotify.com/album/4Gs9RZPIIBzbBMGn5XFSe4",
    "deezer": "https://www.deezer.com/album/1036006132"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -121,11 +100,10 @@ window.AUTO=[
   "date": "2026-06-12",
   "cover": "covers/link-550b03d0.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4",
    "apple": "https://music.apple.com/ru/album/%D1%81%D0%B0%D0%BC%D1%8B%D0%B5%D1%81%D0%BC%D0%B5%D1%88%D0%BD%D1%8B%D0%B5%D0%BC%D0%B5%D0%BC%D1%8B-single/6782640121?uo=4",
+   "spotify": "https://open.spotify.com/album/3UuBlZ1oFLAunxmmwloHp4",
    "deezer": "https://www.deezer.com/album/1006156131"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -142,7 +120,6 @@ window.AUTO=[
    "spotify": "https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW",
    "deezer": "https://www.deezer.com/album/983209891"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -159,7 +136,6 @@ window.AUTO=[
    "yandex": "https://music.yandex.ru/album/41828596",
    "deezer": "https://www.deezer.com/album/973546611"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -172,11 +148,10 @@ window.AUTO=[
   "date": "2026-03-27",
   "cover": "covers/link-2e3461f2.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7",
    "apple": "https://music.apple.com/ru/album/%D0%BF%D0%B0%D0%B4%D1%88%D0%B8%D0%B9-%D1%80%D1%8B%D1%86%D0%B0%D1%80%D1%8C-single/1888205996?uo=4",
+   "spotify": "https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7",
    "deezer": "https://www.deezer.com/album/948787201"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -194,7 +169,6 @@ window.AUTO=[
    "yandex": "https://music.yandex.ru/album/40628842",
    "deezer": "https://www.deezer.com/album/919930291"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -207,11 +181,10 @@ window.AUTO=[
   "date": "2026-01-09",
   "cover": "covers/link-d1550a03.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF",
    "apple": "https://music.apple.com/ru/album/%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5%D0%B3%D0%BE-single/1865501047?uo=4",
+   "spotify": "https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF",
    "deezer": "https://www.deezer.com/album/893808812"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -228,7 +201,6 @@ window.AUTO=[
    "spotify": "https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT",
    "deezer": "https://www.deezer.com/album/880903912"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -243,7 +215,6 @@ window.AUTO=[
   "links": {
    "spotify": "https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -256,11 +227,10 @@ window.AUTO=[
   "date": "2025-10-17",
   "cover": "covers/link-defb2d79.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy",
    "apple": "https://music.apple.com/ru/album/phantom-single/1847870244?uo=4",
+   "spotify": "https://open.spotify.com/album/6saUH5ZLCO2gSwgUphaJgy",
    "deezer": "https://www.deezer.com/album/839976882"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -274,11 +244,10 @@ window.AUTO=[
   "date": "2025-09-26",
   "cover": "covers/link-ec087d3c.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-single/1840949420?uo=4",
+   "spotify": "https://open.spotify.com/album/1JhHeto4knYwhSHFKPDuis",
    "deezer": "https://www.deezer.com/album/1148145831"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -296,7 +265,6 @@ window.AUTO=[
    "yandex": "https://music.yandex.ru/album/37798894",
    "deezer": "https://www.deezer.com/album/859484762"
   },
-  "page": "",
   "srcs": [
    "links"
   ],
@@ -309,11 +277,10 @@ window.AUTO=[
   "date": "2025-07-25",
   "cover": "covers/link-7bedda45.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq",
    "apple": "https://music.apple.com/ru/album/uglymuzik-2025/1827902319?uo=4",
+   "spotify": "https://open.spotify.com/album/7c8VcqXgwQ2lXYP65Dx5kq",
    "deezer": "https://www.deezer.com/album/793800631"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -327,11 +294,10 @@ window.AUTO=[
   "date": "2025-03-21",
   "cover": "covers/link-692c5618.jpg",
   "links": {
-   "spotify": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU",
    "apple": "https://music.apple.com/ru/album/%D1%82%D1%80%D0%B8-%D0%B1%D1%83%D0%BA%D0%B2%D1%8B-single/1855545231?uo=4",
+   "spotify": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU",
    "deezer": "https://www.deezer.com/album/863120072"
   },
-  "page": "",
   "srcs": [
    "apple",
    "links"
@@ -339,243 +305,17 @@ window.AUTO=[
   "src": "https://open.spotify.com/album/2j9oqGvWmgUCoHYCICj8MU"
  },
  {
-  "id": "link-88c4b497",
-  "title": "релиз в Яндекс Музыке",
+  "id": "link-334e187c",
+  "title": "НАКОЛОЧКИ",
   "type": "",
   "date": "",
-  "cover": "",
+  "cover": "covers/link-334e187c.jpg",
   "links": {
-   "yandex": "https://music.yandex.ru/album/44987626"
+   "spotify": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP"
   },
-  "page": "",
-  "src": "https://music.yandex.ru/album/44987626",
   "srcs": [
    "links"
   ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-2a115641",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/44320421"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/44320421",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-1d13b961",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/44163739"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/44163739",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-b62dc750",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/43584725"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/43584725",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-4041f90a",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/43117937"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/43117937",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-e9208f7b",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/42511617"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/42511617",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-cf376e3b",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/41828540"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/41828540",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-9a3aa633",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/41346984"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/41346984",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-46c857d9",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/40020312"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/40020312",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-6321719a",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/39692759"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/39692759",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-3198606b",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/39131024"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/39131024",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-2ae046e2",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/38648077"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/38648077",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-8a53daf6",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/38302359"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/38302359",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-10a2a1b9",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/37269016"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/37269016",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
- },
- {
-  "id": "link-e06aeaef",
-  "title": "релиз в Яндекс Музыке",
-  "type": "",
-  "date": "",
-  "cover": "",
-  "links": {
-   "yandex": "https://music.yandex.ru/album/35652284"
-  },
-  "page": "",
-  "src": "https://music.yandex.ru/album/35652284",
-  "srcs": [
-   "links"
-  ],
-  "pendingMetadata": true
+  "src": "https://open.spotify.com/album/6QxxGmPTGvQsGmfviKrGTP"
  }
 ];
