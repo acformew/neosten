@@ -158,7 +158,7 @@ footer{padding-top:28px;padding-bottom:90px;border-top:3px solid var(--ink);font
 #mpc{font:500 12px "IBM Plex Mono",monospace;white-space:nowrap}
 .eq{display:flex;gap:2px;align-items:flex-end;height:20px}.eq i{width:4px;height:4px;background:var(--ink)}
 .playing .eq i{animation:eq .6s ease-in-out infinite alternate}.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}@keyframes eq{to{height:20px}}
-.chips{margin-top:6px}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}@media (hover:hover) and (pointer:fine){.chip:hover{background:var(--ink);color:var(--bg)}}
+.chips{margin-top:6px}.chip small{margin-inline-start:5px;opacity:.72;font-size:.82em}.chip{display:inline-block;font:500 13px "IBM Plex Mono",monospace;letter-spacing:.06em;border:2px solid var(--ink);padding:6px 10px;margin:10px 8px 0 0;text-decoration:none;color:inherit}@media (hover:hover) and (pointer:fine){.chip:hover{background:var(--ink);color:var(--bg)}}
 .gh{font:700 13px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:lowercase;margin:38px 0 10px}.gh:first-child{margin-top:0}.bk{margin:0;padding:18px 4px;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);opacity:.7}
 #pm{position:fixed;inset:0;z-index:95;background:rgba(5,8,6,.6);display:grid;place-items:center;padding:16px}#pm[hidden]{display:none}
 .pmb{position:relative;background:var(--bg);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:26px;width:min(440px,100%);max-height:90vh;overflow:auto}
@@ -730,7 +730,7 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 </aside>
 <script>
 (function(){var v=location.protocol.indexOf('http')===0?'?v='+Math.floor(Date.now()/300000):'';
-['releases.js','data/auto.js'].forEach(function(f){document.write('<script src="'+f+v+'"><\/script>')})})();
+['releases.js','data/release-identity.js','data/auto.js'].forEach(function(f){document.write('<script src="'+f+v+'"><\/script>')})})();
 </script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -764,14 +764,10 @@ function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chim
 const mb=$('#mute');mb.onclick=()=>{setSound(!sound);mb.classList.remove('bnc');void mb.offsetWidth;mb.classList.add('bnc')};
 /* UI sounds */
 const hoverSoundTargets = '#nav .n, #logo, #theme, #catbox, #grip > span, .catalog-switch button';
-let lastHoverSound = -Infinity;
 document.addEventListener('pointerover', event => {
   if (event.pointerType !== 'mouse' || !sound || ac?.state !== 'running') return;
   const target = event.target.closest(hoverSoundTargets);
   if (!target || target.contains(event.relatedTarget)) return;
-  const now = performance.now();
-  if (now - lastHoverSound < 150) return;
-  lastHoverSound = now;
   blip(1300 + Math.random() * 300, .04, 'square', .015);
 });
 document.addEventListener('pointerdown',e=>{if(e.target.closest('.tr,a,.btn,.n,.pop,[data-s]'))blip(220,.14,'sine',.2,60)});
@@ -1095,8 +1091,8 @@ addEventListener('keydown',e=>{ki=e.keyCode===kk[ki]?ki+1:(e.keyCode===kk[0]?1:0
 document.addEventListener('visibilitychange',()=>document.title=document.hidden?'возвращайся… здесь тихо':'neosten');
 console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл консоль — ты из тех, кто заглядывает за кулисы. привет.');
 /* ---------- releases: data-driven + player ---------- */
-const R=(window.RELEASES||[]).slice(),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
-const norm=t=>(t||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,''),L=window.LINKS||{};
+const R=(window.RELEASES||[]).map(release=>({...release})),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
+const L=window.LINKS||{};
 const MSK=d=>{d=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(d))return Date.parse(d+'T00:00:00+03:00');if(/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/.test(d))return Date.parse(d.replace(' ','T')+'+03:00');return new Date(d).getTime()},hasT=d=>/[T ]\d{2}:\d{2}/.test(String(d)),
 ts=r=>r.date?MSK(r.date):0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
 const mon=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -1121,9 +1117,9 @@ function prog(id){const a=aud[id];if(!a||!a.duration)return;const p=a.currentTim
 const releaseType = type => /^ep$/i.test(type || '') ? 'мини-альбом' : (type || 'релиз').toLowerCase();
 const cover=(r,i)=>r.cover?`<div class="gcover"><img src="${escapeHTML(r.cover)}" alt=""></div>`:`<div class="gcover" style="--c:${COLS[i%4]}"><b>${escapeHTML(r.title)}</b><small>neosten${r.type?' · '+escapeHTML(releaseType(r.type)):''}</small></div>`;
 function chips(release) {
-  const links = releaseLinks(release);
-  return links.length ? `<div class="chips">${links.map(({name, url}) =>
-    `<a class="chip" href="${escapeHTML(url)}" target="_blank" rel="noopener">${name}</a>`
+  const links = listeningOptions(release);
+  return links.length ? `<div class="chips">${links.map(link =>
+    renderListeningLink(link, 'chip')
   ).join('')}</div>` : '';
 }
 const row=(r,l)=>`<button class="trk" data-id="${escapeHTML(r.id)}" data-l="${l}"><span class="ic">${r.file?'▶':'↗'}</span><span class="nm">${escapeHTML(r.title)}</span><span class="ex">${escapeHTML(r.note||'')}</span></button>`;
@@ -1136,60 +1132,66 @@ const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#3
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
 const listPlatforms = ['spotify', 'yandex'];
 
-function normalizedReleaseLinks(links) {
-  const direct = {};
-  for (const [key, value] of Object.entries(links || {})) {
-    if (typeof value !== 'string') continue;
-    const url = value.trim();
-    let parsed;
-    try { parsed = new URL(url); } catch { continue; }
-    if (!['http:', 'https:'].includes(parsed.protocol)) continue;
-    const host = parsed.hostname.replace(/^www\./, '');
-    const path = parsed.pathname;
-    if (/^music\.yandex\.(?:ru|com|kz|by|uz)$/.test(host)) {
-      if (/^\/(?:album\/\d+(?:\/track\/\d+)?|track\/\d+)\/?$/.test(path)) direct.yandex = url;
-      continue;
-    }
-    if (host === 'open.spotify.com') {
-      if (/^\/(?:intl-[\w-]+\/)?(?:album|track)\/[\w]+\/?$/.test(path)) direct.spotify = url;
-      continue;
-    }
-    if (listPlatforms.includes(key) || !Object.hasOwn(PN, key)) continue;
-    if (/\/(?:artists?|users?|channels?|@[^/]+)(?:\/|$)/i.test(path)) continue;
-    if (key === 'soundcloud' && path.split('/').filter(Boolean).length < 2) continue;
-    direct[key] = url;
-  }
-  return direct;
-}
+const {directLinks, hasReleaseTitle, matchesFor, webURL} = window.ReleaseIdentity;
 
 function releaseLinks(release, platforms = Object.keys(PN)) {
-  const links = normalizedReleaseLinks(release.links);
+  const links = directLinks(release.links);
   return platforms.filter(key => links[key]).map(key => ({key, name: PN[key], url: links[key]}));
 }
 
-const manualReleases = new Map(R.map(release => [norm(release.match || release.title), release]));
+function listeningOptions(release) {
+  const options = releaseLinks(release);
+  for (const {k: key, n: name, u: url} of L.listen || []) {
+    if (!webURL(url) || options.some(option => option.key === key)) continue;
+    options.push({key, name: PN[key] || name, url, profile: true});
+  }
+  if (webURL(release.page)) options.push({name: 'все площадки', url: release.page});
+  return options;
+}
+
+function renderListeningLink({name, url, profile}, className = '') {
+  return `<a class="${className}" href="${escapeHTML(url)}" target="_blank" rel="noopener">${escapeHTML(name)}${profile ? ' <small>страница артиста</small>' : ''}</a>`;
+}
+
 for (const automatic of window.AUTO || []) {
-  const manual = !automatic.pendingMetadata && manualReleases.get(norm(automatic.title));
-  if (!manual) {
-    R.push({...automatic, auto: true});
+  if (!hasReleaseTitle(automatic)) continue;
+  const matches = matchesFor(R, automatic).sort((a, b) => R.indexOf(a) - R.indexOf(b));
+  const release = matches[0];
+  if (!release) {
+    R.push({...automatic, auto: true, links: directLinks(automatic.links)});
     continue;
   }
-  manual.auto = true;
-  if (manual.hide) manual.title = automatic.title;
-  manual.hide = false;
-  manual.date = automatic.date || manual.date;
-  manual.cover ||= automatic.cover;
-  manual.type ||= automatic.type;
-  manual.links = {...normalizedReleaseLinks(automatic.links), ...normalizedReleaseLinks(manual.links)};
+  for (const duplicate of matches.slice(1)) {
+    release.links = {...directLinks(duplicate.links), ...directLinks(release.links)};
+    release.ids = [...new Set([...(release.ids || []), duplicate.id, ...(duplicate.ids || [])])];
+    release.cover ||= duplicate.cover;
+    release.date ||= duplicate.date;
+    release.page ||= duplicate.page;
+    release.type ||= duplicate.type;
+    release.file ||= duplicate.file;
+    release.pick ||= duplicate.pick;
+    release.plays ||= duplicate.plays;
+    release.show ||= duplicate.show;
+    R.splice(R.indexOf(duplicate), 1);
+  }
+  if (release.hide) release.title = automatic.title;
+  if (!release.auto) release.date = automatic.date || release.date;
+  release.auto = true;
+  release.ids = [...new Set([...(release.ids || []), automatic.id, ...(automatic.ids || [])])];
+  release.hide = false;
+  release.cover ||= automatic.cover;
+  release.date ||= automatic.date;
+  release.page ||= automatic.page;
+  release.type ||= automatic.type;
+  release.links = {...directLinks(automatic.links), ...directLinks(release.links)};
 }
 
 const platformDialog = $('#pm');
 let platformTrigger;
 
 function openMenu(release, trigger = document.activeElement) {
-  const links = releaseLinks(release);
   const cover = release.cover ? `<img class="pmi" src="${escapeHTML(release.cover)}" alt="">` : '';
-  const options = links.map(({name, url}) => `<a href="${escapeHTML(url)}" target="_blank" rel="noopener">${name}</a>`);
+  const options = listeningOptions(release).map(link => renderListeningLink(link));
   $('#pmc').innerHTML = `${cover}<h3 class="big">${escapeHTML(release.title)}</h3><p class="meta">где слушать</p>${options.join('') || '<p>ссылок пока нет</p>'}`;
   platformTrigger = trigger;
   platformDialog.hidden = false;
@@ -1552,7 +1554,7 @@ function renderReleases(){const t=Date.now(),up=R.filter(r=>!r.pendingMetadata&&
  $('#picks').innerHTML=R.filter(r=>r.pick).map(r=>row(r,'k')).join('');
   {const hp=pp.length>0,hk=R.some(r=>r.pick);$('#rotS').hidden=!(hp||hk);$('#tabPop').hidden=!hp;$('#tabPick').hidden=!hk;
    if(!hp&&hk){$('#pop').hidden=true;$('#picks').hidden=false;$('#tabPick').setAttribute('aria-selected','true');$('#tabPop').setAttribute('aria-selected','false')}}
- renderCatalog(R.filter(r=>!r.hide&&(r.auto||r.show||releaseLinks(r).length)).sort((a,b)=>ts(b)-ts(a)));
+ renderCatalog(R.filter(r=>!r.hide&&hasReleaseTitle(r)&&(r.auto||r.show||releaseLinks(r).length)).sort((a,b)=>ts(b)-ts(a)));
 
  const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
  const card=(t,b)=>`<div class="cc"><h3 class="gh"><span>■ ${t}</span></h3><div class="cc-list">${b}</div></div>`;
