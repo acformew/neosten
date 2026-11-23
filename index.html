@@ -419,7 +419,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 #featureS, #rotS {
   --editorial-line: rgba(255, 255, 255, .25);
   --editorial-line-active: rgba(255, 255, 255, .55);
-  --editorial-surface: rgba(0, 0, 0, .82);
+  --editorial-surface: var(--section-panel);
   --editorial-ink: #f1f1f1;
   --editorial-muted: #c3c3c3;
 }
@@ -437,7 +437,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
   min-width: 0;
   padding: clamp(20px, 3.5vw, 46px);
   border-inline-end: 1px solid var(--editorial-line);
-  background: rgba(0, 0, 0, .25);
+  background: transparent;
 }
 .feature-cover {
   position: relative;
@@ -593,7 +593,7 @@ input:not([type=range]),textarea,select{font-size:max(16px,1em)}
 #rotS {
   border-block: 1px solid var(--editorial-line);
   padding-block: clamp(34px, 5vw, 67px);
-  background: rgba(0, 0, 0, .52);
+  background: transparent;
   color: var(--editorial-ink);
 }
 .recommendation-head {
@@ -842,6 +842,221 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 @media (max-width: 480px) {
   #discS { --release-width: clamp(158px, 54vw, 230px); }
 }
+/* Общие поверхности и акценты основных разделов */
+:root {
+  --section-panel: rgba(0, 0, 0, .7);
+  --section-panel-ink: #f1f1f1;
+  --section-panel-muted: #c3c3c3;
+  --section-panel-line: rgba(255, 255, 255, .25);
+  --section-panel-line-active: rgba(255, 255, 255, .55);
+  --section-page-line: color-mix(in srgb, var(--ink) 32%, transparent);
+}
+:is(#p-art, #p-con, #p-games) .hd {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--section-page-line);
+}
+:is(#memory, #p-art, #p-con, #p-games) :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+#hero .lead { font-weight: 500; line-height: 1.68; }
+#hero .toc { border-top: 1px solid var(--section-page-line); }
+#hero .toc li { display: block; padding: 0; border-bottom: 1px solid var(--section-page-line); }
+#hero .toc a {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  min-height: 46px;
+  padding: 11px 9px;
+  color: var(--ink);
+  background: transparent;
+  font: 400 13px/1.5 "IBM Plex Mono", monospace;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background .18s ease;
+}
+#hero .toc b { font: 700 18px/1 "Oswald", sans-serif; }
+.toc-caption, .toc-arrow { opacity: .77; }
+.toc-arrow { transition: transform .18s ease, opacity .18s ease; }
+#hero .slot { border-width: 1px; }
+#memory {
+  background: var(--section-panel);
+  color: var(--section-panel-ink);
+  border-block: 1px solid var(--section-panel-line);
+  scroll-margin-top: 72px;
+}
+#memory h2 {
+  font-size: clamp(26px, 4vw, 46px);
+  margin-bottom: clamp(18px, 3vw, 28px);
+  text-shadow: none;
+}
+.thought-form {
+  display: flex;
+  max-width: 720px;
+  gap: 8px;
+}
+#memory #in {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 13px;
+  border: 1px solid var(--section-panel-line);
+  color: inherit;
+  font: 500 16px "IBM Plex Mono", monospace;
+}
+#memory #in::placeholder { color: var(--section-panel-muted); }
+.thought-send {
+  padding: 9px 14px;
+  border: 1px solid var(--section-panel-line);
+  background: transparent;
+  color: inherit;
+  font: 500 13px "IBM Plex Mono", monospace;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+#p-art .photo {
+  border: 1px solid var(--section-panel-line);
+  box-shadow: none;
+  color: var(--section-panel-ink);
+  background: radial-gradient(rgba(255, 255, 255, .13) 1px, transparent 1.4px) 0 0 / 15px 15px, var(--section-panel);
+}
+#p-art .photo span {
+  background: rgba(0, 0, 0, .5);
+  color: inherit;
+  border: 1px solid var(--section-panel-line);
+  transform: none;
+  font-size: 13px;
+}
+#p-art .tag { font-size: 14px; opacity: .79; }
+#adl, #p-art .tl-card {
+  border: 1px solid var(--section-panel-line);
+  background: var(--section-panel);
+  color: var(--section-panel-ink);
+  box-shadow: none;
+}
+#adl div, #p-art .tl-head { border-bottom-width: 1px; border-color: var(--section-panel-line); }
+#p-art .bio { border-top: 1px solid var(--section-page-line); }
+#artistBio { padding: 16px 0 0; }
+#p-art .bh { margin-block: 4px 0; }
+#p-art #tlS .bh { margin-bottom: 16px; }
+.bio-reading {
+  max-width: 72ch;
+  min-width: 0;
+  padding: clamp(15px, 2.7vw, 27px);
+  border: 1px solid var(--section-panel-line);
+  background: var(--section-panel);
+  color: var(--section-panel-ink);
+}
+.bio-preview {
+  --bio-lines: 5;
+  font: 400 clamp(15px, 1.65vw, 17px)/1.72 "IBM Plex Mono", monospace;
+  overflow: hidden;
+}
+.bio-reading.can-collapse:not(.expanded) .bio-preview {
+  height: calc(var(--bio-lines) * 1lh);
+  -webkit-mask-image: linear-gradient(#000 70%, transparent);
+  mask-image: linear-gradient(#000 70%, transparent);
+}
+#abio p { max-width: none; margin: 0 0 .9em; font: inherit; }
+#abio > :last-child, #bioMore > :last-child { margin-bottom: 0; }
+.bio-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 4px 0;
+  margin-top: 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: 500 13px "IBM Plex Mono", monospace;
+  text-decoration: underline;
+  text-decoration-color: var(--section-panel-line);
+  text-underline-offset: .27em;
+  cursor: pointer;
+  scroll-margin: 75px 0 16px;
+}
+.bio-toggle[hidden] { display: none; }
+#p-art .tl-vis, #p-art .tl-ph { border-width: 1px; border-color: var(--section-panel-line); }
+#p-art .tl-nav { border-color: var(--section-panel-line); }
+#p-art .tl-nav .btn { border: 1px solid var(--section-panel-line-active); }
+#p-art .tl-dot { border-width: 1px; box-shadow: none; }
+#p-art .tl-node.on .tl-dot { box-shadow: 3px 3px 0 var(--section-page-line); }
+#p-art .tl-line { height: 2px; background: var(--section-page-line); }
+#p-art .tl-node:focus-visible { outline-offset: -2px; }
+#links { gap: clamp(16px, 2.4vw, 28px); }
+#links .cc {
+  background: var(--section-panel);
+  color: var(--section-panel-ink);
+  border: 1px solid var(--section-panel-line);
+  box-shadow: none;
+}
+#links .gh {
+  padding-block: 13px;
+  background: rgba(0, 0, 0, .18);
+  border-bottom: 1px solid var(--section-panel-line);
+}
+#links .cc-list { list-style: none; margin: 0; padding: 0; }
+#links .lnk { min-height: 58px; background: transparent; color: inherit; border: 0; }
+#links .cc-list > li + li { border-top: 1px solid var(--section-panel-line); }
+#links .lnk .n, #links .lnk .h { white-space: normal; overflow-wrap: anywhere; }
+#links .lnk .h { color: var(--section-panel-muted); opacity: 1; }
+#links .lnk:focus-visible { outline-offset: -3px; }
+#links .bk { border: 0; color: var(--section-panel-muted); opacity: 1; }
+#gmMenu .gm-grid { gap: clamp(15px, 2.4vw, 28px); }
+#gmMenu .gm-card {
+  border: 1px solid var(--section-panel-line);
+  background: var(--section-panel);
+  color: var(--section-panel-ink);
+  box-shadow: none;
+  transition: border-color .18s ease, transform .18s ease;
+}
+#gmMenu .gm-h { background: rgba(0, 0, 0, .2); border-bottom: 1px solid var(--section-panel-line); }
+#gmMenu .gm-soon {
+  border-style: dashed;
+  border-color: var(--section-page-line);
+  background: transparent;
+  color: inherit;
+  opacity: .77;
+}
+#gmMenu .gm-pv i { border: 1px solid var(--section-panel-line); }
+#gmMenu .gm-go { border: 1px solid var(--section-panel-line-active); }
+#gmWordle .w-bar { border-bottom: 1px solid var(--section-page-line); }
+#gmWordle :is(.wt, .wk) { border: 1px solid var(--section-panel-line-active); box-shadow: none; }
+#gmWordle :is(.wt, .wk):not(.c-ok, .c-mid, .c-no) { background: var(--section-panel); color: var(--section-panel-ink); }
+#gmWordle .w-note { background: var(--section-panel); color: var(--section-panel-ink); border: 1px solid var(--section-panel-line); box-shadow: none; }
+#wBoard:focus-visible { outline: 1px solid var(--section-page-line); outline-offset: 6px; }
+@media (hover: hover) and (pointer: fine) {
+  #hero .toc a:hover { background: var(--section-page-line); color: var(--ink); }
+  #memory .thought-send:hover { border-color: var(--section-panel-line-active); background: rgba(255, 255, 255, .08); }
+  .bio-toggle:hover { text-decoration-color: currentColor; }
+  #links .lnk:hover { background: rgba(255, 255, 255, .07); color: inherit; }
+  #links .lnk:hover .h { color: var(--section-panel-muted); }
+  #gmMenu .gm-card:not(.gm-soon):hover { border-color: var(--section-panel-line-active); transform: none; box-shadow: none; }
+  #gmMenu .gm-card:hover .gm-go { background: var(--sun); color: #101010; }
+  #gmWordle .wk:not(.c-ok, .c-mid, .c-no):hover { background: var(--sun); color: #101010; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .toc a:hover .toc-arrow { transform: translateX(3px); opacity: 1; }
+  #gmMenu .gm-card:not(.gm-soon):hover { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #links .lnk:hover .arr, #p-art .tl-node:hover { transform: none; }
+}
+@media (max-width: 520px) {
+  #hero .toc a { grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; align-items: center; }
+  #hero .toc .toc-caption { grid-column: 1; grid-row: 2; }
+  #hero .toc .toc-arrow { grid-column: 2; grid-row: 1 / 3; }
+  #hero .toc b { font-size: 17px; }
+}
 </style></head><body>
 <div id="bg" aria-hidden="true"><div class="bgl" id="bgd"></div><div class="bgl" id="bgn"></div><div id="bgw"></div></div>
 <canvas id="grid" aria-hidden="true"></canvas>
@@ -853,7 +1068,12 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 <div class="pg on" id="p-home">
 <header id="hero"><div id="pin"><div class="eyebrow">■ музыкальный проект</div><h1 class="big w2">neosten</h1>
 <div class="intro"><p class="lead">официальный сайт исполнителя neosten. здесь выходят новые релизы, собраны самые популярные треки, выбор артиста, биография и контакты. часть треков можно слушать прямо здесь, а за порядком на сайте следит кот.</p>
-<ul class="toc"><li><a href="#rel" data-go="rel">релизы</a> новое, популярное, выбор артиста</li><li><a href="#art" data-go="art">артист</a> кто это и что слушать</li><li><a href="#con" data-go="con">контакты</a> соцсети, битмейкер, букинг</li><li><a href="#home" data-go="home">мысли</a> ниже: напиши что угодно</li></ul></div></div>
+<ul class="toc">
+  <li><a href="#rel" data-go="rel"><b>релизы</b><span class="toc-caption">новое, популярное, выбор артиста</span><span class="toc-arrow" aria-hidden="true">→</span></a></li>
+  <li><a href="#art" data-go="art"><b>артист</b><span class="toc-caption">кто это и что слушать</span><span class="toc-arrow" aria-hidden="true">→</span></a></li>
+  <li><a href="#con" data-go="con"><b>контакты</b><span class="toc-caption">соцсети, битмейкер, букинг</span><span class="toc-arrow" aria-hidden="true">→</span></a></li>
+  <li><a href="#memory" data-go="home" data-anchor="memory"><b>мысли</b><span class="toc-caption">ниже можно написать что угодно</span><span class="toc-arrow" aria-hidden="true">↓</span></a></li>
+</ul></div></div>
 <div class="slot">кот гуляет по сайту.<br>«позвать кота» вернёт его сюда.</div><div id="catbox" class="home" data-s><div id="bub"></div><b>кот ^^</b><pre id="cat" role="img" aria-label="ASCII-арт: кот">========================-###***+==--=======-=========---=====+++++====-=-=======--==-======+%*+==--=
 ========================---**#*++=======-==--====-=--==---===+++++++++===-=+*====-----==---=*#++=---
 ============================*##**++==-=+++++===+++==-=------==+++++++++*#@@@==-------==-----=%*+==--
@@ -911,9 +1131,12 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
 <div class="strip" aria-hidden="true"><span>neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ </span></div>
 
-<section id="memory"><h2 class="big">оставь мысль</h2>
-<input id="in" maxlength="70" placeholder="напиши что угодно и нажми ввод" autocomplete="off" aria-label="твоя мысль">
-<div id="mem"></div></section>
+<section id="memory" tabindex="-1" aria-labelledby="memoryTitle"><h2 class="big" id="memoryTitle">оставь мысль</h2>
+<form class="thought-form" id="thoughtForm">
+  <input id="in" maxlength="70" placeholder="твоя мысль" autocomplete="off" aria-label="твоя мысль">
+  <button type="submit" class="thought-send">оставить</button>
+</form>
+<div id="mem" aria-hidden="true"></div><div id="thoughtStatus" class="visually-hidden" role="status" aria-atomic="true"></div></section>
 </div>
 
 <div class="pg" id="p-rel">
@@ -961,25 +1184,33 @@ html:has(.catalog-stage.is-changing) { overflow-anchor: none; }
 <div class="pg" id="p-art"><section>
 <div class="card"><div class="photo" id="aph"><span>здесь будет фото</span></div>
 <div><h2 class="big">neosten</h2><p id="atag" class="tag" hidden></p><dl id="adl"></dl></div></div>
-<div class="bio"><div class="bh">биография</div><div id="abio"></div></div>
+<section class="bio" id="artistBio" aria-labelledby="bioTitle">
+  <h3 class="bh" id="bioTitle">биография</h3>
+  <div class="bio-reading" id="bioReading">
+    <div class="bio-preview" id="bioPreview">
+      <div id="abio"><p id="bioIntro"></p><div id="bioMore"></div></div>
+    </div>
+    <button type="button" class="bio-toggle" id="bioToggle" aria-controls="bioPreview" aria-expanded="false" hidden>читать полностью ↓</button>
+  </div>
+</section>
 <blockquote id="aq" class="aq" hidden></blockquote>
 <div class="bio" id="tlS"><div class="bh">хронология</div><div id="atl" class="tl-wrap"></div></div>
 </section></div>
 
-<div class="pg" id="p-con"><section><h2 class="big hd">контакты</h2><div id="links"></div></section></div>
+<div class="pg" id="p-con"><section aria-labelledby="contactsTitle"><h2 class="big hd" id="contactsTitle">контакты</h2><div id="links"></div></section></div>
 <div class="pg" id="p-games">
-<section id="gmMenu"><h2 class="big hd">мини-игры</h2>
+<section id="gmMenu" aria-labelledby="gamesTitle"><h2 class="big hd" id="gamesTitle">мини-игры</h2>
 <p class="lead">небольшие игры на перерыв между треками. музыка не останавливается, пока ты думаешь.</p>
 <div class="gm-grid">
-<button class="gm-card" id="openW" data-s><span class="gm-h"><span>слова</span><span>5 букв · 6 попыток</span></span>
-<span class="gm-b"><span class="gm-pv"><i class="c-no">с</i><i class="c-mid">л</i><i class="c-ok">о</i><i class="c-no">в</i><i class="c-ok">о</i></span>
+<button type="button" class="gm-card" id="openW" aria-controls="gmWordle" data-s><span class="gm-h"><span>слова</span><span>5 букв · 6 попыток</span></span>
+<span class="gm-b"><span class="gm-pv" aria-hidden="true"><i class="c-no">с</i><i class="c-mid">л</i><i class="c-ok">о</i><i class="c-no">в</i><i class="c-ok">о</i></span>
 <b class="big">вордли</b><span class="gm-d">угадай слово из пяти букв. зелёная — на своём месте, жёлтая — в слове, но не здесь. слова каждый раз новые, несуществующие не принимаются.</span><span class="gm-go">играть</span></span></button>
 <div class="gm-card gm-soon">здесь появится ещё одна игра</div>
 </div></section>
-<section id="gmWordle" hidden>
-<div class="w-bar"><button class="btn" id="wBack">← все игры</button><h2 class="big">вордли</h2><button class="btn" id="wNew">новое слово</button></div>
-<div class="w-wrap"><div id="wBoard" aria-label="игровое поле"></div>
-<p class="w-hint">печатай с клавиатуры или нажимай на экранные клавиши. ввод — проверить.</p>
+<section id="gmWordle" aria-labelledby="wordleTitle" hidden>
+<div class="w-bar"><button class="btn" id="wBack">← все игры</button><h2 class="big" id="wordleTitle">вордли</h2><button class="btn" id="wNew">новое слово</button></div>
+<div class="w-wrap"><div id="wBoard" role="group" aria-label="игровое поле" aria-describedby="wHint" tabindex="-1"></div>
+<p class="w-hint" id="wHint">печатай с клавиатуры или нажимай на экранные клавиши. ввод — проверить.</p>
 <div id="wKb"></div>
 <div id="wOver"><div class="w-note"><b>партия завершена</b><span>можно сразу сыграть ещё раз</span></div>
 <div class="w-act"><button class="btn pri" id="wAgain">сыграть новое слово</button><button class="btn" id="wRes">показать результаты</button></div></div></div>
@@ -1344,13 +1575,86 @@ function pickThought(value) {
   }
   return nextThought();
 }
-$('#in').onkeydown=e=>{blip(500+Math.random()*500,.05,'triangle',.05);if(e.key!=='Enter'||!e.target.value.trim())return;
- const t0=e.target.value,cmd=t0.trim().toLowerCase(),f=Object.hasOwn(fx,cmd)?fx[cmd]:null,t=f?f.t:pickThought(t0);if(f)f.f();else if(t0.includes('303'))acid();e.target.value='';const el=document.createElement('div'),m=$('#mem');m.prepend(el);while(m.children.length>3)m.lastChild.remove();
- let i=0;const iv=setInterval(()=>{el.textContent=t.slice(0,++i);blip(900+Math.random()*500,.03,'square',.02);if(i>=t.length){clearInterval(iv);setTimeout(()=>el.classList.add('f'),2500);setTimeout(()=>el.remove(),10000)}},38)};
+const thoughtInput = $('#in');
+const readingMotion = matchMedia('(prefers-reduced-motion: reduce)');
+thoughtInput.addEventListener('keydown', () => blip(500 + Math.random() * 500, .05, 'triangle', .05));
+$('#thoughtForm').onsubmit = event => {
+  event.preventDefault();
+  if (!thoughtInput.value.trim()) return;
+  const value = thoughtInput.value;
+  const command = value.trim().toLowerCase();
+  const effect = Object.hasOwn(fx, command) ? fx[command] : null;
+  const reply = effect ? effect.t : pickThought(value);
+  if (effect) effect.f();
+  else if (value.includes('303')) acid();
+  thoughtInput.value = '';
+  thoughtInput.focus({preventScroll: true});
+
+  const entry = document.createElement('div');
+  const memory = $('#mem');
+  const status = $('#thoughtStatus');
+  status.textContent = '';
+  memory.prepend(entry);
+  while (memory.children.length > 3) memory.lastChild.remove();
+
+  const finish = () => {
+    if (memory.firstElementChild === entry) status.textContent = reply;
+    setTimeout(() => entry.classList.add('f'), 2500);
+    setTimeout(() => entry.remove(), 10000);
+  };
+  if (readingMotion.matches) {
+    entry.textContent = reply;
+    finish();
+    return;
+  }
+  let length = 0;
+  const typing = setInterval(() => {
+    if (!entry.isConnected) { clearInterval(typing); return; }
+    entry.textContent = reply.slice(0, ++length);
+    blip(900 + Math.random() * 500, .03, 'square', .02);
+    if (length >= reply.length) {
+      clearInterval(typing);
+      finish();
+    }
+  }, 38);
+};
+
 /* ---------- pages ---------- */
-const pages=$$('.pg');
-function go(p){if(!$('#p-'+p))p='home';pages.forEach(x=>x.classList.toggle('on',x.id==='p-'+p));$$('#nav .n').forEach(b=>b.classList.toggle('on',b.dataset.p===p));scrollTo(0,0);try{history.replaceState(null,'','#'+p)}catch(e){}blip(400,.12,'sine',.15,800)}
-$$('#nav .n').forEach(b=>b.onclick=()=>go(b.dataset.p));$('#logo').onclick=()=>go('home');try{history.scrollRestoration='manual'}catch(e){}go('home');
+const pages = $$('.pg');
+const pageNames = new Set(pages.map(page => page.id.slice(2)));
+const navItems = $$('#nav .n');
+function go(page, {anchor = '', fromURL = false} = {}) {
+  if (!pageNames.has(page)) page = 'home';
+  const memory = page === 'home' && anchor === 'memory' ? $('#memory') : null;
+  pages.forEach(section => section.classList.toggle('on', section.id === 'p-' + page));
+  navItems.forEach(item => {
+    const active = item.dataset.p === page;
+    item.classList.toggle('on', active);
+    if (active) item.setAttribute('aria-current', 'page');
+    else item.removeAttribute('aria-current');
+  });
+  const hash = '#' + (memory ? 'memory' : page);
+  if (!fromURL && location.hash !== hash) {
+    try { history.pushState(null, '', hash); } catch {}
+  }
+  if (memory) {
+    memory.scrollIntoView({block: 'start', behavior: fromURL || readingMotion.matches ? 'instant' : 'smooth'});
+    if (!fromURL) memory.focus({preventScroll: true});
+  } else {
+    scrollTo({top: 0, behavior: 'instant'});
+  }
+  if (!fromURL) blip(400, .12, 'sine', .15, 800);
+}
+function goToHash() {
+  const hash = location.hash.slice(1);
+  if (hash === 'memory') go('home', {anchor: 'memory', fromURL: true});
+  else go(hash, {fromURL: true});
+}
+navItems.forEach(item => { item.onclick = () => go(item.dataset.p); });
+$('#logo').onclick = () => go('home');
+try { history.scrollRestoration = 'manual'; } catch {}
+addEventListener('hashchange', goToHash);
+goToHash();
 /* ---------- easter eggs ---------- */
 let wc=0;$$('.w2').forEach(w=>w.onclick=()=>{if(++wc>=5){wc=0;const p=$('#pin');p.classList.add('spin');blip(200,1.2,'sawtooth',.08,1600);setTimeout(()=>p.classList.remove('spin'),1500)}});
 document.addEventListener('click',e=>{const c=e.target.closest('.gcover');if(!c)return;c.classList.toggle('night');if(c.classList.contains('night'))for(let i=0;i<4;i++)setTimeout(()=>blip(4200,.05,'sine',.05),300+i*130);else blip(900,.4,'sine',.1,1400)});
@@ -1795,19 +2099,20 @@ function tlArt(x){
 }
 let tlIdx=0;
 function renderTimeline(tl){
- const box=$('#atl');if(!box)return;
+ const box=$('#atl');if(!box || !tl.length)return;
+ const previousScroll = box.querySelector('.tl-track')?.scrollLeft || 0;
  tlIdx=Math.max(0,Math.min(tl.length-1,tlIdx));
  const curItem=tl[tlIdx],pct=tl.length>1?(tlIdx/(tl.length-1)*100):100;
  box.innerHTML=`
   <div class="tl-track" role="tablist" aria-label="Годы хронологии">
    <div class="tl-line"><i style="--tlp:${pct}%"></i></div>
-   ${tl.map((x,i)=>`<button type="button" class="tl-node${i===tlIdx?' on':(i<tlIdx?' done':'')}" data-tli="${i}" data-s role="tab" aria-selected="${i===tlIdx}">
+   ${tl.map((x,i)=>`<button type="button" class="tl-node${i===tlIdx?' on':(i<tlIdx?' done':'')}" id="timelineYear${i}" data-tli="${i}" data-s role="tab" aria-controls="timelineDetail" aria-selected="${i===tlIdx}" tabindex="${i===tlIdx?0:-1}">
     <span class="tl-dot">${i+1}</span>
     <span class="tl-yr">${x.y}</span>
     <span class="tl-sub-lbl">${x.title||''}</span>
    </button>`).join('')}
   </div>
-  <div class="tl-card" role="tabpanel">
+  <div class="tl-card" id="timelineDetail" role="tabpanel" aria-labelledby="timelineYear${tlIdx}">
    <div class="tl-vis">
     ${tlArt(curItem)}
     <span class="tl-vis-badge">${curItem.y}</span>
@@ -1827,7 +2132,38 @@ function renderTimeline(tl){
     </div>
    </div>
   </div>`;
+ const track = box.querySelector('.tl-track');
+ track.scrollLeft = previousScroll;
 }
+
+function selectTimeline(index, control) {
+  const timeline = AR.timeline || [];
+  if (!timeline.length) return;
+  const next = Math.max(0, Math.min(timeline.length - 1, index));
+  if (next === tlIdx) return;
+  tlIdx = next;
+  renderTimeline(timeline);
+  const year = $('#timelineYear' + next);
+  const track = year.parentElement;
+  const visible = track.getBoundingClientRect();
+  const item = year.getBoundingClientRect();
+  const delta = item.left < visible.left + 6 ? item.left - visible.left - 6
+    : item.right > visible.right - 6 ? item.right - visible.right + 6 : 0;
+  if (delta) track.scrollBy({left: delta, behavior: readingMotion.matches ? 'instant' : 'smooth'});
+
+  const replacement = control.dataset.tlstep ? $(`[data-tlstep="${control.dataset.tlstep}"]:not(:disabled)`) : null;
+  (replacement || year).focus({preventScroll: true});
+}
+
+$('#atl').addEventListener('keydown', event => {
+  const year = event.target.closest('[data-tli]');
+  if (!year) return;
+  const delta = {ArrowLeft: -1, ArrowRight: 1}[event.key];
+  if (!delta && event.key !== 'Home' && event.key !== 'End') return;
+  event.preventDefault();
+  const next = delta ? Number(year.dataset.tli) + delta : event.key === 'Home' ? 0 : (AR.timeline || []).length - 1;
+  selectTimeline(next, year);
+});
 
 function editorialArtwork(release) {
   const image = release.cover ? `<img src="${escapeHTML(release.cover)}" alt="" decoding="async">` : '';
@@ -2030,6 +2366,102 @@ document.addEventListener('error', event => {
   event.target.remove();
 }, true);
 
+const bioSection = $('#artistBio');
+const bioReading = $('#bioReading');
+const bioPreview = $('#bioPreview');
+const bioText = $('#abio');
+const bioMore = $('#bioMore');
+const bioToggle = $('#bioToggle');
+let bioExpanded = false;
+let bioAnimation = null;
+
+function cancelBioAnimation() {
+  const animation = bioAnimation;
+  bioAnimation = null;
+  if (animation) animation.cancel();
+}
+
+function refreshBiography() {
+  if (!bioPreview.clientWidth) return;
+  const style = getComputedStyle(bioPreview);
+  const previewHeight = parseFloat(style.lineHeight) * Number(style.getPropertyValue('--bio-lines'));
+  const canCollapse = bioText.getBoundingClientRect().height > previewHeight + 1;
+  bioReading.classList.toggle('can-collapse', canCollapse);
+  bioToggle.hidden = !canCollapse;
+  bioMore.inert = canCollapse && !bioExpanded;
+  if (!canCollapse) cancelBioAnimation();
+}
+
+function renderBiography(paragraphs) {
+  const text = [].concat(paragraphs || []).filter(value => typeof value === 'string' && value.trim());
+  bioSection.hidden = !text.length;
+  $('#bioIntro').textContent = text[0] || '';
+  bioMore.replaceChildren(...text.slice(1).map(value => {
+    const paragraph = document.createElement('p');
+    paragraph.textContent = value;
+    return paragraph;
+  }));
+  refreshBiography();
+}
+
+function keepBioToggleVisible() {
+  if (bioToggle.getBoundingClientRect().top < $('#nav').getBoundingClientRect().bottom) {
+    bioToggle.scrollIntoView({block: 'nearest', behavior: readingMotion.matches ? 'instant' : 'smooth'});
+  }
+}
+
+bioToggle.onclick = () => {
+  const from = bioPreview.getBoundingClientRect().height;
+  cancelBioAnimation();
+  bioExpanded = !bioExpanded;
+  bioReading.classList.toggle('expanded', bioExpanded);
+  bioToggle.setAttribute('aria-expanded', String(bioExpanded));
+  bioToggle.textContent = bioExpanded ? 'свернуть ↑' : 'читать полностью ↓';
+  bioMore.inert = !bioExpanded;
+  const to = bioPreview.getBoundingClientRect().height;
+  if (readingMotion.matches || typeof bioPreview.animate !== 'function' || Math.abs(from - to) < 1) {
+    if (!bioExpanded) keepBioToggleVisible();
+    return;
+  }
+  const animation = bioPreview.animate([{height: `${from}px`}, {height: `${to}px`}],
+    {duration: 300, easing: 'cubic-bezier(.22,.7,.25,1)', fill: 'both'});
+  bioAnimation = animation;
+  animation.onfinish = () => {
+    if (bioAnimation !== animation) return;
+    cancelBioAnimation();
+    if (!bioExpanded) keepBioToggleVisible();
+  };
+};
+if (typeof ResizeObserver === 'function') new ResizeObserver(refreshBiography).observe(bioText);
+else addEventListener('resize', refreshBiography);
+addEventListener('resize', cancelBioAnimation);
+readingMotion.addEventListener('change', () => { if (readingMotion.matches) cancelBioAnimation(); });
+
+function renderContacts() {
+  const groups = [
+    ['соцсети', L.social, 'ссылки скоро появятся.'],
+    ['слушать', L.listen, 'площадки скоро появятся.'],
+    ['битмейкер', L.beats, 'по вопросам битов пиши в соцсети.'],
+    ['букинг', L.booking ? [{n: 'организация выступлений', u: L.booking}] : [], 'контакт для букинга появится позже.'],
+  ];
+  const label = url => url.replace(/^https?:\/\/(www\.)?/i, '').replace(/^(mailto:|tel:)/i, '').replace(/[?#].*$/, '').replace(/\/$/, '');
+  $('#links').innerHTML = groups.map(([title, entries, empty], index) => {
+    const heading = 'contactsGroup' + index;
+    const rows = (entries || []).map(({n, u}) => {
+      if (typeof u !== 'string') return '';
+      const address = webURL(u);
+      if (!address && !/^(mailto:|tel:)[^\s]+$/i.test(u)) return '';
+      return `<li><a class="lnk" href="${escapeHTML(u)}"${address ? ' target="_blank" rel="noopener"' : ''} data-s>
+        <span class="lnk-info"><span class="n">${escapeHTML(n)}</span><span class="h">${escapeHTML(label(u))}</span></span>
+        <span class="arr" aria-hidden="true">↗</span>
+      </a></li>`;
+    }).join('');
+    return `<article class="cc" aria-labelledby="${heading}"><h3 class="gh" id="${heading}">${title}</h3>
+      ${rows ? `<ul class="cc-list" role="list">${rows}</ul>` : `<p class="bk">${empty}</p>`}
+    </article>`;
+  }).join('');
+}
+
 function renderReleases(){const up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&Number.isFinite(ts(r))&&!r.pendingMetadata&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
  let h=nw?renderFeaturedRelease(nw):'';
  if(u)h+=renderUpcomingRelease(u);
@@ -2037,18 +2469,11 @@ function renderReleases(){const up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort
  renderRecommendations();
  renderCatalog(R.filter(r=>!r.hide&&hasReleaseTitle(r)&&(r.auto||r.show||releaseLinks(r).length)).sort((a,b)=>ts(b)-ts(a)));
 
- const hnd=u=>(u||'').replace(/^https?:\/\/(www\.)?/,'').replace(/^mailto:/,'').replace(/[?#].*$/,'').replace(/\/$/,'');
- const card=(t,b)=>`<div class="cc"><h3 class="gh"><span>■ ${t}</span></h3><div class="cc-list">${b}</div></div>`;
- const rows=a=>(a||[]).map(x=>`<a class="lnk" href="${x.u}" target="_blank" rel="noopener" data-s><div class="lnk-info"><span class="n">${x.n}</span><span class="h">${hnd(x.u)}</span></div><span class="arr">↗</span></a>`).join('');
- const soc=(L.social&&L.social.length)?rows(L.social):'<p class="bk">ссылки скоро появятся.</p>';
- const lis=(L.listen&&L.listen.length)?rows(L.listen):'<p class="bk">площадки скоро появятся.</p>';
- const beats=(L.beats&&L.beats.length)?rows(L.beats):'<p class="bk">по вопросам битов: пишите в соцсети.</p>';
- const booking=L.booking?rows([{n:'Букинг / Организация',u:L.booking}]):'<p class="bk">контакт для букинга появится позже.</p>';
- $('#links').innerHTML=card('соцсети',soc)+card('слушать',lis)+card('битмейкер',beats)+card('букинг',booking);
+ renderContacts();
 
  const sum=R.reduce((a,r)=>a+(r.plays||0),0);
  $('#adl').innerHTML=[['жанр',AR.genre||'—'],...(AR.facts||[]).filter(f=>!/^(треков на сайте|питомец)$/i.test(String(f[0]).trim())),['прослушиваний',AR.totalPlays||(sum?fmtN(sum):'—')],['следующий релиз',u?fdt(u.date):'—']].map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
- $('#abio').innerHTML=[].concat(AR.bio||[]).map(p=>`<p>${p}</p>`).join('');
+ renderBiography(AR.bio);
  $('#atag').textContent='краткая сводка';$('#atag').hidden=false;
  const qq=AR.quote;$('#aq').hidden=!qq;if(qq)$('#aq').innerHTML=`<p>${qq.text||qq}</p>${qq.who?`<cite>— ${qq.who}</cite>`:''}`;
  const tl=AR.timeline||[];$('#tlS').hidden=!tl.length;if(tl.length)renderTimeline(tl);
@@ -2061,9 +2486,11 @@ renderReleases();
 try{const sv=localStorage.getItem('nvol');if(sv!==null)vol=Math.min(1,Math.max(0,+sv))}catch(e){}
 const mpv=$('#mpv');mpv.value=vol*100;mpv.style.setProperty('--v',vol*100+'%');Object.values(aud).forEach(a=>a.volume=vol);
 mpv.oninput=e=>{vol=e.target.value/100;e.target.style.setProperty('--v',e.target.value+'%');Object.values(aud).forEach(a=>a.volume=vol);try{localStorage.setItem('nvol',vol)}catch(x){}};
-document.addEventListener('click',e=>{const tlb=e.target.closest('[data-tli]');if(tlb){tlIdx=+tlb.dataset.tli;renderTimeline(AR.timeline||[]);return}
- const tls=e.target.closest('[data-tlstep]');if(tls){tlIdx+=+tls.dataset.tlstep;renderTimeline(AR.timeline||[]);return}
- const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
+document.addEventListener('click',e=>{const tlb=e.target.closest('[data-tli]');if(tlb){selectTimeline(Number(tlb.dataset.tli),tlb);return}
+ const tls=e.target.closest('[data-tlstep]');if(tls){selectTimeline(tlIdx+Number(tls.dataset.tlstep),tls);return}
+ const g=e.target.closest('[data-go]');if(g&&!e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey){
+  e.preventDefault();go(g.dataset.go,{anchor:g.dataset.anchor});return;
+ }
  const mc=e.target.closest('[data-menu]');if(mc){openMenu(byId(mc.dataset.menu),mc);return}
  const b=e.target.closest('[data-id]');if(b){toggle(b.dataset.id,$$('[data-id][data-l="'+b.dataset.l+'"]').map(x=>x.dataset.id));return}
  if(e.target.closest('#mpb')&&cur)toggle(cur)});
@@ -2340,7 +2767,10 @@ function shareText(){
   var won=state.gameState==="won";
   return"вордли · 5 букв "+(won?used().length:"Х")+"/"+ROWS+"\n\n"+used().map(function(r){return r.map(function(s){return EMOJI[s]}).join("")}).join("\n");
 }
+var wordleReturnFocus=null;
 function openModal(){
+  if(!wordleOn()||state.gameState==="playing")return;
+  wordleReturnFocus=g("gmWordle").contains(document.activeElement)?document.activeElement:g("wBoard");
   var won=state.gameState==="won";
   g("wmt").textContent=won?"победа! "+used().length+"/"+ROWS:"слово не угадано";
   var p=g("wPv");p.innerHTML="";
@@ -2349,7 +2779,15 @@ function openModal(){
   g("wRev").style.display=won?"block":"none";
   g("wm").classList.add("on");g("wmNew").focus();
 }
-function closeModal(){g("wm").classList.remove("on")}
+function closeModal(restore){
+  if(!g("wm").classList.contains("on"))return;
+  g("wm").classList.remove("on");
+  if(restore!==false&&wordleOn()){
+    var target=wordleReturnFocus&&wordleReturnFocus.getClientRects().length?wordleReturnFocus:g("wBoard");
+    target.focus({preventScroll:true});
+  }
+  wordleReturnFocus=null;
+}
 function legacy(text){
   var ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0";document.body.appendChild(ta);ta.select();
   var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);
@@ -2379,7 +2817,7 @@ function startGame(secret,saved){
   }
   persist();
 }
-function newGame(){closeModal();startGame(pickWord())}
+function newGame(){closeModal(false);startGame(pickWord());g("wBoard").focus({preventScroll:true})}
 function ensureStarted(){
   if(started)return;started=true;
   var d=load().game;
@@ -2391,8 +2829,9 @@ function ensureStarted(){
 /* ===== переключение «меню игр» ⇄ «вордли» внутри раздела ===== */
 function show(view){
   g("gmMenu").hidden=view!=="menu";g("gmWordle").hidden=view!=="wordle";
-  if(view==="wordle")ensureStarted();else closeModal();
-  scrollTo(0,0);
+  if(view==="wordle")ensureStarted();else closeModal(false);
+  scrollTo({top:0,behavior:"instant"});
+  g(view==="wordle"?"wBoard":"openW").focus({preventScroll:true});
 }
 function pageOn(){return g("p-games").classList.contains("on")}
 function wordleOn(){return pageOn()&&!g("gmWordle").hidden}
@@ -2407,13 +2846,25 @@ g("wRes").addEventListener("click",openModal);g("wmx").addEventListener("click",
 g("wRev").addEventListener("click",function(){g("wAns").hidden=false;this.style.display="none"});
 g("wm").addEventListener("mousedown",function(e){if(e.target===this)closeModal()});
 /* ушли из раздела — окно результата не должно висеть поверх других страниц */
-new MutationObserver(function(){if(!pageOn()){closeModal()}}).observe(g("p-games"),{attributes:true,attributeFilter:["class"]});
+new MutationObserver(function(){if(!pageOn()){closeModal(false)}}).observe(g("p-games"),{attributes:true,attributeFilter:["class"]});
 
 /* ===== физическая клавиатура (перехватываем раньше пасхалок сайта: «кот», «303», «сати») ===== */
 window.addEventListener("keydown",function(e){
   if(!wordleOn()||e.ctrlKey||e.metaKey||e.altKey)return;
-  if(g("wm").classList.contains("on")){if(e.key==="Escape")closeModal();if(e.key.length===1)e.stopPropagation();return}
+  if(g("wm").classList.contains("on")){
+    if(e.key==="Escape"){e.preventDefault();e.stopPropagation();closeModal()}
+    if(e.key==="Tab"){
+      var buttons=Array.from(g("wm").querySelectorAll("button")).filter(function(button){return button.getClientRects().length});
+      var first=buttons[0],last=buttons[buttons.length-1];
+      if(first&&document.activeElement===(e.shiftKey?first:last)){
+        e.preventDefault();(e.shiftKey?last:first).focus();
+      }
+    }
+    if(e.key.length===1)e.stopPropagation();
+    return;
+  }
   if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+  if(e.key==="Enter"&&e.target.closest?.("button,a"))return;
   if(e.key.length===1)e.stopPropagation();
   var k=null;
   if(e.key==="Enter")k="↵";
@@ -2425,7 +2876,6 @@ window.addEventListener("keydown",function(e){
   }
   if(!k)return;
   e.stopPropagation();
-  if(k==="↵"&&state.gameState==="playing"&&e.target.closest&&e.target.closest("button"))e.preventDefault();
   if(e.repeat&&k!=="⌫")return;
   handleKey(k);
 },true);
