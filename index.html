@@ -2,6 +2,7 @@
 <html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>neosten</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
 <script>(function(){try{var t=localStorage.getItem('ntheme');if(!t)t='night';if(t==='night')document.documentElement.classList.add('night')}catch(e){}})();</script>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=IBM+Plex+Mono:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -954,23 +955,13 @@ html.night #memory #in::placeholder { color: #81878b; }
   position: relative;
   display: block;
   isolation: isolate;
+  aspect-ratio: 5 / 7;
   background: #242629;
 }
 #aph img, #portraitGlass { position: absolute; inset: 0; width: 100%; height: 100%; }
-#aph img { object-fit: contain; }
+#aph img { object-fit: cover; }
 #portraitGlass { cursor: crosshair; touch-action: pinch-zoom; }
-#portraitReveal {
-  position: absolute;
-  right: 9px;
-  bottom: 9px;
-  padding: 6px 9px;
-  border: 1px solid rgba(226, 237, 242, .55);
-  background: rgba(12, 17, 20, .76);
-  color: #e8efed;
-  font: 500 11px/1.4 "IBM Plex Mono", monospace;
-  cursor: pointer;
-}
-#aph #portraitReveal:focus-visible { outline-offset: -3px; }
+#aph #portraitGlass:focus-visible { outline-offset: -4px; }
 #petTilt { display: none; }
 #p-art .tag { font-size: 14px; opacity: .79; }
 #adl, #p-art .tl-card {
@@ -1519,8 +1510,7 @@ html.night #memory #in::placeholder { color: #81878b; }
 <div class="pg" id="p-art"><section>
 <div class="card"><div class="photo" id="aph">
   <img id="artistPortrait" src="img/neosten-portrait.png" alt="монохромный портрет neosten" width="1060" height="1484" loading="lazy" decoding="async" draggable="false">
-  <canvas id="portraitGlass" aria-hidden="true" hidden></canvas>
-  <button type="button" id="portraitReveal" hidden>протереть стекло</button>
+  <canvas id="portraitGlass" tabindex="0" role="group" aria-label="запотевшее стекло. пробел и стрелки протирают портрет" hidden></canvas>
 </div>
 <div><h2 class="big">neosten</h2><p id="atag" class="tag" hidden></p><dl id="adl"></dl></div></div>
 <section class="bio" id="artistBio" aria-labelledby="bioTitle">
@@ -1681,12 +1671,20 @@ const heart=()=>{const r=cb.getBoundingClientRect(),h=document.createElement('sp
 const wig=()=>{cb.classList.remove('wig');void cb.offsetWidth;cb.classList.add('wig')};
 const bar=v=>'█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));
 const showPet=()=>{petOn=true;$('#pet').classList.add('on')};
-const draw=()=>$('#st').innerHTML='<div class="br"><span>сытость</span><i style="--v:'+hunger+'%"></i></div><div class="br"><span>настроение</span><i style="--v:'+mood+'%"></i></div><div class="mst">'+(sulk?'обижен':hunger<30?'голодный':'всё хорошо')+'</div>';draw();
+const draw=()=>$('#st').innerHTML='<div class="br"><span>сытость</span><i style="--v:'+hunger+'%"></i></div><div class="br"><span>любовь</span><i style="--v:'+mood+'%"></i></div><div class="mst">'+(sulk?'обижен':hunger<30?'голодный':'всё хорошо')+'</div>';draw();
 function purr(){if(!sound||!ac||ac.state!=='running')return;if(!pn){const o=ac.createOscillator(),l=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter(),g=ac.createGain(),g2=ac.createGain();o.type='sawtooth';o.frequency.value=48;f.type='lowpass';f.frequency.value=260;l.frequency.value=22;lg.gain.value=.5;g.gain.value=.5;g2.gain.value=0;l.connect(lg);lg.connect(g.gain);o.connect(f);f.connect(g);g.connect(g2);g2.connect(out);o.start();l.start();pn=g2}
  pn.gain.setTargetAtTime(.3,ac.currentTime,.1);clearTimeout(pt);pt=setTimeout(()=>pn.gain.setTargetAtTime(0,ac.currentTime,.15),300)}
-cb.onpointerdown=e=>{if(e.button)return;showPet();const r=cb.getBoundingClientRect();d={x:e.clientX,y:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,m:false,h:false};clearInterval(hi);ht=setTimeout(()=>{if(d&&!d.m){d.h=true;hi=setInterval(()=>{if(sulk){say('не трогай!',900);if(!home){vx=(Math.random()<.5?-1:1)*14;vy=-6}return}purr();mood=Math.min(100,mood+1);draw();if(Math.random()<.5)heart();say('мррр',900);navigator.vibrate&&navigator.vibrate([25,35,25])},260)}},350);cb.setPointerCapture(e.pointerId)};
+cb.onpointerdown=e=>{
+ if(e.button||d)return;
+ if(!mobileScreen.matches)showPet();
+ const r=cb.getBoundingClientRect();
+ d={id:e.pointerId,x:e.clientX,y:e.clientY,ox:e.clientX-r.left,oy:e.clientY-r.top,started:performance.now(),m:false,h:false};
+ clearInterval(hi);
+ ht=setTimeout(()=>{if(d&&!d.m){d.h=true;hi=setInterval(()=>{if(sulk){say('не трогай!',900);if(!home){vx=(Math.random()<.5?-1:1)*14;vy=-6}return}purr();mood=Math.min(100,mood+1);draw();if(Math.random()<.5)heart();say('мррр',900);navigator.vibrate&&navigator.vibrate([25,35,25])},260)}},350);
+ cb.setPointerCapture(e.pointerId);
+};
 cb.onpointermove=e=>{
- if(!d)return;
+ if(d?.id!==e.pointerId)return;
  const mobile=mobileScreen.matches;
  if(!d.m&&Math.hypot(e.clientX-d.x,e.clientY-d.y)>6){
   d.m=true;
@@ -1697,7 +1695,7 @@ cb.onpointermove=e=>{
    d.ox=cb.offsetWidth/2;d.oy=14;
   }
   cb.classList.add('is-dragging');
-  if(mobile){$('#pet').classList.remove('on');tvx=tvy=0}
+  if(mobile)tvx=tvy=0;
   vy=0;vx=0;say('мрр?!',1500);blip(700,.15,'sawtooth',.05,300);
  }
  if(!d.m)return;
@@ -1709,20 +1707,26 @@ cb.onpointermove=e=>{
  cb.style.left=e.clientX-d.ox+'px';cb.style.top=e.clientY-d.oy+'px';
  rot=Math.max(-25,Math.min(25,dx*2));tvx=tvx*.5+dx*.5;tvy=tvy*.5+dy*.5;tt=now;
 };
-cb.onpointerup=()=>{
+cb.onpointerup=e=>{
+ if(d?.id!==e.pointerId)return;
  clearTimeout(ht);clearInterval(hi);navigator.vibrate&&navigator.vibrate(0);
- if(d&&!d.m&&!d.h){if(sulk){say('фыр.');blip(300,.2,'sine',.05,120)}else{meow();wig();say('мяу');mood=Math.min(100,mood+2);draw()}}
- if(d&&d.m){
+ const mobile=mobileScreen.matches;
+ const tap=!d.m&&!d.h&&(!mobile||(performance.now()-d.started<350&&Math.hypot(e.clientX-d.x,e.clientY-d.y)<=6));
+ if(tap){
+  if(mobile)showPet();
+  if(sulk){say('фыр.');blip(300,.2,'sine',.05,120)}else{meow();wig();say('мяу');mood=Math.min(100,mood+2);draw()}
+ }
+ if(d.m){
   const q=performance.now()-tt>90;vx=q?0:Math.max(-45,Math.min(45,tvx*1.5));vy=q?0:Math.max(-35,Math.min(35,tvy));
   const r=cb.getBoundingClientRect(),cx=r.left+r.width/2;if(cx<0&&vx>-8)vx=-16;if(cx>innerWidth&&vx<8)vx=16;
-  if(mobileScreen.matches)releaseMobileCat();
+  if(mobile)releaseMobileCat();
  }
  cb.classList.remove('is-dragging');d=null;
 };
-cb.onpointercancel=()=>{
- if(!mobileScreen.matches)return;
+cb.onpointercancel=e=>{
+ if(d?.id!==e.pointerId)return;
  clearTimeout(ht);clearInterval(hi);navigator.vibrate&&navigator.vibrate(0);
- if(d?.m){vx=vy=0;releaseMobileCat()}
+ if(d.m){vx=vy=0;if(mobileScreen.matches)releaseMobileCat()}
  cb.classList.remove('is-dragging');d=null;
 };
 function moveMobileCat(now, step) {
@@ -3064,7 +3068,6 @@ function renderContacts() {
 function initPortraitGlass() {
   const photo = $('#artistPortrait');
   const glass = $('#portraitGlass');
-  const reveal = $('#portraitReveal');
   const ctx = glass.getContext('2d');
   const fog = document.createElement('canvas');
   const fogCtx = fog.getContext('2d');
@@ -3072,13 +3075,21 @@ function initPortraitGlass() {
   const sampleCtx = sample.getContext('2d');
   if (!ctx || !fogCtx || !sampleCtx) return;
 
-  const hold = 3000, restore = 3600;
-  const marks = [], drops = [];
-  let width = 0, height = 0, scale = 1, brush = 36;
-  let frame = 0, timer = 0, pointer = null, revealed = -Infinity, dropTravel = 0;
+  const fogHold = 3000, fogFade = 3600;
+  const wetHold = 1000, wetFade = 2350;
+  const cleared = new Map(), wet = new Map(), drops = [];
+  const dropSprite = [
+    [0, -2, 'rgba(123,165,181,.67)'],
+    [-1, -1, 'rgba(37,61,76,.60)'], [0, -1, 'rgba(177,215,229,.81)'],
+    [-1, 0, 'rgba(136,183,201,.75)'], [0, 0, 'rgba(225,244,249,.84)'], [1, 0, 'rgba(86,133,151,.71)'],
+    [-1, 1, 'rgba(50,79,95,.58)'], [0, 1, 'rgba(155,203,220,.78)'], [1, 1, 'rgba(52,83,99,.60)'],
+    [0, 2, 'rgba(69,105,119,.69)'],
+  ];
+  let width = 0, height = 0, scale = 1, cell = 4, cols = 0, rows = 0, radius = 4;
+  let frame = 0, timer = 0, pointer = null, keyboard = null, dropTravel = 0;
 
-  function coverage(now, start) {
-    const p = Math.max(0, Math.min(1, (now - start - hold) / restore));
+  function opacityAt(age, hold, fade) {
+    const p = Math.min(1, Math.max(0, (age - hold) / fade));
     return 1 - p * p * (3 - 2 * p);
   }
 
@@ -3088,74 +3099,121 @@ function initPortraitGlass() {
     if (!frame) frame = requestAnimationFrame(paint);
   }
 
+  function putTile(col, row) {
+    ctx.fillRect(col * cell, row * cell, cell, cell);
+  }
+
+  function stamp(x, y, now) {
+    const col = Math.floor(x / cell), row = Math.floor(y / cell);
+    for (let r = Math.max(0, row - radius); r <= Math.min(rows - 1, row + radius); r++) {
+      for (let c = Math.max(0, col - radius); c <= Math.min(cols - 1, col + radius); c++) {
+        const grain = ((c * 73856093 ^ r * 19349663) >>> 0) % 13 / 12;
+        const edge = radius - .12 - grain * 1.3;
+        if ((r - row) ** 2 + (c - col) ** 2 <= edge ** 2) cleared.set(r * cols + c, now);
+      }
+    }
+  }
+
+  function dropColumn(drop, row) {
+    const d = row - drop.row;
+    const drift = Math.round(Math.sin(d * .27 + drop.phase) * 1.25 - Math.sin(drop.phase) * 1.25);
+    return Math.max(0, Math.min(cols - 1, drop.col + drift));
+  }
+
+  function advanceDrops(now) {
+    for (let i = drops.length - 1; i >= 0; i--) {
+      const drop = drops[i];
+      const age = Math.max(0, (now - drop.at) / 1000);
+      const slide = Math.max(0, Math.min(drop.duration, age - .13));
+      // Прилипает к стеклу на мгновение, затем набирает скорость по мере стекания.
+      const travel = Math.floor(drop.speed * slide + slide * slide * 4);
+      const row = Math.min(rows - 1, drop.row + travel);
+      const col = dropColumn(drop, row);
+      for (let r = drop.lastRow + 1; r <= row; r++) {
+        const c = dropColumn(drop, r);
+        const previous = dropColumn(drop, Math.max(drop.row, r - 1));
+        for (let x = Math.min(c, previous); x <= Math.max(c, previous); x++) wet.set(r * cols + x, now);
+      }
+      drop.lastRow = row;
+      drop.x = col;
+      drop.y = row;
+      const drained = row === rows - 1 || slide >= drop.duration;
+      if (drained) drop.stopped ??= now;
+      drop.alpha = drop.stopped === undefined ? 1 : Math.max(0, 1 - (now - drop.stopped) / 430);
+      if (!drop.alpha) drops.splice(i, 1);
+    }
+  }
+
   function paint(now) {
     frame = 0;
     if (!width || !photo.clientWidth) return;
-    const globalWipe = coverage(now, revealed);
+    advanceDrops(now);
     ctx.clearRect(0, 0, width, height);
-    ctx.globalAlpha = 1 - globalWipe;
     ctx.drawImage(fog, 0, 0, width, height);
+
+    let repaintAt = Infinity;
     ctx.globalCompositeOperation = 'destination-out';
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#000';
-    while (marks.length && now >= marks[0].at + hold + restore) marks.shift();
-    for (const mark of marks) {
-      const fresh = coverage(now, mark.at);
-      ctx.beginPath();
-      ctx.moveTo(mark.x, mark.y);
-      ctx.lineTo(mark.toX + .01, mark.toY);
-      ctx.lineWidth = brush;
-      ctx.globalAlpha = .33 * fresh;
-      ctx.stroke();
-      ctx.lineWidth = .76 * brush;
-      ctx.globalAlpha = fresh;
-      ctx.stroke();
+    ctx.fillStyle = '#000';
+    for (const [index, at] of cleared) {
+      const alpha = opacityAt(now - at, fogHold, fogFade);
+      if (!alpha) { cleared.delete(index); continue; }
+      ctx.globalAlpha = alpha;
+      putTile(index % cols, Math.floor(index / cols));
+      repaintAt = Math.min(repaintAt, at + fogHold);
     }
+    for (const [index, at] of wet) {
+      const alpha = opacityAt(now - at, wetHold, wetFade);
+      if (!alpha) { wet.delete(index); continue; }
+      ctx.globalAlpha = alpha * .43;
+      putTile(index % cols, Math.floor(index / cols));
+      repaintAt = Math.min(repaintAt, at + wetHold);
+    }
+
     ctx.globalCompositeOperation = 'source-over';
-    for (let i = drops.length - 1; i >= 0; i--) {
-      const drop = drops[i];
-      const seconds = Math.max(0, (now - drop.at) / 1000);
-      const y = drop.y + (18 + 21 * seconds) * seconds;
-      if (y > height + 8 || seconds > 1.55) { drops.splice(i, 1); continue; }
-      const x = drop.x + Math.sin(seconds * 4) * 1.6;
-      ctx.globalAlpha = (1 - seconds / 1.6) * .8;
-      ctx.beginPath();
-      ctx.moveTo(drop.x, y - (3 + 12 * seconds));
-      ctx.lineTo(x, y);
-      ctx.strokeStyle = 'rgba(225,243,255,.66)';
-      ctx.lineWidth = drop.size;
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.ellipse(x, y, drop.size * .63, drop.size * 1.08, -.16, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(201,226,237,.80)';
-      ctx.fill();
+    for (const [index, at] of wet) {
+      const col = index % cols, row = Math.floor(index / cols);
+      const alpha = opacityAt(now - at, wetHold, wetFade);
+      ctx.globalAlpha = alpha * .22;
+      ctx.fillStyle = '#c8e8f1';
+      putTile(col, row);
+      if (col + 1 >= cols || wet.has(index + 1)) continue;
+      ctx.globalAlpha = alpha * .10;
+      ctx.fillStyle = '#1c3542';
+      putTile(col + 1, row);
+    }
+    for (const drop of drops) {
+      ctx.globalAlpha = drop.alpha;
+      for (const [x, y, color] of dropSprite) {
+        ctx.fillStyle = color;
+        putTile(drop.x + x, drop.y + y);
+      }
     }
     ctx.globalAlpha = 1;
 
-    const oldest = Math.min(marks[0]?.at ?? Infinity, globalWipe ? revealed : Infinity);
     if (drops.length) schedule();
-    else if (oldest < Infinity) schedule(Math.max(0, oldest + hold - now));
+    else if (repaintAt < Infinity) schedule(Math.max(0, repaintAt - now));
   }
 
   function sizeGlass() {
     const w = photo.clientWidth, h = photo.clientHeight;
-    const nextScale = Math.min(1.5, window.devicePixelRatio || 1);
+    const nextScale = Math.min(2, window.devicePixelRatio || 1);
     if (!w || !h || !photo.naturalWidth) return;
     if (w === width && h === height && nextScale === scale) { schedule(); return; }
     width = w; height = h; scale = nextScale;
-    brush = Math.max(33, Math.min(66, width * .145));
+    cell = Math.round((w >= 340 ? 5 : 4) * scale) / scale;
+    cols = Math.ceil(w / cell); rows = Math.ceil(h / cell);
+    radius = Math.round(Math.max(17, Math.min(34, w * .077)) / cell);
     glass.width = fog.width = Math.ceil(w * scale);
     glass.height = fog.height = Math.ceil(h * scale);
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
     fogCtx.setTransform(scale, 0, 0, scale, 0, 0);
 
-    // Уменьшенная копия даёт мягкое размытие и на браузерах без canvas.filter.
-    sample.width = 32;
-    sample.height = Math.round(32 * h / w);
-    sampleCtx.fillStyle = '#242629';
-    sampleCtx.fillRect(0, 0, sample.width, sample.height);
-    const fit = Math.min(sample.width / photo.naturalWidth, sample.height / photo.naturalHeight);
-    const sw = photo.naturalWidth * fit, sh = photo.naturalHeight * fit;
+    // Та же область изображения, что и под стеклом, в уменьшенной копии для размытия.
+    sample.width = 36;
+    sample.height = Math.round(36 * h / w);
+    const fit = Math.max(w / photo.naturalWidth, h / photo.naturalHeight);
+    const sw = photo.naturalWidth * fit / w * sample.width;
+    const sh = photo.naturalHeight * fit / h * sample.height;
     sampleCtx.drawImage(photo, (sample.width - sw) / 2, (sample.height - sh) / 2, sw, sh);
     fogCtx.imageSmoothingQuality = 'high';
     fogCtx.drawImage(sample, 0, 0, w, h);
@@ -3165,57 +3223,74 @@ function initPortraitGlass() {
     mist.addColorStop(1, 'rgba(78,101,113,.72)');
     fogCtx.fillStyle = mist;
     fogCtx.fillRect(0, 0, w, h);
-    for (let i = 0; i < Math.min(480, w * h / 320); i++) {
-      const x = Math.random() * w, y = Math.random() * h;
-      const r = .45 + Math.random() ** 3 * 2.7;
-      fogCtx.beginPath();
-      fogCtx.ellipse(x, y, r * .74, r, .15, 0, Math.PI * 2);
-      fogCtx.fillStyle = 'rgba(33,51,61,.21)';
-      fogCtx.fill();
-      fogCtx.beginPath();
-      fogCtx.ellipse(x - r * .2, y - r * .28, r * .31, r * .35, .15, 0, Math.PI * 2);
-      fogCtx.fillStyle = 'rgba(242,249,253,.51)';
-      fogCtx.fill();
+    for (let i = 0; i < Math.min(430, w * h / 420); i++) {
+      const x = Math.floor(Math.random() * w / 2) * 2, y = Math.floor(Math.random() * h / 2) * 2;
+      const size = Math.random() < .16 ? 4 : 2;
+      fogCtx.fillStyle = 'rgba(33,51,61,.20)';
+      fogCtx.fillRect(x, y + 1, size, size);
+      fogCtx.fillStyle = 'rgba(242,249,253,.38)';
+      fogCtx.fillRect(x, y, size, 1);
     }
-    marks.length = drops.length = 0;
-    glass.hidden = reveal.hidden = false;
+    cleared.clear(); wet.clear(); drops.length = 0;
+    keyboard = null;
+    glass.hidden = false;
     if (frame) cancelAnimationFrame(frame);
     paint(performance.now());
   }
 
-  function wipe(event, start = false) {
-    const box = glass.getBoundingClientRect();
-    const x = (event.clientX - box.left) / box.width * width;
-    const y = (event.clientY - box.top) / box.height * height;
-    const fromX = start ? x : pointer.x, fromY = start ? y : pointer.y;
-    const distance = Math.hypot(x - fromX, y - fromY);
-    if (!start && distance < 4) return;
+  function wipeLine(from, to, start = false) {
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const distance = Math.hypot(dx, dy);
+    const steps = Math.max(1, Math.ceil(distance / (cell * .72)));
     const now = performance.now();
-    marks.push({x: fromX, y: fromY, toX: x, toY: y, at: now});
-    if (marks.length > 480) marks.shift();
+    for (let i = 1; i <= steps; i++) stamp(from.x + dx * i / steps, from.y + dy * i / steps, now);
     dropTravel += distance;
-    if (!readingMotion.matches && (start || dropTravel > brush) && drops.length < 16) {
-      drops.push({x, y, at: now, size: 1.2 + Math.random() * 1.4});
+    if (!readingMotion.matches && (start || dropTravel > radius * cell * 1.5) && drops.length < 9) {
+      const col = Math.floor(to.x / cell), row = Math.floor(to.y / cell);
+      drops.push({col, row, lastRow: row - 1, at: now, phase: Math.random() * Math.PI * 2,
+        speed: 3 + Math.random() * 4, duration: 1.6 + Math.random() * .75});
       dropTravel = 0;
     }
-    pointer = {id: event.pointerId, x, y};
     schedule();
+  }
+
+  function position(event) {
+    const box = glass.getBoundingClientRect();
+    return {
+      x: Math.min(width - 1, Math.max(0, (event.clientX - box.left) / box.width * width)),
+      y: Math.min(height - 1, Math.max(0, (event.clientY - box.top) / box.height * height)),
+    };
   }
 
   glass.addEventListener('pointerdown', event => {
     if (event.button !== 0 || pointer) return;
+    const point = position(event);
+    dropTravel = 0;
     glass.setPointerCapture(event.pointerId);
-    wipe(event, true);
+    pointer = {id: event.pointerId, point};
+    wipeLine(point, point, true);
   });
   glass.addEventListener('pointermove', event => {
-    if (pointer?.id === event.pointerId) wipe(event);
+    if (pointer?.id !== event.pointerId) return;
+    const point = position(event);
+    if (Math.hypot(point.x - pointer.point.x, point.y - pointer.point.y) < cell * .5) return;
+    wipeLine(pointer.point, point);
+    pointer.point = point;
   });
   for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
     glass.addEventListener(name, event => {
       if (pointer?.id === event.pointerId) pointer = null;
     });
   }
-  reveal.addEventListener('click', () => { revealed = performance.now(); schedule(); });
+  glass.addEventListener('keydown', event => {
+    const delta = {ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1], ' ': [0, 0], Enter: [0, 0]}[event.key];
+    if (!delta || event.altKey || event.ctrlKey || event.metaKey) return;
+    event.preventDefault();
+    const from = keyboard || {x: width / 2, y: height / 2};
+    keyboard = {x: Math.min(width - 1, Math.max(0, from.x + delta[0] * cell * 3)),
+      y: Math.min(height - 1, Math.max(0, from.y + delta[1] * cell * 3))};
+    wipeLine(from, keyboard);
+  });
   photo.addEventListener('load', sizeGlass);
   if (typeof ResizeObserver === 'function') new ResizeObserver(sizeGlass).observe($('#aph'));
   else addEventListener('resize', sizeGlass);
