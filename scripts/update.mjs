@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import identity from '../data/release-identity.js';
 
-const {cleanTitle: clean, titleKey: norm, catalogTitle, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink} = identity;
+const {cleanTitle: clean, titleKey: norm, catalogTitle, normalizeReleaseEdition, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink} = identity;
 
 const OUT = 'data/auto.js';
 // Суффикс типа от Apple — часть ответа каталога iTunes, а не названия.
@@ -48,7 +48,7 @@ async function img(urls, dest) {
 fs.mkdirSync('covers', { recursive: true }); fs.mkdirSync('data', { recursive: true });
 let old = [];
 try { old = JSON.parse(fs.readFileSync(OUT, 'utf8').replace(/^window\.AUTO=/, '').replace(/;\s*$/, '')); } catch {}
-old = old.filter(hasReleaseTitle);
+old = old.filter(hasReleaseTitle).map(normalizeReleaseEdition);
 
 // ================= источники: каждый возвращает [{title,type,date,covers[],links{},id}] =================
 const typeOf = (n, hint) => n === 1 ? 'сингл' : hint === 'ep' || (hint === 'single' && n <= 6) ? 'EP' : n && n <= 1 ? 'сингл' : 'альбом';
@@ -153,6 +153,7 @@ function mergeRelease(entry, release, source) {
 
 function put(release, source) {
   if (!hasReleaseTitle(release)) return null;
+  release = normalizeReleaseEdition(release);
   const matches = matchesFor(items, release).sort((a, b) => items.indexOf(a) - items.indexOf(b));
   const entry = matches[0] || {
     title: catalogTitle(release.title), type: '', date: '', cover: '', page: '', src: '',
@@ -312,10 +313,10 @@ const rows = lines.map(parseLinkRow).filter(Boolean).map(row => {
   const id = 'link-' + crypto.createHash('md5').update(linkKey(src) || src).digest('hex').slice(0, 8);
   const supplied = Object.fromEntries(row.urls.map(url => [platOf(url), url]));
   const explicit = directLinks(row.extra);
-  return {
+  return normalizeReleaseEdition({
     ...row, src, id, explicit, ids: row.targetId ? [row.targetId] : [],
     links: {...directLinks(supplied), ...explicit},
-  };
+  });
 });
 const requests = new Map();
 
@@ -347,8 +348,8 @@ function attachRow(row, metadata) {
     cover: known?.cover, covers: metadata?.covers,
     links: {...directLinks(metadata?.links), ...directLinks(known?.links), ...row.links},
   }, 'links');
-  if (row.date) entry.manualDate = row.date;
-  const manualLinks = {...row.links};
+  if (row.date) entry.manualDate = normalizeReleaseEdition({...entry, manualDate: row.date}).manualDate;
+  const manualLinks = normalizeReleaseEdition({...entry, links: row.links}).links;
   if (!row.targetId && !row.explicit.spotify && isSpotifyAlias({...row, title}, entry)) delete manualLinks.spotify;
   applyLinks(entry, manualLinks, key => Object.hasOwn(row.explicit, key) ? 4 : 3);
   return true;
