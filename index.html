@@ -1640,31 +1640,36 @@ addEventListener('resize', () => {
   }
 });
 const say=(m,ms=2200)=>{bub.textContent=m;bub.classList.add('on');clearTimeout(bt);bt=setTimeout(()=>bub.classList.remove('on'),ms)};
+const tiltApi = window.DeviceOrientationEvent;
+const petTiltButton = $('#petTilt');
 function readPetTilt(event) {
   if (!mobileScreen.matches || document.hidden || !Number.isFinite(event.gamma)) return;
+  petTiltButton.hidden = true;
   const angle = (window.screen.orientation?.angle ?? window.orientation ?? 0) * Math.PI / 180;
   const beta = (event.beta || 0) * Math.PI / 180;
   const gamma = event.gamma * Math.PI / 180;
   const slope = Math.cos(angle) * Math.sin(gamma) * Math.cos(beta) - Math.sin(angle) * Math.sin(beta);
   tiltTarget = Math.sign(slope) * Math.min(1, Math.max(0, (Math.abs(slope) - .11) / .44));
 }
-const tiltApi = window.DeviceOrientationEvent;
-const petTiltButton = $('#petTilt');
 if (window.isSecureContext && tiltApi) {
+  addEventListener('deviceorientation', readPetTilt, {passive: true});
   if (typeof tiltApi.requestPermission === 'function') {
+    let askingForTilt = false;
     petTiltButton.hidden = false;
-    petTiltButton.onclick = async () => {
-      let allowed = false;
-      try { allowed = await tiltApi.requestPermission() === 'granted'; } catch {}
-      if (allowed) {
-        addEventListener('deviceorientation', readPetTilt, {passive: true});
-        petTiltButton.hidden = true;
-      } else {
-        petTiltButton.textContent = 'наклон недоступен';
-        petTiltButton.disabled = true;
+    async function requestPetTilt() {
+      if (!mobileScreen.matches || askingForTilt || petTiltButton.hidden) return;
+      askingForTilt = true;
+      try {
+        if (await tiltApi.requestPermission() === 'granted') petTiltButton.hidden = true;
+      } catch {
+        // В меню остаётся кнопка на случай, если браузер не принял жест.
+      } finally {
+        askingForTilt = false;
       }
-    };
-  } else addEventListener('deviceorientation', readPetTilt, {passive: true});
+    }
+    $('#gate').addEventListener('click', requestPetTilt, {once: true});
+    petTiltButton.onclick = requestPetTilt;
+  }
 }
 document.addEventListener('visibilitychange', () => { tiltTarget = tiltLevel = 0; });
 const heart=()=>{const r=cb.getBoundingClientRect(),h=document.createElement('span');h.className='heart';h.textContent='♥';h.style.left=r.left+r.width*Math.random()+'px';h.style.top=r.top+'px';document.body.append(h);setTimeout(()=>h.remove(),1200)};
@@ -2204,7 +2209,7 @@ const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#3
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
 const listPlatforms = ['spotify', 'yandex'];
 
-const {directLinks, hasReleaseTitle, matchesFor, isSpotifyAlias, webURL} = window.ReleaseIdentity;
+const {directLinks, hasReleaseTitle, matchesFor, isSpotifyAlias, isEditionLink, webURL, catalogTitle} = window.ReleaseIdentity;
 
 function releaseLinks(release, platforms = Object.keys(PN)) {
   const links = directLinks(release.links);
@@ -2228,9 +2233,14 @@ function renderListeningLink({name, url, profile}, className = '') {
 function mergeCatalogLinks(release, incoming) {
   const existingLinks = directLinks(release.links);
   const incomingLinks = directLinks(incoming.links);
-  return isSpotifyAlias(release, incoming)
+  const links = isSpotifyAlias(release, incoming)
     ? {...existingLinks, ...incomingLinks}
     : {...incomingLinks, ...existingLinks};
+  for (const [platform, url] of Object.entries({...existingLinks, ...incomingLinks})) {
+    const preferred = [url, existingLinks[platform]].find(candidate => isEditionLink(release, candidate));
+    if (preferred) links[platform] = preferred;
+  }
+  return links;
 }
 
 for (const automatic of window.AUTO || []) {
@@ -2241,7 +2251,7 @@ for (const automatic of window.AUTO || []) {
     const ids = [automatic.id, ...(automatic.ids || [])];
     let id = automatic.id;
     for (let suffix = 2; R.some(item => item.id === id); suffix++) id = automatic.id + '-' + suffix;
-    R.push({...automatic, id, ids, auto: true, links: directLinks(automatic.links)});
+    R.push({...automatic, title: catalogTitle(automatic.title), id, ids, auto: true, links: directLinks(automatic.links)});
     continue;
   }
   for (const duplicate of matches.slice(1)) {
@@ -2260,7 +2270,7 @@ for (const automatic of window.AUTO || []) {
   }
   const replacesAlias = isSpotifyAlias(release, automatic);
   const links = mergeCatalogLinks(release, automatic);
-  if (release.hide) release.title = automatic.title;
+  if (release.hide) release.title = catalogTitle(automatic.title);
   if (!release.auto) release.date = automatic.date || release.date;
   release.auto = true;
   release.ids = [...new Set([...(release.ids || []), automatic.id, ...(automatic.ids || [])])];
@@ -3077,7 +3087,8 @@ function initPortraitGlass() {
 
   const fogHold = 3000, fogFade = 3600;
   const wetHold = 1000, wetFade = 2350;
-  const cleared = new Map(), wet = new Map(), drops = [];
+  const touchFade = 460;
+  const cleared = new Map(), wet = new Map(), fingerTrail = new Map(), drops = [];
   const dropSprite = [
     [0, -2, 'rgba(123,165,181,.67)'],
     [-1, -1, 'rgba(37,61,76,.60)'], [0, -1, 'rgba(177,215,229,.81)'],
@@ -3085,8 +3096,13 @@ function initPortraitGlass() {
     [-1, 1, 'rgba(50,79,95,.58)'], [0, 1, 'rgba(155,203,220,.78)'], [1, 1, 'rgba(52,83,99,.60)'],
     [0, 2, 'rgba(69,105,119,.69)'],
   ];
+  const smallDropSprite = [
+    [0, -1, 'rgba(101,149,169,.63)'],
+    [-1, 0, 'rgba(93,149,168,.68)'], [0, 0, 'rgba(225,244,249,.84)'], [1, 0, 'rgba(56,95,113,.60)'],
+    [0, 1, 'rgba(109,161,183,.73)'],
+  ];
   let width = 0, height = 0, scale = 1, cell = 4, cols = 0, rows = 0, radius = 4;
-  let frame = 0, timer = 0, pointer = null, keyboard = null, dropTravel = 0;
+  let frame = 0, timer = 0, pointer = null, keyboard = null;
 
   function opacityAt(age, hold, fade) {
     const p = Math.min(1, Math.max(0, (age - hold) / fade));
@@ -3123,10 +3139,11 @@ function initPortraitGlass() {
   function advanceDrops(now) {
     for (let i = drops.length - 1; i >= 0; i--) {
       const drop = drops[i];
+      if (now < drop.at) continue;
       const age = Math.max(0, (now - drop.at) / 1000);
-      const slide = Math.max(0, Math.min(drop.duration, age - .13));
+      const slide = Math.max(0, Math.min(drop.duration, age - drop.rest));
       // Прилипает к стеклу на мгновение, затем набирает скорость по мере стекания.
-      const travel = Math.floor(drop.speed * slide + slide * slide * 4);
+      const travel = Math.floor(drop.speed * slide + slide * slide * drop.acceleration);
       const row = Math.min(rows - 1, drop.row + travel);
       const col = dropColumn(drop, row);
       for (let r = drop.lastRow + 1; r <= row; r++) {
@@ -3170,6 +3187,14 @@ function initPortraitGlass() {
     }
 
     ctx.globalCompositeOperation = 'source-over';
+    for (const [index, at] of fingerTrail) {
+      const alpha = opacityAt(now - at, 25, touchFade);
+      if (!alpha) { fingerTrail.delete(index); continue; }
+      ctx.globalAlpha = alpha * .21;
+      ctx.fillStyle = '#b4d4de';
+      putTile(index % cols, Math.floor(index / cols));
+      repaintAt = Math.min(repaintAt, at + 25);
+    }
     for (const [index, at] of wet) {
       const col = index % cols, row = Math.floor(index / cols);
       const alpha = opacityAt(now - at, wetHold, wetFade);
@@ -3182,16 +3207,17 @@ function initPortraitGlass() {
       putTile(col + 1, row);
     }
     for (const drop of drops) {
+      repaintAt = Math.min(repaintAt, drop.at);
+      if (now < drop.at) continue;
       ctx.globalAlpha = drop.alpha;
-      for (const [x, y, color] of dropSprite) {
+      for (const [x, y, color] of drop.sprite) {
         ctx.fillStyle = color;
         putTile(drop.x + x, drop.y + y);
       }
     }
     ctx.globalAlpha = 1;
 
-    if (drops.length) schedule();
-    else if (repaintAt < Infinity) schedule(Math.max(0, repaintAt - now));
+    if (repaintAt < Infinity) schedule(Math.max(0, repaintAt - now));
   }
 
   function sizeGlass() {
@@ -3231,25 +3257,36 @@ function initPortraitGlass() {
       fogCtx.fillStyle = 'rgba(242,249,253,.38)';
       fogCtx.fillRect(x, y, size, 1);
     }
-    cleared.clear(); wet.clear(); drops.length = 0;
+    cleared.clear(); wet.clear(); fingerTrail.clear(); drops.length = 0;
     keyboard = null;
     glass.hidden = false;
     if (frame) cancelAnimationFrame(frame);
     paint(performance.now());
   }
 
-  function wipeLine(from, to, start = false) {
+  function wipeLine(from, to) {
     const dx = to.x - from.x, dy = to.y - from.y;
     const distance = Math.hypot(dx, dy);
     const steps = Math.max(1, Math.ceil(distance / (cell * .72)));
     const now = performance.now();
-    for (let i = 1; i <= steps; i++) stamp(from.x + dx * i / steps, from.y + dy * i / steps, now);
-    dropTravel += distance;
-    if (!readingMotion.matches && (start || dropTravel > radius * cell * 1.5) && drops.length < 9) {
-      const col = Math.floor(to.x / cell), row = Math.floor(to.y / cell);
-      drops.push({col, row, lastRow: row - 1, at: now, phase: Math.random() * Math.PI * 2,
-        speed: 3 + Math.random() * 4, duration: 1.6 + Math.random() * .75});
-      dropTravel = 0;
+    const chance = 1 - Math.exp(-Math.max(13, distance) / 94);
+    const spawn = !readingMotion.matches && drops.length < 10 && Math.random() < chance;
+    for (let i = 1; i <= steps; i++) {
+      const x = from.x + dx * i / steps, y = from.y + dy * i / steps;
+      stamp(x, y, now);
+      const col = Math.floor(x / cell), row = Math.floor(y / cell);
+      fingerTrail.set(row * cols + col, now);
+      if (col + 1 < cols) fingerTrail.set(row * cols + col + 1, now);
+    }
+    if (spawn) {
+      const p = Math.random(), spread = (Math.random() - .5) * cell * 3;
+      const col = Math.min(cols - 1, Math.max(0, Math.floor((from.x + dx * p + spread) / cell)));
+      const row = Math.min(rows - 1, Math.max(0, Math.floor((from.y + dy * p) / cell)));
+      const small = Math.random() < .38;
+      drops.push({col, row, lastRow: row - 1, at: now + Math.random() * 740, rest: .08 + Math.random() * .45,
+        phase: Math.random() * Math.PI * 2, speed: 2 + Math.random() * 4,
+        acceleration: small ? 2.4 : 3.7, duration: 1.05 + Math.random() * (small ? 1.5 : 2.1),
+        sprite: small ? smallDropSprite : dropSprite});
     }
     schedule();
   }
@@ -3265,10 +3302,9 @@ function initPortraitGlass() {
   glass.addEventListener('pointerdown', event => {
     if (event.button !== 0 || pointer) return;
     const point = position(event);
-    dropTravel = 0;
     glass.setPointerCapture(event.pointerId);
     pointer = {id: event.pointerId, point};
-    wipeLine(point, point, true);
+    wipeLine(point, point);
   });
   glass.addEventListener('pointermove', event => {
     if (pointer?.id !== event.pointerId) return;

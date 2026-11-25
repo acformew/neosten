@@ -4,7 +4,6 @@
 # Неподтверждённая ссылка остаётся в этом файле до следующей сборки или ручного уточнения.
 # Строки, начинающиеся с #, — комментарии.
 #
-https://music.yandex.ru/album/40628842
 https://music.yandex.ru/album/41828596
 2025-08-22 | https://music.yandex.ru/album/37798894 | title=НАКОЛОЧКИ
 2026-11-06 | https://music.yandex.ru/album/44794240
@@ -33,7 +32,7 @@ https://music.yandex.ru/album/35652284
 2026-05-15 | https://open.spotify.com/album/7oq3CMDHWR9mGJkveN0VCW | yandex=https://music.yandex.ru/album/41828540/track/150833161
 2026-05-01 | https://open.spotify.com/album/1D56tP79stZ5t730vsRtsB | yandex=https://music.yandex.ru/album/41828596
 2026-03-27 | https://open.spotify.com/album/6k1BWoWX9RbvwsmtheSzp7 | yandex=https://music.yandex.ru/album/41346984/track/149715475
-2026-01-23 | https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL | yandex=https://music.yandex.ru/album/40628842
+2026-01-23 | https://open.spotify.com/album/5N9TjB8SR3vVmk4jHKpbXL | title=303core.mp3 | id=link-463ff86b | yandex=https://music.yandex.ru/album/40628842
 2026-01-09 | https://open.spotify.com/album/6jbDLv3T2MWh9TrVzI3JvF | yandex=https://music.yandex.ru/album/40020312
 2025-12-19 | https://open.spotify.com/album/0sv71Dve9DDndzIDWAgzRT | yandex=https://music.yandex.ru/album/39692759
 2025-11-09 | https://open.spotify.com/album/308TQDuBDKZBOFCHCwwd5x | yandex=https://music.yandex.ru/album/39131024
