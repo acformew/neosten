@@ -82,7 +82,26 @@
     return result;
   }
 
-  const releaseTitleKey = release => titleKey(release.match || release.title);
+  const catalogTitle = title => titleKey(title) === '303core' ? '303core.mp3' : cleanTitle(title);
+  const releaseTitleKey = release => titleKey(catalogTitle(release.match || release.title));
+  const releaseDay = release => String(release.manualDate || release.date || '').slice(0, 10);
+  // Только подтверждённые варианты издания. Суффиксы Remix и Remixes сохраняются.
+  const knownEditions = new Map([
+    ['303core.mp3', {day: '2026-01-23', ids: ['link-463ff86b'],
+      links: ['yandex:album:40628842', 'spotify:album:5N9TjB8SR3vVmk4jHKpbXL']}],
+    ['прыгай', {day: '2025-09-26', ids: ['prygay', 'apple-1840949420'],
+      links: ['yandex:album:38302359', 'spotify:album:1JhHeto4knYwhSHFKPDuis', 'apple:album:1840949420']}],
+  ]);
+
+  function editionEvidence(release, edition) {
+    if (releaseDay(release) === edition.day) return true;
+    return [release.id, ...(release.ids || [])].some(id => edition.ids.includes(id)) ||
+      [release.src, ...Object.values(directLinks(release.links))].some(url => edition.links.includes(linkKey(url)));
+  }
+
+  function isEditionLink(release, url) {
+    return knownEditions.get(releaseTitleKey(release))?.links.includes(linkKey(url)) || false;
+  }
 
   function isSpotifyAlias(candidate, main) {
     const title = releaseTitleKey(candidate);
@@ -92,14 +111,17 @@
     if (!candidateLinks.spotify || Object.keys(candidateLinks).length !== 1 ||
         !mainLinks.spotify || Object.keys(mainLinks).length < 2) return false;
     if (linkKey(candidateLinks.spotify) === linkKey(mainLinks.spotify)) return false;
-    const candidateDate = (candidate.manualDate || candidate.date || '').slice(0, 10);
-    const mainDate = (main.manualDate || main.date || '').slice(0, 10);
+    const candidateDate = releaseDay(candidate);
+    const mainDate = releaseDay(main);
     return !candidateDate || !mainDate || candidateDate === mainDate;
   }
 
   function sameTitle(first, second) {
     const title = releaseTitleKey(first);
     if (!title || title !== releaseTitleKey(second)) return false;
+    const edition = knownEditions.get(title);
+    if (edition && releaseDay(first) && releaseDay(second) && releaseDay(first) !== releaseDay(second) &&
+        !(editionEvidence(first, edition) && editionEvidence(second, edition))) return false;
     if (isSpotifyAlias(first, second) || isSpotifyAlias(second, first)) return true;
     const firstLinks = directLinks(first.links);
     const secondLinks = directLinks(second.links);
@@ -116,7 +138,10 @@
     const title = releaseTitleKey(release);
     // Даже совпавший URL или ID из кэша не отменяет явное различие названий.
     const candidates = catalog.filter(item => !title || releaseTitleKey(item) === title);
+    const edition = knownEditions.get(title);
+    const knownEdition = edition && editionEvidence(release, edition);
     const strong = candidates.filter(item =>
+      (knownEdition && editionEvidence(item, edition)) ||
       [item.id, ...(item.ids || [])].some(id => ids.has(id)) ||
       [item.src, ...Object.values(directLinks(item.links))].some(url => links.has(linkKey(url)))
     );
@@ -129,7 +154,7 @@
     return strong;
   }
 
-  const api = {cleanTitle, titleKey, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias};
+  const api = {cleanTitle, titleKey, catalogTitle, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else window.ReleaseIdentity = api;
 })();
