@@ -14,7 +14,7 @@ main,header,footer{position:relative;z-index:1}
 .big{font-weight:900;font-family:"Unbounded","Arial Black",Impact,sans-serif;text-transform:lowercase;letter-spacing:-.045em;line-height:.9;margin:0}
 a,button{color:inherit}
 /* gate */
-#gate{position:fixed;inset:0;z-index:100;background:#fff;color:#000;display:block;transition:none cubic-bezier(.8,0,.2,1)}
+#gate{position:fixed;inset:0;z-index:100;background:#090e11;color:#e3ebea;display:block;transition:none cubic-bezier(.8,0,.2,1)}
 #gate.go{pointer-events:none}
 
 .btn{font:700 16px "IBM Plex Mono",monospace;border:4px solid var(--ink);background:var(--sun);padding:12px 18px;cursor:pointer;box-shadow:6px 6px 0 var(--ink);margin:0 10px 10px 0;transition:transform .08s,box-shadow .08s}@media (hover:hover) and (pointer:fine){.btn:hover{background:var(--card)}}.btn:active{transform:translate(6px,6px);box-shadow:0 0 0}
@@ -27,8 +27,6 @@ a,button{color:inherit}
 #catbox b{display:block;background:var(--ink);color:var(--bg);margin:-6px -8px 6px;padding:2px 8px;font-size:12px}
 #cat{margin:0;font:min(6.4px,1.1vw)/.9 "Courier New",monospace;white-space:pre;color:var(--ink)}@media (hover:hover) and (pointer:fine){#catbox:hover #cat{color:var(--sky)}}
 #catbox{width:max-content}
-.strip{background:var(--ink);color:var(--sun);overflow:hidden;white-space:nowrap;border-block:5px solid var(--ink);font:700 22px "IBM Plex Mono",monospace;padding:6px 0}
-.strip span{display:inline-block;animation:mq 28s linear infinite}
 @keyframes mq{to{transform:translateX(-50%)}}
 /* sections */
 section{padding:clamp(48px,9vw,110px) 5vw}
@@ -73,8 +71,8 @@ footer{padding:30px 5vw 50px;font-size:12px}
 .photo span{background:var(--sun);border:4px solid var(--ink);padding:8px 14px;font-weight:700;transform:rotate(-4deg)}
 dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{display:flex;gap:14px;padding:10px 14px;border-bottom:3px solid var(--ink)}dl div:last-child{border:0}dt{width:120px;font-weight:700;flex:none}dd{margin:0}
 .soon{margin-top:50px;border:5px dashed var(--ink);padding:22px;font-weight:700}.soon i{display:inline-block;background:var(--ink);width:140px;height:1em;vertical-align:middle}
-.btn,.tr,#nav .n,#pet .btn,.pop,dt,.strip,.soon{font-family:"Oswald","Arial Narrow",sans-serif;letter-spacing:.03em}
-.btn{font-size:19px;font-weight:700}#nav .n{font-size:18px;font-weight:500}.tr{font-size:23px;font-weight:700}.strip{font-size:26px;font-weight:700}#pet .btn{font-size:15px}
+.btn,.tr,#nav .n,#pet .btn,.pop,dt,.soon{font-family:"Oswald","Arial Narrow",sans-serif;letter-spacing:.03em}
+.btn{font-size:19px;font-weight:700}#nav .n{font-size:18px;font-weight:500}.tr{font-size:23px;font-weight:700}#pet .btn{font-size:15px}
 .hd{font-size:clamp(30px,6vw,80px);margin-bottom:28px;text-shadow:5px 5px 0 #fff}.b1 .hd{text-shadow:5px 5px 0 var(--sun)}#memory h2{text-shadow:5px 5px 0 var(--sky)}
 .band{border-bottom:5px solid var(--ink)}.b2{background:var(--sun)}.b3{background:var(--sky)}
 .pop{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;width:100%;text-align:left;border:4px solid var(--ink);margin:0 0 12px;padding:12px 16px;cursor:pointer;color:var(--ink);font-size:23px;font-weight:700;background:linear-gradient(90deg,var(--sky) var(--w),var(--card) var(--w));box-shadow:5px 5px 0 var(--ink);transition:transform .1s}@media (hover:hover) and (pointer:fine){.pop:hover{transform:translate(-3px,-3px)}}.pop em{font:900 22px "Unbounded",sans-serif}.pop.on{border-color:var(--grass);box-shadow:5px 5px 0 var(--grass)}.pop.on em::after{content:"♪"}
@@ -84,7 +82,7 @@ dl{margin:20px 0;border:4px solid var(--ink);background:var(--card)}dl div{displ
 .tile h3{font:900 clamp(18px,2.2vw,28px)/1 "Unbounded",sans-serif;margin:0 0 14px}.tile p{margin:0 0 14px}.tile .btn{font-size:16px;padding:7px 12px;margin-bottom:0}
 .t-new{grid-column:span 3;background:var(--sky)}.t-pop{grid-column:span 3;background:var(--sun)}.t-pick{grid-column:span 2;transform:rotate(1deg)}.t-art{grid-column:span 2;background:var(--ink);color:var(--bg)}.t-con{grid-column:span 2;background:var(--grass);color:#fff;transform:rotate(-1deg)}
 .tile .pop{font-size:17px;padding:6px 10px;margin:0 0 8px;box-shadow:3px 3px 0 var(--ink)}
-#ldc{position:absolute;inset:0;width:100%;height:100%}#lb,#ls{position:absolute;left:0;right:0;text-align:center;font:500 15px "IBM Plex Mono",monospace;letter-spacing:.08em;color:#000}#lb{bottom:58px}#ls{bottom:32px;opacity:.7}
+#ldc{position:absolute;inset:0;width:100%;height:100%}#lb,#ls{position:absolute;left:0;right:0;text-align:center;font:500 15px "IBM Plex Mono",monospace;letter-spacing:.08em;color:#dce8e7}#lb{bottom:58px}#ls{bottom:32px;opacity:.7}
 #hero{height:auto;min-height:100vh;padding:100px 5vw 50px;overflow:hidden;display:flex;align-items:center}
 #pin{position:static;inset:auto;transform-origin:20% 30%;width:100%}
 .w2{font-size:clamp(44px,15.5vw,250px);margin:0 0 30px -.04em}
@@ -113,7 +111,7 @@ html.glitch{animation:gl .25s steps(2) 6}@keyframes gl{25%{filter:invert(1)}50%{
 #mute{box-shadow:4px 4px 0 var(--ink);transition:transform .08s,box-shadow .08s;background:var(--sun)}@media (hover:hover) and (pointer:fine){#mute:hover{background:var(--card);color:var(--ink)}}#mute:active{transform:translate(4px,4px);box-shadow:none}
 .bnc{animation:bnc .45s}@keyframes bnc{30%{transform:scale(1.2) rotate(-4deg)}60%{transform:scale(.92)}100%{transform:none}}
 .rain.d{animation-duration:1.1s;color:var(--sky);font-size:24px}
-.dance .w2,.dance h2,.dance .strip{animation:dn .4s ease-in-out 10}@keyframes dn{50%{transform:translateY(-14px) rotate(-1.5deg)}}
+.dance .w2,.dance h2{animation:dn .4s ease-in-out 10}@keyframes dn{50%{transform:translateY(-14px) rotate(-1.5deg)}}
 /* ---- order: single container, type scale, calm spacing ---- */
 :root{--gx:max(clamp(16px,4vw,40px),calc((100vw - 1160px)/2))}
 body{font-size:16px;line-height:1.6}
@@ -131,7 +129,6 @@ section{padding-top:clamp(44px,6vw,72px);padding-bottom:clamp(44px,6vw,72px)}
 .hd,.b1 .hd{font-size:clamp(26px,3.4vw,42px);line-height:1.05;margin:0 0 32px;padding-bottom:16px;border-bottom:3px solid currentColor;text-shadow:none}
 #memory h2{font-size:clamp(30px,4.6vw,60px);line-height:1.05;margin:0 0 28px;text-shadow:4px 4px 0 var(--sky)}
 #in{max-width:720px;font-size:17px}#mem div{font-size:clamp(18px,2.2vw,28px)}
-.strip{font-size:18px;padding:8px 0}
 .two{gap:clamp(28px,5vw,64px)}.cover{max-width:440px;width:100%;transform:none}.photo{max-width:420px;width:100%;transform:none}
 #p-rel h3.big{font-size:clamp(22px,2.6vw,34px);margin:0 0 20px}
 .card .big{font-size:clamp(32px,4.6vw,56px);margin:0 0 4px}
@@ -200,7 +197,7 @@ section{padding-top:clamp(48px,6vw,88px);padding-bottom:clamp(48px,6vw,88px)}
 #st .mst{font:500 12px "IBM Plex Mono",monospace;margin-top:6px;opacity:.75}
 #catbox.sulk{filter:grayscale(1);transform:rotate(var(--r,0deg)) scaleX(-1)}
 #catbox.sulk #cat{opacity:.6}#catbox.sulk b,#catbox.sulk #bub{transform:scaleX(-1)}
-#lh{position:absolute;left:0;right:0;bottom:10px;padding-inline:14px;text-align:center;font:400 11px "IBM Plex Mono",monospace;letter-spacing:.08em;opacity:.55;transition:opacity .4s;color:#000}
+#lh{position:absolute;left:0;right:0;bottom:10px;padding-inline:14px;text-align:center;font:400 11px "IBM Plex Mono",monospace;letter-spacing:.08em;opacity:.55;transition:opacity .4s;color:#a9b6b8}
 /* --- pet panel on the right above sound; artist page; rain --- */
 #pet{left:auto;right:14px;bottom:70px}
 @media(max-width:900px){#pet{bottom:156px}}
@@ -257,14 +254,13 @@ html.night #bgw{background:radial-gradient(ellipse at 50% 45%,rgba(4,8,7,0) 30%,
 #memory,.b2{background:var(--bandbg);color:var(--bandfg)}
 .pop{color:var(--bandfg);border-top-color:var(--bandfg)}.pop.on{border-color:var(--bandfg)}
 .soon{background:var(--bandbg);color:var(--bandfg)}.soon i.red{background:var(--bandfg)}.soon .btn{border-color:var(--bandfg);color:var(--bandfg)}@media (hover:hover) and (pointer:fine){.soon .btn:hover{background:var(--bandfg);color:var(--bandbg)}}
-.strip{background:var(--bandbg)}
 .gcover{color:#050806}
 #pet .btn:not(.alt),#mute,#mpb,.photo span,#bub,.fish{color:#050806}@media (hover:hover) and (pointer:fine){#pet .btn:hover{color:var(--ink)}}
 html.night .b3{background:rgba(12,36,70,.74)}@media (hover:hover) and (pointer:fine){html.night .cc .lnk:hover{background:var(--sun);color:#050806}}@media (hover:hover) and (pointer:fine){html.night .cc .lnk:hover .h,html.night .cc .lnk:hover .arr{color:#050806}}
 @media(max-width:700px){.bgl.raw{filter:blur(8px)}}
 @media(prefers-reduced-motion:reduce){.bgl,#bgw{transition:none}}
 .cc .gh{background:var(--bandbg)}
-#lb,#ls,#lh{text-shadow:0 0 5px #fff,0 0 8px #fff,0 0 12px #fff}.wait #ls{bottom:auto;top:70%}#gate.wait{cursor:pointer}.wait #ls{animation:blk 1.3s ease-in-out infinite;opacity:1;font-size:18px;letter-spacing:.12em}@keyframes blk{50%{opacity:.3}}
+#lb,#ls,#lh{text-shadow:0 0 8px rgba(155,204,222,.30)}.wait #ls{bottom:auto;top:70%}#gate.wait{cursor:pointer}.wait #ls{animation:blk 1.3s ease-in-out infinite;opacity:1;font-size:18px;letter-spacing:.12em}@keyframes blk{50%{opacity:.3}}
 :focus-visible{outline:3px solid #f0f;outline-offset:3px}
 #logo:focus-visible,#nav .n:focus-visible,#theme:focus-visible{outline-offset:-3px}
 @media(max-width:800px){.bento>.tile{grid-column:1/-1}.card,.two{grid-template-columns:1fr}.w.l,.w.r{display:none}}
@@ -923,7 +919,12 @@ html.night {
   color: inherit;
   font: 500 16px "IBM Plex Mono", monospace;
 }
-#memory #in::placeholder { color: var(--section-panel-muted); }
+#memory #in::placeholder {
+  color: color-mix(in srgb, var(--section-panel-ink) 55%, var(--bg));
+  font-weight: 400;
+  opacity: 1;
+}
+html.night #memory #in::placeholder { color: #81878b; }
 .thought-send {
   padding: 9px 14px;
   border: 1px solid var(--section-panel-line);
@@ -949,13 +950,28 @@ html.night {
   color: var(--section-panel-ink);
   background: radial-gradient(var(--section-panel-pattern) 1px, transparent 1.4px) 0 0 / 15px 15px, var(--section-panel);
 }
-#p-art .photo span {
-  background: var(--section-control);
-  color: inherit;
-  border: 1px solid var(--section-panel-line);
-  transform: none;
-  font-size: 13px;
+#p-art #aph {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  background: #242629;
 }
+#aph img, #portraitGlass { position: absolute; inset: 0; width: 100%; height: 100%; }
+#aph img { object-fit: contain; }
+#portraitGlass { cursor: crosshair; touch-action: pinch-zoom; }
+#portraitReveal {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  padding: 6px 9px;
+  border: 1px solid rgba(226, 237, 242, .55);
+  background: rgba(12, 17, 20, .76);
+  color: #e8efed;
+  font: 500 11px/1.4 "IBM Plex Mono", monospace;
+  cursor: pointer;
+}
+#aph #portraitReveal:focus-visible { outline-offset: -3px; }
+#petTilt { display: none; }
 #p-art .tag { font-size: 14px; opacity: .79; }
 #adl, #p-art .tl-card {
   border: 1px solid var(--section-panel-line);
@@ -1163,8 +1179,8 @@ html.night {
     grid-area: 1 / 1 / 2 / -1;
     justify-self: end;
     position: relative;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     min-height: 0;
     margin: 0;
     padding: 0;
@@ -1177,7 +1193,7 @@ html.night {
     inset: 0;
     display: grid;
     place-items: center;
-    font: 400 20px/1 system-ui, sans-serif;
+    font: 400 16px/1 system-ui, sans-serif;
     pointer-events: none;
   }
   html.night #nav #theme::before { content: '☾'; }
@@ -1212,7 +1228,6 @@ html.night {
   #hero .lead { max-width: 54ch; margin-inline: auto; font-size: clamp(15px, 3.7vw, 17px); line-height: 1.7; }
   #hero .toc a { padding: 12px 6px; min-height: 58px; }
   #hero .toc-caption, #mem { overflow-wrap: anywhere; }
-  #p-home .strip { padding-block: 4px; border-block-width: 2px; font-size: 14px; line-height: 1.2; }
   #catbox.home { justify-self: center; }
   #catbox:is(.home, .small) {
     border-width: 2px;
@@ -1223,12 +1238,12 @@ html.night {
   #catbox.home #cat { font-size: clamp(1.7px, .5vw, 2.4px); }
   #catbox.small #cat { font-size: 1.25px; }
   #catbox #cat { -webkit-text-size-adjust: none; }
-  #catbox.small:not(.is-dragging) { bottom: var(--mobile-bottom); top: auto; }
+  #catbox.small:not(.is-dragging) { bottom: calc(var(--mobile-bottom) + var(--cat-rise, 0px)); top: auto; }
   #catbox #bub { bottom: calc(100% + 6px); width: max-content; max-width: 100%; padding: 2px 4px; border-width: 1px; font-size: 9px; white-space: normal; overflow-wrap: anywhere; }
   #memory { text-align: center; }
   #memory .thought-form { width: min(100%, 350px); margin-inline: auto; flex-direction: column; align-items: center; gap: 10px; }
   #memory #in { flex: none; width: 100%; text-align: center; }
-  #memory .thought-send { min-height: 44px; align-self: center; }
+  #memory .thought-send { min-height: 34px; align-self: center; padding: 4px 10px; font-size: 12px; }
   #mem { min-height: 60px; margin-top: 22px; }
 
   #featureS, #p-games section { padding-bottom: clamp(44px, 11vw, 76px); }
@@ -1313,6 +1328,18 @@ html.night {
   #st i { flex: 1; height: 8px; border-width: 1px; }
   #st .mst { margin-top: 3px; font-size: 10px; }
   #pet .btn { min-height: 36px; margin: 5px 0 0; padding: 1px 6px; border-width: 1px; box-shadow: none; font-size: 12px; }
+  #petTilt:not([hidden]) {
+    display: block;
+    min-height: 28px;
+    margin-top: 4px;
+    padding: 2px 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: .28em;
+    cursor: pointer;
+  }
   #pet > div:last-child { line-height: 1.3; }
   #gate #lb, #gate #ls, #gate #lh { padding-inline: 12px; }
   #gate #lb { bottom: calc(58px + env(safe-area-inset-bottom)); }
@@ -1438,7 +1465,6 @@ html.night {
 +======+===+===++++++++++++++*++++++**#@@@@@@@@@@@@@@@@@@@@@@#***+++++++++++==++++++============++++
 +++====+++++==+==++++=+++++++++++++*****@@@@@@@@@@@@@@@@@@@@@%***+***=+++++===++==++=====+===++==+++
 =====+====+=++++=++==++++++++++++++++++*%@@@@@@@@@@@@@@@@@@@@@@%++**+++++++++====+++===+=====+++==++</pre></div></header>
-<div class="strip" aria-hidden="true"><span>neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ neosten ✶ слушай ✶ </span></div>
 
 <section id="memory" tabindex="-1" aria-labelledby="memoryTitle"><h2 class="big" id="memoryTitle">оставь мысль</h2>
 <form class="thought-form" id="thoughtForm">
@@ -1491,7 +1517,11 @@ html.night {
 </div>
 
 <div class="pg" id="p-art"><section>
-<div class="card"><div class="photo" id="aph"><span>здесь будет фото</span></div>
+<div class="card"><div class="photo" id="aph">
+  <img id="artistPortrait" src="img/neosten-portrait.png" alt="монохромный портрет neosten" width="1060" height="1484" loading="lazy" decoding="async" draggable="false">
+  <canvas id="portraitGlass" aria-hidden="true" hidden></canvas>
+  <button type="button" id="portraitReveal" hidden>протереть стекло</button>
+</div>
 <div><h2 class="big">neosten</h2><p id="atag" class="tag" hidden></p><dl id="adl"></dl></div></div>
 <section class="bio" id="artistBio" aria-labelledby="bioTitle">
   <h3 class="bh" id="bioTitle">биография</h3>
@@ -1509,7 +1539,7 @@ html.night {
 <div class="pg" id="p-con"><section aria-labelledby="contactsTitle"><h2 class="big hd" id="contactsTitle">контакты</h2><div id="links"></div></section></div>
 <div class="pg" id="p-games">
 <section id="gmMenu" aria-labelledby="gamesTitle"><h2 class="big hd" id="gamesTitle">мини-игры</h2>
-<p class="lead">небольшие игры на перерыв между треками. музыка не останавливается, пока ты думаешь.</p>
+<p class="lead">здесь будут выходить концептуальные мини игры, пока что можно поиграть в вордли</p>
 <div class="gm-grid">
 <button type="button" class="gm-card" id="openW" aria-controls="gmWordle" data-s><span class="gm-h"><span>слова</span><span>5 букв · 6 попыток</span></span>
 <span class="gm-b"><span class="gm-pv" aria-hidden="true"><i class="c-no">с</i><i class="c-mid">л</i><i class="c-ok">о</i><i class="c-no">в</i><i class="c-ok">о</i></span>
@@ -1528,7 +1558,7 @@ html.night {
 <footer>neosten ✶ ты забудешь эту страницу. и это нормально.</footer>
 <div id="pm" hidden><div class="pmb" role="dialog" aria-modal="true" aria-label="где слушать"><button id="pmx" aria-label="закрыть">×</button><div id="pmc"></div></div></div>
 <aside id="mp" aria-label="плеер" hidden><button id="mpb" aria-label="пауза">▶</button><div id="mpt"><span id="mpn"></span><div id="mps"><i id="mpf"></i></div></div><span id="mpc">0:00</span><label class="vol" title="громкость"><span>громкость</span><input id="mpv" type="range" min="0" max="100" value="80" aria-label="громкость"></label><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div><button type="button" id="mpx" aria-label="закрыть плеер" title="закрыть">×</button></aside>
-<aside id="pet" aria-label="питомец"><div id="grip"><span>⠿ питомец</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></aside>
+<aside id="pet" aria-label="питомец"><div id="grip"><span>⠿ питомец</span><button id="px" aria-label="закрыть">×</button></div><pre id="st"></pre><button class="btn" id="feed">покормить</button><button class="btn alt" id="call">позвать кота</button><button type="button" id="petTilt" hidden>включить наклон</button><div style="margin-top:8px;font-weight:400">зажми кота — погладишь</div></aside>
 <!-- правка 4: ретро-баннер «реклама последнего релиза» -->
 <aside id="rb" hidden aria-label="реклама последнего релиза">
 <div class="rb-top"><b>горячий релиз!</b><button type="button" id="rbx" aria-label="закрыть рекламу">[×]</button></div>
@@ -1554,7 +1584,8 @@ function meow(){if(!sound||!ac||ac.state!=='running')return;const n=ac.currentTi
  g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.22,n+.06);g.gain.linearRampToValueAtTime(0,n+.65);o.connect(f);f.connect(g);g.connect(out);o.start(n);l.start(n);o.stop(n+.7);l.stop(n+.7)}
 const setSound=v=>{sound=v;if(v)A();else if(out)out.gain.value=0;$('#mute').textContent='звук: '+(v?'вкл':'выкл');if(typeof aud!=='undefined')Object.values(aud).forEach(a=>a.muted=!v)};
 
-function enter(){adSchedule(10000+Math.random()*5000);$('#gate').classList.add('go');$('#mute').hidden=false;setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
+let firstPromoScheduled=false;
+function enter(){if(!firstPromoScheduled){firstPromoScheduled=true;adSchedule(30000)}$('#gate').classList.add('go');$('#mute').hidden=false;setTimeout(()=>say('подними меня'),1600);setTimeout(()=>blip(300,.3,'sine',.12,900),300);if(new Date().getHours()<5)setTimeout(()=>say('почему ты не спишь?',3500),4500)}
 let loading=false,chimed=false,waiting=false,ldT0=0;
 function startupChime(){if(!sound||!ac||ac.state!=='running'||chimed)return;chimed=true;const t=ac.currentTime+.08,END=4.6;
  const bus=ac.createGain(),mst=ac.createGain(),sh=ac.createBiquadFilter(),dl=ac.createDelay(1),fb=ac.createGain(),lp=ac.createBiquadFilter();
@@ -1594,16 +1625,58 @@ const mobileScreen = matchMedia('(max-width: 900px)');
 const cb=$('#catbox'),bub=$('#bub');let vx=0,wrapped=0,tvx=0,tvy=0,tt=0,home=true,d=null,vy=0,rot=0,hunger=70,mood=50,pn,pt,bt,ht,hi,over=0,sulk=false,petOn=false;
 const catLeft = () => parseFloat(cb.style.left) || 0;
 const mobileCatLeft = x => Math.max(8, Math.min(innerWidth - cb.offsetWidth - 8, x));
-function dockMobileCat() {
+const catCeiling = () => Math.max(0, innerHeight - cb.offsetHeight - 24);
+let mobileRise = 0, lastPetFrame = 0, tiltTarget = 0, tiltLevel = 0, nextTiltReaction = 0;
+function setCatRise(height) {
+  mobileRise = Math.max(0, Math.min(catCeiling(), height));
+  cb.style.setProperty('--cat-rise', mobileRise.toFixed(2) + 'px');
+}
+function releaseMobileCat() {
+  const releasedTop = parseFloat(cb.style.top);
   cb.style.left = mobileCatLeft(catLeft()) + 'px';
+  cb.classList.remove('is-dragging');
   cb.style.top = '';
-  vx = Math.max(-8, Math.min(8, vx));
-  vy = rot = 0;
+  setCatRise(0);
+  const ground = innerHeight - cb.offsetHeight - (parseFloat(getComputedStyle(cb).bottom) || 12);
+  setCatRise(Number.isFinite(releasedTop) ? ground - releasedTop : 0);
+  vx = Math.max(-19, Math.min(19, vx));
+  vy = Math.max(-26, Math.min(26, vy));
 }
 addEventListener('resize', () => {
-  if (mobileScreen.matches && !home && !d) dockMobileCat();
+  if (mobileScreen.matches && !home && !d) {
+    cb.style.left = mobileCatLeft(catLeft()) + 'px';
+    cb.style.top = '';
+    setCatRise(mobileRise);
+  }
 });
 const say=(m,ms=2200)=>{bub.textContent=m;bub.classList.add('on');clearTimeout(bt);bt=setTimeout(()=>bub.classList.remove('on'),ms)};
+function readPetTilt(event) {
+  if (!mobileScreen.matches || document.hidden || !Number.isFinite(event.gamma)) return;
+  const angle = (window.screen.orientation?.angle ?? window.orientation ?? 0) * Math.PI / 180;
+  const beta = (event.beta || 0) * Math.PI / 180;
+  const gamma = event.gamma * Math.PI / 180;
+  const slope = Math.cos(angle) * Math.sin(gamma) * Math.cos(beta) - Math.sin(angle) * Math.sin(beta);
+  tiltTarget = Math.sign(slope) * Math.min(1, Math.max(0, (Math.abs(slope) - .11) / .44));
+}
+const tiltApi = window.DeviceOrientationEvent;
+const petTiltButton = $('#petTilt');
+if (window.isSecureContext && tiltApi) {
+  if (typeof tiltApi.requestPermission === 'function') {
+    petTiltButton.hidden = false;
+    petTiltButton.onclick = async () => {
+      let allowed = false;
+      try { allowed = await tiltApi.requestPermission() === 'granted'; } catch {}
+      if (allowed) {
+        addEventListener('deviceorientation', readPetTilt, {passive: true});
+        petTiltButton.hidden = true;
+      } else {
+        petTiltButton.textContent = 'наклон недоступен';
+        petTiltButton.disabled = true;
+      }
+    };
+  } else addEventListener('deviceorientation', readPetTilt, {passive: true});
+}
+document.addEventListener('visibilitychange', () => { tiltTarget = tiltLevel = 0; });
 const heart=()=>{const r=cb.getBoundingClientRect(),h=document.createElement('span');h.className='heart';h.textContent='♥';h.style.left=r.left+r.width*Math.random()+'px';h.style.top=r.top+'px';document.body.append(h);setTimeout(()=>h.remove(),1200)};
 const wig=()=>{cb.classList.remove('wig');void cb.offsetWidth;cb.classList.add('wig')};
 const bar=v=>'█'.repeat(Math.round(v/10))+'░'.repeat(10-Math.round(v/10));
@@ -1628,11 +1701,13 @@ cb.onpointermove=e=>{
   vy=0;vx=0;say('мрр?!',1500);blip(700,.15,'sawtooth',.05,300);
  }
  if(!d.m)return;
- const dx=mobile?e.clientX-(d.lastX??d.x):e.movementX;
- const dy=mobile?e.clientY-(d.lastY??d.y):e.movementY;
+ const now=performance.now();
+ const speed=mobile&&d.lastX!==undefined?16.7/Math.max(8,Math.min(50,now-tt)):1;
+ const dx=mobile?(e.clientX-(d.lastX??d.x))*speed:e.movementX;
+ const dy=mobile?(e.clientY-(d.lastY??d.y))*speed:e.movementY;
  d.lastX=e.clientX;d.lastY=e.clientY;
  cb.style.left=e.clientX-d.ox+'px';cb.style.top=e.clientY-d.oy+'px';
- rot=Math.max(-25,Math.min(25,dx*2));tvx=tvx*.5+dx*.5;tvy=tvy*.5+dy*.5;tt=performance.now();
+ rot=Math.max(-25,Math.min(25,dx*2));tvx=tvx*.5+dx*.5;tvy=tvy*.5+dy*.5;tt=now;
 };
 cb.onpointerup=()=>{
  clearTimeout(ht);clearInterval(hi);navigator.vibrate&&navigator.vibrate(0);
@@ -1640,26 +1715,54 @@ cb.onpointerup=()=>{
  if(d&&d.m){
   const q=performance.now()-tt>90;vx=q?0:Math.max(-45,Math.min(45,tvx*1.5));vy=q?0:Math.max(-35,Math.min(35,tvy));
   const r=cb.getBoundingClientRect(),cx=r.left+r.width/2;if(cx<0&&vx>-8)vx=-16;if(cx>innerWidth&&vx<8)vx=16;
-  if(mobileScreen.matches){dockMobileCat();blip(110,.2,'sine',.3,40);wig()}
+  if(mobileScreen.matches)releaseMobileCat();
  }
  cb.classList.remove('is-dragging');d=null;
 };
 cb.onpointercancel=()=>{
  if(!mobileScreen.matches)return;
  clearTimeout(ht);clearInterval(hi);navigator.vibrate&&navigator.vibrate(0);
- if(d?.m){vx=0;dockMobileCat()}
+ if(d?.m){vx=vy=0;releaseMobileCat()}
  cb.classList.remove('is-dragging');d=null;
 };
-(function phys(){
+function moveMobileCat(now, step) {
+  tiltLevel += (tiltTarget - tiltLevel) * (1 - Math.pow(.9, step));
+  if (mobileRise > 0 || vy) {
+    vy += .85 * step;
+    const lift = mobileRise - vy * step;
+    if (lift >= catCeiling() && vy < 0) vy = 0;
+    if (lift <= 0 && vy > 0) {
+      if (vy > 6) { blip(110,.2,'sine',.3,40); wig(); }
+      vy = vy > 5 ? -vy * .34 : 0;
+    }
+    setCatRise(lift);
+  }
+  const grounded = mobileRise === 0;
+  if (grounded) vx += tiltLevel * .55 * step;
+  if (Math.abs(vx) < .08 && Math.abs(tiltLevel) < .03) { vx = 0; return; }
+  if (grounded && Math.abs(tiltLevel) > .06 && cb.style.transition) {
+    const left = cb.getBoundingClientRect().left;
+    cb.style.transition = '';
+    cb.style.left = mobileCatLeft(left) + 'px';
+  }
+  const x = catLeft();
+  const intended = x + vx * step;
+  const left = mobileCatLeft(intended);
+  cb.style.left = left + 'px';
+  vx = left === intended ? vx * Math.pow(grounded ? .89 : .985, step) : (grounded ? 0 : -vx * .45);
+  if (grounded && Math.abs(tiltLevel) > .35 && Math.abs(left - x) > .8 && now >= nextTiltReaction) {
+    nextTiltReaction = now + 5500;
+    say('мрр… скользко!', 1800);
+    meow();
+  }
+}
+(function phys(now){
+ const step=lastPetFrame?Math.min(2,Math.max(.25,(now-lastPetFrame)/16.7)):1;
+ lastPetFrame=now;
  if(!home){
   if(!d?.m){
    if(mobileScreen.matches){
-    if(vy<0)wig();
-    vy=0;
-    if(Math.abs(vx)>.3){
-     const x=catLeft()+vx,next=mobileCatLeft(x);
-     cb.style.left=next+'px';vx=x===next?vx*.86:0;
-    }else vx=0;
+    moveMobileCat(now,step);
    }else{
     const fl=innerHeight-cb.offsetHeight-8,w=cb.offsetWidth;
     let y=Math.min(parseFloat(cb.style.top)||0,fl),x=catLeft();
@@ -1679,9 +1782,9 @@ cb.onpointercancel=()=>{
   rot*=.88;cb.style.setProperty('--r',rot+'deg');
  }
  requestAnimationFrame(phys);
-})();
+})(performance.now());
 setInterval(()=>{
- if(home||d||vy||Math.abs(vx)>.3||Math.random()<.5)return;
+ if(home||d||vy||Math.abs(vx)>.3||(mobileScreen.matches&&(mobileRise||Math.abs(tiltLevel)>.06))||Math.random()<.5)return;
  const target=catLeft()+(Math.random()-.5)*(mobileScreen.matches?150:260);
  const x=mobileScreen.matches?mobileCatLeft(target):Math.max(0,Math.min(innerWidth-cb.offsetWidth,target));
  cb.style.transition='left 1.8s ease-in-out';cb.style.left=x+'px';setTimeout(()=>cb.style.transition='',1900);
@@ -1691,7 +1794,7 @@ setInterval(()=>{if(!petOn)return;hunger=Math.max(0,hunger-1);mood=Math.max(0,mo
  draw();if(!d){if(sulk){if(Math.random()<.35)say(['не смотри на меня.','молчу.','я не голодный. я принципиальный.','…'][Math.random()*4|0],2600)}else if(hunger<30){say('голодный…');meow()}}},15000);
 $('#feed').onclick=()=>{const r=cb.getBoundingClientRect(),f=document.createElement('div');f.className='fish';f.textContent='><((°>';f.style.left=r.left+r.width/2-30+'px';f.style.top='-40px';document.body.append(f);void f.offsetWidth;f.style.top=r.top+r.height*.3+'px';
  setTimeout(()=>{f.remove();if(hunger>=100){say('сыт. хватит.');if(++over>=3){over=0;say('ты меня раскормишь!');rot=180}return}hunger=Math.min(100,hunger+35);mood=Math.min(100,mood+5);draw();wig();if(sulk){if(hunger>=60){sulk=false;cb.classList.remove('sulk');say('ладно. прощаю.',3000);meow();for(let i=0;i<4;i++)setTimeout(heart,i*180)}else say('ем. но я всё ещё обижен.',3000)}else say('ням-ням');draw();for(let i=0;i<5;i++)setTimeout(()=>blip(240-i*15,.07,'square',.08,120),i*110);heart()},750)};
-$('#call').onclick=()=>{go('home');$('#hero').append(cb);home=true;vy=0;vx=0;rot=0;cb.classList.remove('small');cb.classList.add('home');cb.style.cssText='';say('мяу!');meow()};
+$('#call').onclick=()=>{go('home');$('#hero').append(cb);home=true;vy=0;vx=0;rot=0;mobileRise=0;cb.classList.remove('small');cb.classList.add('home');cb.style.cssText='';say('мяу!');meow()};
 /* ---------- thoughts ---------- */
 // В колоде только цельные фразы. При изменении состава обновляй ключ хранения колоды.
 const thoughtPhrases = `пыль на подоконнике знает больше закатов, чем человек у окна.
@@ -2050,7 +2153,7 @@ let wc=0;$$('.w2').forEach(w=>w.onclick=()=>{if(++wc>=5){wc=0;const p=$('#pin');
 document.addEventListener('click',e=>{const c=e.target.closest('.gcover');if(!c)return;c.classList.toggle('night');if(c.classList.contains('night'))for(let i=0;i<4;i++)setTimeout(()=>blip(4200,.05,'sine',.05),300+i*130);else blip(900,.4,'sine',.1,1400)});
 const kk=[38,38,40,40,37,39,37,39,66,65];let ki=0;
 addEventListener('keydown',e=>{ki=e.keyCode===kk[ki]?ki+1:(e.keyCode===kk[0]?1:0);if(ki===kk.length){ki=0;say('рыбный дождь!',3000);for(let i=0;i<30;i++)setTimeout(()=>{const f=document.createElement('div');f.className='rain';f.textContent='><((°>';f.style.left=Math.random()*95+'vw';document.body.append(f);blip(400+i*40,.15,'triangle',.05);setTimeout(()=>f.remove(),2700)},i*90)}});
-document.addEventListener('visibilitychange',()=>document.title=document.hidden?'возвращайся… здесь тихо':'neosten');
+document.addEventListener('visibilitychange',()=>document.title=document.hidden?'вернись...':'neosten');
 console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл консоль — ты из тех, кто заглядывает за кулисы. привет.');
 /* ---------- releases: data-driven + player ---------- */
 const R=(window.RELEASES||[]).map(release=>({...release})),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
@@ -2957,6 +3060,170 @@ function renderContacts() {
   }).join('');
 }
 
+/* ---------- fogged portrait ---------- */
+function initPortraitGlass() {
+  const photo = $('#artistPortrait');
+  const glass = $('#portraitGlass');
+  const reveal = $('#portraitReveal');
+  const ctx = glass.getContext('2d');
+  const fog = document.createElement('canvas');
+  const fogCtx = fog.getContext('2d');
+  const sample = document.createElement('canvas');
+  const sampleCtx = sample.getContext('2d');
+  if (!ctx || !fogCtx || !sampleCtx) return;
+
+  const hold = 3000, restore = 3600;
+  const marks = [], drops = [];
+  let width = 0, height = 0, scale = 1, brush = 36;
+  let frame = 0, timer = 0, pointer = null, revealed = -Infinity, dropTravel = 0;
+
+  function coverage(now, start) {
+    const p = Math.max(0, Math.min(1, (now - start - hold) / restore));
+    return 1 - p * p * (3 - 2 * p);
+  }
+
+  function schedule(delay = 0) {
+    clearTimeout(timer);
+    if (delay > 16) { timer = setTimeout(schedule, delay); return; }
+    if (!frame) frame = requestAnimationFrame(paint);
+  }
+
+  function paint(now) {
+    frame = 0;
+    if (!width || !photo.clientWidth) return;
+    const globalWipe = coverage(now, revealed);
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalAlpha = 1 - globalWipe;
+    ctx.drawImage(fog, 0, 0, width, height);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#000';
+    while (marks.length && now >= marks[0].at + hold + restore) marks.shift();
+    for (const mark of marks) {
+      const fresh = coverage(now, mark.at);
+      ctx.beginPath();
+      ctx.moveTo(mark.x, mark.y);
+      ctx.lineTo(mark.toX + .01, mark.toY);
+      ctx.lineWidth = brush;
+      ctx.globalAlpha = .33 * fresh;
+      ctx.stroke();
+      ctx.lineWidth = .76 * brush;
+      ctx.globalAlpha = fresh;
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    for (let i = drops.length - 1; i >= 0; i--) {
+      const drop = drops[i];
+      const seconds = Math.max(0, (now - drop.at) / 1000);
+      const y = drop.y + (18 + 21 * seconds) * seconds;
+      if (y > height + 8 || seconds > 1.55) { drops.splice(i, 1); continue; }
+      const x = drop.x + Math.sin(seconds * 4) * 1.6;
+      ctx.globalAlpha = (1 - seconds / 1.6) * .8;
+      ctx.beginPath();
+      ctx.moveTo(drop.x, y - (3 + 12 * seconds));
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = 'rgba(225,243,255,.66)';
+      ctx.lineWidth = drop.size;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(x, y, drop.size * .63, drop.size * 1.08, -.16, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,226,237,.80)';
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    const oldest = Math.min(marks[0]?.at ?? Infinity, globalWipe ? revealed : Infinity);
+    if (drops.length) schedule();
+    else if (oldest < Infinity) schedule(Math.max(0, oldest + hold - now));
+  }
+
+  function sizeGlass() {
+    const w = photo.clientWidth, h = photo.clientHeight;
+    const nextScale = Math.min(1.5, window.devicePixelRatio || 1);
+    if (!w || !h || !photo.naturalWidth) return;
+    if (w === width && h === height && nextScale === scale) { schedule(); return; }
+    width = w; height = h; scale = nextScale;
+    brush = Math.max(33, Math.min(66, width * .145));
+    glass.width = fog.width = Math.ceil(w * scale);
+    glass.height = fog.height = Math.ceil(h * scale);
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    fogCtx.setTransform(scale, 0, 0, scale, 0, 0);
+
+    // Уменьшенная копия даёт мягкое размытие и на браузерах без canvas.filter.
+    sample.width = 32;
+    sample.height = Math.round(32 * h / w);
+    sampleCtx.fillStyle = '#242629';
+    sampleCtx.fillRect(0, 0, sample.width, sample.height);
+    const fit = Math.min(sample.width / photo.naturalWidth, sample.height / photo.naturalHeight);
+    const sw = photo.naturalWidth * fit, sh = photo.naturalHeight * fit;
+    sampleCtx.drawImage(photo, (sample.width - sw) / 2, (sample.height - sh) / 2, sw, sh);
+    fogCtx.imageSmoothingQuality = 'high';
+    fogCtx.drawImage(sample, 0, 0, w, h);
+    const mist = fogCtx.createLinearGradient(0, 0, w * .78, h);
+    mist.addColorStop(0, 'rgba(204,224,232,.82)');
+    mist.addColorStop(.58, 'rgba(155,178,190,.66)');
+    mist.addColorStop(1, 'rgba(78,101,113,.72)');
+    fogCtx.fillStyle = mist;
+    fogCtx.fillRect(0, 0, w, h);
+    for (let i = 0; i < Math.min(480, w * h / 320); i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const r = .45 + Math.random() ** 3 * 2.7;
+      fogCtx.beginPath();
+      fogCtx.ellipse(x, y, r * .74, r, .15, 0, Math.PI * 2);
+      fogCtx.fillStyle = 'rgba(33,51,61,.21)';
+      fogCtx.fill();
+      fogCtx.beginPath();
+      fogCtx.ellipse(x - r * .2, y - r * .28, r * .31, r * .35, .15, 0, Math.PI * 2);
+      fogCtx.fillStyle = 'rgba(242,249,253,.51)';
+      fogCtx.fill();
+    }
+    marks.length = drops.length = 0;
+    glass.hidden = reveal.hidden = false;
+    if (frame) cancelAnimationFrame(frame);
+    paint(performance.now());
+  }
+
+  function wipe(event, start = false) {
+    const box = glass.getBoundingClientRect();
+    const x = (event.clientX - box.left) / box.width * width;
+    const y = (event.clientY - box.top) / box.height * height;
+    const fromX = start ? x : pointer.x, fromY = start ? y : pointer.y;
+    const distance = Math.hypot(x - fromX, y - fromY);
+    if (!start && distance < 4) return;
+    const now = performance.now();
+    marks.push({x: fromX, y: fromY, toX: x, toY: y, at: now});
+    if (marks.length > 480) marks.shift();
+    dropTravel += distance;
+    if (!readingMotion.matches && (start || dropTravel > brush) && drops.length < 16) {
+      drops.push({x, y, at: now, size: 1.2 + Math.random() * 1.4});
+      dropTravel = 0;
+    }
+    pointer = {id: event.pointerId, x, y};
+    schedule();
+  }
+
+  glass.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || pointer) return;
+    glass.setPointerCapture(event.pointerId);
+    wipe(event, true);
+  });
+  glass.addEventListener('pointermove', event => {
+    if (pointer?.id === event.pointerId) wipe(event);
+  });
+  for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+    glass.addEventListener(name, event => {
+      if (pointer?.id === event.pointerId) pointer = null;
+    });
+  }
+  reveal.addEventListener('click', () => { revealed = performance.now(); schedule(); });
+  photo.addEventListener('load', sizeGlass);
+  if (typeof ResizeObserver === 'function') new ResizeObserver(sizeGlass).observe($('#aph'));
+  else addEventListener('resize', sizeGlass);
+  sizeGlass();
+}
+
+initPortraitGlass();
+
 function renderReleases(){const up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort((a,b)=>ts(a)-ts(b)),nw=R.filter(r=>r.date&&Number.isFinite(ts(r))&&!r.pendingMetadata&&!isUp(r)).sort((a,b)=>ts(b)-ts(a))[0],u=up[0];shownUp=u?u.id:null;adRel=nw||null;
  let h=nw?renderFeaturedRelease(nw):'';
  if(u)h+=renderUpcomingRelease(u);
@@ -2972,8 +3239,6 @@ function renderReleases(){const up=R.filter(r=>!r.pendingMetadata&&isUp(r)).sort
  $('#atag').textContent='краткая сводка';$('#atag').hidden=false;
  const qq=AR.quote;$('#aq').hidden=!qq;if(qq)$('#aq').innerHTML=`<p>${qq.text||qq}</p>${qq.who?`<cite>— ${qq.who}</cite>`:''}`;
  const tl=AR.timeline||[];$('#tlS').hidden=!tl.length;if(tl.length)renderTimeline(tl);
- if(AR.photo)$('#aph').innerHTML=`<img src="${AR.photo}" alt="neosten">`;
- $('.strip span').textContent=('neosten ✶ '+(nw?nw.title+' ✶ ':'')).repeat(16);
  R.filter(r=>r.file).forEach(au);ui()}
 setInterval(()=>{const u=shownUp&&byId(shownUp);if(shownUp&&u&&!isUp(u)){renderReleases();return}const cd=$('#cd');if(!cd||!u)return;
  const s=Math.max(0,Math.floor((ts(u)-Date.now())/1000)),p=n=>String(n).padStart(2,'0');cd.textContent=s<1?'выходит сегодня':'через '+Math.floor(s/86400)+' д '+p(Math.floor(s%86400/3600))+':'+p(Math.floor(s%3600/60))+':'+p(s%60)},1000);
@@ -2999,7 +3264,6 @@ gr.onpointerup=()=>pd=null;
 $('#px').onclick=()=>pet.classList.remove('on');
 let lc=0;$('#logo').addEventListener('click',()=>{if(++lc>=7){lc=0;const h=document.documentElement;h.classList.add('glitch');for(let i=0;i<8;i++)setTimeout(()=>blip(100+Math.random()*2000,.06,'sawtooth',.08),i*70);setTimeout(()=>h.classList.remove('glitch'),1600)}});
 $('.w2').ondblclick=()=>setTheme(isNight()?'day':'night',true);
-$('.strip').onclick=()=>{const p=$('.strip span');p.style.animationDirection=p.style.animationDirection==='reverse'?'normal':'reverse'};
 function breath(){const b=document.createElement('div');b.className='breath';b.innerHTML='<span>вдох</span>';document.body.append(b);let k=0;const iv=setInterval(()=>{b.firstChild.textContent=k++%2?'вдох':'выдох'},2500);setTimeout(()=>{clearInterval(iv);b.remove()},15000)}
 let kb='';addEventListener('keydown',e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.key.length!==1)return;kb=(kb+e.key.toLowerCase()).slice(-8);
  if(kb.endsWith('кот')||kb.endsWith('cat')){kb='';if(home)wig();else vy=-22;meow();say('мяу?',1500)}
@@ -3018,8 +3282,8 @@ function runLoader(force){const g=$('#gate'),cv=$('#ldc'),x=cv.getContext('2d');
  x.font=fs+'px "IBM Plex Mono",monospace';x.textBaseline='top';
  (function f(t){const e=waiting?0:Math.max(0,t-ldT0),p=waiting?.14:Math.min(1,e/3000),d=Math.max(0,Math.min(1,(e-3400)/1200));
   x.clearRect(0,0,W,H);
-  for(let c=0;c<C;c++){hd[c]=(hd[c]+sp[c])%(R+12);for(let k=0;k<10;k++){const r=Math.floor(hd[c]-k);if(r<0||r>=R)continue;if(M[r*C+c]&&Math.random()<p*1.1)continue;x.fillStyle='rgba(0,0,0,'+(1-k/10)*(k?.3:.9)+')';x.fillText(rc(),c*cw,r*fs)}}
-  x.fillStyle='#000';for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(M[r*C+c]&&Math.random()<p*1.1&&Math.random()>d*1.2)x.fillText(rc(),c*cw,r*fs);
+  for(let c=0;c<C;c++){hd[c]=(hd[c]+sp[c])%(R+12);for(let k=0;k<10;k++){const r=Math.floor(hd[c]-k);if(r<0||r>=R)continue;if(M[r*C+c]&&Math.random()<p*1.1)continue;x.fillStyle='rgba(136,181,193,'+(1-k/10)*(k?.3:.9)+')';x.fillText(rc(),c*cw,r*fs)}}
+  x.fillStyle='#e1f0ed';for(let r=0;r<R;r++)for(let c=0;c<C;c++)if(M[r*C+c]&&Math.random()<p*1.1&&Math.random()>d*1.2)x.fillText(rc(),c*cw,r*fs);
   const pd=waiting?0:p,n=Math.round(pd*20);$('#lb').textContent=waiting?'':'['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(pd*100)+'%';$('#ls').textContent=waiting?'нажми, чтобы войти':logs[Math.min(4,p*5|0)]+'…';$('#lh').style.opacity=waiting?.7:0;
   if(d>0){if(!ent){ent=true;enter()}g.style.opacity=1-d;g.style.filter='blur('+d*5+'px)'}
   if(d<1)requestAnimationFrame(f);else{g.style.display='none';loading=false}})(ldT0)}
@@ -3097,7 +3361,7 @@ const fx={
  'ветер':{t:'слушай.',f(){if(wg){wg.gain.setTargetAtTime(.25,ac.currentTime,.5);setTimeout(()=>wg.gain.setTargetAtTime(windLvl(),ac.currentTime,1),7000)}}},
  'дыши':{t:'вдох.',f:breath},
  'танец':{t:'три, два, раз.',f(){document.body.classList.add('dance');for(let i=0;i<10;i++)setTimeout(()=>blip(i%2?110:165,.12,'square',.08),i*400);setTimeout(()=>document.body.classList.remove('dance'),4200)}},
- 'быстрее':{t:'держись.',f(){const p=$('.strip span');p.style.animationDuration='4s';setTimeout(()=>p.style.animationDuration='',8000)}},
+ 'быстрее':{t:'держись.',f:hop},
  'кот':{t:'он слышит.',f:hop},'мяу':{t:'мяу.',f:hop},
  'перезагрузка':{t:'перезагружаюсь…',f(){setTimeout(runLoader,700)}}
 };
