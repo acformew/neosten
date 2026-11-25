@@ -1557,7 +1557,7 @@ html.night #memory #in::placeholder { color: #81878b; }
 <div class="rb-bot" aria-hidden="true"><span>новый трек ✶ горячо ✶ слушай сейчас ✶ новый трек ✶ горячо ✶ слушай сейчас ✶ новый трек ✶ горячо ✶ слушай сейчас ✶ новый трек ✶ горячо ✶ слушай сейчас ✶ </span></div>
 </aside>
 <script>
-(function(){var v=location.protocol.indexOf('http')===0?'?v='+Math.floor(Date.now()/300000):'';
+(function(){var v=location.protocol.indexOf('http')===0?'?v=editions-2-'+Math.floor(Date.now()/300000):'';
 ['releases.js','data/release-identity.js','data/auto.js'].forEach(function(f){document.write('<script src="'+f+v+'"><\/script>')})})();
 </script>
 <script>
@@ -2165,7 +2165,7 @@ addEventListener('keydown',e=>{ki=e.keyCode===kk[ki]?ki+1:(e.keyCode===kk[0]?1:0
 document.addEventListener('visibilitychange',()=>document.title=document.hidden?'вернись...':'neosten');
 console.log('%cneosten','font:900 36px sans-serif','\nесли ты открыл консоль — ты из тех, кто заглядывает за кулисы. привет.');
 /* ---------- releases: data-driven + player ---------- */
-const R=(window.RELEASES||[]).map(release=>({...release})),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
+const R=(window.RELEASES||[]).map(release=>({...window.ReleaseIdentity.normalizeReleaseEdition(release)})),AR=window.ARTIST||{},aud={};let cur=null,shownUp=null,vol=.8,adRel=null;
 const L=window.LINKS||{};
 const MSK=d=>{d=String(d).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(d))return Date.parse(d+'T00:00:00+03:00');if(/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/.test(d))return Date.parse(d.replace(' ','T')+'+03:00');return new Date(d).getTime()},hasT=d=>/[T ]\d{2}:\d{2}/.test(String(d)),
 ts=r=>r.date?MSK(r.date):0,isUp=r=>r.date&&(ts(r)>Date.now()||(r.hide&&!r.auto)),byId=id=>R.find(r=>r.id===id);
@@ -2209,7 +2209,7 @@ const htmlEscapes = {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#3
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => htmlEscapes[char]);
 const listPlatforms = ['spotify', 'yandex'];
 
-const {directLinks, hasReleaseTitle, matchesFor, isSpotifyAlias, isEditionLink, webURL, catalogTitle} = window.ReleaseIdentity;
+const {directLinks, hasReleaseTitle, matchesFor, isSpotifyAlias, isEditionLink, webURL, catalogTitle, normalizeReleaseEdition} = window.ReleaseIdentity;
 
 function releaseLinks(release, platforms = Object.keys(PN)) {
   const links = directLinks(release.links);
@@ -2243,8 +2243,9 @@ function mergeCatalogLinks(release, incoming) {
   return links;
 }
 
-for (const automatic of window.AUTO || []) {
-  if (!hasReleaseTitle(automatic)) continue;
+for (const raw of window.AUTO || []) {
+  if (!hasReleaseTitle(raw)) continue;
+  const automatic = normalizeReleaseEdition(raw);
   const matches = matchesFor(R, automatic).sort((a, b) => R.indexOf(a) - R.indexOf(b));
   const release = matches[0];
   if (!release) {

@@ -7,7 +7,6 @@
 https://music.yandex.ru/album/41828596
 2025-08-22 | https://music.yandex.ru/album/37798894 | title=НАКОЛОЧКИ
 2026-11-06 | https://music.yandex.ru/album/44794240
-https://music.yandex.ru/album/44987626
 https://music.yandex.ru/album/44794240
 https://music.yandex.ru/album/44320421
 https://music.yandex.ru/album/44163739
@@ -20,7 +19,6 @@ https://music.yandex.ru/album/40020312
 https://music.yandex.ru/album/39692759
 https://music.yandex.ru/album/39131024
 https://music.yandex.ru/album/38648077
-https://music.yandex.ru/album/38302359
 https://music.yandex.ru/album/37269016
 https://music.yandex.ru/album/35652284
 2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007 | yandex=https://music.yandex.ru/album/44987626
