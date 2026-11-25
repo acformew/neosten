@@ -3,6 +3,7 @@ window.AUTO=[
   "id": "apple-6835430007",
   "ids": [
    "apple-6835430007",
+   "deezer-1148145831",
    "link-88c4b497",
    "link-2c33cefe"
   ],
@@ -12,30 +13,16 @@ window.AUTO=[
   "cover": "covers/apple-6835430007.jpg",
   "links": {
    "apple": "https://music.apple.com/ru/album/%D0%BF%D1%80%D1%8B%D0%B3%D0%B0%D0%B9-remix-single/6835430007?uo=4",
+   "deezer": "https://www.deezer.com/album/1148145831",
    "spotify": "https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07",
    "yandex": "https://music.yandex.ru/album/44987626"
   },
   "srcs": [
    "apple",
+   "deezer",
    "links"
   ],
   "src": "https://music.yandex.ru/album/44987626"
- },
- {
-  "id": "deezer-1148145831",
-  "ids": [
-   "deezer-1148145831"
-  ],
-  "title": "ПРЫГАЙ",
-  "type": "сингл",
-  "date": "2026-11-20",
-  "cover": "covers/deezer-1148145831.jpg",
-  "links": {
-   "deezer": "https://www.deezer.com/album/1148145831"
-  },
-  "srcs": [
-   "deezer"
-  ]
  },
  {
   "id": "apple-6820449428",
