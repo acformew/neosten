@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import identity from '../data/release-identity.js';
 
-const {cleanTitle: clean, titleKey: norm, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias} = identity;
+const {cleanTitle: clean, titleKey: norm, catalogTitle, hasReleaseTitle, platformOf: platOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink} = identity;
 
 const OUT = 'data/auto.js';
 // Суффикс типа от Apple — часть ответа каталога iTunes, а не названия.
@@ -122,9 +122,11 @@ const items = [];
 
 function applyLinks(entry, links, priority) {
   for (const [platform, url] of Object.entries(directLinks(links))) {
-    if (entry.links[platform] && priority(platform) <= entry.linkPriorities[platform]) continue;
+    const score = priority(platform);
+    if (entry.links[platform] && score <= entry.linkPriorities[platform] &&
+        !(score === entry.linkPriorities[platform] && isEditionLink(entry, url))) continue;
     entry.links[platform] = url;
-    entry.linkPriorities[platform] = priority(platform);
+    entry.linkPriorities[platform] = score;
   }
 }
 
@@ -144,8 +146,8 @@ function mergeRelease(entry, release, source) {
   entry.page ||= release.page;
   entry.src = (replacesAlias && release.src) || entry.src || release.src;
   const links = directLinks(release.links);
-  if (incomingAlias) delete links.spotify;
-  if (replacesAlias && (entry.linkPriorities.spotify || 0) < 4) delete entry.links.spotify;
+  if (incomingAlias && !isEditionLink(entry, links.spotify)) delete links.spotify;
+  if (replacesAlias && (entry.linkPriorities.spotify || 0) < 4 && !isEditionLink(entry, entry.links.spotify)) delete entry.links.spotify;
   applyLinks(entry, links, key => release.linkPriorities?.[key] ?? (source === 'cache' ? 1 : 2));
 }
 
@@ -153,7 +155,7 @@ function put(release, source) {
   if (!hasReleaseTitle(release)) return null;
   const matches = matchesFor(items, release).sort((a, b) => items.indexOf(a) - items.indexOf(b));
   const entry = matches[0] || {
-    title: clean(release.title), type: '', date: '', cover: '', page: '', src: '',
+    title: catalogTitle(release.title), type: '', date: '', cover: '', page: '', src: '',
     ids: [], srcs: new Set(), covers: [], links: {}, linkPriorities: {},
   };
   if (!matches.length) items.push(entry);
@@ -397,7 +399,7 @@ for (const e of items) {
     if (await img(e.covers, path)) cover = path;
   }
   list.push({
-    id, title: e.title, type: e.type || '', date: e.manualDate || e.date || '', cover,
+    id, ids: [id, ...e.ids.filter(sourceId => sourceId !== id)], title: e.title, type: e.type || '', date: e.manualDate || e.date || '', cover,
     links: directLinks(e.links), page: e.page, srcs: [...e.srcs],
     ...(e.src ? {src: e.src} : {}),
   });
