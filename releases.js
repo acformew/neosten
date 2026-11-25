@@ -20,8 +20,8 @@ window.RELEASES = [
     file:'audio/diss-na-neforov.m4a' },
 
   // --- скоро (пример: замени или удали) ---
-  { id:'next', title:'???', hide:true, type:'сингл', date:'2026-11-06T00:00',
-    presave:'https://band.link/SAFEEHARM' },                                                          // <- сюда ссылку на пресейв
+  { id:'next', title:'???', hide:true, type:'сингл', date:'2026-12-11T00:00',
+    presave:'' },                                                          // <- сюда ссылку на пресейв
 
   // --- популярное ---
   { id:'oshibka', title:'я ошибка музыки', plays:2100000, file:'audio/ya-oshibka-muzyki.mp3' },
