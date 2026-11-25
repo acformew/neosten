@@ -89,9 +89,55 @@
   const knownEditions = new Map([
     ['303core.mp3', {day: '2026-01-23', ids: ['link-463ff86b'],
       links: ['yandex:album:40628842', 'spotify:album:5N9TjB8SR3vVmk4jHKpbXL']}],
-    ['прыгай', {day: '2025-09-26', ids: ['prygay', 'apple-1840949420'],
-      links: ['yandex:album:38302359', 'spotify:album:1JhHeto4knYwhSHFKPDuis', 'apple:album:1840949420']}],
+    ['прыгай', {title: 'ПРЫГАЙ', day: '2025-09-26', cover: 'covers/1840949420.jpg',
+      ids: ['prygay', 'apple-1840949420', 'spotify-1JhHeto4knYwhSHFKPDuis', 'yandex-38302359', 'deezer-827973731'],
+      links: ['yandex:album:38302359', 'spotify:album:1JhHeto4knYwhSHFKPDuis', 'apple:album:1840949420', 'deezer:album:827973731']}],
+    ['прыгай (remix)', {title: 'ПРЫГАЙ (Remix)', day: '2026-11-20', cover: 'covers/apple-6835430007.jpg',
+      ids: ['apple-6835430007', 'spotify-4RysIENz1kH4enb4yIcv07', 'yandex-44987626'],
+      links: ['yandex:album:44987626', 'spotify:album:4RysIENz1kH4enb4yIcv07', 'apple:album:6835430007']}],
   ]);
+
+  const prygayEditions = [knownEditions.get('прыгай'), knownEditions.get('прыгай (remix)')];
+  const editionById = id => prygayEditions.find(edition => edition.ids.includes(id));
+
+  function editionByURL(url) {
+    const path = releasePath(url);
+    const key = linkKey(url);
+    const albumKey = path?.album ? `${path.platform}:album:${path.album}` :
+      path?.platform === 'apple' && path.kind === 'track' ? linkKey(url.split('?')[0]) : '';
+    return prygayEditions.find(edition => edition.links.includes(key) || edition.links.includes(albumKey));
+  }
+
+  function normalizeReleaseEdition(release) {
+    const title = releaseTitleKey(release);
+    const named = prygayEditions.find(edition => titleKey(edition.title) === title);
+    if (title && !named) return release;
+    const linked = new Set([release.src, ...Object.values(directLinks(release.links))].map(editionByURL).filter(Boolean));
+    const identified = new Set((release.ids || []).map(editionById).filter(Boolean));
+    const hinted = prygayEditions.find(edition => edition.day === releaseDay(release) || edition.cover === release.cover);
+    // ID самой записи имеет приоритет. Если его нет, сверяем площадки раньше даты и названия.
+    const edition = editionById(release.id) || (linked.size === 1 ? [...linked][0] : null) ||
+      (identified.size === 1 ? [...identified][0] : null) || (linked.has(named) ? named : null) ||
+      (named && hinted);
+    if (!edition) return release;
+
+    const fits = (candidate, findEdition) => {
+      const editionOfCandidate = findEdition(candidate);
+      return !editionOfCandidate || editionOfCandidate === edition;
+    };
+    const links = Object.fromEntries(Object.entries(directLinks(release.links)).filter(([, url]) => fits(url, editionByURL)));
+    return {
+      ...release,
+      title: edition.title,
+      ...(release.match ? {match: edition.title} : {}),
+      date: edition.day,
+      ...(release.manualDate ? {manualDate: edition.day} : {}),
+      cover: edition.cover,
+      ...(release.ids ? {ids: release.ids.filter(id => fits(id, editionById))} : {}),
+      ...(release.src && !fits(release.src, editionByURL) ? {src: ''} : {}),
+      links,
+    };
+  }
 
   function editionEvidence(release, edition) {
     if (releaseDay(release) === edition.day) return true;
@@ -154,7 +200,7 @@
     return strong;
   }
 
-  const api = {cleanTitle, titleKey, catalogTitle, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink};
+  const api = {cleanTitle, titleKey, catalogTitle, normalizeReleaseEdition, hasReleaseTitle, webURL, platformOf, releasePath, linkKey, directLinks, matchesFor, isSpotifyAlias, isEditionLink};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else window.ReleaseIdentity = api;
 })();
