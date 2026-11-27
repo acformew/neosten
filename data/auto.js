@@ -28,7 +28,9 @@ window.AUTO=[
   "id": "apple-6839891548",
   "ids": [
    "apple-6839891548",
-   "deezer-1156786721"
+   "deezer-1156786721",
+   "link-48b8e527",
+   "link-d60a7607"
   ],
   "title": "#SAFEHARM",
   "type": "сингл",
@@ -36,12 +38,16 @@ window.AUTO=[
   "cover": "covers/apple-6839891548.jpg",
   "links": {
    "apple": "https://music.apple.com/ru/album/safeharm-single/6839891548?uo=4",
-   "deezer": "https://www.deezer.com/album/1156786721"
+   "deezer": "https://www.deezer.com/album/1156786721",
+   "spotify": "https://open.spotify.com/album/2p79AdZO79gmkXyiKpomHo",
+   "yandex": "https://music.yandex.ru/album/44794240"
   },
   "srcs": [
    "apple",
-   "deezer"
-  ]
+   "deezer",
+   "links"
+  ],
+  "src": "https://open.spotify.com/album/2p79AdZO79gmkXyiKpomHo"
  },
  {
   "id": "apple-6820449428",
