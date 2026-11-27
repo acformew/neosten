@@ -21,6 +21,7 @@ https://music.yandex.ru/album/39131024
 https://music.yandex.ru/album/38648077
 https://music.yandex.ru/album/37269016
 https://music.yandex.ru/album/35652284
+2026-11-06 | https://open.spotify.com/album/2p79AdZO79gmkXyiKpomHo | yandex=https://music.yandex.ru/album/44794240
 2026-11-20 | https://open.spotify.com/album/4RysIENz1kH4enb4yIcv07 | title=ПРЫГАЙ (Remix) | id=apple-6835430007 | yandex=https://music.yandex.ru/album/44987626
 2026-10-09 | https://open.spotify.com/album/2rt6Mn1v4m6z8vsvV1VZTj | yandex=https://music.yandex.ru/album/44320421/track/156772950
 2026-10-02 | https://open.spotify.com/album/3mzSyA8PHRZMK9flrOvd7Y | title=МАЛО | id=apple-6817133665 | yandex=https://music.yandex.ru/album/44163739/track/156288049
